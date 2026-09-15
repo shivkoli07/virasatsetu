@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Literature & Knowledge | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF2DF !important;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.3s ease;
+    }
+
+    .auth-btn:hover {
+      box-shadow: 0 4px 15px rgba(184, 130, 48, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/literature/hero-literature.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Literary Fields Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .style-badge {
+      font-size: 0.68rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 1024px) {
+      .styles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 03.01 • Literary Epics & Scientific Canons</div>
+      <h1 class="hero-title">Literature & Knowledge Traditions</h1>
+      <p class="hero-tagline">"Where epic Sanskrit epics, Sangam poetry anthologies, calculus series, and medical treatises codify intellectual heritage."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Repository of Indian Literary & Scientific Thought</h2>
+        <p class="doctrine-subtitle">India's literary and knowledge traditions comprise monumental epics, exquisite lyric poetry, philosophical systems (Shad-Darshana), and exact mathematical discoveries transmitted across palm-leaf manuscripts.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What is Literature & Knowledge -->
+        <div class="concept-block">
+          <h3 class="concept-title">📚 What are Literature & Knowledge Traditions?</h3>
+          <p class="concept-text">
+            This domain encompasses the written and memorized corpuses of Indian civilization. Spanning moral epics like the Mahabharata, early Tamil Sangam poetry, statecraft manuals, and advanced calculus series by the Kerala School, these texts served as intellectual blueprints for society.
+          </p>
+        </div>
+
+        <!-- Manuscripts & Preservation -->
+        <div class="concept-block">
+          <h3 class="concept-title">📜 Palm-Leaf Manuscripts & Transmission</h3>
+          <p class="concept-text">
+            Preserved across centuries on fragile palm leaves (Talapatra) and birch bark (Bhurja patra) housed in temple libraries (Bhandars), these manuscripts were meticulously copied by scribes to withstand tropical humidity and time.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Literary Fields Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Literary & Scientific Fields</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Itihasa & Epics</h4>
+            <span class="style-badge">Heroic & Moral Lore</span>
+            <p class="style-text">Vast narrative compendiums imparting dharma, statecraft, and human psychology (e.g., Mahabharata, Ramayana).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Kavya & Poetry</h4>
+            <span class="style-badge">Lyrical Masterpieces</span>
+            <p class="style-text">Exquisite classical Sanskrit and Tamil verse celebrating nature, emotion, and aesthetics (e.g., Meghaduta, Silappadikaram).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Shastra & Science</h4>
+            <span class="style-badge">Medicine & Calculus</span>
+            <p class="style-text">Empirical treaties on surgery, pharmacology, arithmetic series, and astronomy (e.g., Charaka Samhita, Kerala School).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Dharma & Polity</h4>
+            <span class="style-badge">Ethics & Governance</span>
+            <p class="style-text">Normative texts guiding economic policy, royal administration, and righteous living (e.g., Arthashastra, Tirukkural).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Literature & Knowledge Canons) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Literature & Knowledge Canons of India</h2>
+      <p>Pan-Indian case studies documenting epic poetry, classical drama, medical samhitas, calculus series, and ethical treatises.</p>
+    </div>
+
+    <!-- 01: The Mahabharata -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/mahabharata.jpg');">
+        <span class="monument-badge-top">Itihasa Epic • 100,000 Shlokas</span>
+        <div class="monument-bottom-title">
+          <h3>The Mahabharata</h3>
+          <span>Ancient India • Attributed to Sage Vyasa</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Epic Narrative / Itihasa (composed over centuries, c. 400 BCE – 400 CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">The longest epic poem known to mankind, containing over 100,000 shlokas. It explores human complexity, duty, and cosmic law (Dharma) through the Kurukshetra war, embedding the Bhagavad Gita within its Bhishma Parva.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Universally summarized by the philosophical axiom: *"What is here is elsewhere; what is not here is nowhere."*</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">100,000 Shlokas</span>
+              <span class="tag-pill">Bhagavad Gita Embedded</span>
+              <span class="tag-pill">Kurukshetra War</span>
+              <span class="tag-pill">Sage Vyasa Authorship</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kurukshetra, Haryana (29.9672° N, 76.8341° E)</span>
+          <a href="https://maps.google.com/?q=Kurukshetra+Haryana" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: The Ramayana -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/ramayana.jpg');">
+        <span class="monument-badge-top">Adi Kavya • First Sanskrit Epic</span>
+        <div class="monument-bottom-title">
+          <h3>The Ramayana</h3>
+          <span>Ayodhya & Mithila • Attributed to Sage Valmiki</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Adi Kavya (First Poetry) / Epic Narrative (c. 5th–4th Century BCE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Chronicles the journey of Prince Rama of Ayodhya, his righteous devotion, the abduction of Sita by Ravana, and the triumphant return. Set the enduring cultural benchmark for ideal familial and political ethics (Ramrajya).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Composed in the mellifluous Anushtubh meter, inspiring countless regional adaptations across Southeast Asia and India.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Adi Kavya (First Poem)</span>
+              <span class="tag-pill">Sage Valmiki</span>
+              <span class="tag-pill">Anushtubh Meter</span>
+              <span class="tag-pill">Ethical Ideal (Ramrajya)</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ayodhya, Uttar Pradesh (26.7922° N, 82.1998° E)</span>
+          <a href="https://maps.google.com/?q=Ayodhya+Uttar+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Silappadikaram (The Tale of an Anklet) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/silappadikaram.jpg');">
+        <span class="monument-badge-top">Sangam Epic • Tamil Masterpiece</span>
+        <div class="monument-bottom-title">
+          <h3>Silappadikaram</h3>
+          <span>Poompuhar & Madurai, Tamil Nadu • c. 5th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Classical Tamil Epic Poem (One of the Five Great Epics of Tamil Literature)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Authored by the Jain prince-poet Ilango Adigal. It narrates the tragic tale of Kovalan and Kannagi, whose quest for justice following a wrongful execution by the Pandya king burns Madurai to the ground.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">A towering milestone of early Tamil urbanism, musicology, and moral law superseding royal sovereignty.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Ilango Adigal Authorship</span>
+              <span class="tag-pill">Five Great Tamil Epics</span>
+              <span class="tag-pill">Kannagi Justice Legend</span>
+              <span class="tag-pill">Sangam Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Madurai, Tamil Nadu (9.9195° N, 78.1194° E)</span>
+          <a href="https://maps.google.com/?q=Madurai+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Kalidasa's Meghaduta -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/meghaduta.jpg');">
+        <span class="monument-badge-top">Gupta Kavya • Lyrical Cloud Messenger</span>
+        <div class="monument-bottom-title">
+          <h3>Kalidasa's Meghaduta</h3>
+          <span>Ujjain & Ramtek, Madhya Pradesh • 5th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Classical Sanskrit Lyrical Poem (Kavya in Mandakranta Meter)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Composed by Mahakavi Kalidasa. A banished Yaksha spirit persuades a passing monsoon cloud to carry a message of love and longing across mountains and rivers to his disconsolate wife in the Himalayan heights.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Serves as a poetic geographical map of ancient India, celebrated for breathtaking nature imagery and sublime emotional tenderness.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Mandakranta Meter</span>
+              <span class="tag-pill">Gupta Court Masterpiece</span>
+              <span class="tag-pill">Geographical Map Poem</span>
+              <span class="tag-pill">Kalidasa Lyrical Art</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ujjain, Madhya Pradesh (23.1765° N, 75.7885° E)</span>
+          <a href="https://maps.google.com/?q=Ujjain+Madhya+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Charaka Samhita -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/charaka-samhita.jpg');">
+        <span class="monument-badge-top">Ayurvedic Canon • Internal Medicine Treatise</span>
+        <div class="monument-bottom-title">
+          <h3>Charaka Samhita</h3>
+          <span>Takshashila & Ancient India • c. 2nd Century BCE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Foundational Ayurvedic Medical Treatise (Internal Medicine / Kaya Chikitsa)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Compiled by Sage Charaka, editing earlier medical traditions. It outlines comprehensive principles of diagnostics, etiology, preventive hygiene, embryology, and the pharmacological classification of over 2,000 medicinal plant species.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Emphasizes holistic patient care, mental wellness, and the ethical oath of the physician matching modern medical ethics.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Kaya Chikitsa Medicine</span>
+              <span class="tag-pill">2,000 Plant Pharmacopoeia</span>
+              <span class="tag-pill">Sage Charaka Codification</span>
+              <span class="tag-pill">Holistic Diagnostics</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Taxila / Gandhara (33.7463° N, 72.8397° E)</span>
+          <a href="https://maps.google.com/?q=Taxila+Pakistan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Madhava's Calculus Series (Kerala School) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/kerala-calculus.jpg');">
+        <span class="monument-badge-top">Tantrasangraha • Pre-Newtonian Calculus</span>
+        <div class="monument-bottom-title">
+          <h3>Madhava's Calculus Series</h3>
+          <span>Tirur & Sangamagrama, Kerala • 14th–16th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Mathematical and Astronomical Sanskrit Verse Treatises (Tantrasangraha & Yuktibhasa)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Authored by Madhava of Sangamagrama and expanded by Nilakantha Somayaji. These texts recorded the world's first infinite series expansions for trigonometric functions and calculus principles centuries before European counterparts.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Expressed advanced infinitesimal calculus proofs entirely through poetic Sanskrit verse.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Tantrasangraha Treatise</span>
+              <span class="tag-pill">Infinite Series Proofs</span>
+              <span class="tag-pill">Nilakantha Somayaji</span>
+              <span class="tag-pill">Kerala School of Math</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Tirur, Kerala (10.9163° N, 75.9222° E)</span>
+          <a href="https://maps.google.com/?q=Tirur+Kerala" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Kautilya's Arthashastra -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/arthashastra.jpg');">
+        <span class="monument-badge-top">Mauryan Statecraft • Treatise on Economics & Polity</span>
+        <div class="monument-bottom-title">
+          <h3>Kautilya's Arthashastra</h3>
+          <span>Pataliputra, Magadha • c. 4th Century BCE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Sanskrit Treatise on Statecraft, Economics, Military Strategy, and Law</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Authored by Acharya Chanakya (Kautilya). It provides a remarkably pragmatic, analytical framework for running an empire, covering taxation, civil law, espionage, foreign policy, and market regulation.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Stands alongside Machiavelli's *The Prince* as a foundational global text on political realism, predating it by nearly 1,800 years.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Acharya Chanakya Authorship</span>
+              <span class="tag-pill">Statecraft & Taxation</span>
+              <span class="tag-pill">Mauryan Administration</span>
+              <span class="tag-pill">Political Realism</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Patna / Pataliputra (25.5941° N, 85.1376° E)</span>
+          <a href="https://maps.google.com/?q=Patna+Bihar" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Tirukkural -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/tirukkural.jpg');">
+        <span class="monument-badge-top">Sangam Ethics • 1,330 Couplets</span>
+        <div class="monument-bottom-title">
+          <h3>Tirukkural</h3>
+          <span>Madurai, Tamil Nadu • Attributed to Thiruvalluvar</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Classical Tamil Ethical Treatise (c. 3rd–5th Century CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Composed by the poet Thiruvalluvar. Consists of 1,330 brief couplets (Kural) divided into three books covering Aram (righteousness/virtue), Porul (wealth/polity), and Inbam (love).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Universally acclaimed for secular wisdom, transcending sectarian boundaries and offering timeless guidance on human character.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Thiruvalluvar Authorship</span>
+              <span class="tag-pill">1,330 Ethical Couplets</span>
+              <span class="tag-pill">Secular Tamil Wisdom</span>
+              <span class="tag-pill">Aram, Porul, Inbam</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Valluvar Kottam, Chennai (13.0569° N, 80.2425° E)</span>
+          <a href="https://maps.google.com/?q=Valluvar+Kottam+Chennai" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Sushruta Samhita -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/sushruta-samhita.jpg');">
+        <span class="monument-badge-top">Surgical Treatise • Plastic Surgery Foundation</span>
+        <div class="monument-bottom-title">
+          <h3>Sushruta Samhita</h3>
+          <span>Varanasi, Uttar Pradesh • c. 6th Century BCE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Sanskrit Treatise on Surgery, Anatomy, and Therapeutics</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Composed by Sage Sushruta in Varanasi. Documented surgical techniques for rhinoplasty (nasal reconstruction), lithotomy, ophthalmology, fracture setting, and descriptions of over 120 surgical instruments.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Celebrated globally as the foundational historical text of plastic and reconstructive surgery.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Surgical Reconstitution</span>
+              <span class="tag-pill">120+ Instruments</span>
+              <span class="tag-pill">Sage Sushruta Varanasi</span>
+              <span class="tag-pill">Anatomical Dissection</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Varanasi (25.3176° N, 82.9739° E)</span>
+          <a href="https://maps.google.com/?q=Varanasi+Medical+Heritage" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Natya Shastra -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/literature/natya-shastra.jpg');">
+        <span class="monument-badge-top">Performing Arts Treatise • Fifth Veda</span>
+        <div class="monument-bottom-title">
+          <h3>Natya Shastra</h3>
+          <span>Ancient India • Attributed to Sage Bharata Muni</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Literary Genre</span>
+            <p class="dossier-text">Sanskrit Compendium on Dramatic Theory, Dance, Music, and Aesthetics (c. 200 BCE – 200 CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Civilizational Impact</span>
+            <p class="dossier-text">Attributed to Sage Bharata Muni. It formulates the definitive rules of Indian classical theatre, outlining stage architecture, musical scales, facial expressions, hand mudras, and the groundbreaking theory of the *Navarasa* (Nine Emotions).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Referred to as the *Natya Veda* (Fifth Veda), guiding all classical dance and dramatic forms across the subcontinent.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Literature Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Navarasa 9 Emotions</span>
+              <span class="tag-pill">Sage Bharata Muni</span>
+              <span class="tag-pill">Natya Veda Treatise</span>
+              <span class="tag-pill">Stage Architecture & Music</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Nashik / Godavari Basin (19.9975° N, 73.7898° E)</span>
+          <a href="https://maps.google.com/?q=Nashik+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

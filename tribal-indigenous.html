@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tribal & Indigenous Heritage | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/tribal/hero-tribal.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Tribal Pillars Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .style-badge {
+      font-size: 0.68rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 1024px) {
+      .styles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 04.02 • Indigenous Ecology & Ancestral Wisdom</div>
+      <h1 class="hero-title">Tribal & Indigenous Heritage</h1>
+      <p class="hero-tagline">"Where sacred groves, living root architecture, animistic art, and sustainable forest stewardship preserve India's oldest roots."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Philosophy of Indigenous Stewardship</h2>
+        <p class="doctrine-subtitle">India's indigenous and tribal communities (Adivasis and Scheduled Tribes) represent deep ecological harmony. Their heritage is anchored in sustainable forest management, animistic reverence for nature, and autonomous oral governance systems.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What is Tribal Heritage -->
+        <div class="concept-block">
+          <h3 class="concept-title">🌿 What is Tribal & Indigenous Heritage?</h3>
+          <p class="concept-text">
+            Tribal heritage comprises the time-tested survival systems, customary laws, eco-architecture, oral epics, and sacred ecological practices of over 700 distinct scheduled tribes across India. Unlike urban civilizations, indigenous knowledge systems view human beings as protectors of nature rather than its dominators.
+          </p>
+        </div>
+
+        <!-- Sacred Groves & Conservation -->
+        <div class="concept-block">
+          <h3 class="concept-title">🌳 Sacred Groves (Devarkadu / Sarnas)</h3>
+          <p class="concept-text">
+            Across central, southern, and northeastern India, indigenous communities protect virgin forest patches termed <em>Sacred Groves</em> (Sarnas, Devarkadus, or Law Kyntangs). Zero felling or hunting is permitted within these sanctuaries, serving as vital sanctuaries for endemic flora and fauna.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Tribal Pillars Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Indigenous Heritage Pillars</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Bio-Architecture</h4>
+            <span class="style-badge">Living Engineering</span>
+            <p class="style-text">Sustainable structures grown or built using living rubber tree roots, cane, bamboo, and thatch (e.g., Jingkieng Jri, Toda Huts).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Animistic Art</h4>
+            <span class="style-badge">Ritual Wall & Metal</span>
+            <p class="style-text">Votive wall paintings and hollow-box brass casting dedicated to forest deities and seasonal bounty (e.g., Dokra, Pithora).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Floral Festivals</h4>
+            <span class="style-badge">Agrarian Gratitude</span>
+            <p class="style-text">Spring and harvest celebrations marking the blooming of sacred forest trees and crop sowing (e.g., Baha Parab).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Megafauna & Lore</h4>
+            <span class="style-badge">Ancestral Memory</span>
+            <p class="style-text">Oral histories and ritual customs preserving deep connections with pastoral animals and stone monoliths.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Tribal & Indigenous Traditions) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Tribal & Indigenous Traditions of India</h2>
+      <p>Pan-Indian case studies documenting living bio-bridges, bronze casting, flower festivals, pastoral architecture, and tribal art.</p>
+    </div>
+
+    <!-- 01: Meghalaya Living Root Bridges (Jingkieng Jri) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/root-bridges.jpg');">
+        <span class="monument-badge-top">Khasi & Jaintia Hills • Bio-Engineering Marvel</span>
+        <div class="monument-bottom-title">
+          <h3>Meghalaya Living Root Bridges</h3>
+          <span>Cherrapunji & Nongriat, Meghalaya • Jingkieng Jri</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Khasi and Jaintia indigenous communities of Meghalaya's rainforest canopy</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">Bridges grown over decades by guiding aerial roots of the <em>Ficus elastica</em> (rubber fig tree) through hollowed betel nut tree trunks across turbulent monsoon streams, growing stronger over centuries</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Living architectural masterpieces that self-heal and strengthen with age, withstanding torrential monsoon floods without concrete</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Ficus Elastica Roots</span>
+              <span class="tag-pill">Self-Healing Bio-Bridge</span>
+              <span class="tag-pill">Khasi Rainforest Engineering</span>
+              <span class="tag-pill">Monsoon Adaptation</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Nongriat, Meghalaya (25.2428° N, 91.7061° E)</span>
+          <a href="https://maps.google.com/?q=Nongriat+Living+Root+Bridges" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Bastar Dokra Brass Casting (Chhattisgarh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/bastar-dokra.jpg');">
+        <span class="monument-badge-top">Bastar Forests • 4,000-Year Bell Metal Craft</span>
+        <div class="monument-bottom-title">
+          <h3>Bastar Dokra Brass Casting</h3>
+          <span>Kondagaon & Jagdalpur, Chhattisgarh • Lost-Wax Art</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Ghara and Maria Gond tribal metal-smiths of the Bastar plateau</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">Practices the ancient non-ferrous lost-wax metal casting technique. Fine beeswax threads are wrapped around a clay core to form rustic, expressive tribal figures of deities, musicians, and forest animals</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Unmistakable rustic charm with intricate coiled wire textures, echoing Harappan metallurgical heritage</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Beeswax Thread Wrapping</span>
+              <span class="tag-pill">Non-Ferrous Bell Metal</span>
+              <span class="tag-pill">Bastar Tribal Sculptures</span>
+              <span class="tag-pill">Indus Valley Metallurgical Link</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kondagaon, Bastar (19.5978° N, 81.6661° E)</span>
+          <a href="https://maps.google.com/?q=Kondagaon+Bastar+Chhattisgarh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Santhali Flower Festivals (Baha Parab) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/baha-parab.jpg');">
+        <span class="monument-badge-top">Chota Nagpur Plateau • Spring Forest Gratitude</span>
+        <div class="monument-bottom-title">
+          <h3>Santhali Baha Parab Festival</h3>
+          <span>Mayurbhanj & Jharkhand • Sacred Sal Flower Worship</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Santhal indigenous community inhabiting Jharkhand, Odisha, and West Bengal</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text"><em>Baha</em> (meaning flower) is the major spring festival celebrating the blooming of sacred Sal (Shorea robusta) and Mahua trees. Ritual priest (Naike) offers freshly plucked Sal flowers to forest spirits before humans harvest them</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Features exuberant community drum beats (Madal), traditional dances celebrating spring, and ritual water sprinkling symbolizing rain prayers</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Sal Flower Worship</span>
+              <span class="tag-pill">Santhal Spring Celebration</span>
+              <span class="tag-pill">Madal Drum Beat</span>
+              <span class="tag-pill">Forest Gratitude Rite</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Baripada, Mayurbhanj (21.9346° N, 86.7380° E)</span>
+          <a href="https://maps.google.com/?q=Baripada+Mayurbhanj+Odisha" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Toda Conical Huts (Nilgiri Hills) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/toda-hut.jpg');">
+        <span class="monument-badge-top">Nilgiri Biosphere • Barrel-Vaulted Bamboo Architecture</span>
+        <div class="monument-bottom-title">
+          <h3>Toda Conical Huts (Mund)</h3>
+          <span>Nilgiri Hills, Tamil Nadu • Pastoral Eco-Architecture</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Toda pastoral community of the Nilgiri plateau</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">Constructed as half-barrel vault structures made of bamboo frames tied with rattan and thatched tightly with dried grass. Features remarkably small front entry doors (crawling height) designed to keep predators out and heat trapped in cold mountain elevations</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Architectural harmony with rolling shola grasslands; built entirely without nails or modern hardware</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Barrel-Vaulted Bamboo</span>
+              <span class="tag-pill">Grass Thatching</span>
+              <span class="tag-pill">Crawling Doorway</span>
+              <span class="tag-pill">Nilgiri Shola Architecture</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ooty, Nilgiris (11.4102° N, 76.6950° E)</span>
+          <a href="https://maps.google.com/?q=Ooty+Nilgiri+Hills" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Gond Pithora Wall Art (Madhya Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/gond-art.jpg');">
+        <span class="monument-badge-top">Satpura Range • Ritual Cosmic Wall Murals</span>
+        <div class="monument-bottom-title">
+          <h3>Gond Pithora Ritual Wall Art</h3>
+          <span>Mandla & Dindori, Madhya Pradesh • Cosmic Painting</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Gond and Baiga tribal communities of central India</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">Murals painted on mud walls during thanksgiving rituals using natural earth pigments (red clay, yellow ochre, charcoal, cow dung wash). Features vibrant dot-and-dash patterns outlining sacred fauna and ancestral spirits</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Brings alive the dense folklore of the Satpura forests, visualizing trees as living sentient entities</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Natural Earth Pigments</span>
+              <span class="tag-pill">Satpura Forest Lore</span>
+              <span class="tag-pill">Dot-and-Dash Pattern</span>
+              <span class="tag-pill">Gond Ritual Murals</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Mandla, MP (22.5976° N, 80.3702° E)</span>
+          <a href="https://maps.google.com/?q=Mandla+Madhya+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Bhil Pithora Ritual Painting (Gujarat & MP) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/bhil-pithora.jpg');">
+        <span class="monument-badge-top">Vindhyan Hills • Horse Deity Offerings</span>
+        <div class="monument-bottom-title">
+          <h3>Bhil Pithora Ritual Painting</h3>
+          <span>Chhota Udepur, Gujarat & Jhabua, MP • Pithora Dev</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Bhil and Rathwa indigenous communities of the Gujarat-Madhya Pradesh border</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">A sacred mural ritual performed to invoke Pithora Baba (God of Crops and Creation). Houses are plastered with cow dung and white clay before priests paint galloping horses representing ancestral deities</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Accompanied by all-night tribal singing (Pithora Gazal), drumming, and offerings of liquor and coconut</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Pithora Baba Horse Murals</span>
+              <span class="tag-pill">Cow Dung Plaster Base</span>
+              <span class="tag-pill">Bhil & Rathwa Tradition</span>
+              <span class="tag-pill">All-Night Ritual Chant</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Chhota Udepur, Gujarat (22.3107° N, 74.0205° E)</span>
+          <a href="https://maps.google.com/?q=Chhota+Udepur+Gujarat" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Warli Harvest Life (Maharashtra) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/warli-harvest.jpg');">
+        <span class="monument-badge-top">Sahyadri Foothills • Agrarian Rice Paste Art</span>
+        <div class="monument-bottom-title">
+          <h3>Warli Harvest Mural Heritage</h3>
+          <span>Palghar & Thane, Maharashtra • Agrarian Simplicity</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Warli indigenous agricultural community of the Northern Sahyadri range</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">Rooted entirely in agricultural interdependence. Rice paste mixed with gum is painted onto red-ochre mud walls using bamboo twigs, celebrating sowing seasons, paddy harvesting, and forest harmony</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Stark minimalist forms using concentric circles and triangle spirals representing human community bonds</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Rice Paste on Red Mud</span>
+              <span class="tag-pill">Paddy Harvest Celebration</span>
+              <span class="tag-pill">Minimalist Circles & Triangles</span>
+              <span class="tag-pill">Sahyadri Tribal Roots</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Jawhar, Palghar (19.9142° N, 73.2359° E)</span>
+          <a href="https://maps.google.com/?q=Jawhar+Palghar+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Khasi Monolith Memorials (Meghalaya) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/khasi-monoliths.jpg');">
+        <span class="monument-badge-top">Shillong Plateau • Megalithic Ancestor Stones</span>
+        <div class="monument-bottom-title">
+          <h3>Khasi Megalithic Monoliths</h3>
+          <span>Cherrapunji & Mawphlang, Meghalaya • Ancestor Worship</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Khasi indigenous hill clans of Meghalaya</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">Erection of upright vertical stone pillars (Mawbynna) and flat dolmen seat stones honoring maternal ancestors and clan founders, seamlessly integrated into sacred grove landscapes</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Demonstrates living Megalithic architectural practices surviving into contemporary times across the Northeast hills</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Mawbynna Stone Pillars</span>
+              <span class="tag-pill">Megalithic Ancestor Honor</span>
+              <span class="tag-pill">Sacred Grove Monoliths</span>
+              <span class="tag-pill">Khasi Clan Tradition</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Mawphlang Sacred Grove (25.4578° N, 91.7664° E)</span>
+          <a href="https://maps.google.com/?q=Mawphlang+Sacred+Grove" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Nicobarese Beehive Huts (Andaman & Nicobar) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/nicobarese-hut.jpg');">
+        <span class="monument-badge-top">Bay of Bengal • Stilted Dome Architecture</span>
+        <div class="monument-bottom-title">
+          <h3>Nicobarese Beehive Stilted Huts</h3>
+          <span>Car Nicobar Island • Coastal Eco-Architecture</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Nicobarese indigenous maritime community</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">Dome-shaped or beehive-styled huts elevated on sturdy wooden stilts, constructed entirely from cane, bamboo, and dry pandanus leaves with zero metal nails, accessed via wooden floor ladders</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Aerodynamically engineered to withstand fierce tropical cyclones and tidal storm surges along island coasts</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Beehive Stilted Dome</span>
+              <span class="tag-pill">Pandanus Leaf Thatch</span>
+              <span class="tag-pill">Cyclone-Resistant Design</span>
+              <span class="tag-pill">Nicobarese Island Architecture</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Car Nicobar Island (9.1729° N, 92.7750° E)</span>
+          <a href="https://maps.google.com/?q=Car+Nicobar+Island" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Bodo Bagurumba Dance & Lore (Assam) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/tribal/bagurumba.jpg');">
+        <span class="monument-badge-top">Brahmaputra Plains • Butterfly Nature Dance</span>
+        <div class="monument-bottom-title">
+          <h3>Bodo Bagurumba Dance & Lore</h3>
+          <span>Kokrajhar & Udalguri, Assam • Nature Mimicry</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Tribe</span>
+            <p class="dossier-text">Bodo indigenous ethnic group of the Brahmaputra northern plains</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ecological Craft</span>
+            <p class="dossier-text">A traditional folk dance and oral tradition mimicking the gentle flight of butterflies, swaying bamboo branches, rustling leaves, and flowing river currents in absolute harmony with the natural world</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Performed using traditional wind and percussion instruments (Sifung flute and Kham drum) while wearing vibrant Dousa and Aronai handwoven dokhna garments</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Indigenous Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Butterfly Nature Mimicry</span>
+              <span class="tag-pill">Sifung Bamboo Flute</span>
+              <span class="tag-pill">Aronai Handwoven Scarf</span>
+              <span class="tag-pill">Bodo Plains Tradition</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kokrajhar, Assam (26.3917° N, 90.2728° E)</span>
+          <a href="https://maps.google.com/?q=Kokrajhar+Assam" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Tribal Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

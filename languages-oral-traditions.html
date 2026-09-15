@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Languages & Oral Traditions | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/oral/hero-oral.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Linguistic Families Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .style-badge {
+      font-size: 0.68rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 1024px) {
+      .styles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 02.04 • Linguistic & Spoken Memory</div>
+      <h1 class="hero-title">Languages & Oral Traditions</h1>
+      <p class="hero-tagline">"Where Vedic chanting phonetics, epigraphic scripts, bardic memory, and dying dialects preserve spoken wisdom."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Parampara of Spoken Word & Linguistic Pluralism</h2>
+        <p class="doctrine-subtitle">India is a profound linguistic mosaic housing hundreds of distinct mother tongues across four major language families. Long before widespread codification on paper, sacred knowledge, laws, and history were preserved entirely through oral memory (Shruti).</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What are Oral Traditions -->
+        <div class="concept-block">
+          <h3 class="concept-title">🗣️ What are Oral Traditions?</h3>
+          <p class="concept-text">
+            Oral traditions constitute the spoken repositories of community knowledge—encompassing folk tales, epic ballads, proverbs, ritual chants, and genealogical genealogies passed down by bardic lineages. These unwritten archives capture local histories and emotional landscapes that formal imperial texts frequently overlook.
+          </p>
+        </div>
+
+        <!-- Linguistic Preservation -->
+        <div class="concept-block">
+          <h3 class="concept-title">📜 The 4 Indian Language Families</h3>
+          <p class="concept-text">
+            India's linguistic richness stems from four distinct language families: Indo-Aryan (spoken by ~78% of the population), Dravidian (~20%), Austroasiatic (Munda languages of central/eastern tribes), and Tibeto-Burman (spoken across Himalayan and northeastern hill communities).
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Language Families Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">India's Four Linguistic Phyla</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Indo-Aryan Family</h4>
+            <span class="style-badge">Northern & Western</span>
+            <p class="style-text">Derived from Sanskrit and Vedic roots; includes Hindi, Marathi, Bengali, Gujarati, Punjabi, Odhia, Kashmiri, and Assamese.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Dravidian Family</h4>
+            <span class="style-badge">Southern Peninsula</span>
+            <p class="style-text">Ancient southern languages predating Sanskrit penetration; includes Tamil, Telugu, Kannada, Malayalam, and tribal Tulu.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Austroasiatic Family</h4>
+            <span class="style-badge">Central Tribal Belt</span>
+            <p class="style-text">Munda branch languages spoken by indigenous communities such as Santhali, Ho, Mundari, and Khasi.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Tibeto-Burman Family</h4>
+            <span class="style-badge">Himalayas & Northeast</span>
+            <p class="style-text">Sino-Tibetan linguistic branches including Bodo, Manipuri (Meiteilon), Garo, Naga dialects, and Ladakhi.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Languages & Oral Traditions) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Languages & Oral Traditions of India</h2>
+      <p>Pan-Indian case studies documenting UNESCO intangible masterworks, Sanskrit theatre, bardic epics, and tribal oral lore.</p>
+    </div>
+
+    <!-- 01: UNESCO Vedic Chanting (Kerala & Karnataka) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/vedic-chanting.jpg');">
+        <span class="monument-badge-top">UNESCO Intangible Heritage • Oral Veda Tradition</span>
+        <div class="monument-bottom-title">
+          <h3>Vedic Chanting Tradition</h3>
+          <span>Kerala & Karnataka • 3,500-Year Oral Recitation</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Vedic Sanskrit phonetics preserved strictly through auditory memorization across priestly lineages</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">Proclaimed by UNESCO in 2008 as a Masterpiece of the Oral and Intangible Heritage of Humanity. Utilizes precise pitch accents (Udatt, Anudatt, Svarita) and hand gestures to prevent textual corruption over millennia.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Recited without written texts using advanced mnemonic structures (Padapatha, Kramapatha) that survived untouched for millennia.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">UNESCO Masterpiece</span>
+              <span class="tag-pill">Pitch Accents (Svarita)</span>
+              <span class="tag-pill">Auditory Mnemonic Grids</span>
+              <span class="tag-pill">Rigveda Recitation</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Thrissur, Kerala (10.5276° N, 76.2144° E)</span>
+          <a href="https://maps.google.com/?q=Thrissur+Vedic+Pathasala" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Kudiyattam Sanskrit Theatre (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/kudiyattam.jpg');">
+        <span class="monument-badge-top">UNESCO Masterpiece • Ancient Sanskrit Stage</span>
+        <div class="monument-bottom-title">
+          <h3>Kudiyattam Sanskrit Drama</h3>
+          <span>Thrissur, Kerala • 2,000-Year Acting Tradition</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Classical Sanskrit and Prakrit theatrical dialogue performed inside temple theatres (Koothambalams)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">The sole surviving ancient Sanskrit dramatic art form in the world. Actors undergo 10–12 years of rigorous physical and vocal training under the traditional Guru-Shishya parampara.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Famous for Netrabhinaya (eye expression) where actors convey complex emotional soliloquies and backstories using solely eye movements.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Sanskrit Stage Recitation</span>
+              <span class="tag-pill">Netrabhinaya Eye Acting</span>
+              <span class="tag-pill">Koothambalam Temple Hall</span>
+              <span class="tag-pill">Mizhavu Drum</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Vadakkunnathan Temple, Thrissur (10.5231° N, 76.2138° E)</span>
+          <a href="https://maps.google.com/?q=Vadakkunnathan+Temple+Thrissur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Powada Maratha Heroic Lore (Maharashtra) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/powada.jpg');">
+        <span class="monument-badge-top">Shahiri Bardic Lore • Maratha Ballads</span>
+        <div class="monument-bottom-title">
+          <h3>Powada Heroic Ballads</h3>
+          <span>Pune & Raigad, Maharashtra • Military Oral History</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Classical Marathi verse recited by hereditary bards known as Shahirs</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">Emerged during the 17th-century Maratha military campaigns to chronicle heroic battles, sieges, and acts of bravery by Chhatrapati Shivaji Maharaj, Tanaji Malusare, and Baji Prabhu Deshpande.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Combines high-octane poetic cadence, rapid rhythmic chanting, and stirring vocal exhortations accompanied by Daphne drums and Tuntune.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Shahir Bardic Tradition</span>
+              <span class="tag-pill">Maratha Military Lore</span>
+              <span class="tag-pill">Stirring Marathi Verse</span>
+              <span class="tag-pill">Pratapgad Battle Ballads</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Shaniwar Wada, Pune (18.5204° N, 73.8567° E)</span>
+          <a href="https://maps.google.com/?q=Shaniwar+Wada+Pune" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Burrakatha Telugu Ballads (Andhra Pradesh & Telangana) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/burrakatha.jpg');">
+        <span class="monument-badge-top">Jangam Storytellers • Telugu Epic Ballads</span>
+        <div class="monument-bottom-title">
+          <h3>Burrakatha Ballad Tradition</h3>
+          <span>Telangana & Andhra Pradesh • Oral Storytelling</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Classical and folk Telugu storytelling performed by a troupe of three traveling bards</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">Named after the <em>Burra</em> (a skull-shaped dried hollow drum or Tambura played with rings on the performer's fingers). The lead narrator (Kathakudu) recites mythological and historical tales while two side-comedians interject with political satire.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Dynamic rhythmic footwork, synchronized dancing, and rapid switching between prose dialogue and soaring Telugu lyrical poetry.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Burra Drum & Ring Play</span>
+              <span class="tag-pill">Telugu Folk Ballad</span>
+              <span class="tag-pill">Three-Person Troupe</span>
+              <span class="tag-pill">Mythic & Social Satire</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Warangal, Telangana (17.9689° N, 79.5941° E)</span>
+          <a href="https://maps.google.com/?q=Warangal+Fort+Telangana" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Baul Mystic Oral Lore (West Bengal) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/baul.jpg');">
+        <span class="monument-badge-top">UNESCO Intangible Masterpiece • Mystic Minstrels</span>
+        <div class="monument-bottom-title">
+          <h3>Baul Mystic Philosophy Songs</h3>
+          <span>Birbhum & Nadia, West Bengal • Wandering Minstrels</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Rural colloquial Bengali poetry infused with Sufi and Vaishnava philosophy</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">The Bauls are a group of ecstatic wandering troubadours in rural Bengal who have no fixed scriptures or temples. Their entire theology is preserved through unwritten oral songs sung while playing the Ektara and Dubki.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Profound spiritual verses celebrating the "Maner Manush" (Man of the Heart) dwelling within every human body, transcending religious dogma.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">UNESCO Oral Heritage</span>
+              <span class="tag-pill">Maner Manush Philosophy</span>
+              <span class="tag-pill">Ektara & Ghungroo</span>
+              <span class="tag-pill">Bengali Mystic Verse</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Shantiniketan (23.6791° N, 87.6835° E)</span>
+          <a href="https://maps.google.com/?q=Shantiniketan+West+Bengal" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Harikatha Devotional Storytelling (Karnataka & Tamil Nadu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/harikatha.jpg');">
+        <span class="monument-badge-top">Katha Kalakshepam • Musical Discourse</span>
+        <div class="monument-bottom-title">
+          <h3>Harikatha Discourse Tradition</h3>
+          <span>Thanjavur & Mysuru • Musical Storytelling</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Multilingual oral performance in Tamil, Telugu, Kannada, and Marathi</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">Literally meaning "Stories of Hari (God)," Harikatha is a composite art form combining storytelling, classical music, poetry, philosophy, and light comedy delivered by a single virtuoso storyteller (Haridasu).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">The speaker wears ankle bells and holds finger cymbals, seamlessly transitioning between Sanskrit shlokas, dramatic narration, and classical Carnatic kritis.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Katha Kalakshepam</span>
+              <span class="tag-pill">Haridasu Narrator</span>
+              <span class="tag-pill">Carnatic Musical Interludes</span>
+              <span class="tag-pill">Philosophical Parables</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Thanjavur (10.7870° N, 79.1378° E)</span>
+          <a href="https://maps.google.com/?q=Thanjavur+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Pandvani Epic Recitation (Chhattisgarh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/pandvani.jpg');">
+        <span class="monument-badge-top">Mahabharata Oral Lore • Tambura Theater</span>
+        <div class="monument-bottom-title">
+          <h3>Pandvani Epic Recitation</h3>
+          <span>Bhilai & Raipur, Chhattisgarh • Tribal Mahabharata</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Chhattisgarhi and rural Hindi vernacular storytelling</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">An energetic folk oral tradition narrating the triumphs of the Pandavas from the Mahabharata. The lead storyteller (such as Padma Vibhushan Teejan Bai) enacts every character using a tuned Tambura as a prop, sword, or bow.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Performed in two styles: <em>Vedamati</em> (sitting posture following strict epic text) and <em>Kapalik</em> (improvised theatrical performance with dramatic body movement).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Mahabharata Oral Lore</span>
+              <span class="tag-pill">Tambura Prop Integration</span>
+              <span class="tag-pill">Kapalik & Vedamati</span>
+              <span class="tag-pill">Chhattisgarhi Dialect</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Raipur, Chhattisgarh (21.2514° N, 81.6296° E)</span>
+          <a href="https://maps.google.com/?q=Raipur+Chhattisgarh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Toda Tribal Oral Poetry (Nilgiri Hills, Tamil Nadu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/toda.jpg');">
+        <span class="monument-badge-top">Nilgiri Biosphere • Endangered Tribal Verse</span>
+        <div class="monument-bottom-title">
+          <h3>Toda Oral Poetic Songs</h3>
+          <span>Nilgiri Hills, Tamil Nadu • Endangered Dravidian Lore</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Toda language (an isolated southern Dravidian tongue without a native script)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">The pastoral Toda tribe preserves their entire mythology, buffalo-sacred rituals, and emotional landscape through improvised couplets sung in a distinctive polyphonic modal style.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Every song is composed using conventionalized poetic formulas and paired couplets that chronicle hills, sacred dairies, and ancestral spirits.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Unwritten Dravidian Tongue</span>
+              <span class="tag-pill">Buffalo Pastoral Lore</span>
+              <span class="tag-pill">Polyphonic Couplets</span>
+              <span class="tag-pill">Nilgiri Biosphere Archive</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ooty, Nilgiris (11.4102° N, 76.6950° E)</span>
+          <a href="https://maps.google.com/?q=Ooty+Nilgiri+Hills" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Villupattu Bow Song (Tamil Nadu & Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/villupattu.jpg');">
+        <span class="monument-badge-top">Musical Bow • Southern Folk Ballads</span>
+        <div class="monument-bottom-title">
+          <h3>Villupattu Bow Song Tradition</h3>
+          <span>Kanyakumari & Tirunelveli, Tamil Nadu • Musical Archery Lore</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Classical and colloquial Tamil folk verse</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">Literally "Bow Song," Villupattu uses a large musical bow strung with bells as the primary percussion instrument. Striking the bow string while beating earthen pots (Kudam) creates a driving rhythm for narrating village guardian deity legends.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">A lead singer and supporting chorus engage in lively call-and-response storytelling blending moral parables and village history.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Musical Archery Bow</span>
+              <span class="tag-pill">Kudam Earthen Pot Bass</span>
+              <span class="tag-pill">Tamil Folk Ballad</span>
+              <span class="tag-pill">Village Deity Lore</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kanyakumari (8.0883° N, 77.5385° E)</span>
+          <a href="https://maps.google.com/?q=Kanyakumari+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Alha Epic Ballads (Bundelkhand, UP & MP) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/oral/alha.jpg');">
+        <span class="monument-badge-top">Bundelkhandi Vernacular • Chandel Warrior Epics</span>
+        <div class="monument-bottom-title">
+          <h3>Alha Epic Ballad Tradition</h3>
+          <span>Mahoba & Bundelkhand • Warrior Oral History</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Linguistic Origin</span>
+            <p class="dossier-text">Bundelkhandi dialect of Hindi (Alha Meter)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Oral Preservation</span>
+            <p class="dossier-text">Composed around 12th century by court poet Jagnik, chronicling the 52 heroic battles fought by warrior brothers Alha and Udal against Prithviraj Chauhan.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Traditonally sung during the monsoon season by rural troubadours in a specific accelerating martial meter that stirs intense regional pride.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Tradition Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Alha Meter Poetry</span>
+              <span class="tag-pill">Bundelkhandi Vernacular</span>
+              <span class="tag-pill">Chandel Warrior Battles</span>
+              <span class="tag-pill">Monsoon Bardic Singing</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Mahoba, UP (25.2924° N, 79.8753° E)</span>
+          <a href="https://maps.google.com/?q=Mahoba+Uttar+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Oral Heritage Center
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

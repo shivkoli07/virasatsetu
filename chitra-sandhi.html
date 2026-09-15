@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chitra-Sandhi: Sacred Visual Jigsaw | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+    }
+
+    /* Level Selector Bar */
+    .level-bar {
+      max-width: 1100px;
+      margin: 1.5rem auto 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .level-btn {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.5rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .level-btn:hover, .level-btn.active {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: var(--accent-brown);
+    }
+
+    .game-layout {
+      max-width: 1100px;
+      margin: 1.5rem auto 3rem auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .game-card, .reference-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 22px;
+      padding: 2.2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .game-card::before, .reference-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 22px;
+      border-top-right-radius: 22px;
+    }
+
+    .game-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    /* 3x3 Jigsaw Board */
+    .jigsaw-board {
+      width: 360px;
+      height: 360px;
+      margin: 1.5rem auto 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      gap: 4px;
+      background: var(--border-card);
+      padding: 4px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(42, 21, 11, 0.18);
+      overflow: hidden;
+    }
+
+    .tile {
+      background-size: 352px 352px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: transform 0.15s ease-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 0.9rem;
+      user-select: none;
+    }
+
+    .tile.empty {
+      background: #D9C2A7 !important;
+      cursor: default;
+    }
+
+    .tile:hover:not(.empty) {
+      filter: brightness(1.08);
+    }
+
+    .stats-bar {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-card);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--accent-brown);
+    }
+
+    .btn-action {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 25px;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1.2rem;
+      width: 100%;
+    }
+
+    .btn-action:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    .ref-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-card);
+      margin-top: 1rem;
+    }
+
+    .completion-banner {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      margin-top: 1.2rem;
+    }
+
+    .unlocked-badge-box {
+      margin-top: 0.9rem;
+      padding: 0.8rem;
+      background: rgba(238, 219, 190, 0.35);
+      border: 1.5px dashed var(--accent-gold);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      width: 100%;
+    }
+
+    .unlocked-badge-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .unlocked-badge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: left;
+    }
+
+    .unlocked-badge-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    @media (max-width: 900px) {
+      .game-layout { grid-template-columns: 1fr; }
+      header { padding: 0 1.5rem; }
+      .jigsaw-board { width: 300px; height: 300px; }
+      .tile { background-size: 292px 292px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <!-- Level & Game Selector Bar -->
+  <div class="level-bar" id="levelSelector">
+    <button class="level-btn active" onclick="switchLevel(0)">Level 1: Kailasa Temple</button>
+    <button class="level-btn" onclick="switchLevel(1)">Level 2: Taj Mahal</button>
+    <button class="level-btn" onclick="switchLevel(2)">Level 3: Ram Setu</button>
+    <button class="level-btn" onclick="switchLevel(3)">Level 4: Darjeeling</button>
+    <button class="level-btn" onclick="switchLevel(4)">Level 5: Hampi Ruins</button>
+  </div>
+
+  <main class="game-layout">
+
+    <!-- Jigsaw Puzzle Frame -->
+    <section class="game-card">
+      <div class="game-tag" id="gameTag">Sacred Visual Puzzle • Level 1</div>
+      <h1 class="game-title">Chitra-Sandhi</h1>
+      <p style="color: var(--text-muted); font-size: 0.88rem;">
+        Click adjacent tiles to slide them into the empty space and assemble the sacred monolithic marvel.
+      </p>
+
+      <div class="jigsaw-board" id="board"></div>
+
+      <div class="stats-bar">
+        <span>Moves: <strong id="moveCount">0</strong></span>
+        <span>Target: <strong>3x3 Grid</strong></span>
+        <span>Reward: <strong id="rewardXp">+350 XP</strong></span>
+      </div>
+
+      <button class="btn-action" onclick="shuffleGame()">Reshuffle Puzzle</button>
+
+      <div class="completion-banner" id="winBanner">
+        <h2 style="font-family: 'Cinzel', serif; color: var(--accent-brown);">Heritage Restored!</h2>
+        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.4rem;" id="winMessage"></p>
+        
+        <div class="unlocked-badge-box">
+          <span class="unlocked-badge-icon" id="badgeIcon">🛕</span>
+          <div>
+            <div class="unlocked-badge-name" id="badgeTitleText">Shreshthi Architect</div>
+            <div class="unlocked-badge-sub">Honor permanently recorded to PostgreSQL</div>
+          </div>
+        </div>
+
+        <button class="btn-action" style="margin-top: 0.8rem;" onclick="loadNextLevel()">Next Game / Level &rarr;</button>
+        <button class="btn-action" style="background: #FFF; color: var(--accent-brown); border: 1.5px solid var(--border-card); margin-top: 0.4rem;" onclick="window.location.href='profile.html'">View in Scholar Dossier</button>
+      </div>
+    </section>
+
+    <!-- Reference Visual & Archaeological Notes -->
+    <aside class="reference-card">
+      <div class="game-tag">Archaeological Reference</div>
+      <h2 style="font-family: 'Cinzel', serif; font-size: 1.3rem;" id="refTitle">Kailasa Rock-Cut Temple</h2>
+      <div style="font-size: 0.78rem; font-weight: 700; color: var(--accent-gold); text-transform: uppercase;" id="refMeta">
+        Ellora Caves, Maharashtra • 8th Century
+      </div>
+
+      <img id="refImg" src="assets/games/kailash.jpg" alt="Monument Reference" class="ref-img" />
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin-top: 1rem;" id="refDesc">
+        Commissioned by King Krishna I of the Rashtrakuta Dynasty, Cave 16 represents the apex of rock-cut monolithic craftsmanship. Craftsmen chiseled over 200,000 tonnes of basalt rock top-down with surgical precision.
+      </p>
+    </aside>
+
+  </main>
+
+  <script>
+    const API_QUIZ = 'http://localhost:8080/api/quiz/submit';
+    const userEmail = localStorage.getItem('virasatSetu_user_email');
+
+    // 5 Levels Configuration using assets from games folder
+    const levels = [
+      {
+        name: "Kailasa Rock-Cut Temple",
+        meta: "Ellora Caves, Maharashtra • 8th Century",
+        image: "assets/games/kailash.jpg",
+        desc: "Commissioned by King Krishna I of the Rashtrakuta Dynasty, Cave 16 represents the apex of rock-cut monolithic craftsmanship. Craftsmen chiseled over 200,000 tonnes of basalt rock top-down with surgical precision.",
+        xp: 350,
+        badge: "Shreshthi Architect",
+        icon: "🛕",
+        tag: "Sacred Visual Puzzle • Level 1"
+      },
+      {
+        name: "Taj Mahal Mausoleum",
+        meta: "Agra, Uttar Pradesh • 17th Century",
+        image: "assets/games/tajmahal.jpg",
+        desc: "An ivory-white marble mausoleum on the right bank of the river Yamuna, commissioned in 1631 by the Mughal emperor Shah Jahan to house the tomb of his favourite wife, Mumtaz Mahal.",
+        xp: 400,
+        badge: "Mughal Master Craftsman",
+        icon: "🕌",
+        tag: "Architectural Marvel • Level 2"
+      },
+      {
+        name: "Ram Setu (Adam's Bridge)",
+        meta: "Pamban Island to Mannar Island • Ancient Epic Heritage",
+        image: "assets/games/ramsetu.jpg",
+        desc: "A chain of limestone shoals bridging the Palk Strait between India and Sri Lanka, resonating with rich mythological legends from the epic Ramayana.",
+        xp: 450,
+        badge: "Vedic Voyager",
+        icon: "🌊",
+        tag: "Mythic Heritage • Level 3"
+      },
+      {
+        name: "Darjeeling Himalayan Railway",
+        meta: "West Bengal • UNESCO World Heritage",
+        image: "assets/games/darjeeling.jpg",
+        desc: "Affectionately known as the 'Toy Train', operating on a 2 foot gauge track through the breathtaking lower Himalayan foothills amidst lush green tea plantations.",
+        xp: 500,
+        badge: "Himalayan Explorer",
+        icon: "🚂",
+        tag: "Engineering Heritage • Level 4"
+      },
+      {
+        name: "Hampi Stone Chariot & Ruins",
+        meta: "Vijayanagara, Karnataka • 14th Century",
+        image: "assets/games/hampi.jpg",
+        desc: "The magnificent stone chariot inside the Vitthala Temple complex, dedicated to Garuda, showcasing the extraordinary sculptural mastery of the Vijayanagara Empire.",
+        xp: 600,
+        badge: "Vijayanagara Titan",
+        icon: "🏛️",
+        tag: "Imperial Legacy • Level 5"
+      }
+    ];
+
+    let currentLevelIndex = 0;
+
+    // Navbar sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Profile';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // 3x3 Puzzle State (Tile index 8 is empty)
+    let tiles = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    let moves = 0;
+    let isFinished = false;
+
+    function switchLevel(index) {
+      currentLevelIndex = index;
+      document.querySelectorAll('.level-btn').forEach((btn, idx) => {
+        if (idx === index) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      const lvl = levels[currentLevelIndex];
+      document.getElementById('gameTag').textContent = lvl.tag;
+      document.getElementById('refTitle').textContent = lvl.name;
+      document.getElementById('refMeta').textContent = lvl.meta;
+      document.getElementById('refImg').src = lvl.image;
+      document.getElementById('refDesc').textContent = lvl.desc;
+      document.getElementById('rewardXp').textContent = `+${lvl.xp} XP`;
+      document.getElementById('badgeTitleText').textContent = lvl.badge;
+      document.getElementById('badgeIcon').textContent = lvl.icon;
+
+      shuffleGame();
+    }
+
+    function loadNextLevel() {
+      const nextIndex = (currentLevelIndex + 1) % levels.length;
+      switchLevel(nextIndex);
+    }
+
+    function renderBoard() {
+      const board = document.getElementById('board');
+      board.innerHTML = '';
+      const lvl = levels[currentLevelIndex];
+
+      tiles.forEach((tileValue, pos) => {
+        const tileDiv = document.createElement('div');
+        tileDiv.className = 'tile';
+
+        if (tileValue === 8) {
+          tileDiv.classList.add('empty');
+        } else {
+          tileDiv.style.backgroundImage = `url('${lvl.image}')`;
+          const row = Math.floor(tileValue / 3);
+          const col = tileValue % 3;
+          tileDiv.style.backgroundPosition = `-${col * 117}px -${row * 117}px`;
+        }
+
+        tileDiv.onclick = () => onTileClick(pos);
+        board.appendChild(tileDiv);
+      });
+    }
+
+    function onTileClick(pos) {
+      if (isFinished) return;
+      const emptyPos = tiles.indexOf(8);
+
+      const isAdjacent = (
+        (pos === emptyPos - 1 && emptyPos % 3 !== 0) ||
+        (pos === emptyPos + 1 && pos % 3 !== 0) ||
+        (pos === emptyPos - 3) ||
+        (pos === emptyPos + 3)
+      );
+
+      if (isAdjacent) {
+        [tiles[pos], tiles[emptyPos]] = [tiles[emptyPos], tiles[pos]];
+        moves++;
+        document.getElementById('moveCount').textContent = moves;
+        renderBoard();
+        checkCompletion();
+      }
+    }
+
+    function shuffleGame() {
+      isFinished = false;
+      moves = 0;
+      document.getElementById('moveCount').textContent = '0';
+      document.getElementById('winBanner').style.display = 'none';
+
+      for (let i = 0; i < 60; i++) {
+        const emptyPos = tiles.indexOf(8);
+        const validNeighbors = [];
+
+        if (emptyPos % 3 !== 0) validNeighbors.push(emptyPos - 1);
+        if (emptyPos % 3 !== 2) validNeighbors.push(emptyPos + 1);
+        if (emptyPos - 3 >= 0) validNeighbors.push(emptyPos - 3);
+        if (emptyPos + 3 < 9) validNeighbors.push(emptyPos + 3);
+
+        const randomPos = validNeighbors[Math.floor(Math.random() * validNeighbors.length)];
+        [tiles[emptyPos], tiles[randomPos]] = [tiles[randomPos], tiles[emptyPos]];
+      }
+      renderBoard();
+    }
+
+    async function checkCompletion() {
+      const isSolved = tiles.every((val, idx) => val === idx);
+      if (isSolved && !isFinished) {
+        isFinished = true;
+        document.getElementById('winBanner').style.display = 'block';
+        const lvl = levels[currentLevelIndex];
+
+        if (!userEmail) {
+          document.getElementById('winMessage').textContent = `Puzzle solved! Sign in to permanently save your badge and +${lvl.xp} XP to your profile.`;
+          return;
+        }
+
+        // Post trial completion, XP, and badge title to PostgreSQL via Spring Boot
+        try {
+          const res = await fetch(API_QUIZ, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: userEmail,
+              title: `Chitra-Sandhi: ${lvl.name} Jigsaw`,
+              category: "Visual Puzzles",
+              scorePercent: 100,
+              xpEarned: lvl.xp,
+              badgeTitle: lvl.badge,
+              badgeIcon: lvl.icon
+            })
+          });
+
+          if (res.ok) {
+            const data = await res.json();
+            document.getElementById('winMessage').innerHTML = 
+              `Congratulations! Sacred visual reconstructed in <strong>${moves}</strong> moves. <strong>+${lvl.xp} XP</strong> awarded (Total: <strong>${data.totalXp} XP</strong>).`;
+          }
+        } catch (e) {
+          document.getElementById('winMessage').textContent = 'Solved, but backend synchronization failed.';
+        }
+      }
+    }
+
+    // Initial render
+    switchLevel(0);
+  </script>
+</body>
+</html>

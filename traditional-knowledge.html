@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traditional Knowledge | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/knowledge/hero-knowledge.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Scientific Domains Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .style-badge {
+      font-size: 0.68rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 1024px) {
+      .styles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 04.03 • Empirical Science & Technological Innovation</div>
+      <h1 class="hero-title">Traditional Knowledge</h1>
+      <p class="hero-tagline">"Where Wootz Damascus metallurgy, medieval industrial zinc retorts, flood irrigation, and ancient surgery embody empirical mastery."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Empirical Science of Ancient India</h2>
+        <p class="doctrine-subtitle">Traditional Knowledge Systems (TKS) in India represent centuries of rigorous empirical observation, experimentation, and documentation across metallurgy, water management, medicine, mathematics, and astronomy.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What is Traditional Knowledge -->
+        <div class="concept-block">
+          <h3 class="concept-title">🔬 What is Traditional Knowledge?</h3>
+          <p class="concept-text">
+            Traditional knowledge refers to the cumulative body of know-how, practices, and representations maintained and developed by Indian societies with long histories of interaction with their natural environment. Far from mystical speculation, these systems yielded advanced industrial metallurgy, calculus, and plastic surgery centuries before Western industrial counterparts.
+          </p>
+        </div>
+
+        <!-- Empirical Methodology -->
+        <div class="concept-block">
+          <h3 class="concept-title">📜 Empirical Observation & Treatises</h3>
+          <p class="concept-text">
+            Codified in authoritative Sanskrit and regional treatises such as the <em>Sushruta Samhita</em>, <em>Aryabhatiya</em>, and <em>Arthashastra</em>, traditional knowledge relied on empirical verification, peer analysis, and practical apprenticeship to solve complex ecological and societal challenges.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Scientific Domains Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Traditional Scientific Branches</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Metallurgy</h4>
+            <span class="style-badge">Steel & Zinc</span>
+            <p class="style-text">Crucible steel manufacturing and industrial distillation furnaces (e.g., Wootz Steel, Zawar Zinc).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Hydraulic Engineering</h4>
+            <span class="style-badge">Irrigation & Wells</span>
+            <p class="style-text">Inundation canals, check dams, and multi-tiered groundwater stepwells (e.g., Ahar-Pyne, Baolis).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Medicine & Surgery</h4>
+            <span class="style-badge">Sushruta & Ayurveda</span>
+            <p class="style-text">Surgical instruments, rhinoplasty, and pulse diagnostics (e.g., Sushruta Samhita, Siddha pulse reading).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Mathematics & Astronomy</h4>
+            <span class="style-badge">Calculus & Zero</span>
+            <p class="style-text">Trigonometric series, planetary models, and infinite series (e.g., Kerala School of Astronomy).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Traditional Knowledge Systems) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Traditional Knowledge Systems of India</h2>
+      <p>Pan-Indian case studies documenting crucible steel, industrial zinc distillation, flood irrigation, surgical instruments, and calculus.</p>
+    </div>
+
+    <!-- 01: Wootz Crucible Damascus Steel (Southern India) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/wootz-steel.jpg');">
+        <span class="monument-badge-top">Deccan Plateau • Legendary Damascus Steel</span>
+        <div class="monument-bottom-title">
+          <h3>Wootz Crucible Steel</h3>
+          <span>Karnataka, Tamil Nadu & Telangana • Ancient Metallurgy</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Advanced materials science and high-carbon crucible steel metallurgy (c. 300 BCE onwards)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">Iron ore was smelted with glass and carbon-rich plant matter inside sealed clay crucibles heated in charcoal furnaces, producing ultra-high carbon steel ingots (Wootz) exported worldwide to forge legendary Damascus sword blades</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Exhibited striking water-like damask surface patterns and exceptional structural flexibility combined with razor-sharp edge retention</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Sealed Clay Crucible</span>
+              <span class="tag-pill">High-Carbon Steel</span>
+              <span class="tag-pill">Damascus Blade Forging</span>
+              <span class="tag-pill">Deccan Metallurgical Origin</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Golconda / Telangana (17.3850° N, 78.4010° E)</span>
+          <a href="https://maps.google.com/?q=Golconda+Fort+Telangana" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Zawar Medieval Industrial Zinc Furnaces (Udaipur, Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/zawar-zinc.jpg');">
+        <span class="monument-badge-top">Aravalli Hills • World's First Zinc Distillation</span>
+        <div class="monument-bottom-title">
+          <h3>Zawar Industrial Zinc Furnaces</h3>
+          <span>Zawar, Udaipur, Rajasthan • Medieval Chemical Engineering</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Pyrometallurgical chemical engineering and downward distillation (12th to 16th Century CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">Zawar represents the world's earliest known industrial-scale zinc smelting site. Utilizing ingenious downward-distillation retorts packed with ore, charcoal, and salt, medieval metallurgists successfully extracted pure zinc metal centuries before Europe</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Excavated multi-tiered furnace banks preserving hundreds of intact terracotta retorts, recognized internationally as a milestone in chemical history</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Downward Distillation Retorts</span>
+              <span class="tag-pill">Pyrometallurgical Smelting</span>
+              <span class="tag-pill">Zawar Mines Udaipur</span>
+              <span class="tag-pill">World's First Zinc Production</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Zawar, Udaipur (24.3833° N, 73.7167° E)</span>
+          <a href="https://maps.google.com/?q=Zawar+Mines+Udaipur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Ahar-Pyne Irrigation System (Bihar) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/ahar-pyne.jpg');">
+        <span class="monument-badge-top">Magadh Plain • Indigenous Flood Water Harvesting</span>
+        <div class="monument-bottom-title">
+          <h3>Ahar-Pyne Irrigation System</h3>
+          <span>South Bihar Plain • Traditional Watershed Engineering</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Agro-hydrological engineering and community flood management in undulating terrain</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">An ingenious flood-water harvesting network. <em>Ahars</em> are rectangular catchment reservoirs capturing river floodwaters during monsoon rains, while <em>Pynes</em> are diversion channels channeling water across agricultural fields via gravity flow</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Enables successful paddy cultivation in semi-arid southern Bihar without relying on modern mechanized tube-wells or electric pumps</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Ahar Flood Catchment</span>
+              <span class="tag-pill">Pyne Gravity Canals</span>
+              <span class="tag-pill">Magadh Water Management</span>
+              <span class="tag-pill">Monsoon Harvesting</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Gaya, Bihar (24.7914° N, 85.0002° E)</span>
+          <a href="https://maps.google.com/?q=Gaya+Bihar+Irrigation" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Sushruta Surgical Instruments & Medicine -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/sushruta.jpg');">
+        <span class="monument-badge-top">Varanasi • Father of Plastic Surgery</span>
+        <div class="monument-bottom-title">
+          <h3>Sushruta's Surgical Science</h3>
+          <span>Varanasi, Uttar Pradesh • Ancient Medical Treatise</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Ayurvedic medicine, surgical operations, and plastic reconstructive surgery (c. 6th Century BCE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">Authored the <em>Sushruta Samhita</em>, detailing over 121 specialized surgical instruments (scalpels, forceps, trocars) forged from steel, alongside pathbreaking techniques for cataract removal, lithotomy, and forehead-flap rhinoplasty (nose reconstruction)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Emphasized rigorous practical training on cadavers, botanical models, and fruits before operating on human patients</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Sushruta Samhita Text</span>
+              <span class="tag-pill">121 Surgical Instruments</span>
+              <span class="tag-pill">Forehead Flap Rhinoplasty</span>
+              <span class="tag-pill">Cadaver Dissection Training</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Varanasi (25.3176° N, 82.9739° E)</span>
+          <a href="https://maps.google.com/?q=Banaras+Hindu+University+Medical+College" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Kerala School of Astronomy & Mathematics -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/kerala-math.jpg');">
+        <span class="monument-badge-top">Kerala Coast • Calculus & Infinite Series</span>
+        <div class="monument-bottom-title">
+          <h3>Kerala School of Mathematics</h3>
+          <span>Thrissur & Tirur, Kerala • Pre-Newtonian Calculus</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Astronomy, trigonometry, and infinite series calculus (14th to 16th Century CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">Founded by Madhava of Sangamagrama, this brilliant mathematical lineage formulated Taylor-Maclaurin infinite series for sine, cosine, and arctangent functions, alongside precise approximations of Pi ($\pi$) centuries before Leibniz and Newton in Europe</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Bridged finite arithmetic with infinitesimal calculus using poetic Sanskrit verse treatises (Tantrasangraha)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Madhava Infinite Series</span>
+              <span class="tag-pill">Pre-Newtonian Calculus</span>
+              <span class="tag-pill">Sangamagrama Tradition</span>
+              <span class="tag-pill">Tantrasangraha Treatise</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Tirur, Kerala (10.9163° N, 75.9222° E)</span>
+          <a href="https://maps.google.com/?q=Tirur+Kerala" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Ancient Stepwells & Baolis (Gujarat & Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/stepwells.jpg');">
+        <span class="monument-badge-top">Arid Plains • Subterranean Water Architecture</span>
+        <div class="monument-bottom-title">
+          <h3>Hydraulic Stepwell Engineering (Baolis)</h3>
+          <span>Gujarat & Rajasthan • Groundwater Conservation</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Hydrogeology, civil engineering, and micro-climate architecture</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">Masterworks of water conservation engineered to tap fluctuating water tables across arid western India. Subterranean multi-level pavilions (Baolis/Vavs) cooled surrounding air via evaporation while providing reliable drinking water during prolonged droughts</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Combining structural stability against earth pressure with breathtaking artistic sculpture and religious shrines</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Hydrogeological Engineering</span>
+              <span class="tag-pill">Subterranean Cooling</span>
+              <span class="tag-pill">Groundwater Table Tapping</span>
+              <span class="tag-pill">Chand Baori Abhaneri</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Chand Baori, Abhaneri (27.0076° N, 76.6022° E)</span>
+          <a href="https://maps.google.com/?q=Chand+Baori+Abhaneri" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Siddha Pulse Diagnosis (Nadi Pariksha) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/siddha-pulse.jpg');">
+        <span class="monument-badge-top">Tamil Nadu • Traditional Nadi Diagnostics</span>
+        <div class="monument-bottom-title">
+          <h3>Siddha & Ayurvedic Pulse Diagnostics</h3>
+          <span>Madurai & Thanjavur, Tamil Nadu • Nadi Pariksha</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Traditional physiological diagnostics and pharmacognosy</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text"><em>Nadi Pariksha</em> is an advanced tactile diagnostic technique where traditional physicians (Siddhars and Vaidyas) assess radial artery pulses at the wrist using index, middle, and ring fingers to detect deep constitutional imbalances (Vata, Pitta, Kapha)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Allows accurate clinical diagnosis of internal organ disorders and psychological stress without invasive blood tests</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Nadi Pariksha Tactile Test</span>
+              <span class="tag-pill">Vata-Pitta-Kapha Tridosha</span>
+              <span class="tag-pill">Siddha Medical System</span>
+              <span class="tag-pill">Radial Artery Diagnostics</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Madurai, Tamil Nadu (9.9195° N, 78.1194° E)</span>
+          <a href="https://maps.google.com/?q=Madurai+Tamil+Nadu+Siddha" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Traditional Rainwater Tankas (Thar Desert, Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/tankas.jpg');">
+        <span class="monument-badge-top">Thar Desert • Underground Rainwater Cisterns</span>
+        <div class="monument-bottom-title">
+          <h3>Thar Desert Tanka Systems</h3>
+          <span>Jaisalmer & Barmer, Rajasthan • Micro-Catchment Hydroology</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Arid-zone hydrology and potable water preservation</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text"><em>Tankas</em> are cylindrical underground rainwater storage cisterns constructed in courtyards or village commons across the Thar desert. Rooftops and sloped courtyards act as catchment basins funneling precious monsoon runoff directly into lime-plastered underground reservoirs</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Keeps stored water cool and potable throughout scorching desert summers, preventing evaporation losses</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Underground Tanka Cisterns</span>
+              <span class="tag-pill">Lime Plaster Sealing</span>
+              <span class="tag-pill">Thar Desert Hydrology</span>
+              <span class="tag-pill">Rooftop Catchment Basin</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Jaisalmer, Rajasthan (26.9157° N, 70.9083° E)</span>
+          <a href="https://maps.google.com/?q=Jaisalmer+Rajasthan+Water+Systems" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Iron Pillar of Delhi Corrosion Resistance -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/iron-pillar.jpg');">
+        <span class="monument-badge-top">Qutb Complex • 1,600-Year Rust-Resistant Iron</span>
+        <div class="monument-bottom-title">
+          <h3>Iron Pillar of Delhi Corrosion Science</h3>
+          <span>New Delhi • Ancient High-Phosphorus Metallurgy</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Anti-corrosion material science and ancient forge-welding (c. 400 CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">Erected during the Gupta Empire under Kumaragupta I. Standing 7.2 meters tall and weighing over 6 tonnes, this pure wrought-iron pillar has resisted rusting for over 1,600 years in the open air</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Metallurgical analysis reveals a high phosphorus content and low manganese/sulfur, which catalyzed a protective passive catalytic film (misawite) across the iron surface</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">High-Phosphorus Iron</span>
+              <span class="tag-pill">Misawite Protective Film</span>
+              <span class="tag-pill">Gupta Empire Metallurgy</span>
+              <span class="tag-pill">Qutb Complex Delhi</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Qutb Complex, New Delhi (28.5245° N, 77.1855° E)</span>
+          <a href="https://maps.google.com/?q=Iron+Pillar+of+Delhi" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Ancient Ethno-Botany & Forest Ecology -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/knowledge/ethno-botany.jpg');">
+        <span class="monument-badge-top">Western Ghats • Indigenous Pharmacognosy</span>
+        <div class="monument-bottom-title">
+          <h3>Indigenous Ethno-Botany & Pharmacognosy</h3>
+          <span>Western Ghats, Kerala & Karnataka • Plant Pharmacology</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Scientific Domain</span>
+            <p class="dossier-text">Plant taxonomy, herbal pharmacology, and forest ecology</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Traditional Innovation</span>
+            <p class="dossier-text">Indigenous tribal groups across the Western Ghats maintain detailed pharmacological knowledge of over 2,000 medicinal plant species (e.g., *Trichopus zeylanicus* used by Kani tribes for anti-fatigue endurance)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Serves as the empirical foundation for modern pharmaceutical drug discovery and sustainable agro-forestry</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Knowledge Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Herbal Pharmacognosy</span>
+              <span class="tag-pill">Western Ghats Flora</span>
+              <span class="tag-pill">Kani Tribe Phytochemistry</span>
+              <span class="tag-pill">Traditional Plant Taxonomy</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Agasthyamalai Biosphere, Western Ghats (8.6167° N, 77.2500° E)</span>
+          <a href="https://maps.google.com/?q=Western+Ghats+Kerala" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Scientific Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

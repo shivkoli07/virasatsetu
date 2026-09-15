@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Textiles & Weaving | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/textiles/hero-textiles.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Weaving Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Weaving Techniques Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .style-badge {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 02.02 • Tactile Civilizational Identity</div>
+      <h1 class="hero-title">Textiles & Weaving</h1>
+      <p class="hero-tagline">"Where intersecting warp and weft, pure mulberry silk, gold zari brocades, and resist-dyeing tell geographic stories."</p>
+    </div>
+  </section>
+
+  <!-- Core Weaving Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Art and Science of Indian Handlooms</h2>
+        <p class="doctrine-subtitle">India's textile heritage is among the oldest in human history, evidenced by Harappan cotton fragments and Vedic loom references. Handloom weaving is an intricate mathematical interplay of vertical warp threads and horizontal weft yarns operated on pit-looms and jacquard frames.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What is Textile Weaving -->
+        <div class="concept-block">
+          <h3 class="concept-title">🧵 What is Textile Weaving?</h3>
+          <p class="concept-text">
+            Textile weaving in India transcends mere clothing; it represents wearable cartography. Each weaving cluster encodes its regional identity through specific yarn counts, border motifs, shuttle techniques, and color symbolism passed down through master artisan families across millennia.
+          </p>
+        </div>
+
+        <!-- Zari & Resist Techniques -->
+        <div class="concept-block">
+          <h3 class="concept-title">✨ Zari Brocade & Resist Dyeing</h3>
+          <p class="concept-text">
+            Master techniques include <em>Zari</em> (fine metallic threads of flattened silver electroplated with gold) woven into rich supplementary weft brocades, alongside complex resist-dyeing methods like <em>Bandhani</em> and double-<em>Ikat</em> where yarns are mathematically tied and dyed prior to mounting on the loom.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Weaving Techniques Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Handloom Weaving Classifications</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Supplementary Weft Brocade</h4>
+            <span class="style-badge">Banaras & Chanderi</span>
+            <p class="style-text">Intricate motifs woven into the fabric ground by passing supplementary metallic gold or silver threads across specific warp sheds using wooden spools.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Resist Dyeing & Ikat</h4>
+            <span class="style-badge">Patola & Sambalpuri</span>
+            <p class="style-text">Yarns are tightly bound with waterproof thread and dyed in successive vats before weaving, requiring astonishing precision so patterns align perfectly on the loom.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Interlocked Weft Tapestry</h4>
+            <span class="style-badge">Paithani & Kanjeevaram</span>
+            <p class="style-text">Border and pallu yarns interlock directly with the body warp threads using multiple shuttles, creating seamless reversible joints without stitches.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Textile Traditions) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Textile & Weaving Traditions of India</h2>
+      <p>Pan-Indian case studies documenting loom mechanics, silk grades, motifs, and weaver cluster locations.</p>
+    </div>
+
+    <!-- 01: Paithani (Yeola, Maharashtra) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/paithani.jpg');">
+        <span class="monument-badge-top">Yeola Cluster • Poetic Gold Brocade</span>
+        <div class="monument-bottom-title">
+          <h3>Paithani Saree & Brocade</h3>
+          <span>Yeola & Paithan, Maharashtra • Satavahana Era Roots</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Yeola and Paithan towns, Maharashtra (historical export market to ancient Roman merchants)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Pure mulberry silk woven with an interlocked weft technique (Kadiyal), featuring rich peacock, parrot, and lotus motifs rendered in genuine gold zari</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Completely identical front and reverse sides due to hand-interlocking shuttle work; famous for kaleidoscopic shot-color effect silks (e.g., peacock-green body with magenta pallu)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Pure Gold Zari</span>
+              <span class="tag-pill">Asavali Pallu</span>
+              <span class="tag-pill">Kadiyal Interlock</span>
+              <span class="tag-pill">Bangdi Mor Motifs</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Yeola, Nashik (20.0381° N, 74.4988° E)</span>
+          <a href="https://maps.google.com/?q=Yeola+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Banarasi Katan Silk (Varanasi, UP) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/banarasi.jpg');">
+        <span class="monument-badge-top">Ganga Ghats • Mughal Brocade Heritage</span>
+        <div class="monument-bottom-title">
+          <h3>Banarasi Katan Silk</h3>
+          <span>Varanasi, Uttar Pradesh • Imperial Brocade</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Varanasi (Banaras) old city weaver quarters, Uttar Pradesh</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Handloom weaving using Katan silk (twisted silk threads prepared by twisting multiple silk filaments) woven with heavy supplementary gold and silver zari brocade work (Jamdani and Kora variants)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Inspired by Persian floral trellis (Jangla) and Mughal architectural jali screens, dense with metallic sheen and rich embossed textures</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Katan Silk Yarn</span>
+              <span class="tag-pill">Jangla Florals</span>
+              <span class="tag-pill">Heavy Zari Brocade</span>
+              <span class="tag-pill">GI Tagged Weave</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Varanasi (25.3176° N, 82.9739° E)</span>
+          <a href="https://maps.google.com/?q=Varanasi+Silk+Weavers" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Kanjeevaram Silk (Tamil Nadu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/kanjeevaram.jpg');">
+        <span class="monument-badge-top">Kanchipuram • Mulberry Silk & Korvai</span>
+        <div class="monument-bottom-title">
+          <h3>Kanjeevaram Silk</h3>
+          <span>Kanchipuram, Tamil Nadu • Temple Border Weave</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Kanchipuram temple town, Tamil Nadu (centuries of patronage under Pallava and Chola kings)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Pure mulberry silk warp and weft woven with thick silver-dipped gold zari. Employs the complex <em>Korvai</em> technique where body and contrasting borders are woven separately and joined intricately</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Extraordinary durability and heavy weight; legendary temple-inspired motifs including coin checks (Aktusthali), sun-moon motifs (Surya-Pirai), and yalis</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Korvai Joinery</span>
+              <span class="tag-pill">Pure Mulberry Silk</span>
+              <span class="tag-pill">Heavy Gold Zari</span>
+              <span class="tag-pill">Temple Border Motifs</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Kanchipuram (12.8342° N, 79.7036° E)</span>
+          <a href="https://maps.google.com/?q=Kanchipuram+Silk+Weavers" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Chanderi (Madhya Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/chanderi.jpg');">
+        <span class="monument-badge-top">Vindhyan Hills • Featherlight Sheer Weave</span>
+        <div class="monument-bottom-title">
+          <h3>Chanderi Silk-Cotton</h3>
+          <span>Chanderi, Ashoknagar, Madhya Pradesh • Royal Sheer</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Chanderi historic town, Ashoknagar district, Madhya Pradesh</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Blending un-degummed raw silk warp with fine cotton weft on pit-looms, creating an ethereal, featherlight transparency paired with delicate gold zari booti motifs</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Renowned for its gossamer lightness and sophisticated pastel palettes, historically favored by Mughal royalty for its cooling luxury</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Featherlight Sheer</span>
+              <span class="tag-pill">Raw Silk & Cotton</span>
+              <span class="tag-pill">Zari Bootis</span>
+              <span class="tag-pill">Handloom Transparency</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Chanderi, MP (24.4285° N, 78.1342° E)</span>
+          <a href="https://maps.google.com/?q=Chanderi+Madhya+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Sambalpuri Bandha (Odisha) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/sambalpuri.jpg');">
+        <span class="monument-badge-top">Mahanadi Basin • Tie & Dye Bandha</span>
+        <div class="monument-bottom-title">
+          <h3>Sambalpuri Bandha</h3>
+          <span>Bargarh & Sambalpur, Odisha • Ikat Artistry</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Bargarh, Sonepur, and Sambalpur districts, Mahanadi river valley, Odisha</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">A specialized form of yarn-resist tie and dye (locally termed <em>Bandha</em>) where warp and weft yarns are tied with rubber bands or cotton yarn before dyeing to form motifs on the loom</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Features traditional auspicious symbols including conch shells (Shanka), wheels (Chakra), flowers (Phula), and stylized animal figures with blurred, organic color bleeding boundaries</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Bandha Tie & Dye</span>
+              <span class="tag-pill">Shanka & Chakra</span>
+              <span class="tag-pill">Double-Sided Richness</span>
+              <span class="tag-pill">Mahanadi Tradition</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Bargarh, Odisha (21.3331° N, 83.6262° E)</span>
+          <a href="https://maps.google.com/?q=Bargarh+Odisha+Weavers" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Jamdani (West Bengal) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/jamdani.jpg');">
+        <span class="monument-badge-top">Bengal Delta • Flowered Muslin Weave</span>
+        <div class="monument-bottom-title">
+          <h3>Dakai Jamdani</h3>
+          <span>Fulia & Duttapukur, West Bengal • UNESCO Intangible Heritage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Fulia, Shantipur, and Duttapukur clusters, West Bengal (historically Dhaka region)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Described as "woven air," Jamdani is a supplementary weft technique worked directly on a fine cotton muslin loom. Artisans insert geometric and floral motifs by hand using individual wooden spools without mechanical jacquards</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Appears as if floral patterns are floating on a translucent, gossamer cloud of fine cotton cloth</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Muslin Transparency</span>
+              <span class="tag-pill">Hand-Inserted Motifs</span>
+              <span class="tag-pill">Floating Florals</span>
+              <span class="tag-pill">UNESCO Masterpiece</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Fulia, Nadia (23.2389° N, 88.5770° E)</span>
+          <a href="https://maps.google.com/?q=Fulia+West+Bengal+Weavers" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Patola (Patan, Gujarat) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/patola.jpg');">
+        <span class="monument-badge-top">Patan Cluster • Double-Ikat Masterpiece</span>
+        <div class="monument-bottom-title">
+          <h3>Patan Patola</h3>
+          <span>Patan, North Gujarat • Double-Ikat Luxury</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Patan town, North Gujarat (practiced exclusively by select Salvi families)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">The pinnacle of double-ikat weaving where both warp and weft yarns are mathematically tied and dyed with absolute precision before being mounted on a slanted pit-loom</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Identical vibrant colors and razor-sharp geometric patterns visible on both sides of the fabric; a single saree takes up to 6 months to 1 year to complete</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Double-Ikat Precision</span>
+              <span class="tag-pill">Reversible Identical Pattern</span>
+              <span class="tag-pill">Salvi Guild Tradition</span>
+              <span class="tag-pill">Natural Silk Dyes</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Patan, Gujarat (23.8490° N, 72.1260° E)</span>
+          <a href="https://maps.google.com/?q=Patan+Patola+Weavers+Gujarat" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Maheshwari (Madhya Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/maheshwari.jpg');">
+        <span class="monument-badge-top">Narmada Riverbanks • Ahilyabai Holkar Weave</span>
+        <div class="monument-bottom-title">
+          <h3>Maheshwari Silk-Cotton</h3>
+          <span>Maheshwari Fort, Narmada, MP • Reversible Border</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Maheshwar town along the Narmada River banks, Madhya Pradesh</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Originally conceptualized by Queen Ahilyabai Holkar in the 18th century, combining silk warp with cotton weft featuring distinctive stripes, checks, and reversible borders (Reva check or Badi/Choti line)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Lightweight, breathable, and elegant with minimalist geometric pallus inspired by carvings on the Narmada ghats</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Reversible Borders</span>
+              <span class="tag-pill">Narmada Ghat Inspiration</span>
+              <span class="tag-pill">Silk-Cotton Blend</span>
+              <span class="tag-pill">Holkar Royal Legacy</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Maheshwar, MP (22.1751° N, 75.5786° E)</span>
+          <a href="https://maps.google.com/?q=Maheshwar+Madhya+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Phulkari (Punjab) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/phulkari.jpg');">
+        <span class="monument-badge-top">Punjab Plains • Darning Needle Embroidery</span>
+        <div class="monument-bottom-title">
+          <h3>Phulkari Embroidery</h3>
+          <span>Amritsar & Patiala, Punjab • Floral Darning</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Amritsar, Patiala, Jalandhar, and rural households across Punjab</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Not strictly loom-woven but a stellar folk embroidery tradition where vibrant untwisted silk floss (Pat) is stitched onto heavy hand-spun coarse cotton (Khaddar) using a counted-thread darning stitch from the reverse side</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Dense geometric and floral garden patterns completely covering the fabric ground; includes dense variants like <em>Bagh</em> (garden) and <em>Chope</em></p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Darning Needle Stitch</span>
+              <span class="tag-pill">Pat Silk Floss</span>
+              <span class="tag-pill">Khaddar Foundation</span>
+              <span class="tag-pill">Bagh Variant</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Patiala, Punjab (30.3398° N, 76.3869° E)</span>
+          <a href="https://maps.google.com/?q=Patiala+Punjab" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Pochampally Ikat (Telangana) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/textiles/pochampally.jpg');">
+        <span class="monument-badge-top">Bhoodan Pochampally • Silk & Cotton Ikat</span>
+        <div class="monument-bottom-title">
+          <h3>Pochampally Ikat</h3>
+          <span>Yadadri Bhuvanagiri, Telangana • Geometric Ikat</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Weaver Cluster</span>
+            <p class="dossier-text">Bhoodan Pochampally cluster, Yadadri Bhuvanagiri district, Telangana</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Weaving Technique</span>
+            <p class="dossier-text">Geometric tie-and-dye method applied to warp and weft threads before mounting on pit-looms, creating striking geometric triangles, diamonds, and flower lattice designs</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Known as the "Silk City of India," famous for lightweight silk and cotton sarees that combine smooth drape with striking geometrical precision</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Textile Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Geometric Ikat</span>
+              <span class="tag-pill">Silk & Cotton Blend</span>
+              <span class="tag-pill">Pit-Loom Weaving</span>
+              <span class="tag-pill">Telangana Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Pochampally, Telangana (17.3452° N, 78.9056° E)</span>
+          <a href="https://maps.google.com/?q=Pochampally+Telangana" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Weaver Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

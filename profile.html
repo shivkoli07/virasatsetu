@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cultural Profile & Heritage Dossier | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --badge-gradient: linear-gradient(135deg, #EAD7BE 0%, #D8BE9E 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+
+      --border-card: #CDB393;
+      --border-badge: #BA9973;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+
+    .nav-link:hover {
+      color: var(--accent-brown);
+    }
+
+    .logout-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 25px;
+      padding: 0.55rem 1.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .logout-btn:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    .profile-container {
+      max-width: 1320px;
+      margin: 2.5rem auto 4rem auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    /* Left Sidebar Card */
+    .profile-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 22px;
+      padding: 2.2rem 1.8rem;
+      box-shadow: var(--card-shadow);
+      text-align: center;
+      position: relative;
+    }
+
+    .profile-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 22px;
+      border-top-right-radius: 22px;
+    }
+
+    .avatar-wrapper {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 1.25rem auto;
+      border-radius: 50%;
+      padding: 4px;
+      background: var(--gold-accent-gradient);
+      box-shadow: 0 8px 20px rgba(53, 29, 14, 0.2);
+    }
+
+    .avatar-img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #FAF0DF;
+      display: block;
+    }
+
+    .avatar-upload-btn {
+      position: absolute;
+      bottom: 2px;
+      right: 2px;
+      background: var(--royal-gradient);
+      border: 2px solid #FFF9F0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      color: #FFF9F0;
+    }
+
+    .avatar-upload-btn:hover {
+      transform: scale(1.1);
+      background: var(--royal-gradient-hover);
+    }
+
+    .profile-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-role {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-quick-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-card);
+    }
+
+    .stat-box {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 0.75rem 0.5rem;
+    }
+
+    .stat-val {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+    }
+
+    .stat-lbl {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Dashboard Stack */
+    .dashboard-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .content-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 22px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 22px;
+      border-top-right-radius: 22px;
+    }
+
+    .card-title-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .panel-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+      color: var(--accent-brown);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(184, 130, 48, 0.15);
+    }
+
+    .save-profile-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 25px;
+      padding: 0.7rem 1.8rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .save-profile-btn:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .badge-item {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 14px;
+      padding: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: var(--transition);
+    }
+
+    .badge-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-gold);
+      box-shadow: 0 8px 18px rgba(53, 29, 14, 0.1);
+    }
+
+    .badge-icon-wrap {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--badge-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-badge);
+      flex-shrink: 0;
+      font-size: 1.4rem;
+    }
+
+    .badge-details h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.15rem;
+    }
+
+    .badge-details p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      line-height: 1.35;
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .history-item {
+      background: rgba(255, 255, 255, 0.85);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      transition: var(--transition);
+    }
+
+    .history-item:hover {
+      background: #FFFFFF;
+      border-color: var(--accent-brown);
+    }
+
+    .hist-title {
+      font-weight: 600;
+      font-size: 0.92rem;
+      color: var(--primary-dark);
+    }
+
+    .hist-meta {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .hist-points {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-brown);
+    }
+
+    @media (max-width: 992px) {
+      .profile-container { grid-template-columns: 1fr; }
+      .badges-grid { grid-template-columns: 1fr; }
+      .details-grid { grid-template-columns: 1fr; }
+      .form-group.full-width { grid-column: span 1; }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <div class="nav-actions">
+      <a href="index.html" class="nav-link">Home Archive</a>
+      <a href="explore.html" class="nav-link">Explore</a>
+      <a href="experience.html" class="nav-link">Experience</a>
+      <a href="analytics.html" class="nav-link">Analytics</a>
+      <a href="games.html" class="nav-link">Gaming Pavilion</a>
+      <button class="logout-btn" id="logoutBtn">Log Out</button>
+    </div>
+  </header>
+
+  <main class="profile-container">
+
+    <!-- Left Sidebar Scholar Dossier -->
+    <aside class="profile-card">
+      <div class="avatar-wrapper">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" alt="Cultural Scholar" class="avatar-img" id="avatarPreview" />
+        <label for="avatarInput" class="avatar-upload-btn" title="Upload Scholar Portrait">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm8 3a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg>
+        </label>
+        <input type="file" id="avatarInput" accept="image/*" style="display: none;" />
+      </div>
+
+      <h2 class="profile-name" id="displayFullName">Scholar</h2>
+      <p class="profile-role">Heritage Scholar & Custodian</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted);" id="displayEmail">loading...</p>
+
+      <div class="profile-quick-stats">
+        <div class="stat-box">
+          <div class="stat-val" id="totalPoints">0</div>
+          <div class="stat-lbl">Heritage XP</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val" id="badgesCount">0</div>
+          <div class="stat-lbl">Badges Won</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right Detailed Sections -->
+    <section class="dashboard-panel">
+
+      <!-- 1. Scholar Demographics & Background Form -->
+      <div class="content-card">
+        <div class="card-title-bar">
+          <h3 class="panel-heading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            Personal & Academic Information
+          </h3>
+        </div>
+
+        <form id="profileDetailsForm">
+          <div class="details-grid">
+            <div class="form-group">
+              <label class="form-label" for="inputFullName">Full Name</label>
+              <input type="text" id="inputFullName" class="form-input" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inputPhone">Phone Number</label>
+              <input type="tel" id="inputPhone" class="form-input" placeholder="+91 98765 43210" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inputEducation">Highest Education / Affiliation</label>
+              <input type="text" id="inputEducation" class="form-input" placeholder="e.g., B.E Information Technology" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inputInterest">Primary Heritage Focus</label>
+              <input type="text" id="inputInterest" class="form-input" placeholder="e.g., Temple Architecture & Lost Wax Bronze" />
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="inputAddress">Address / Location</label>
+              <input type="text" id="inputAddress" class="form-input" placeholder="e.g., Mumbai, Maharashtra, India" />
+            </div>
+          </div>
+
+          <button type="submit" class="save-profile-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+            Update Profile Dossier
+          </button>
+        </form>
+      </div>
+
+      <!-- 2. Heritage Badges & Achievements (Dynamically Loaded from PostgreSQL) -->
+      <div class="content-card">
+        <div class="card-title-bar">
+          <h3 class="panel-heading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            Earned Heritage Honors
+          </h3>
+          <a href="games.html" class="nav-link" style="font-size: 0.82rem; font-weight: 700; color: var(--accent-gold);">Explore Pavilion &rarr;</a>
+        </div>
+
+        <div class="badges-grid" id="badgesContainer">
+          <p style="font-size: 0.85rem; color: var(--text-muted); grid-column: 1 / -1;">Fetching earned honors from database...</p>
+        </div>
+      </div>
+
+      <!-- 3. Live Quiz Records -->
+      <div class="content-card">
+        <div class="card-title-bar">
+          <h3 class="panel-heading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/></svg>
+            Recent Quiz Records & Interactive Challenges
+          </h3>
+        </div>
+
+        <div class="history-list" id="quizHistoryContainer">
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Fetching quiz trials from database...</p>
+        </div>
+      </div>
+
+      <!-- 4. Chronicled Stories from Database -->
+      <div class="content-card">
+        <div class="card-title-bar">
+          <h3 class="panel-heading">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h5v8l-2.5-1.5L6 12V4z"/></svg>
+            Chronicled Heritage Epics & Oral Library
+          </h3>
+          <a href="ai-heritage-storyteller.html" class="nav-link" style="font-size: 0.82rem; font-weight: 700; color: var(--accent-gold);">+ Generate New Epic</a>
+        </div>
+
+        <div class="history-list" id="storiesDossierList">
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Fetching your saved epics from database...</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <script>
+    const API_AUTH = 'http://localhost:8080/api/auth';
+    const API_QUIZ = 'http://localhost:8080/api/quiz';
+    const API_STORIES = 'http://localhost:8080/api/stories';
+
+    // 1. Session Guard
+    if (localStorage.getItem('virasatSetu_auth') !== 'true') {
+      window.location.href = 'login.html';
+    }
+
+    const userEmail = localStorage.getItem('virasatSetu_user_email');
+    let currentAvatarBase64 = '';
+
+    // 2. Load Profile Details
+    async function loadProfile() {
+      if (!userEmail) return;
+
+      try {
+        const res = await fetch(`${API_AUTH}/profile?email=${encodeURIComponent(userEmail)}`);
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('displayFullName').textContent = data.fullName || 'Heritage Scholar';
+          document.getElementById('displayEmail').textContent = data.email;
+          document.getElementById('inputFullName').value = data.fullName || '';
+          document.getElementById('inputPhone').value = data.phone || '';
+          document.getElementById('inputEducation').value = data.education || '';
+          document.getElementById('inputInterest').value = data.interest || '';
+          document.getElementById('inputAddress').value = data.address || '';
+          document.getElementById('totalPoints').textContent = (data.totalXp || 0).toLocaleString();
+          document.getElementById('badgesCount').textContent = data.badgesWon || 0;
+
+          if (data.avatarBase64) {
+            currentAvatarBase64 = data.avatarBase64;
+            document.getElementById('avatarPreview').src = data.avatarBase64;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend unavailable, showing cached values.');
+      }
+    }
+
+    // 3. Load Badges from PostgreSQL
+    async function loadUserBadges() {
+      if (!userEmail) return;
+
+      const container = document.getElementById('badgesContainer');
+
+      try {
+        const res = await fetch(`${API_QUIZ}/badges?email=${encodeURIComponent(userEmail)}`);
+        if (res.ok) {
+          const badges = await res.json();
+
+          if (!badges || badges.length === 0) {
+            container.innerHTML = `
+              <div style="grid-column: 1 / -1; padding: 1.5rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+                No honors unlocked yet. Complete trials in the <a href="games.html" style="color: var(--accent-brown); font-weight: 700;">Gaming Pavilion</a> to earn your scholar titles!
+              </div>`;
+            return;
+          }
+
+          container.innerHTML = '';
+          badges.forEach(b => {
+            const item = document.createElement('div');
+            item.className = 'badge-item';
+            item.innerHTML = `
+              <div class="badge-icon-wrap">${b.badgeIcon || '🏅'}</div>
+              <div class="badge-details">
+                <h4>${b.badgeTitle}</h4>
+                <p>${b.badgeSubtitle || 'Awarded for Civilizational Mastery'}</p>
+              </div>
+            `;
+            container.appendChild(item);
+          });
+        }
+      } catch (err) {
+        console.warn('Could not load user badges:', err);
+        container.innerHTML = '<p style="font-size: 0.85rem; color: #B83230; grid-column: 1 / -1;">Unable to synchronize honors from database.</p>';
+      }
+    }
+
+    // 4. Load Live Quiz Records
+    async function loadQuizHistory() {
+      if (!userEmail) return;
+
+      try {
+        const res = await fetch(`${API_QUIZ}/history?email=${encodeURIComponent(userEmail)}`);
+        if (res.ok) {
+          const records = await res.json();
+          const listContainer = document.getElementById('quizHistoryContainer');
+
+          if (records.length === 0) {
+            listContainer.innerHTML = '<p style="font-size: 0.85rem; color: var(--text-muted);">No challenges completed yet.</p>';
+            return;
+          }
+
+          listContainer.innerHTML = '';
+          records.forEach(rec => {
+            const item = document.createElement('div');
+            item.className = 'history-item';
+            item.style.display = 'flex';
+            item.style.alignItems = 'center';
+            item.style.justifyContent = 'space-between';
+            item.innerHTML = `
+              <div>
+                <div class="hist-title">${rec.challengeTitle}</div>
+                <div class="hist-meta"><span>${rec.category}</span> • <span>Score: ${rec.scorePercent}%</span></div>
+              </div>
+              <div class="hist-points">+${rec.xpAwarded} XP</div>
+            `;
+            listContainer.appendChild(item);
+          });
+        }
+      } catch (e) {
+        console.warn('Could not fetch quiz records');
+      }
+    }
+
+    // 5. Load Live Chronicled Stories
+    async function loadUserStories() {
+      if (!userEmail) return;
+
+      try {
+        const res = await fetch(`${API_STORIES}/my-library?email=${encodeURIComponent(userEmail)}`);
+        if (res.ok) {
+          const stories = await res.json();
+          const storyContainer = document.getElementById('storiesDossierList');
+
+          if (stories.length === 0) {
+            storyContainer.innerHTML = '<p style="font-size: 0.85rem; color: var(--text-muted);">No epics chronicled yet. Generate your first oral epic using the link above.</p>';
+            return;
+          }
+
+          storyContainer.innerHTML = '';
+          stories.forEach(story => {
+            const item = document.createElement('div');
+            item.className = 'history-item';
+            item.style.display = 'flex';
+            item.style.flexDirection = 'column';
+            item.style.gap = '0.4rem';
+
+            item.innerHTML = `
+              <div style="display: flex; justify-content: space-between; width: 100%; align-items: center;">
+                <div class="hist-title" style="color: var(--accent-brown); font-family: 'Cinzel', serif;">${story.title}</div>
+                <span style="font-size: 0.75rem; color: var(--text-muted);">${new Date(story.createdAt).toLocaleDateString()}</span>
+              </div>
+              <div class="hist-meta">
+                <span><strong>Era:</strong> ${story.dynastyEra}</span> • 
+                <span><strong>Theme:</strong> ${story.craftTheme}</span> • 
+                <span><strong>Tone:</strong> ${story.narrativeTone}</span>
+              </div>
+              <p style="font-size: 0.85rem; color: var(--primary-dark); line-height: 1.5; margin-top: 0.3rem;">
+                ${story.storyContent}
+              </p>
+            `;
+            storyContainer.appendChild(item);
+          });
+        }
+      } catch (e) {
+        console.warn('Could not fetch user story archives');
+      }
+    }
+
+    // Avatar upload handler
+    const avatarInput = document.getElementById('avatarInput');
+    const avatarPreview = document.getElementById('avatarPreview');
+
+    avatarInput.addEventListener('change', function () {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          currentAvatarBase64 = e.target.result;
+          avatarPreview.src = currentAvatarBase64;
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Update Profile form submit handler
+    document.getElementById('profileDetailsForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+
+      const payload = {
+        email: userEmail,
+        fullName: document.getElementById('inputFullName').value.trim(),
+        phone: document.getElementById('inputPhone').value.trim(),
+        education: document.getElementById('inputEducation').value.trim(),
+        interest: document.getElementById('inputInterest').value.trim(),
+        address: document.getElementById('inputAddress').value.trim(),
+        avatarBase64: currentAvatarBase64
+      };
+
+      try {
+        const res = await fetch(`${API_AUTH}/profile`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (res.ok) {
+          document.getElementById('displayFullName').textContent = payload.fullName;
+          localStorage.setItem('virasatSetu_user_name', payload.fullName);
+          alert('Scholar Dossier saved directly to PostgreSQL!');
+        } else {
+          alert('Failed to update profile in database.');
+        }
+      } catch (err) {
+        alert('Error contacting backend server.');
+      }
+    });
+
+    // Logout button handler
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+      localStorage.clear();
+      window.location.href = 'login.html';
+    });
+
+    // Initialize all data loaders
+    loadProfile();
+    loadUserBadges();
+    loadQuizHistory();
+    loadUserStories();
+  </script>
+</body>
+</html>

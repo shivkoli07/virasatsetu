@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panchangam & Sacred Festival Calendar | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--accent-brown); }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    /* Filter Bar */
+    .filter-bar-container {
+      max-width: 1440px;
+      margin: 1.5rem auto 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filters-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-chip:hover, .filter-chip.active {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: var(--accent-brown);
+    }
+
+    /* Main Container Layout */
+    .calendar-layout {
+      max-width: 1440px;
+      margin: 1rem auto 4rem auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .calendar-card, .dossier-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .calendar-card::before, .dossier-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    /* Calendar Header */
+    .cal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.85rem;
+      border-bottom: 1.5px solid var(--border-card);
+    }
+
+    .cal-title-wrapper h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .cal-subtitle {
+      font-size: 0.8rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .cal-nav-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .nav-circle-btn {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .nav-circle-btn:hover {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: transparent;
+    }
+
+    /* Weekday labels: Locked to equal 7 columns */
+    .weekdays-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      margin-bottom: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Days Grid: Equal square-like cells guaranteed */
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 0.45rem;
+    }
+
+    .day-cell {
+      height: 105px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1.5px solid var(--border-card);
+      border-radius: 12px;
+      padding: 0.35rem 0.4rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-cell:hover {
+      border-color: var(--accent-gold);
+      background: #FFFFFF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(42, 21, 11, 0.08);
+    }
+
+    .day-cell.inactive {
+      opacity: 0.28;
+      pointer-events: none;
+      background: transparent;
+    }
+
+    .day-cell.today {
+      border-color: var(--accent-gold);
+      background: #FFFBF4;
+      box-shadow: 0 0 0 2px var(--accent-gold);
+    }
+
+    .day-cell.selected {
+      border-color: var(--accent-brown);
+      background: #FAF0DF;
+    }
+
+    .day-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .day-number {
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      line-height: 1;
+    }
+
+    /* Event image thumbnail in cell */
+    .cell-event-visual {
+      width: 100%;
+      height: 48px;
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 0.2rem 0;
+      position: relative;
+      background: #2A150B;
+    }
+
+    .cell-event-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .event-tag-tiny {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.15rem 0.3rem;
+      border-radius: 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #FFF9F0;
+      display: block;
+      width: 100%;
+      line-height: 1.2;
+    }
+
+    .tag-religious { background: #804724; }
+    .tag-harvest { background: #B88230; }
+    .tag-arts { background: #5E3219; }
+    .tag-fair { background: #2A6F4E; }
+
+    /* Right Dossier Card */
+    .dossier-card {
+      min-height: 640px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dossier-header-crest {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent-brown);
+      text-transform: uppercase;
+    }
+
+    .dossier-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 0.25rem 0;
+      line-height: 1.3;
+    }
+
+    .dossier-meta {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .dossier-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-card);
+      margin: 0.4rem 0 0.8rem 0;
+      background: #1B0F08;
+    }
+
+    .dossier-section {
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-brown);
+      margin-bottom: 0.2rem;
+    }
+
+    .section-text {
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: var(--primary-dark);
+    }
+
+    .tithi-box {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border-card);
+      border-left: 3.5px solid var(--accent-gold);
+      border-radius: 0 10px 10px 0;
+      padding: 0.55rem 0.8rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin: 0.6rem 0;
+    }
+
+    .dossier-footer {
+      display: flex;
+      gap: 0.6rem;
+      padding-top: 1rem;
+      border-top: 1.5px solid var(--border-card);
+      margin-top: 0.5rem;
+    }
+
+    .btn-action {
+      flex: 1;
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      text-decoration: none;
+      padding: 0.65rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-align: center;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-action:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1040px) {
+      .calendar-layout { grid-template-columns: 1fr; }
+      .dossier-card { min-height: auto; }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home Archive</a></li>
+      <li><a href="living-heritage-map.html">Heritage Map</a></li>
+      <li><a href="games.html">Gaming Pavilion</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar-container">
+    <div class="filters-group" id="filterContainer">
+      <button class="filter-chip active" data-filter="all">All Celebrations</button>
+      <button class="filter-chip" data-filter="religious">Major Festivals</button>
+      <button class="filter-chip" data-filter="harvest">Harvest & Solstices</button>
+      <button class="filter-chip" data-filter="arts">Classical Arts & Dance</button>
+      <button class="filter-chip" data-filter="fair">Sacred Fairs & Yatras</button>
+    </div>
+    <div style="font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">
+      Vedic Panchangam & Cultural Calendar
+    </div>
+  </div>
+
+  <main class="calendar-layout">
+
+    <!-- Interactive Calendar Component -->
+    <section class="calendar-card">
+      <div class="cal-header">
+        <div class="cal-title-wrapper">
+          <div class="cal-subtitle" id="vedicMonthLabel">Bhadrapada 2083 VS • 1948 Shaka</div>
+          <h2 id="currentMonthYear">September 2026</h2>
+        </div>
+        <div class="cal-nav-buttons">
+          <button class="nav-circle-btn" onclick="prevMonth()" title="Previous Month">&#8592;</button>
+          <button class="nav-circle-btn" onclick="nextMonth()" title="Next Month">&#8594;</button>
+        </div>
+      </div>
+
+      <div class="weekdays-grid">
+        <div>Sun</div>
+        <div>Mon</div>
+        <div>Tue</div>
+        <div>Wed</div>
+        <div>Thu</div>
+        <div>Fri</div>
+        <div>Sat</div>
+      </div>
+
+      <div class="days-grid" id="calendarDays"></div>
+    </section>
+
+    <!-- Detailed Celebration Dossier -->
+    <aside class="dossier-card">
+      <div>
+        <div class="dossier-header-crest">Sacred Festival Dossier</div>
+        <h2 class="dossier-title" id="dossierTitle">Ganesh Chaturthi</h2>
+        <div class="dossier-meta" id="dossierMeta">Bhadrapada Shukla Chaturthi • Maharashtra & Pan-India</div>
+
+        <img id="dossierImg" src="assets/slides/slide7.jpg" alt="Cultural Celebration" class="dossier-img" />
+
+        <div class="tithi-box" id="dossierPanchang">
+          <strong>Panchang Tithi:</strong> Shukla Paksha, Swati Nakshatra. Auspicious advent of Vighnaharta Ganesha.
+        </div>
+
+        <div class="dossier-section">
+          <h3 class="section-title">Ritual & Cultural Practices</h3>
+          <p class="section-text" id="dossierRitual">
+            Installation of handcrafted Shadu Mati clay idols, daily aarti with Dhol-Tasha folk drums, and Vedic chant recitations.
+          </p>
+        </div>
+
+        <div class="dossier-section">
+          <h3 class="section-title">Seasonal Cuisines & Sacred Attire</h3>
+          <p class="section-text" id="dossierAttire">
+            <strong>Cuisine:</strong> Steamed Ukadiche Modak with jaggery, fresh coconut, and pure ghee.<br>
+            <strong>Attire:</strong> Traditional pure silk Dhoti-Kurta with Angavastram and Nauvari Paithani sarees.
+          </p>
+        </div>
+      </div>
+
+      <div class="dossier-footer">
+        <button class="btn-action" onclick="window.location.href='ai-heritage-storyteller.html'">Chronicle in Storyteller</button>
+        <button class="btn-action" style="background:#FFF; color:var(--accent-brown); border:1.5px solid var(--border-card);" onclick="window.location.href='games.html'">Play Festival Trivia</button>
+      </div>
+    </aside>
+
+  </main>
+
+  <script>
+    // Header authentication sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Scholar';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // All 12 Months Pan-Indian Festivals Dataset (Dynamic Years Support)
+    const festivalDatabase = [
+      // JANUARY (Month index 0)
+      {
+        month: 0, day: 13,
+        name: "Lohri",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Punjab & Northern India",
+        tithi: "Pausha Sankranti Eve",
+        panchang: "Celebration of winter culmination and Rabi crop fertility.",
+        ritual: "Gathering around community bonfires, throwing puffed rice and rewri into sacred flames.",
+        cuisineAttire: "Cuisine: Sarson da Saag, Makki di Roti, Til Chikki, and Gur Rewri.\nAttire: Bright Phulkari dupattas, kurta-tehmat, and patiala salwars.",
+        image: "assets/festivals/makar-sankranti.jpg"
+      },
+      {
+        month: 0, day: 14,
+        name: "Makar Sankranti & Pongal",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Tamil Nadu, Gujarat, Andhra & Karnataka",
+        tithi: "Solar Transit (Makara Rashi)",
+        panchang: "Solar transit into Makara marking the Uttarayana auspicious half of the year.",
+        ritual: "Boiling fresh harvest milk and rice in clay pots until overflowing; flying kites in Gujarat.",
+        cuisineAttire: "Cuisine: Sweet Jaggery Pongal, Tilgul laddoos, and Ven Pongal.\nAttire: Handwoven Kasavu mundus and zari-bordered silk pattu drapes.",
+        image: "assets/festivals/pongalsankranti.jpg"
+      },
+      {
+        month: 0, day: 15,
+        name: "Magh Bihu (Bhogali Bihu)",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Assam & North East",
+        tithi: "Magha Sankranti",
+        panchang: "Feast of abundance after granaries are stocked with paddy harvest.",
+        ritual: "Erecting Meji bonfires made of bamboo and straw, followed by community Uruka night feasts.",
+        cuisineAttire: "Cuisine: Pitha, Laroo (coconut sweets), and Bora Saul rice delicacies.\nAttire: Traditional golden Muga silk Mekhela Sador.",
+        image: "assets/festivals/maghbihu.jpg"
+      },
+      {
+        month: 0, day: 23,
+        name: "Vasant Panchami",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-India",
+        tithi: "Magha Shukla Panchami",
+        panchang: "Veneration of Saraswati, goddess of learning, music, and civilizational arts.",
+        ritual: "Worship of writing implements, books, and musical instruments in schools and homes.",
+        cuisineAttire: "Cuisine: Saffron-infused Meethe Chawal and Boondi Laddoo.\nAttire: Vibrant mustard yellow traditional kurtas and sarees.",
+        image: "assets/festivals/vasantpanchami.jpg"
+      },
+
+      // FEBRUARY (Month index 1)
+      {
+        month: 1, day: 2,
+        name: "Surajkund International Crafts Mela",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Haryana (Faridabad)",
+        tithi: "Spring Artisan Assembly",
+        panchang: "The world's largest gathering of indigenous handloom weavers and terracotta craftsmen.",
+        ritual: "Live master artisan loom demonstrations, folk theater, Chau dance, and rustic pottery workshops.",
+        cuisineAttire: "Cuisine: Traditional Bajre ki Roti with white butter, Lassi, and regional foods.\nAttire: Hand-spun Khadi, Ikat, and tribal embroidered jackets.",
+        image: "assets/festivals/surajkund.jpg"
+      },
+      {
+        month: 1, day: 14,
+        name: "Goa Carnival",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Goa",
+        tithi: "Pre-Lenten Heritage Festival",
+        panchang: "Portuguese-Goan syncretic heritage parade celebrated since the 18th century.",
+        ritual: "King Momo proclaiming the carnival open, street brass band parades, and folk masked dancers.",
+        cuisineAttire: "Cuisine: Bebinca, Dodol, Sorpotel, and Goan Poee.\nAttire: Colorful carnival costumes, feather masks, and tropical prints.",
+        image: "assets/festivals/goacarnival.jpg"
+      },
+      {
+        month: 1, day: 15,
+        name: "Maha Shivaratri",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-India",
+        tithi: "Phalguna Krishna Chaturdashi",
+        panchang: "The great night of Shiva; cosmic convergence of Shiva and Shakti.",
+        ritual: "All-night wakefulness (Jagaran), continuous chanting of Rudram, and Bilva leaf abhishekam.",
+        cuisineAttire: "Cuisine: Thandai infused with fennel and almonds, Sabudana Vada, and fruit offerings.\nAttire: Unstitched white or saffron cotton dhotis and raw silk robes.",
+        image: "assets/festivals/mahashivaratri.jpg"
+      },
+      {
+        month: 1, day: 17,
+        name: "Losar (Tibetan New Year)",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Ladakh, Himachal Pradesh & Sikkim",
+        tithi: "First Day of Tibetan Lunar Calendar",
+        panchang: "Tibetan and Himalayan Buddhist cultural and spiritual new year.",
+        ritual: "Monastery horn ceremonies, masked sacred Cham dances, and butter sculpture offerings.",
+        cuisineAttire: "Cuisine: Guthuk noodle soup, Khapse fried pastries, and butter tea.\nAttire: Heavy wool Goncha coats and silk sashes.",
+        image: "assets/festivals/losar.jpg"
+      },
+
+      // MARCH (Month index 2)
+      {
+        month: 2, day: 3,
+        name: "Holi (Dhulandi)",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-India",
+        tithi: "Phalguna Purnima",
+        panchang: "Spring full moon festival celebrating the destruction of Holika and divine play of Radha-Krishna.",
+        ritual: "Holika Dahan bonfires on eve, playing with natural floral gulal and herbal pigments.",
+        cuisineAttire: "Cuisine: Mawa Gujiya, Dahi Bhalla, Puran Poli, and refreshing Thandai.\nAttire: Simple white cotton kurtas and chikankari suits.",
+        image: "assets/festivals/holi.jpg"
+      },
+      {
+        month: 2, day: 4,
+        name: "Hola Mohalla",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Punjab (Anandpur Sahib)",
+        tithi: "Chet Vadi 1",
+        panchang: "Founded by Guru Gobind Singh Ji to cultivate martial prowess and courage.",
+        ritual: "Nihang warrior assemblies displaying Gatka martial arts, horsemanship, and military poetry.",
+        cuisineAttire: "Cuisine: Guru ka Langar, Kheer, and Karah Parshad.\nAttire: Royal electric blue and saffron Nihang robes with dumalla turbans.",
+        image: "assets/festivals/holamohalla.jpg"
+      },
+      {
+        month: 2, day: 5,
+        name: "Yaoshang & Shigmo",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Manipur & Goa",
+        tithi: "Spring Equinox Festivities",
+        panchang: "Indigenous Manipuri Meitei festival paired with traditional Goan spring folk celebrations.",
+        ritual: "Thabal Chongba moonlight folk circle dances in Manipur; Ghode Modni warrior dances in Goa.",
+        cuisineAttire: "Cuisine: Chak-hao kheer (black rice pudding) and traditional Goan sweets.\nAttire: Manipuri Phanek and Innaphi handlooms.",
+        image: "assets/festivals/yaoshangshigmo.jpg"
+      },
+      {
+        month: 2, day: 20,
+        name: "Gangaur",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Rajasthan & Madhya Pradesh",
+        tithi: "Chaitra Shukla Tritiya",
+        panchang: "Celebration of Gauri (Parvati) and Shiva symbolizing marital devotion and harvest.",
+        ritual: "Carrying beautifully dressed wooden idols of Isar and Gauri in royal brass palanquin processions.",
+        cuisineAttire: "Cuisine: Ghewar with rabdi, Churma, and Besan Gatta.\nAttire: Marwari Bandhani and Leheriya dupattas with antique jewelry.",
+        image: "assets/festivals/gangaur.jpg"
+      },
+
+      // APRIL (Month index 3)
+      {
+        month: 3, day: 14,
+        name: "Baisakhi, Vishu & Puthandu",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Punjab, Kerala & Tamil Nadu",
+        tithi: "Mesha Sankranti (Solar New Year)",
+        panchang: "The first day of the solar calendar, celebrated simultaneously across cultural regions.",
+        ritual: "Viewing Vishukkani auspicious arrangements at dawn in Kerala; Bhangra harvest dances in Punjab.",
+        cuisineAttire: "Cuisine: Vishu Kanji, Aviyal, and traditional Mango Pachadi.\nAttire: Gold-bordered Kasavu mundu and silk sarees.",
+        image: "assets/festivals/baisakhi.jpg"
+      },
+      {
+        month: 3, day: 15,
+        name: "Bohag Bihu (Rongali Bihu)",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Assam & North East",
+        tithi: "Assamese New Year",
+        panchang: "Spring arrival marking the start of seeding in the Brahmaputra valley.",
+        ritual: "Bihu dances accompanied by Dhol, Pepa (buffalo horn pipe), and Gogona jaw harp.",
+        cuisineAttire: "Cuisine: Pitha, Laru, and Masor Tenga sour fish curry.\nAttire: Indigenous red-embroidered Muga silk dress.",
+        image: "assets/festivals/bihu.jpg"
+      },
+      {
+        month: 3, day: 19,
+        name: "Gudi Padwa & Ugadi",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Maharashtra, Karnataka, Andhra & Telangana",
+        tithi: "Chaitra Shukla Pratipada",
+        panchang: "Vedic New Year marking the first sunrise of the Vikram Samvat cycle.",
+        ritual: "Raising the sacred Gudi victory banner outside homes; consuming neem-jaggery pacchadi.",
+        cuisineAttire: "Cuisine: Shrikhand, Puran Poli, and Ugadi Pachadi.\nAttire: Nauvari Paithani silk sarees and traditional Kurta-Pyjamas.",
+        image: "assets/festivals/gudi.jpg"
+      },
+      {
+        month: 3, day: 26,
+        name: "Ram Navami & Mahavir Jayanti",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-India",
+        tithi: "Chaitra Shukla Navami",
+        panchang: "Divine advent of Lord Rama and the 24th Jain Tirthankara Lord Mahavira.",
+        ritual: "Recitation of Ramcharitmanas, Rath Yatra processions in Ayodhya, and Jain temple pujas.",
+        cuisineAttire: "Cuisine: Panakam, Neer Mor, and Kosambari salad.\nAttire: Simple white handloom cottons and silk angavastrams.",
+        image: "assets/festivals/ram-navmi.jpg"
+      },
+
+      // MAY (Month index 4)
+      {
+        month: 4, day: 2,
+        name: "Moatsu Festival",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Nagaland (Mokokchung)",
+        tithi: "Post-Sowing Tribal Assembly",
+        panchang: "Ao Naga community celebration following the conclusion of seasonal field clearing.",
+        ritual: "Traditional tribal war dances around village fires, tug-of-war contests, and folk singing.",
+        cuisineAttire: "Cuisine: Smoked meats, bamboo shoot delicacies, and rice beer.\nAttire: Vivid Ao Naga warrior shawls (Tsungkotepsu) with shell ornaments.",
+        image: "assets/festivals/moatsu.jpg"
+      },
+      {
+        month: 4, day: 19,
+        name: "Akshaya Tritiya",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-India",
+        tithi: "Vaishakha Shukla Tritiya",
+        panchang: "Auspicious day ruled by Lord Vishnu where spiritual merits never diminish (Akshaya).",
+        ritual: "Inauguration of chariot construction for Puri Rath Yatra, gold acquisitions, and charitable anna-daan.",
+        cuisineAttire: "Cuisine: Mango Shrikhand, Puran Poli, and chilled panchamrit.\nAttire: Yellow silk kurtas and gold-zari bordered traditional sarees.",
+        image: "assets/festivals/akshya.jpg"
+      },
+      {
+        month: 4, day: 31,
+        name: "Buddha Purnima (Vesak)",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Bodh Gaya, Sarnath, Ladakh & Sikkim",
+        tithi: "Vaishakha Purnima",
+        panchang: "Triple blessed day marking the Birth, Enlightenment, and Mahaparinirvana of the Buddha.",
+        ritual: "Water offerings to the sacred Bodhi tree, butter lamp illuminations, and silent mindfulness meditation.",
+        cuisineAttire: "Cuisine: Sweet rice pudding (Kheer) symbolizing Sujata's sacred offering.\nAttire: Pure white hand-woven khadi garments.",
+        image: "assets/festivals/buddha.jpg"
+      },
+
+      // JUNE (Month index 5)
+      {
+        month: 5, day: 12,
+        name: "Saga Dawa",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Sikkim & Ladakh",
+        tithi: "Tibetan Fourth Lunar Month",
+        panchang: "The holiest month in Tibetan Buddhism celebrating the Buddha's attainment of Nirvana.",
+        ritual: "Processions carrying holy Kangyur scriptures around Gangtok, circumbulations of chortens.",
+        cuisineAttire: "Cuisine: Vegetarian Thukpa, Tingmo steamed bread, and sweet tea.\nAttire: Formal Himalayan silk Bakhu dresses.",
+        image: "assets/festivals/saga.jpg"
+      },
+      {
+        month: 5, day: 22,
+        name: "Ambubachi Mela",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Assam (Kamakhya Temple, Guwahati)",
+        tithi: "Ashaadha Month Monsoon Onset",
+        panchang: "Annual tantric fertility festival celebrating Mother Earth's regenerative feminine power.",
+        ritual: "Temple doors remain closed for three days while the Brahmaputra runs red, followed by sacred red cloth distribution.",
+        cuisineAttire: "Cuisine: Fruits, sprouted pulses, and uncooked prasad during seclusion.\nAttire: Traditional Assamese red-and-white gamosas and saffron robes.",
+        image: "assets/festivals/ambubachi.jpg"
+      },
+      {
+        month: 5, day: 24,
+        name: "São João",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Goa",
+        tithi: "Monsoon Feast of St. John",
+        panchang: "Centuries-old monsoon festival celebrating youth, rain, and fertility.",
+        ritual: "Youth wearing vibrant fresh-flower crowns (Kopels) leaping into village wells and freshwater streams.",
+        cuisineAttire: "Cuisine: Sanna, Patoleo wrapped in turmeric leaves, and local fruits.\nAttire: Bright floral shirts and hand-woven floral crowns.",
+        image: "assets/festivals/sao.jpg"
+      },
+      {
+        month: 5, day: 29,
+        name: "Vat Purnima",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Maharashtra, Gujarat & Karnataka",
+        tithi: "Jyeshtha Purnima",
+        panchang: "Commemorating Savitri's triumph over Yamaraj to retrieve the soul of Satyavan.",
+        ritual: "Married women winding sacred white cotton thread seven times around Banyan trees (Vat Vriksha).",
+        cuisineAttire: "Cuisine: Mango delicacies, soaked chickpeas, and jackfruit seeds.\nAttire: Traditional bright Paithani sarees and green glass bangles.",
+        image: "assets/festivals/vat-purnima.jpg"
+      },
+
+      // JULY (Month index 6)
+      {
+        month: 6, day: 16,
+        name: "Jagannath Rath Yatra",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Odisha (Puri)",
+        tithi: "Ashadha Shukla Dwitiya",
+        panchang: "Annual journey of Jagannath, Balabhadra, and Subhadra to Gundicha Temple.",
+        ritual: "Pulling massive monumental wooden chariots (Nandighosha) through Grand Road by thousands of devotees.",
+        cuisineAttire: "Cuisine: Mahaprasad, Khaja, Podapitha, and Dalma.\nAttire: Handwoven Sambalpuri and Ikat cotton dhotis.",
+        image: "assets/festivals/rath-yatra.jpg"
+      },
+      {
+        month: 6, day: 25,
+        name: "Ashadhi Ekadashi (Pandharpur Wari)",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Maharashtra (Pandharpur)",
+        tithi: "Ashadha Shukla Ekadashi",
+        panchang: "Culmination of the 800-year-old pilgrimage of Sant Dnyaneshwar and Tukaram padukas.",
+        ritual: "Hundreds of thousands of Warkaris walking hundreds of kilometers singing Abhangas with Taal and Chipli.",
+        cuisineAttire: "Cuisine: Sabudana Khichdi, Bhagar, and Shengdana Amti.\nAttire: Simple white Gandhi topis, dhotis, and saffron Tulsi mala beads.",
+        image: "assets/festivals/ashadhi.jpg"
+      },
+      {
+        month: 6, day: 26,
+        name: "Bonalu & Hemis Festival",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Telangana (Hyderabad) & Ladakh",
+        tithi: "Ashadha Festivities",
+        panchang: "Goddess Mahankali worship in the Deccan paired with Guru Padmasambhava birthday in Ladakh.",
+        ritual: "Women balancing decorated brass/earthen pots on heads; sacred monastery cham mask dances in Hemis.",
+        cuisineAttire: "Cuisine: Cooked rice with jaggery in earthen pots; butter tea.\nAttire: Pothuraju body paint in Hyderabad; traditional Ladakhi perak headgear.",
+        image: "assets/festivals/bonalu.jpg"
+      },
+      {
+        month: 6, day: 29,
+        name: "Guru Purnima",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-India",
+        tithi: "Ashadha Purnima",
+        panchang: "Birth of sage Veda Vyasa; expressing reverence to spiritual and classical arts masters.",
+        ritual: "Padapuja of spiritual gurus, classical vocal ustads, and dance vidvans.",
+        cuisineAttire: "Cuisine: Sweet Halwa, Kheer, and Sattvic meals.\nAttire: Unadorned saffron or cream-colored silk dhotis.",
+        image: "assets/festivals/guru-purnima.jpg"
+      },
+
+      // AUGUST (Month index 7)
+      {
+        month: 7, day: 26,
+        name: "Onam (Thiruvonam)",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Kerala",
+        tithi: "Chingam Month • Thiruvonam Star",
+        panchang: "Welcome festival honoring the mythical benevolent King Mahabali's annual return.",
+        ritual: "Intricate floral floor carpets (Pookkalam), Vallamkali snake boat races, and Pulikali tiger dances.",
+        cuisineAttire: "Cuisine: Onasadya featuring 26+ dishes served on fresh plantain leaves.\nAttire: Kasavu mundu with golden zari and Set-Saree.",
+        image: "assets/festivals/onam.jpg"
+      },
+      {
+        month: 7, day: 28,
+        name: "Raksha Bandhan & Narali Purnima",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-India & Coastal Maharashtra",
+        tithi: "Shravana Purnima",
+        panchang: "Celebration of sibling protection and fisherfolk offering coconuts to appease the monsoon sea god Varuna.",
+        ritual: "Tying protective silk threads (Rakhis) on brothers' wrists; sailing decorated boats in Mumbai.",
+        cuisineAttire: "Cuisine: Narali Bhaat (sweet coconut rice), Ghewar, and Kaju Katli.\nAttire: Silk Kurtas and festive handloom Chanderi sarees.",
+        image: "assets/festivals/raksha.jpg"
+      },
+
+      // SEPTEMBER (Month index 8)
+      {
+        month: 8, day: 4,
+        name: "Krishna Janmashtami",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Mathura, Vrindavan & Pan-India",
+        tithi: "Bhadrapada Krishna Ashtami",
+        panchang: "Midnight birth of Lord Krishna under Rohini Nakshatra in Mathura jail.",
+        ritual: "Midnight puja, rocking infant Krishna in silver cradles, and human pyramids for Dahi Handi.",
+        cuisineAttire: "Cuisine: Makhan Mishri, Dhaniya Panjiri, Chappan Bhog, and Gopalkala.\nAttire: Yellow Pitambar dhotis and peacock feather crests.",
+        image: "assets/festivals/jamasthami.jpg"
+      },
+      {
+        month: 8, day: 14,
+        name: "Ganesh Chaturthi",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Maharashtra & Pan-India",
+        tithi: "Bhadrapada Shukla Chaturthi",
+        panchang: "Shukla Paksha • Swati Nakshatra. Auspicious advent of Vighnaharta Ganesha.",
+        ritual: "Installation of handcrafted Shadu Mati clay idols, daily aarti with Dhol-Tasha folk drums, and Vedic chant recitations.",
+        cuisineAttire: "Cuisine: Steamed Ukadiche Modak with jaggery and coconut.\nAttire: Silk Kurta-Dhotis and handloom Paithani sarees.",
+        image: "assets/festivals/ganesh.jpg"
+      },
+      {
+        month: 8, day: 16,
+        name: "Nuakhai & Karam Festival",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Western Odisha, Jharkhand & Bengal",
+        tithi: "Bhadrapada Shukla Panchami",
+        panchang: "Indigenous agricultural harvest festival offering the first harvested grains to deities.",
+        ritual: "Consuming the new crop (Nabanna) with family; tribal Karam branch worship for tree prosperity.",
+        cuisineAttire: "Cuisine: Dishes made of freshly pounded harvest rice, Arisa Pitha.\nAttire: Traditional Sambalpuri handloom sarees.",
+        image: "assets/festivals/nuakhai.jpg"
+      },
+      {
+        month: 8, day: 25,
+        name: "Anant Chaturdashi (Ganesh Visarjan)",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Maharashtra & Pan-India",
+        tithi: "Bhadrapada Shukla Chaturdashi",
+        panchang: "Culmination of Ganeshotsav and veneration of Lord Vishnu's cosmic infinite form (Ananta).",
+        ritual: "Grand musical immersion processions to sea and river ghats with Dhol-Tasha-Zanj Pathaks.",
+        cuisineAttire: "Cuisine: Kheer, Puran Poli, and roasted coconut prasad.\nAttire: Saffron-bordered traditional kurtas and Nauvari drapes.",
+        image: "assets/festivals/ganesh-visarjan.jpg"
+      },
+      {
+        month: 8, day: 29,
+        name: "Bathukamma Floral Festival",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Telangana",
+        tithi: "Bhadrapada Amavasya to Navratri",
+        panchang: "Nine-day floral worship celebrating nature's bounty and womanhood.",
+        ritual: "Women crafting conical floral towers using regional wildflowers like Gunugu and Tangedu, dancing in circles.",
+        cuisineAttire: "Cuisine: Maleeda (sweet wheat and jaggery powder) and Sattu.\nAttire: Handloom Pochampally silk sarees and traditional jewelry.",
+        image: "assets/festivals/bathukamma.jpg"
+      },
+
+      // OCTOBER (Month index 9)
+      {
+        month: 9, day: 10,
+        name: "Sharad Navratri Begins (Ghatasthapana)",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Gujarat, Bengal & Pan-India",
+        tithi: "Ashvina Shukla Pratipada",
+        panchang: "Ghatasthapana invoking Goddess Durga and cosmic feminine energy across 9 sacred nights.",
+        ritual: "Garba and Dandiya Raas in Gujarat; installing consecrated sacred clay kalash with sprouted barley grains.",
+        cuisineAttire: "Cuisine: Sabudana Khichdi, Kuttu ki Poori, and Singhara halwa.\nAttire: Colorful Kutchi mirror-work Chaniya Cholis and Kediyu kurtas.",
+        image: "assets/festivals/sharad-navratri.jpg"
+      },
+      {
+        month: 9, day: 17,
+        name: "Durga Puja (Maha Ashtami)",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "West Bengal, Assam & Tripura",
+        tithi: "Ashvina Shukla Ashtami",
+        panchang: "Climax of the grand autumn worship with Sandhi Puja invoking Chamunda.",
+        ritual: "Dhunuchi Nritya dancing with smoking clay censers, rhythmic Dhak drum ensembles, and Pushpanjali prayers.",
+        cuisineAttire: "Cuisine: Bhog Khichuri, Labra mixed vegetable, Luchi, and Sandesh.\nAttire: White and red bordered traditional Garad and Jamdani silk sarees.",
+        image: "assets/festivals/durga-puja.jpg"
+      },
+      {
+        month: 9, day: 18,
+        name: "Ayudha Puja (Maha Navami)",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Karnataka, Tamil Nadu & Bengal",
+        tithi: "Ashvina Shukla Navami",
+        panchang: "Sacred veneration of artisan tools, sculptors' chisels, weavers' looms, musical instruments, and knowledge implements.",
+        ritual: "Cleaning and adorning instruments and mechanical looms with sandalwood paste, turmeric, and marigold garlands.",
+        cuisineAttire: "Cuisine: Kondakadalai Sundal, steamed Neyyappam, and beaten rice prasad.\nAttire: Pure Kanjeevaram and Kasavu handloom silks.",
+        image: "assets/festivals/ayudha-puja.jpg"
+      },
+      {
+        month: 9, day: 19,
+        name: "Vijayadashami & Mysuru Dasara",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Mysuru, Kullu & Pan-India",
+        tithi: "Ashvina Shukla Dashami",
+        panchang: "Triumph of dharma: Durga vanquishing Mahishasura and Rama defeating Ravana.",
+        ritual: "Grand Jumboo Savari elephant procession at Mysuru Palace; week-long devta gatherings in Kullu valley.",
+        cuisineAttire: "Cuisine: Mysore Pak in Karnataka; Jalebi and crisp Fafda in Gujarat.\nAttire: Royal gold-embroidered silk attire and Mysore Peta turbans.",
+        image: "assets/festivals/mysuru-dasara.jpg"
+      },
+      {
+        month: 9, day: 29,
+        name: "Karwa Chauth",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Northern India",
+        tithi: "Kartika Krishna Chaturthi",
+        panchang: "Strict dawn-to-moonrise fasting by married women for longevity and prosperity of families.",
+        ritual: "Listening to Karwa Chauth Vrat Katha, viewing the moon through a fine sieve (Chhalni), and offering Arghya.",
+        cuisineAttire: "Cuisine: Morning Sargi (pheni, dry fruits), and festive Mathri.\nAttire: Bridal red Banarasi sarees, mehendi, and traditional glass bangles.",
+        image: "assets/festivals/karwa-chauth.jpg"
+      },
+
+      // NOVEMBER (Month index 10)
+      {
+        month: 10, day: 8,
+        name: "Deepawali (Lakshmi Puja)",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Pan-Indian & Global Diaspora",
+        tithi: "Kartika Amavasya",
+        panchang: "Darkest Amavasya night illumined by millions of earthen diyas welcoming Goddess Lakshmi.",
+        ritual: "Lighting hand-thrown terracotta lamps with mustard oil, geometric rice-flour rangolis, and Lakshmi-Ganesha puja.",
+        cuisineAttire: "Cuisine: Besan Laddoo, Kaju Katli, Gujiya, and Shankarpali.\nAttire: Handwoven pure Banarasi brocades and raw silk sherwanis.",
+        image: "assets/festivals/diwali.jpg"
+      },
+      {
+        month: 10, day: 14,
+        name: "Chhath Puja (Evening Arghya)",
+        category: "harvest",
+        tagClass: "tag-harvest",
+        state: "Bihar, Jharkhand & Uttar Pradesh",
+        tithi: "Kartika Shukla Shashthi",
+        panchang: "Ancient Vedic sun worship honoring Surya Dev and Chhathi Maiya on riverbanks.",
+        ritual: "Standing waist-deep in river waters offering evening Arghya through bamboo winnowing baskets (Soop).",
+        cuisineAttire: "Cuisine: Thekua made from whole wheat flour, jaggery, and ghee.\nAttire: Unstitched saffron or yellow cotton sarees and dhotis.",
+        image: "assets/festivals/chhath.jpg"
+      },
+      {
+        month: 10, day: 24,
+        name: "Pushkar Fair, Dev Deepawali & Bali Jatra",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Rajasthan, Varanasi & Odisha (Cuttack)",
+        tithi: "Kartika Purnima",
+        panchang: "Full moon commemorating ancient Odia mariners sailing to Bali and sacred camel trading in Pushkar.",
+        ritual: "Floating miniature toy boats (Boita Bandana) on Mahanadi; illuminating all 84 ghats of Varanasi.",
+        cuisineAttire: "Cuisine: Cuttack Dahi Bara Aloodum and Pushkar Malpua.\nAttire: Rajasthani Bandhani and Sambalpuri handlooms.",
+        image: "assets/festivals/pushkar-fair.jpg"
+      },
+      {
+        month: 10, day: 25,
+        name: "Guru Nanak Gurpurab & Sangai Festival",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Punjab & Manipur",
+        tithi: "Kartika Purnima (Nanakshahi Cycle)",
+        panchang: "Birth anniversary of Guru Nanak Dev Ji celebrated alongside Manipur's tourism festival.",
+        ritual: "Akhand Path scripture recitations, early morning Prabhat Pheris, and Community Langar.",
+        cuisineAttire: "Cuisine: Karah Parshad, Dal Makhani, and Manipuri Black Rice Sweets.\nAttire: Pristine white Kurta Pajamas with saffron turbans.",
+        image: "assets/festivals/guru-nanak-gurpurab.jpg"
+      },
+
+      // DECEMBER (Month index 11)
+      {
+        month: 11, day: 1,
+        name: "Hornbill Festival Begins",
+        category: "fair",
+        tagClass: "tag-fair",
+        state: "Nagaland (Kisama Heritage Village)",
+        tithi: "Festival of Festivals",
+        panchang: "Gathering of all 17 major indigenous Naga tribes to showcase living folkloric traditions.",
+        ritual: "Tribal log drum beating, indigenous wrestling, spear-throwing, and morung folk dances.",
+        cuisineAttire: "Cuisine: Bamboo-steamed rice, roasted meats with King Chilli (Bhut Jolokia).\nAttire: Authentic hand-woven Naga tribal shawls and ceremonial headgear.",
+        image: "assets/festivals/hornbill-festival.jpg"
+      },
+      {
+        month: 11, day: 10,
+        name: "Rann Utsav & Tawang Festival",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Gujarat (Kutch) & Arunachal Pradesh",
+        tithi: "Winter Moon Celebrations",
+        panchang: "Full moon white salt desert celebrations combined with Monpa Buddhist cultural festivals.",
+        ritual: "Kutchi folk music recitations under moonlight; Monpa Yak dances in Tawang monastery valley.",
+        cuisineAttire: "Cuisine: Bajra no Rotlo, Ringan no Olo, and Tibetan momos with chili dip.\nAttire: Woolen Monpa robes and vibrant Kutchi Rogan and mirror-worked jackets.",
+        image: "assets/festivals/rann-utsav.jpg"
+      },
+      {
+        month: 11, day: 15,
+        name: "Margazhi Classical Music Festival",
+        category: "arts",
+        tagClass: "tag-arts",
+        state: "Tamil Nadu (Chennai)",
+        tithi: "Margazhi Month",
+        panchang: "The world's largest classical music season featuring thousands of Carnatic concerts.",
+        ritual: "Kacheris (Carnatic concerts) across city sabhas, early morning temple Bhajans, and Thiruppavai verses.",
+        cuisineAttire: "Cuisine: Authentic Sabha Canteen Ghee Roast Dosa, Filter Coffee, and Kesari.\nAttire: Fine Kanchipuram silk sarees and traditional dhotis with angavastram.",
+        image: "assets/festivals/margazhi-music-festival.jpg"
+      },
+      {
+        month: 11, day: 25,
+        name: "Christmas & Losoong (Namsoong)",
+        category: "religious",
+        tagClass: "tag-religious",
+        state: "Goa, Kerala, Meghalaya & Sikkim",
+        tithi: "Winter Solstice Celebrations",
+        panchang: "Christmas celebrations paired with the Sikkimese Bhutia & Lepcha harvest new year.",
+        ritual: "Midnight cathedral masses in Goa and Kerala; Black Hat Cham dances in Sikkim monasteries.",
+        cuisineAttire: "Cuisine: Plum cake, Bebinca, and Sikkimese Kodo ko Raksi.\nAttire: Traditional Lepcha Dumvum and festive holiday suits.",
+        image: "assets/festivals/christmas-losoong.jpg"
+      }
+    ];
+
+    // Calendar state
+    let currentDate = new Date(); // Defaults to actual current system date
+    let activeFilter = 'all';
+
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    function renderCalendar() {
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+
+      document.getElementById('currentMonthYear').textContent = `${monthNames[month]} ${year}`;
+      
+      // Dynamically calculate accurate Vikram Samvat (VS) and Shaka Samvat based on Gregorian year
+      // (Vikram Samvat generally leads Gregorian by 57 years; Shaka leads by 78 years behind)
+      const vsYear1 = year + 56;
+      const vsYear2 = year + 57;
+      const shakaYear = year - 78;
+      document.getElementById('vedicMonthLabel').textContent = `${monthNames[month]} ${vsYear2} VS • ${shakaYear} Shaka`;
+
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+      const daysContainer = document.getElementById('calendarDays');
+      daysContainer.innerHTML = '';
+
+      // Inactive days from previous month
+      for (let i = firstDay - 1; i >= 0; i--) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell inactive';
+        cell.innerHTML = `<div class="day-top-bar"><span class="day-number">${daysInPrevMonth - i}</span></div>`;
+        daysContainer.appendChild(cell);
+      }
+
+      // Active days for current month
+      const todayObj = new Date();
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement('div');
+        cell.className = 'day-cell';
+
+        // Check if today matches real world date
+        if (year === todayObj.getFullYear() && month === todayObj.getMonth() && day === todayObj.getDate()) {
+          cell.classList.add('today');
+        }
+
+        // Match events for this day dynamically across any selected year
+        const events = festivalDatabase.filter(f => 
+          f.month === month && f.day === day &&
+          (activeFilter === 'all' || f.category === activeFilter)
+        );
+
+        if (events.length > 0) {
+          const ev = events[0];
+          cell.innerHTML = `
+            <div class="day-top-bar">
+              <span class="day-number">${day}</span>
+            </div>
+            <div class="cell-event-visual">
+              <img src="${ev.image || 'assets/slides/slide7.jpg'}" alt="${ev.name}" />
+            </div>
+            <span class="event-tag-tiny ${ev.tagClass}">${ev.name}</span>
+          `;
+
+          cell.onclick = () => {
+            document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected'));
+            cell.classList.add('selected');
+            updateDossier(ev);
+          };
+        } else {
+          cell.innerHTML = `
+            <div class="day-top-bar">
+              <span class="day-number">${day}</span>
+            </div>
+          `;
+          cell.onclick = () => {
+            document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('selected'));
+            cell.classList.add('selected');
+          };
+        }
+
+        daysContainer.appendChild(cell);
+      }
+    }
+
+    function updateDossier(festival) {
+      document.getElementById('dossierTitle').textContent = festival.name;
+      document.getElementById('dossierMeta').textContent = `${festival.tithi} • ${festival.state}`;
+      document.getElementById('dossierPanchang').innerHTML = `<strong>Panchang Tithi:</strong> ${festival.panchang}`;
+      document.getElementById('dossierRitual').textContent = festival.ritual;
+      document.getElementById('dossierAttire').innerHTML = festival.cuisineAttire.replace(/\n/g, '<br>');
+      if (festival.image) {
+        document.getElementById('dossierImg').src = festival.image;
+      }
+    }
+
+    function prevMonth() {
+      currentDate.setMonth(currentDate.getMonth() - 1);
+      renderCalendar();
+    }
+
+    function nextMonth() {
+      currentDate.setMonth(currentDate.getMonth() + 1);
+      renderCalendar();
+    }
+
+    // Filter Chips Event Binding
+    document.querySelectorAll('.filter-chip').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        activeFilter = this.dataset.filter;
+        renderCalendar();
+      });
+    });
+
+    // Initial render
+    renderCalendar();
+  </script>
+</body>
+</html>

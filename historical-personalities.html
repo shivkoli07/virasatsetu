@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historical Personalities | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/personalities/hero-personalities.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Archetypes Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .style-badge {
+      font-size: 0.68rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 1024px) {
+      .styles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 04.04 • Civilizational Luminaries & Visionaries</div>
+      <h1 class="hero-title">Historical Personalities</h1>
+      <p class="hero-tagline">"Where sovereign strategists, pioneering scientists, Bhakti mystic poets, and social reformers shaped Indian destiny."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Pantheon of Indian Historical Luminaries</h2>
+        <p class="doctrine-subtitle">Indian history is illuminated by extraordinary minds whose philosophical treatises, martial statecraft, spiritual poetry, and social reforms redefined human civilization across millennia.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What are Historical Personalities -->
+        <div class="concept-block">
+          <h3 class="concept-title">👑 Who are India's Historical Luminaries?</h3>
+          <p class="concept-text">
+            These figures are the living pillars of Indian civilizational memory. Spanning sovereign emperors who championed ethical governance, grammarians who mapped human speech, rebel queens who defended their homelands, and saint-poets who bridged social divides, their legacies continue to inspire contemporary national identity.
+          </p>
+        </div>
+
+        <!-- Impact on Living Heritage -->
+        <div class="concept-block">
+          <h3 class="concept-title">📜 The Transmission of Values</h3>
+          <p class="concept-text">
+            Through oral literature, sacred songs, epigraphs, and biographical chronicles, the exploits and wisdom of these 20 luminaries form the bedrock of VirasatSetu's educational ecosystem, teaching resilience, wisdom, artistic excellence, and universal compassion.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Archetypes Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Historical Archetypes</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Sovereigns & Strategists</h4>
+            <span class="style-badge">Statecraft & Empire</span>
+            <p class="style-text">Visionary monarchs and guerrilla tacticians who forged enduring administrative frameworks (e.g., Shivaji Maharaj, Ashoka, Rajaraja Chola, Ahilyabai Holkar).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Scientists & Grammarians</h4>
+            <span class="style-badge">Intellectual Rigor</span>
+            <p class="style-text">Pioneering mathematicians, physicians, and linguists who codified exact sciences and language structure (e.g., Aryabhata, Panini, Sushruta, Chanakya).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Mystic Poets & Saints</h4>
+            <span class="style-badge">Bhakti & Sufi Devotion</span>
+            <p class="style-text">Visionary poets who democratized spirituality and transcended caste through ecstatic devotional verse (e.g., Kabir, Mirabai, Tukaram, Guru Gobind Singh).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Reformers & Freedom Icons</h4>
+            <span class="style-badge">Social Awakening</span>
+            <p class="style-text">Trailblazing educators and social reformers who eradicated societal inequities and fought colonial domination (e.g., Ambedkar, Phule, Vivekananda, Tagore).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (20 Master Historical Personalities) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>20 Benchmark Historical Personalities of India</h2>
+      <p>Pan-Indian biographical dossiers documenting sovereign strategies, scientific breakthroughs, mystic poetry, and social reforms.</p>
+    </div>
+
+    <!-- 01: Chhatrapati Shivaji Maharaj -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/shivaji.jpg');">
+        <span class="monument-badge-top">Swarajya Founder • Guerrilla Tactician</span>
+        <div class="monument-bottom-title">
+          <h3>Chhatrapati Shivaji Maharaj</h3>
+          <span>Shivneri Fort & Raigad, Maharashtra • 17th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1630–1680 CE • Founder and Sovereign of the Maratha Empire (Swarajya)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Pioneered asymmetric mountain guerrilla warfare (Ganimi Kava), established a formidable naval fleet along the Konkan coast, and instituted an enlightened administrative council (Ashtapradhan Mandal) upholding religious tolerance.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Reshaped geopolitical destiny in the Deccan, symbolizing invincible courage, agrarian welfare, and self-rule.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Swarajya Vision</span>
+              <span class="tag-pill">Ganimi Kava Warfare</span>
+              <span class="tag-pill">Ashtapradhan Council</span>
+              <span class="tag-pill">Raigad Capital</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Shivneri Fort, Junnar (19.2023° N, 73.8567° E)</span>
+          <a href="https://maps.google.com/?q=Shivneri+Fort+Junnar" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Rajaraja Chola I -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/rajaraja-chola.jpg');">
+        <span class="monument-badge-top">Imperial Chola • Maritime Sovereign</span>
+        <div class="monument-bottom-title">
+          <h3>Emperor Rajaraja Chola I</h3>
+          <span>Thanjavur, Tamil Nadu • 10th–11th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">985–1014 CE • Sovereign Emperor of the Imperial Chola Dynasty</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Expanded Chola dominion across southern India, Sri Lanka, and the Maldives while establishing powerful naval trade networks extending into Southeast Asia. Commissioned the architectural masterpiece Brihadisvara Temple.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Celebrated for meticulous land revenue surveys, decentralized village administrative councils, and patronage of Tamil literature and bronzes.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Naval Empire Builder</span>
+              <span class="tag-pill">Brihadisvara Patron</span>
+              <span class="tag-pill">Land Survey Pioneer</span>
+              <span class="tag-pill">Chola Golden Age</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Thanjavur (10.7870° N, 79.1378° E)</span>
+          <a href="https://maps.google.com/?q=Thanjavur+Palace+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Rani Ahilyabai Holkar -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/ahilyabai.jpg');">
+        <span class="monument-badge-top">Philosopher Queen • Temple Builder</span>
+        <div class="monument-bottom-title">
+          <h3>Rani Ahilyabai Holkar</h3>
+          <span>Maheshwar & Indore, Madhya Pradesh • 18th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1725–1795 CE • Maharani and Benevolent Ruler of the Holkar Malwa Kingdom</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Transformed Maheshwar into a flourishing center of handloom weaving (Maheshwari sarees) and righteous governance. Financed the reconstruction of hundreds of sacred temples, ghats, and wells across India from Kashi to Somnath.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Revered across India as a saintly monarch who placed public welfare, justice, and economic rehabilitation above royal luxury.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Righteous Governance</span>
+              <span class="tag-pill">Maheshwari Handloom Patron</span>
+              <span class="tag-pill">Nationwide Temple Restoration</span>
+              <span class="tag-pill">Holkar Dynasty</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Maheshwar Fort, MP (22.1751° N, 75.5786° E)</span>
+          <a href="https://maps.google.com/?q=Maheshwar+Fort+Madhya+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Aryabhata -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/aryabhata.jpg');">
+        <span class="monument-badge-top">Mathematician & Astronomer • Zero & Pi Pioneer</span>
+        <div class="monument-bottom-title">
+          <h3>Aryabhata</h3>
+          <span>Kusumapura (Patna), Bihar • 5th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">476–550 CE • Classical Indian Mathematician and Master Astronomer</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Authored the groundbreaking <em>Aryabhatiya</em>. Conceptualized the placeholder place-value zero system, accurately calculated Pi ($\pi$ ) to four decimal places, and correctly posited that the Earth rotates on its axis around the Sun.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Revolutionized global mathematics and astronomy during India's classical Gupta golden age.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Aryabhatiya Treatise</span>
+              <span class="tag-pill">Place-Value Zero Concept</span>
+              <span class="tag-pill">Heliocentric Rotation Theory</span>
+              <span class="tag-pill">Gupta Era Scientist</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Patna, Bihar (25.5941° N, 85.1376° E)</span>
+          <a href="https://maps.google.com/?q=Patna+Bihar" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Panini -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/panini.jpg');">
+        <span class="monument-badge-top">Master Grammarian • Father of Linguistics</span>
+        <div class="monument-bottom-title">
+          <h3>Sage Panini</h3>
+          <span>Shalatura (Gandhara), Ancient India • c. 4th Century BCE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">c. 4th Century BCE • Ancient Sanskrit Philologist and Linguistic Genius</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Authored the <em>Ashtadhyayi</em>, a monumental linguistic treatise containing 3,959 rules governing Sanskrit morphology, syntax, and semantics using a generative grammar format that predated modern computer programming logic by millennia.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Laid the foundational architecture for formal language theory, phonetics, and structural linguistics worldwide.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Ashtadhyayi Treatise</span>
+              <span class="tag-pill">Generative Grammar Logic</span>
+              <span class="tag-pill">Sanskrit Phonetics</span>
+              <span class="tag-pill">Father of Linguistics</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Taxila / Gandhara Region (33.7463° N, 72.8397° E)</span>
+          <a href="https://maps.google.com/?q=Taxila+Pakistan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Sant Tukaram -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/tukaram.jpg');">
+        <span class="monument-badge-top">Bhakti Poet • Abhanga Virtuoso</span>
+        <div class="monument-bottom-title">
+          <h3>Sant Tukaram Maharaj</h3>
+          <span>Dehu, Pune, Maharashtra • 17th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1608–1650 CE • Varkari Bhakti Saint and Marathi Poet</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Composed thousands of devotional lyrics known as <em>Abhangas</em>, championing social equality, egalitarian devotion to Vitthal, and compassionate rejection of ritual hypocrisy.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Spiritual heart of the Varkari pilgrimage movement, uniting millions of Maharashtrians in annual Wari walks to Pandharpur.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Varkari Movement</span>
+              <span class="tag-pill">Abhanga Devotional Poetry</span>
+              <span class="tag-pill">Pandharpur Wari Tradition</span>
+              <span class="tag-pill">Social Equality</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Dehu, Pune (18.7185° N, 73.7450° E)</span>
+          <a href="https://maps.google.com/?q=Dehu+Pune+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Kabir -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/kabir.jpg');">
+        <span class="monument-badge-top">Mystic Weaver • Nirguna Saint</span>
+        <div class="monument-bottom-title">
+          <h3>Sant Kabir Das</h3>
+          <span>Varanasi, Uttar Pradesh • 15th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1440–1518 CE • 15th-Century Mystic Poet and Social Reformer</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Challenged institutionalized religious dogmas, caste hierarchies, and orthodox rituals through his sharp, memorable two-line couplets (Dohas). Revered equally by Hindus, Muslims, and Sikhs.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Embodied the simple life of a weaver (Julaha) while delivering profound spiritual wisdom directly in the vernacular tongue.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Kabir Dohas (Couplets)</span>
+              <span class="tag-pill">Nirguna Bhakti Mystic</span>
+              <span class="tag-pill">Caste Critique</span>
+              <span class="tag-pill">Varanasi Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kabir Chaura, Varanasi (25.3176° N, 82.9739° E)</span>
+          <a href="https://maps.google.com/?q=Kabir+Math+Varanasi" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Mirabai -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/mirabai.jpg');">
+        <span class="monument-badge-top">Bhakti Princess • Ecstatic Devotee</span>
+        <div class="monument-bottom-title">
+          <h3>Sant Mirabai</h3>
+          <span>Merta, Rajasthan & Vrindavan • 16th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1498–1547 CE • Rajput Princess and Ecstatic Bhakti Poetess</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Renounced royal palace privileges to dedicate her life entirely to Lord Krishna, composing passionate devotional bhajans that transcend feudal boundaries and patriarchal expectations.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Her timeless bhajans ("Maro Pranam", "Aisi Lagi Lagan") remain pillars of North Indian folk and classical devotional music.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Krishna Bhakti Bhajans</span>
+              <span class="tag-pill">Rajput Royal Renunciation</span>
+              <span class="tag-pill">Vrindavan Pilgrimage</span>
+              <span class="tag-pill">Feminist Spiritual Voice</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Merta, Rajasthan (26.6509° N, 74.0325° E)</span>
+          <a href="https://maps.google.com/?q=Merta+Rajasthan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Swami Vivekananda -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/vivekananda.jpg');">
+        <span class="monument-badge-top">Vedanta Philosopher • Youth Icon</span>
+        <div class="monument-bottom-title">
+          <h3>Swami Vivekananda</h3>
+          <span>Kolkata & Kanyakumari, India • 19th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1863–1902 CE • Chief Disciple of Ramakrishna Paramahamsa & Vedantic Reformer</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Electrified the 1893 Parliament of Religions in Chicago, introducing Vedanta and Yoga to the Western world. Championed national awakening, youth empowerment, and service to humanity (Daridra Narayana).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Fused ancient spiritual philosophy with practical social action, inspiring generations through his call for fearless strength and self-belief.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Chicago Address 1893</span>
+              <span class="tag-pill">Ramakrishna Mission</span>
+              <span class="tag-pill">Practical Vedanta</span>
+              <span class="tag-pill">National Youth Icon</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Belur Math, Kolkata (22.6318° N, 88.3576° E)</span>
+          <a href="https://maps.google.com/?q=Belur+Math+Kolkata" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Emperor Ashoka (Added Item 10) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/ashoka.jpg');">
+        <span class="monument-badge-top">Mauryan Emperor • Apostle of Dhamma</span>
+        <div class="monument-bottom-title">
+          <h3>Emperor Ashoka the Great</h3>
+          <span>Pataliputra, Magadha • 3rd Century BCE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">304–232 BCE • Third Mauryan Emperor of India</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Following the Kalinga War, underwent a profound transformation, embracing Buddhism and propagating <em>Dhamma</em> (moral righteousness, non-violence, and social welfare) across rock edicts spanning from Afghanistan to Karnataka.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">The Lion Capital of Ashoka serves as India's National Emblem, symbolizing truth, courage, and peaceful coexistence.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Kalinga Transformation</span>
+              <span class="tag-pill">Ashokan Pillar Edicts</span>
+              <span class="tag-pill">National Emblem Lion Capital</span>
+              <span class="tag-pill">Mauryan Empire</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Sarnath, UP (25.3811° N, 83.0232° E)</span>
+          <a href="https://maps.google.com/?q=Sarnath+Uttar+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 11: Guru Gobind Singh (Added Item 11) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/guru-gobind-singh.jpg');">
+        <span class="monument-badge-top">Khalsa Founder • Warrior Saint</span>
+        <div class="monument-bottom-title">
+          <h3>Guru Gobind Singh Ji</h3>
+          <span>Anandpur Sahib, Punjab • 17th–18th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1666–1708 CE • Tenth Sikh Guru, Poet, and Philosopher-Warrior</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Established the <em>Khalsa</em> brotherhood in 1699 to defend the oppressed against tyranny, instituting the Five Ks and finalizing the Sikh holy scripture, Sri Guru Granth Sahib Ji.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">A master poet and military strategist who embodied the ideal synthesis of spiritual devotion and martial defense (Sant-Sipahi).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Khalsa Brotherhood 1699</span>
+              <span class="tag-pill">Sant-Sipahi Ideal</span>
+              <span class="tag-pill">Dasam Granth Poetry</span>
+              <span class="tag-pill">Anandpur Sahib</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Takht Sri Kesgarh Sahib (31.2354° N, 76.5003° E)</span>
+          <a href="https://maps.google.com/?q=Anandpur+Sahib+Punjab" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 12: Rani Lakshmibai (Added Item 12) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/lakshmibai.jpg');">
+        <span class="monument-badge-top">Jhansi Queen • 1857 Freedom Icon</span>
+        <div class="monument-bottom-title">
+          <h3>Rani Lakshmibai of Jhansi</h3>
+          <span>Jhansi, Uttar Pradesh • 19th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1828–1858 CE • Rani and Military Commander of the Princely State of Jhansi</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Became one of the leading heroines of the Indian Rebellion of 1857, defending Jhansi Fort with legendary valor against British forces before leading cavalry troops in open battle.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Immortalized in history and poetry ("Khoob Ladi Mardani...") as an enduring symbol of fearless female sovereignty.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">1857 Rebellion Leader</span>
+              <span class="tag-pill">Jhansi Fort Defense</span>
+              <span class="tag-pill">Fearless Valor</span>
+              <span class="tag-pill">National Freedom Icon</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Jhansi Fort, UP (25.4484° N, 78.5682° E)</span>
+          <a href="https://maps.google.com/?q=Jhansi+Fort+Uttar+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 13: Birsa Munda (Added Item 13) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/birsa-munda.jpg');">
+        <span class="monument-badge-top">Ulgulan Leader • Tribal Freedom Fighter</span>
+        <div class="monument-bottom-title">
+          <h3>Birsa Munda</h3>
+          <span>Chotanagpur Plateau, Jharkhand • 19th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1875–1900 CE • Tribal Freedom Fighter and Folk Hero of Chotanagpur</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Spearheaded the <em>Ulgulan</em> (Great Tumult) movement against British colonial land policies and oppressive feudal landlords, uniting tribal Adivasis to reclaim forest rights and self-governance.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Revered affectionately as 'Dharti Abba' (Father of the Earth), his uprising forced colonial authorities to enact protective land legislation for indigenous tribes.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Ulgulan Tribal Uprising</span>
+              <span class="tag-pill">Dharti Abba (Father of Earth)</span>
+              <span class="tag-pill">Forest Rights Champion</span>
+              <span class="tag-pill">Jharkhand Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ranchi, Jharkhand (23.3441° N, 85.3096° E)</span>
+          <a href="https://maps.google.com/?q=Ranchi+Jharkhand" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 14: Raja Ram Mohan Roy (Added Item 14) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/ram-mohan-roy.jpg');">
+        <span class="monument-badge-top">Father of Modern India • Social Reformer</span>
+        <div class="monument-bottom-title">
+          <h3>Raja Ram Mohan Roy</h3>
+          <span>Kolkata, West Bengal • 19th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1772–1833 CE • Social Reformer and Founder of Brahmo Samaj</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Spearheaded the abolition of Sati in 1829, championed women's property rights, advocated for modern Western education in India, and tirelessly campaigned against idol worship corruption and child marriage.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Widely hailed as the "Father of Modern Indian Renaissance" for blending rational inquiry with spiritual reform.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Brahmo Samaj Founder</span>
+              <span class="tag-pill">Abolition of Sati 1829</span>
+              <span class="tag-pill">Modern Educational Reform</span>
+              <span class="tag-pill">Bengal Renaissance</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kolkata, West Bengal (22.5726° N, 88.3639° E)</span>
+          <a href="https://maps.google.com/?q=Kolkata+West+Bengal" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 15: Savitribai Phule (Added Item 15) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/savitribai-phule.jpg');">
+        <span class="monument-badge-top">Pioneer Educator • Women's Rights Champion</span>
+        <div class="monument-bottom-title">
+          <h3>Savitribai Phule</h3>
+          <span>Pune, Maharashtra • 19th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1831–1897 CE • Social Reformer, Poet, and India's First Female Teacher</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Co-founded India's first school for girls at Bhide Wada in Pune (1848) alongside her husband Jyotirao Phule. Defied intense social persecution to educate girls from oppressed castes and widows.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Established nurseries for newborn infants of vulnerable mothers and published stirring Marathi poetry advocating universal education.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">India's First Female Teacher</span>
+              <span class="tag-pill">Bhide Wada School 1848</span>
+              <span class="tag-pill">Satyashodhak Samaj</span>
+              <span class="tag-pill">Women's Education Pioneer</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Pune, Maharashtra (18.5204° N, 73.8567° E)</span>
+          <a href="https://maps.google.com/?q=Pune+Maharashtra+Education" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 16: Dr. B. R. Ambedkar (Added Item 16) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/ambedkar.jpg');">
+        <span class="monument-badge-top">Constitution Architect • Social Justice Icon</span>
+        <div class="monument-bottom-title">
+          <h3>Dr. B. R. Ambedkar</h3>
+          <span>Mumbai & New Delhi • 20th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1891–1956 CE • Jurist, Economist, Social Reformer, and Principal Architect of the Indian Constitution</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Chaired the Drafting Committee of the Constituent Assembly, embedding fundamental human rights, equality, and secularism into the Constitution of India. Dedicated his life to uplifting the oppressed and marginalized.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Globally recognized scholar holding doctorates from Columbia University and the London School of Economics.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Constitution Architect</span>
+              <span class="tag-pill">Social Justice Champion</span>
+              <span class="tag-pill">Columbia & LSE Scholar</span>
+              <span class="tag-pill">Buddhism Reviver</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Chaitya Bhoomi, Mumbai (19.0183° N, 72.8424° E)</span>
+          <a href="https://maps.google.com/?q=Chaitya+Bhoomi+Mumbai" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 17: Kalidasa (Added Item 17) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/kalidasa.jpg');">
+        <span class="monument-badge-top">Sanskrit Poet • Classical Dramatist</span>
+        <div class="monument-bottom-title">
+          <h3>Mahakavi Kalidasa</h3>
+          <span>Ujjain, Madhya Pradesh • Classical Gupta Era</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">c. 4th–5th Century CE • Classical Sanskrit Poet and Playwright of the Gupta Court</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Authored masterpieces of world literature including <em>Abhijnanashakuntalam</em>, <em>Meghaduta</em>, and <em>Raghuvamsha</em>, celebrated for exquisite similes, rich nature imagery, and deep emotional resonance.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Regarded universally as India's greatest classical poet, comparable to Shakespeare in Western theatrical tradition.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Abhijnanashakuntalam Play</span>
+              <span class="tag-pill">Meghaduta Lyrical Poem</span>
+              <span class="tag-pill">Gupta Court Luminary</span>
+              <span class="tag-pill">Master of Sanskrit Simile</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ujjain, Madhya Pradesh (23.1765° N, 75.7885° E)</span>
+          <a href="https://maps.google.com/?q=Ujjain+Madhya+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 18: Chanakya (Added Item 18) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/chanakya.jpg');">
+        <span class="monument-badge-top">Master Strategist • Author of Arthashastra</span>
+        <div class="monument-bottom-title">
+          <h3>Acharya Chanakya (Kautilya)</h3>
+          <span>Takshashila & Pataliputra • 4th Century BCE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">c. 375–283 BCE • Royal Advisor, Economist, and Architect of the Mauryan Empire</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Authored the <em>Arthashastra</em>, a pioneering treatise on statecraft, economic policy, military strategy, and legal administration. Guided Chandragupta Maurya in unifying fragmented Indian kingdoms.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Synonymous with unmatched political pragmatism, strategic foresight, and unwavering dedication to national sovereignty.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Arthashastra Treatise</span>
+              <span class="tag-pill">Mauryan Statecraft</span>
+              <span class="tag-pill">Strategic Pragmatism</span>
+              <span class="tag-pill">Takshashila Scholar</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Patna / Pataliputra (25.5941° N, 85.1376° E)</span>
+          <a href="https://maps.google.com/?q=Patna+Bihar" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 19: Rani Durgavati (Added Item 19) -->
+    <article class="monument-card">
+        <div class="monument-visual" style="background-image: url('assets/personalities/durgavati.jpg');">
+          <span class="monument-badge-top">Gondwana Queen • Warrior Sovereign</span>
+          <div class="monument-bottom-title">
+            <h3>Rani Durgavati</h3>
+            <span>Garha-Mandla, Madhya Pradesh • 16th Century CE</span>
+          </div>
+        </div>
+        <div class="monument-details">
+          <div class="monument-dossier-grid">
+            <div class="dossier-row">
+              <span class="dossier-label">Era & Domain</span>
+              <p class="dossier-text">1524–1564 CE • Queen Regent of the Gondwana Kingdom</p>
+            </div>
+            <div class="dossier-row">
+              <span class="dossier-label">Historical Impact</span>
+              <p class="dossier-text">Administered the prosperous Gond kingdom with immense public works (reservoirs, temples) and heroically led her armies in combat against Mughal invasion at Narrai gorge.</p>
+            </div>
+            <div class="dossier-row">
+              <span class="dossier-label">Distinguishing Mark</span>
+              <p class="dossier-text">Chose martyrdom on the battlefield over surrender, immortalized as a peerless guardian of tribal sovereignty.</p>
+            </div>
+            <div class="dossier-row">
+              <span class="dossier-label">Personality Markers</span>
+              <div class="tag-container">
+                <span class="tag-pill">Gondwana Sovereignty</span>
+                <span class="tag-pill">Battlefield Martyrdom</span>
+                <span class="tag-pill">Benevolent Administration</span>
+                <span class="tag-pill">Madhya Pradesh Heritage</span>
+              </div>
+            </div>
+          </div>
+          <div class="monument-footer">
+            <span class="coords-text">Epicenter: Jabalpur, MP (23.1815° N, 79.9864° E)</span>
+            <a href="https://maps.google.com/?q=Jabalpur+Madhya+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+              📍 View Historical Epicenter
+            </a>
+          </div>
+        </div>
+      </article>
+
+    <!-- 20: Rabindranath Tagore (Added Item 20) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/personalities/tagore.jpg');">
+        <span class="monument-badge-top">Nobel Laureate • Polymath & Poet</span>
+        <div class="monument-bottom-title">
+          <h3>Rabindranath Tagore</h3>
+          <span>Shantiniketan, West Bengal • Modern Renaissance Icon</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Era & Domain</span>
+            <p class="dossier-text">1861–1941 CE • Poet, Novelist, Composer, Painter, and Nobel Laureate</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Historical Impact</span>
+            <p class="dossier-text">Awarded the Nobel Prize in Literature in 1913. Composed the national anthems of India and Bangladesh, founded Visva-Bharati University at Shantiniketan, and revolutionized Bengali literature and art.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">A universal humanist bridging Eastern spirituality with Western progressive thought through immortal verses (Gitanjali).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Personality Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Nobel Laureate 1913</span>
+              <span class="tag-pill">Visva-Bharati University</span>
+              <span class="tag-pill">National Anthem Composer</span>
+              <span class="tag-pill">Shantiniketan Visionary</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Shantiniketan (23.6791° N, 87.6835° E)</span>
+          <a href="https://maps.google.com/?q=Shantiniketan+West+Bengal" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Historical Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

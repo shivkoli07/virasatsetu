@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rituals & Customs | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/rituals/hero-rituals.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Ritual Classifications Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .style-badge {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 04.01 • Sacred Rites & Social Continuity</div>
+      <h1 class="hero-title">Rituals & Customs</h1>
+      <p class="hero-tagline">"Where riverbank evening aratis, living oracle possession, solar gratitude, and ancestral rites bind communities across generations."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Philosophy of Samskaras and Living Rites</h2>
+        <p class="doctrine-subtitle">Rituals and customs in India provide structured rhythm to human life, transitioning individuals through biological milestones, honoring natural elements, and preserving cosmic equilibrium.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What are Rituals & Customs -->
+        <div class="concept-block">
+          <h3 class="concept-title">🔥 What are Rituals & Customs?</h3>
+          <p class="concept-text">
+            Rituals are codified symbolic actions designed to connect the individual with divine cosmic forces, natural elements, and ancestral lineages. From daily twilight riverbank offerings to community harvest worship and life-cycle samskaras, customs give visible form to abstract spiritual philosophies.
+          </p>
+        </div>
+
+        <!-- Social Continuity & Rites of Passage -->
+        <div class="concept-block">
+          <h3 class="concept-title">🌱 Rites of Passage & Social Continuity</h3>
+          <p class="concept-text">
+            Governed historically by the <em>Shodasha Samskaras</em> (sixteen life-stage sacraments), rituals accompany human existence from conception and birth through education, marriage, and final memorial rites. They foster unbreakable psychological and social solidarity within communities.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Ritual Classifications Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Ritual Classifications</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Daily Nitya Pujas</h4>
+            <span class="style-badge">Twilight & Rivers</span>
+            <p class="style-text">Regular daily observances honoring fire, sun, and flowing sacred rivers (e.g., Ganga Sandhya Aratis).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Living Oracle Worship</h4>
+            <span class="style-badge">Trance & Possession</span>
+            <p class="style-text">Ecstatic ritual performances where human performers embody divine spirits and ancestral deities (e.g., Theyyam).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Solar & Ancestral Rites</h4>
+            <span class="style-badge">Cosmic Gratitude</span>
+            <p class="style-text">Rigorous solar austerities and annual oblations honoring nourishing natural forces and departed forebears (e.g., Chhath Puja, Pind Daan).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Rituals & Customs) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Rituals & Customs of India</h2>
+      <p>Pan-Indian case studies documenting riverbank twilight aratis, living oracles, solar gratitude rites, and ancestral sacraments.</p>
+    </div>
+
+    <!-- 01: Varanasi & Haridwar Sandhya Aratis -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/sandhya-arati.jpg');">
+        <span class="monument-badge-top">Ganga Ghats • Twilight Fire Worship</span>
+        <div class="monument-bottom-title">
+          <h3>Ganga Sandhya Arati</h3>
+          <span>Varanasi & Haridwar, Uttar Pradesh • Daily Twilight Ritual</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Dashashwamedh Ghat (Varanasi) and Har Ki Pauri (Haridwar) along the holy River Ganga</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Conducted daily at dusk by young priests (Pandits) facing the river, wielding multi-tiered heavy brass lamps (Agni aratis), conch shells, incense burners, and camphor flames in synchronized choreography</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">A mesmerizing sensory spectacle attended by thousands of pilgrims floating flickering leaf-boats bearing marigold flowers down the river</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Brass Multi-Tiered Lamps</span>
+              <span class="tag-pill">Ganga Ghat Twilight</span>
+              <span class="tag-pill">Synchronized Priestly Chants</span>
+              <span class="tag-pill">Floating Floral Diyas</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Dashashwamedh Ghat, Varanasi (25.3094° N, 83.0104° E)</span>
+          <a href="https://maps.google.com/?q=Dashashwamedh+Ghat+Varanasi" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Theyyam Living Worship Rituals (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/theyyam.jpg');">
+        <span class="monument-badge-top">Malabar Coast • Living Deity Possession</span>
+        <div class="monument-bottom-title">
+          <h3>Theyyam Living Worship Rituals</h3>
+          <span>Kannur & Kasaragod, Kerala • Ancestral Oracle Trance</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Kavus (sacred groves) and temples across North Malabar, Kerala</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">An ancient ritual art where performers from marginalized communities undergo intense fasting and intricate face-painting to embody divine spirits, heroes, and ancestral deities</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Towering bamboo headgear standing up to 30 feet tall, accompanied by frenetic drumming and fiery trance possession</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Divine Trance Possession</span>
+              <span class="tag-pill">30-Foot Bamboo Headdress</span>
+              <span class="tag-pill">Sacred Grove Kavu</span>
+              <span class="tag-pill">Malabar Tradition</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Parassinikkadavu Temple, Kannur (11.9772° N, 75.3855° E)</span>
+          <a href="https://maps.google.com/?q=Parassinikkadavu+Temple+Kannur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Chhath Surya Arghya (Bihar & Jharkhand) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/chhath-puja.jpg');">
+        <span class="monument-badge-top">Gangetic Plains • Rigorous Solar Austerity</span>
+        <div class="monument-bottom-title">
+          <h3>Chhath Surya Arghya</h3>
+          <span>Patna & Ranchi, Bihar/Jharkhand • Sun God Worship</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Riverbanks, ponds, and water reservoirs across Bihar, Jharkhand, and Eastern UP</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">A rigorous 4-day festival dedicated to Surya (Sun God) and Chhathi Maiya. Devotees observe strict fasting without water for 36 hours, standing knee-deep in river water at sunset and sunrise to offer milk and fruit arghya</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Uniquely honors both the setting and rising sun, emphasizing ecological gratitude toward sustaining solar energy</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Knee-Deep River Worship</span>
+              <span class="tag-pill">36-Hour Nirjala Fast</span>
+              <span class="tag-pill">Setting & Rising Sun Arghya</span>
+              <span class="tag-pill">Thekua Prasad Offerings</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Patna Ghats, Bihar (25.5941° N, 85.1376° E)</span>
+          <a href="https://maps.google.com/?q=Patna+Ganga+Ghats+Chhath" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Toda Tribal Funeral Rites (Nilgiri Hills) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/toda-funeral.jpg');">
+        <span class="monument-badge-top">Nilgiri Hills • Pastoral Buffalo Funeral Rites</span>
+        <div class="monument-bottom-title">
+          <h3>Toda Tribal Funeral Rituals</h3>
+          <span>Nilgiri Biosphere, Tamil Nadu • Ancestral Transition</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Toda pastoral hamlets (Munds) across the Nilgiri plateau, Tamil Nadu</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Comprises two distinct funeral ceremonies (Green Funeral for immediate family grief and Dry Funeral months later). Features ritual buffalo sacrifices and chanting to escort the departed soul to the afterlife realm (Amnoor)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Deeply sacred pastoral rituals demonstrating profound spiritual unity between the tribe, their sacred dairy buffaloes, and the Nilgiri hills</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Green & Dry Funerals</span>
+              <span class="tag-pill">Sacred Buffalo Rites</span>
+              <span class="tag-pill">Amnoor Afterlife Journey</span>
+              <span class="tag-pill">Nilgiri Pastoral Custom</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ooty, Nilgiris (11.4102° N, 76.6950° E)</span>
+          <a href="https://maps.google.com/?q=Ooty+Nilgiri+Hills" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Shodasha Samskaras (Life-Stage Rites) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/samskaras.jpg');">
+        <span class="monument-badge-top">Vedic Tradition • 16 Life-Stage Sacraments</span>
+        <div class="monument-bottom-title">
+          <h3>Shodasha Samskaras</h3>
+          <span>Pan-India • Human Life Milestone Rites</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Family homes and traditional temples across India</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Sixteen sacred sacraments purifying and guiding an individual from conception (Garbhadhana), childhood education (Upanayana), marriage (Vivaha), up to final cremation rites (Antyeshti)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Centers around consecrated fire rituals (Yajnas) and Sanskrit mantras invoking cosmic blessings for each transition</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">16 Life Milestones</span>
+              <span class="tag-pill">Upanayana Thread Ceremony</span>
+              <span class="tag-pill">Vivaha Wedding Fire</span>
+              <span class="tag-pill">Vedic Consecration</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Varanasi (25.3176° N, 82.9739° E)</span>
+          <a href="https://maps.google.com/?q=Varanasi+Temples" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Pind Daan Ancestral Rites (Gaya, Bihar) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/pind-daan.jpg');">
+        <span class="monument-badge-top">Falgu River • Ancestral Liberation Oblations</span>
+        <div class="monument-bottom-title">
+          <h3>Pind Daan Ancestral Rites</h3>
+          <span>Gaya, Bihar • Pitru Paksha Oblations</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Vishnupad Temple and Falgu River banks in Gaya, Bihar</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Performed during the fortnight of <em>Pitru Paksha</em>. Descendants offer balls of cooked rice, barley flour, and sesame seeds (Pind) to liberate departed ancestors from the cycle of rebirth</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Fulfills filial debt (Pitru Rin); believed to grant eternal salvation (Moksha) to forefathers at the sacred footprints of Lord Vishnu</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Pitru Paksha Fortnight</span>
+              <span class="tag-pill">Rice & Sesame Pind Balls</span>
+              <span class="tag-pill">Vishnupad Temple Gaya</span>
+              <span class="tag-pill">Ancestral Salvation</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Vishnupad Temple, Gaya (24.7891° N, 85.0002° E)</span>
+          <a href="https://maps.google.com/?q=Vishnupad+Temple+Gaya" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Thrissur Pooram Elephant Rituals -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/pooram-ritual.jpg');">
+        <span class="monument-badge-top">Kerala Temples • Divine Seva Processions</span>
+        <div class="monument-bottom-title">
+          <h3>Thrissur Pooram Deity Procession</h3>
+          <span>Thrissur, Kerala • Sacred Temple Utsava</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Vadakkunnathan Temple and surrounding city squares, Thrissur</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Ritual transport of temple deities mounted atop majestic caparisoned elephants accompanied by traditional drum ensembles (Idayka and Chenda)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Strict ritual protocols govern the positioning of elephants, lighting of ceremonial torches, and timing of traditional percussion suites</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Deity Elephant Seva</span>
+              <span class="tag-pill">Chenda Melam Drums</span>
+              <span class="tag-pill">Torchlit Procession</span>
+              <span class="tag-pill">Temple Utsava Protocol</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Vadakkunnathan Temple, Thrissur (10.5231° N, 76.2138° E)</span>
+          <a href="https://maps.google.com/?q=Vadakkunnathan+Temple+Thrissur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Naga Sadhus Shahi Snan (Kumbh Mela) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/naga-snan.jpg');">
+        <span class="monument-badge-top">Akharas • Ascetic Dawn Immersion</span>
+        <div class="monument-bottom-title">
+          <h3>Naga Sadhus Shahi Snan</h3>
+          <span>Prayagraj & Haridwar • Royal Ascetic Bath</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">River banks during Maha Kumbh Mela cycles</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Armed ascetic warrior monks (Naga Sadhus) belonging to ancient monastic Akharas lead the dawn royal bathing procession (Shahi Snan) into holy river waters amidst blowing conches and raised tridents</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Practitioners smear sacred ash (Bhasma) over their bodies, embodying total renunciation of worldly illusions</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Naga Akhara Monks</span>
+              <span class="tag-pill">Shahi Snan Dawn Bath</span>
+              <span class="tag-pill">Bhasma Sacred Ash</span>
+              <span class="tag-pill">Trident Procession</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Har Ki Pauri, Haridwar (29.9578° N, 78.1761° E)</span>
+          <a href="https://maps.google.com/?q=Har+Ki+Pauri+Haridwar" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Kutchi Wedding Customs (Gujarat) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/kutchi-wedding.jpg');">
+        <span class="monument-badge-top">Kutch Desert • Embroidered Community Nuptials</span>
+        <div class="monument-bottom-title">
+          <h3>Kutchi Community Wedding Customs</h3>
+          <span>Bhuj & Kutch, Gujarat • Desert Nuptial Rites</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Desert villages and pastoral settlements across Kutch, Gujarat</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Multi-day pastoral wedding customs featuring community folk songs, mirror-work bridal garments handcrafted by women over months, ritual earthen hearth worship, and collective folk dancing (Garba/Dandiya)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Showcases the resilient artistic soul of desert communities where textile embroidery is an integral component of marital blessing</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Mirror-Work Bridal Attire</span>
+              <span class="tag-pill">Desert Folk Songs</span>
+              <span class="tag-pill">Earthen Hearth Rituals</span>
+              <span class="tag-pill">Kutchi Pastoral Custom</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Bhuj, Kutch (23.2420° N, 69.6669° E)</span>
+          <a href="https://maps.google.com/?q=Bhuj+Kutch+Gujarat" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Sabarimala Mandala Pooja (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/rituals/sabarimala.jpg');">
+        <span class="monument-badge-top">Western Ghats • 41-Day Ascetic Pilgrimage</span>
+        <div class="monument-bottom-title">
+          <h3>Sabarimala Mandala Pooja</h3>
+          <span>Periyar Tiger Reserve, Kerala • Forest Pilgrimage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Location</span>
+            <p class="dossier-text">Sabarimala hill shrine nestled deep inside the Periyar Tiger Reserve, Kerala</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Execution</span>
+            <p class="dossier-text">Pilgrims (Swami) observe a strict 41-day ascetic penance involving vegetarianism, celibacy, black or blue robes, and carrying a sacred cloth bundle (Irumudi Kettu) containing ghee-filled coconuts on their heads</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Treking through rugged mountain forests barefoot to reach the hilltop shrine, embodying absolute spiritual equality where every pilgrim addresses others as "Swami"</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Ritual Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">41-Day Ascetic Vow</span>
+              <span class="tag-pill">Irumudi Kettu Bundle</span>
+              <span class="tag-pill">Barefoot Forest Trek</span>
+              <span class="tag-pill">Western Ghats Shrine</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Sabarimala Temple (9.4346° N, 77.0814° E)</span>
+          <a href="https://maps.google.com/?q=Sabarimala+Temple+Kerala" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Ritual Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

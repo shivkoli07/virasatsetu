@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Riti-Vandana: Sacred Memory Matrix | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+    }
+
+    .game-layout {
+      max-width: 820px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .game-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      text-align: center;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .game-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .game-desc {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* 4x4 Grid Board */
+    .matrix-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 580px;
+      margin: 0 auto;
+      perspective: 1000px;
+    }
+
+    .tile-card {
+      height: 105px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.45s cubic-bezier(0.2, 0.85, 0.4, 1.2);
+      cursor: pointer;
+    }
+
+    .tile-card.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .tile-card.matched {
+      transform: rotateY(180deg) scale(0.96);
+      pointer-events: none;
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0.6rem;
+      box-shadow: 0 4px 12px rgba(42, 21, 11, 0.12);
+      border: 1.5px solid var(--border-card);
+      user-select: none;
+    }
+
+    .card-back {
+      background: var(--royal-gradient);
+      color: #EEDBBE;
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .card-front {
+      background: #FFFFFF;
+      color: var(--primary-dark);
+      transform: rotateY(180deg);
+      border-color: var(--accent-gold);
+      text-align: center;
+    }
+
+    .tile-card.matched .card-front {
+      background: #FAF3E8;
+      border-color: #246B3E;
+    }
+
+    .tile-icon {
+      font-size: 1.6rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .tile-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      line-height: 1.2;
+    }
+
+    .status-bar {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-card);
+      font-weight: 600;
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-next {
+      background: #FAF0DF;
+      border: 1.5px solid var(--accent-gold);
+      color: var(--accent-brown);
+      border-radius: 20px;
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-next:hover {
+      background: #F1DDBE;
+      transform: translateY(-2px);
+    }
+
+    .win-box {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 1.4rem;
+      text-align: center;
+      margin-top: 1.4rem;
+    }
+
+    .unlocked-badge-box {
+      margin-top: 0.9rem;
+      padding: 0.8rem 1.2rem;
+      background: rgba(238, 219, 190, 0.4);
+      border: 1.5px dashed var(--accent-gold);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .unlocked-badge-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .unlocked-badge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: left;
+    }
+
+    .unlocked-badge-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .btn-submit {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 25px;
+      padding: 0.75rem 1.8rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      margin-top: 0.8rem;
+      transition: var(--transition);
+    }
+
+    .btn-submit:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 600px) {
+      .matrix-grid { gap: 0.6rem; }
+      .tile-card { height: 85px; }
+      .tile-icon { font-size: 1.2rem; }
+      .tile-label { font-size: 0.65rem; }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <main class="game-layout">
+    <div class="game-card">
+      <div class="game-tag" id="levelTag">Trial 07.01 • Sacred Memory Matrix</div>
+      <h1 class="game-title">Riti-Vandana</h1>
+      <p class="game-desc">
+        Flip the stone tablets to match related artisan tools, monuments, and living crafts. Earn <strong>+300 XP</strong> and unlock the <strong>Smriti Custodian</strong> honor.
+      </p>
+
+      <div class="matrix-grid" id="grid"></div>
+
+      <div class="status-bar">
+        <div>Turns: <strong id="turnCounter">0</strong></div>
+        <div>Pairs Matched: <strong id="matchCounter">0 / 8</strong></div>
+        <button class="btn-next" onclick="tryNextLevel()">Try Next One &rarr;</button>
+        <div>Award: <strong style="color: var(--accent-gold);">+300 XP</strong></div>
+      </div>
+
+      <div class="win-box" id="winCard">
+        <h2 style="font-family: 'Cinzel', serif; color: var(--accent-brown);">Heritage Resonated!</h2>
+        <p style="font-size: 0.92rem; color: var(--text-muted); margin-top: 0.3rem;" id="winDetails"></p>
+
+        <div class="unlocked-badge-box">
+          <span class="unlocked-badge-icon">🏺</span>
+          <div>
+            <div class="unlocked-badge-name">Smriti Custodian</div>
+            <div class="unlocked-badge-sub">Honor permanently recorded to PostgreSQL</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap;">
+          <button class="btn-submit" onclick="tryNextLevel()" style="margin-top:0;">Next Trial &rarr;</button>
+          <button class="btn-submit" onclick="window.location.href='profile.html'" style="margin-top:0; background:#FFF; color:var(--accent-brown); border:1.5px solid var(--border-card);">View in Scholar Dossier</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_QUIZ = 'http://localhost:8080/api/quiz/submit';
+    const userEmail = localStorage.getItem('virasatSetu_user_email');
+
+    // Navbar sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Profile';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // 5 Matrix Levels Dataset (Level 1 + 4 New Levels = 5 Levels Total)
+    const levelsData = [
+      {
+        tag: "Trial 07.01 • Architectural Wonders & Artisan Tools",
+        pairs: [
+          { pairId: 1, icon: "🛕", label: "Kailasa Cave" }, { pairId: 1, icon: "⛏️", label: "Basalt Chisel" },
+          { pairId: 2, icon: "🧵", label: "Gold Zari" }, { pairId: 2, icon: "🦚", label: "Paithani Motif" },
+          { pairId: 3, icon: "🎨", label: "Rice Paste" }, { pairId: 3, icon: "⭕", label: "Warli Circle" },
+          { pairId: 4, icon: "🔥", label: "Lost-Wax Mold" }, { pairId: 4, icon: "✨", label: "Chola Bronze" },
+          { pairId: 5, icon: "📜", label: "Brahmi Script" }, { pairId: 5, icon: "🦁", label: "Ashokan Edict" },
+          { pairId: 6, icon: "🎭", label: "Kathakali Mask" }, { pairId: 6, icon: "🥁", label: "Chenda Drum" },
+          { pairId: 7, icon: "☀️", label: "Konark Wheel" }, { pairId: 7, icon: "🐎", label: "Stone Chariot" },
+          { pairId: 8, icon: "🎶", label: "Tanpura Drone" }, { pairId: 8, icon: "🕉️", label: "Dhrupad Raga" }
+        ]
+      },
+      {
+        tag: "Trial 07.02 • Imperial Dynasties & Capital Seats",
+        pairs: [
+          { pairId: 1, icon: "🏛️", label: "Vijayanagara" }, { pairId: 1, icon: "🗿", label: "Hampi Chariot" },
+          { pairId: 2, icon: "👑", label: "Chola Dynasty" }, { pairId: 2, icon: "🌊", label: "Thanjavur Vimana" },
+          { pairId: 3, icon: "🛡️", label: "Maratha Empire" }, { pairId: 3, icon: "🏰", label: "Raigad Fort" },
+          { pairId: 4, icon: "🦅", label: "Mauryan Empire" }, { pairId: 4, icon: "📜", label: "Pataliputra" },
+          { pairId: 5, icon: "🐅", label: "Gupta Empire" }, { pairId: 5, icon: "🪙", label: "Classical Gold" },
+          { pairId: 6, icon: "🕌", label: "Mughal Empire" }, { pairId: 6, icon: "🤍", label: "Taj Mahal" },
+          { pairId: 7, icon: "⚔️", label: "Rajput Valor" }, { pairId: 7, icon: "🏜️", label: "Chittorgarh" },
+          { pairId: 8, icon: "🏹", label: "Kakatiya Dynasty" }, { pairId: 8, icon: "🚪", label: "Warangal Gateway" }
+        ]
+      },
+      {
+        tag: "Trial 07.03 • Classical Arts & Instruments",
+        pairs: [
+          { pairId: 1, icon: "💃", label: "Bharatanatyam" }, { pairId: 1, icon: "🔔", label: "Temple Bells" },
+          { pairId: 2, icon: "🕺", label: "Kathak Spin" }, { pairId: 2, icon: "🥻", label: "Ghungroo Anklet" },
+          { pairId: 3, icon: "🎻", label: "Carnatic Violin" }, { pairId: 3, icon: "☕", label: "Filter Coffee" },
+          { pairId: 4, icon: "🪘", label: "Hindustani Tabla" }, { pairId: 4, icon: "🌌", label: "Sitar Melody" },
+          { pairId: 5, icon: "🪈", label: "Bansuri Flute" }, { pairId: 5, icon: "🌿", label: "Yamuna Groves" },
+          { pairId: 6, icon: "🌾", label: "Bihu Dance" }, { pairId: 6, icon: "🥻", label: "Muga Silk" },
+          { pairId: 7, icon: "🌸", label: "Garba Raas" }, { pairId: 7, icon: "🪔", label: "Earthen Diya" },
+          { pairId: 8, icon: "🗡️", label: "Gatka Art" }, { pairId: 8, icon: "💙", label: "Nihang Turban" }
+        ]
+      },
+      {
+        tag: "Trial 07.04 • Sacred Rivers & Geography",
+        pairs: [
+          { pairId: 1, icon: "🌊", label: "Ganga Flow" }, { pairId: 1, icon: "🏔️", label: "Gangotri Glacier" },
+          { pairId: 2, icon: "💧", label: "Yamuna Stream" }, { pairId: 2, icon: "🛕", label: "Mathura Ghats" },
+          { pairId: 3, icon: "🌊", label: "Godavari River" }, { pairId: 3, icon: "🔱", label: "Nashik Trimbak" },
+          { pairId: 4, icon: "🌊", label: "Kaveri Waters" }, { pairId: 4, icon: "🐘", label: "Talakaveri" },
+          { pairId: 5, icon: "⛰️", label: "Himalayas" }, { pairId: 5, icon: "🧘", label: "Kedarnath Peak" },
+          { pairId: 6, icon: "🌴", label: "Western Ghats" }, { pairId: 6, icon: "☕", label: "Nilgiri Hills" },
+          { pairId: 7, icon: "🏜️", label: "Thar Desert" }, { pairId: 7, icon: "🐪", label: "Jaisalmer Fort" },
+          { pairId: 8, icon: "🏝️", label: "Pamban Island" }, { pairId: 8, icon: "🌉", label: "Ram Setu Bridge" }
+        ]
+      },
+      {
+        tag: "Trial 07.05 • Sacred Textiles & Craft Hubs",
+        pairs: [
+          { pairId: 1, icon: "🥻", label: "Banarasi Silk" }, { pairId: 1, icon: "🕌", label: "Varanasi Ghats" },
+          { pairId: 2, icon: "🧣", label: "Pashmina Wool" }, { pairId: 2, icon: "🐐", label: "Changthang Goat" },
+          { pairId: 3, icon: "🧶", label: "Kanjeevaram" }, { pairId: 3, icon: "🏛️", label: "Temple Borders" },
+          { pairId: 4, icon: "🟥", label: "Madhubani Art" }, { pairId: 4, icon: "🖌️", label: "Bamboo Twig" },
+          { pairId: 5, icon: "🪵", label: "Channapatna" }, { pairId: 5, icon: "🧸", label: "Lacquer Toy" },
+          { pairId: 6, icon: "🧵", label: "Chikankari" }, { pairId: 6, icon: "🪡", label: "Lucknow White Work" },
+          { pairId: 7, icon: "🔵", label: "Blue Pottery" }, { pairId: 7, icon: "🏺", label: "Jaipur Glaze" },
+          { pairId: 8, icon: "🌿", label: "Kalamkari" }, { pairId: 8, icon: "🖊️", label: "Bamboo Pen" }
+        ]
+      }
+    ];
+
+    let currentLevelIdx = 0;
+    let flippedCards = [];
+    let matchedPairs = 0;
+    let turns = 0;
+    let lockBoard = false;
+
+    function initMatrix() {
+      const lvl = levelsData[currentLevelIdx];
+      document.getElementById('levelTag').textContent = lvl.tag;
+
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      matchedPairs = 0;
+      turns = 0;
+      flippedCards = [];
+      lockBoard = false;
+      document.getElementById('turnCounter').textContent = '0';
+      document.getElementById('matchCounter').textContent = `0 / ${lvl.pairs.length / 2}`;
+      document.getElementById('winCard').style.display = 'none';
+
+      const deck = [...lvl.pairs].sort(() => Math.random() - 0.5);
+
+      deck.forEach((item, index) => {
+        const tile = document.createElement('div');
+        tile.className = 'tile-card';
+        tile.dataset.pairId = item.pairId;
+        tile.dataset.index = index;
+
+        tile.innerHTML = `
+          <div class="card-face card-back">ॐ</div>
+          <div class="card-face card-front">
+            <span class="tile-icon">${item.icon}</span>
+            <span class="tile-label">${item.label}</span>
+          </div>
+        `;
+
+        tile.onclick = () => flipTile(tile);
+        grid.appendChild(tile);
+      });
+    }
+
+    function tryNextLevel() {
+      currentLevelIdx = (currentLevelIdx + 1) % levelsData.length;
+      initMatrix();
+    }
+
+    function flipTile(tile) {
+      if (lockBoard || tile.classList.contains('flipped') || tile.classList.contains('matched')) return;
+
+      tile.classList.add('flipped');
+      flippedCards.push(tile);
+
+      if (flippedCards.length === 2) {
+        turns++;
+        document.getElementById('turnCounter').textContent = turns;
+        checkMatch();
+      }
+    }
+
+    function checkMatch() {
+      const [tile1, tile2] = flippedCards;
+      const isMatch = tile1.dataset.pairId === tile2.dataset.pairId;
+      const totalPairs = levelsData[currentLevelIdx].pairs.length / 2;
+
+      if (isMatch) {
+        tile1.classList.add('matched');
+        tile2.classList.add('matched');
+        matchedPairs++;
+        document.getElementById('matchCounter').textContent = `${matchedPairs} / ${totalPairs}`;
+        flippedCards = [];
+
+        if (matchedPairs === totalPairs) {
+          handleWin();
+        }
+      } else {
+        lockBoard = true;
+        setTimeout(() => {
+          tile1.classList.remove('flipped');
+          tile2.classList.remove('flipped');
+          flippedCards = [];
+          lockBoard = false;
+        }, 900);
+      }
+    }
+
+    async function handleWin() {
+      const winCard = document.getElementById('winCard');
+      winCard.style.display = 'block';
+
+      if (!userEmail) {
+        document.getElementById('winDetails').textContent = `All sacred pairs unlocked in ${turns} turns! Sign in to permanently save your +300 XP and badge.`;
+        return;
+      }
+
+      try {
+        const res = await fetch(API_QUIZ, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: userEmail,
+            title: `Riti-Vandana: ${levelsData[currentLevelIdx].tag}`,
+            category: "Sacred Memory & Artifacts",
+            scorePercent: 100,
+            xpEarned: 300,
+            badgeTitle: "Smriti Custodian",
+            badgeIcon: "🏺"
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('winDetails').innerHTML = 
+            `Superb recollection! All civilizational pairs resolved in <strong>${turns}</strong> turns. <strong>+300 XP</strong> recorded directly to PostgreSQL (Total: <strong>${data.totalXp} XP</strong>).`;
+        }
+      } catch (e) {
+        console.warn('Sync failed');
+      }
+    }
+
+    initMatrix();
+  </script>
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akshar-Manthan: Heritage Word Unscramble | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+    }
+
+    .game-layout {
+      max-width: 900px;
+      margin: 3.5rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .game-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2.8rem 2.4rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      text-align: center;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .game-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .clue-box {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid var(--border-card);
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.5rem auto;
+      max-width: 650px;
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+      line-height: 1.5;
+    }
+
+    .clue-title {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      color: var(--accent-brown);
+      margin-bottom: 0.3rem;
+    }
+
+    /* Word Slot Answer Boxes */
+    .answer-slot-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 2rem 0 1.5rem 0;
+      min-height: 58px;
+      flex-wrap: wrap;
+    }
+
+    .letter-slot {
+      width: 48px;
+      height: 54px;
+      border-bottom: 3px solid var(--accent-brown);
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px 8px 2px 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(42, 21, 11, 0.08);
+      transition: var(--transition);
+    }
+
+    .letter-slot:hover {
+      background: #FFF4E5;
+    }
+
+    /* Scrambled Available Letters */
+    .scrambled-letters-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .letter-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(42, 21, 11, 0.25);
+      transition: var(--transition);
+    }
+
+    .letter-btn:hover {
+      transform: translateY(-3px) scale(1.05);
+      background: var(--royal-gradient-hover);
+    }
+
+    .letter-btn.used {
+      opacity: 0.3;
+      pointer-events: none;
+      transform: scale(0.95);
+    }
+
+    .action-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-control {
+      border-radius: 25px;
+      padding: 0.7rem 1.4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      border: none;
+    }
+
+    .btn-clear {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      color: var(--accent-brown);
+    }
+
+    .btn-clear:hover {
+      background: #F8EFE0;
+    }
+
+    .btn-next {
+      background: #FAF0DF;
+      border: 1.5px solid var(--accent-gold);
+      color: var(--accent-brown);
+    }
+
+    .btn-next:hover {
+      background: #F1DDBE;
+      transform: translateY(-2px);
+    }
+
+    .btn-submit {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      box-shadow: 0 4px 14px rgba(42, 21, 11, 0.25);
+    }
+
+    .btn-submit:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    .result-alert {
+      display: none;
+      margin-top: 2rem;
+      padding: 1.2rem;
+      border-radius: 14px;
+      font-weight: 600;
+    }
+
+    .result-alert.success {
+      display: block;
+      background: rgba(36, 107, 62, 0.12);
+      border: 1.5px solid #246B3E;
+      color: #1A542F;
+    }
+
+    .result-alert.error {
+      display: block;
+      background: rgba(184, 50, 48, 0.12);
+      border: 1.5px solid #B83230;
+      color: #8C1F1D;
+    }
+
+    .unlocked-badge-box {
+      margin-top: 1.2rem;
+      padding: 0.85rem 1.2rem;
+      background: rgba(238, 219, 190, 0.4);
+      border: 1.5px dashed var(--accent-gold);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .unlocked-badge-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .unlocked-badge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: left;
+    }
+
+    .unlocked-badge-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <main class="game-layout">
+    <div class="game-card">
+      <div class="game-tag" id="levelIndicator">Trial 01 / 10 • Lexical Heritage Riddle</div>
+      <h1 class="game-title">Akshar-Manthan</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        Unscramble the sacred civilizational term using the historical clue. Tap letters to assemble. Earn <strong>+150 XP</strong> and unlock the <strong>Vidvan Grammarian</strong> honor.
+      </p>
+
+      <div class="clue-box">
+        <div class="clue-title" id="puzzleCategory">Textiles & Weaving</div>
+        <div id="puzzleClue">Royal handloom silk saree from Maharashtra characterized by intricate gold and silver zari peacocks on the pallu.</div>
+      </div>
+
+      <!-- Current Assembled Answer -->
+      <div class="answer-slot-container" id="answerSlots"></div>
+
+      <!-- Available Scrambled Letters -->
+      <div class="scrambled-letters-container" id="letterPool"></div>
+
+      <div class="action-row">
+        <button class="btn-control btn-clear" onclick="clearAnswer()">Clear Word</button>
+        <button class="btn-control btn-next" onclick="tryNextOne()">Try Next One &rarr;</button>
+        <button class="btn-control btn-submit" onclick="submitWord()">Verify Answer</button>
+      </div>
+
+      <div class="result-alert" id="resultNotice"></div>
+    </div>
+  </main>
+
+  <script>
+    const API_QUIZ = 'http://localhost:8080/api/quiz/submit';
+    const userEmail = localStorage.getItem('virasatSetu_user_email');
+
+    // Navbar sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Profile';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // 10 Heritage Puzzles Dataset
+    const puzzles = [
+      {
+        word: "PAITHANI",
+        category: "Textiles & Weaving • Maharashtra",
+        clue: "Royal handloom silk saree from Maharashtra characterized by intricate gold and silver zari peacocks on the pallu."
+      },
+      {
+        word: "NAGARA",
+        category: "Monuments & Architecture • North India",
+        clue: "The northern school of sacred Hindu temple architecture featuring curvilinear spires crowned with an Amalaka."
+      },
+      {
+        word: "NATARAJA",
+        category: "Metallurgy & Bronze • Chola Dynasty",
+        clue: "The cosmic dance posture of Shiva immortalized in lost-wax bronze sculptures during the Imperial Chola era."
+      },
+      {
+        word: "KANCHIPURAM",
+        category: "Textiles & Weaving • Tamil Nadu",
+        clue: "Renowned temple town silk sarees woven with pure mulberry silk and heavy zari gold brocade borders."
+      },
+      {
+        word: "KATHAKALI",
+        category: "Classical Arts & Dance • Kerala",
+        clue: "Classical dance-drama from Kerala known for elaborate colorful facial makeup, vibrant costumes, and expressive eye gestures."
+      },
+      {
+        word: "TANJORE",
+        category: "Classical Fine Arts • Tamil Nadu",
+        clue: "Traditional South Indian painting style distinguished by rich gold leaf embellishments and semi-precious stone inlays."
+      },
+      {
+        word: "MADHUBANI",
+        category: "Folk Art & Painting • Mithila",
+        clue: "Traditional folk art form practiced in the Mithila region featuring geometric patterns and natural pigments created using twigs and fingers."
+      },
+      {
+        word: "PASHMINA",
+        category: "Fine Handloom Crafts • Kashmir",
+        clue: "Luxurious fine cashmere wool handcrafted in the Himalayan valleys from the undercoat of changthangi goats."
+      },
+      {
+        word: "BHARATNATYAM",
+        category: "Classical Arts & Dance • Tamil Nadu",
+        clue: "Ancient classical dance tradition originating from the temples of Tamil Nadu expressing spiritual themes of Shaivism and Vaishnavism."
+      },
+      {
+        word: "BANDHANI",
+        category: "Textile Craft • Gujarat & Rajasthan",
+        clue: "Tie-dye textile craft practiced mainly in Gujarat and Rajasthan created by plucking cloth with fingernails into thousands of tiny bindings."
+      }
+    ];
+
+    let currentIdx = 0;
+    let selectedWord = "";
+    let scrambled = [];
+    let assembled = [];
+
+    function initPuzzle(index) {
+      currentIdx = index;
+      selectedWord = puzzles[index].word;
+      document.getElementById('levelIndicator').textContent = `Trial 0${index + 1} / 10 • Lexical Heritage Riddle`;
+      document.getElementById('puzzleCategory').textContent = puzzles[index].category;
+      document.getElementById('puzzleClue').textContent = puzzles[index].clue;
+      document.getElementById('resultNotice').className = 'result-alert';
+      document.getElementById('resultNotice').style.display = 'none';
+
+      // Scramble letters
+      assembled = [];
+      scrambled = selectedWord.split('').sort(() => Math.random() - 0.5);
+
+      renderSlots();
+      renderPool();
+    }
+
+    function renderSlots() {
+      const slotBox = document.getElementById('answerSlots');
+      slotBox.innerHTML = '';
+
+      for (let i = 0; i < selectedWord.length; i++) {
+        const slot = document.createElement('div');
+        slot.className = 'letter-slot';
+        slot.textContent = assembled[i] ? assembled[i].char : '';
+        slot.onclick = () => removeLetter(i);
+        slotBox.appendChild(slot);
+      }
+    }
+
+    function renderPool() {
+      const pool = document.getElementById('letterPool');
+      pool.innerHTML = '';
+
+      scrambled.forEach((char, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'letter-btn';
+        btn.textContent = char;
+        btn.id = `char-btn-${idx}`;
+
+        const isUsed = assembled.some(item => item.poolIdx === idx);
+        if (isUsed) btn.classList.add('used');
+
+        btn.onclick = () => pickLetter(char, idx);
+        pool.appendChild(btn);
+      });
+    }
+
+    function pickLetter(char, poolIdx) {
+      if (assembled.length < selectedWord.length) {
+        assembled.push({ char, poolIdx });
+        renderSlots();
+        renderPool();
+      }
+    }
+
+    function removeLetter(slotIdx) {
+      if (assembled[slotIdx]) {
+        assembled.splice(slotIdx, 1);
+        renderSlots();
+        renderPool();
+      }
+    }
+
+    function clearAnswer() {
+      assembled = [];
+      renderSlots();
+      renderPool();
+    }
+
+    function tryNextOne() {
+      const nextIndex = (currentIdx + 1) % puzzles.length;
+      initPuzzle(nextIndex);
+    }
+
+    async function submitWord() {
+      const currentAttempt = assembled.map(a => a.char).join('');
+      const notice = document.getElementById('resultNotice');
+
+      if (currentAttempt.length !== selectedWord.length) {
+        notice.textContent = "Please fill in all letters before verifying.";
+        notice.className = "result-alert error";
+        return;
+      }
+
+      if (currentAttempt === selectedWord) {
+        const isLast = currentIdx + 1 === puzzles.length;
+
+        notice.innerHTML = `Correct! You deciphered <strong>${selectedWord}</strong>. +150 XP recorded to database!`;
+        notice.className = "result-alert success";
+
+        // Record to PostgreSQL via Spring Boot
+        if (userEmail) {
+          try {
+            await fetch(API_QUIZ, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: userEmail,
+                title: `Akshar-Manthan: ${selectedWord}`,
+                category: "Heritage Anagrams",
+                scorePercent: 100,
+                xpEarned: 150,
+                badgeTitle: "Vidvan Grammarian",
+                badgeIcon: "📜"
+              })
+            });
+          } catch (e) {
+            console.warn('XP synchronization issue');
+          }
+        }
+
+        setTimeout(() => {
+          if (!isLast) {
+            initPuzzle(currentIdx + 1);
+          } else {
+            notice.innerHTML = `
+              <div>Glorious! You have deciphered all 10 civilizational riddles for this trial!</div>
+              <div class="unlocked-badge-box">
+                <span class="unlocked-badge-icon">📜</span>
+                <div>
+                  <div class="unlocked-badge-name">Vidvan Grammarian</div>
+                  <div class="unlocked-badge-sub">Honor permanently recorded to PostgreSQL</div>
+                </div>
+              </div>
+              <div style="margin-top: 1rem;">
+                <button class="btn-control btn-submit" onclick="window.location.href='profile.html'">View in Scholar Dossier</button>
+              </div>
+            `;
+          }
+        }, 1800);
+      } else {
+        notice.textContent = "Not quite! Check the clue and try re-arranging the letters.";
+        notice.className = "result-alert error";
+      }
+    }
+
+    // Start initial puzzle
+    initPuzzle(0);
+  </script>
+</body>
+</html>

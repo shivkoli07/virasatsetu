@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Virtual Heritage Tours | 360° Walkthroughs | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--accent-brown); }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    /* Selector Bar */
+    .tour-selector-bar {
+      max-width: 1440px;
+      margin: 1.5rem auto 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+    }
+
+    .tour-selector-bar::-webkit-scrollbar { height: 5px; }
+    .tour-selector-bar::-webkit-scrollbar-thumb {
+      background: var(--border-card);
+      border-radius: 4px;
+    }
+
+    .tour-chip {
+      background: rgba(255, 255, 255, 0.75);
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.45rem 1.1rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .tour-chip:hover, .tour-chip.active {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: var(--accent-brown);
+      transform: translateY(-2px);
+    }
+
+    /* Main Tour Layout */
+    .tour-layout {
+      max-width: 1440px;
+      margin: 1rem auto 4rem auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 2rem;
+      align-items: start;
+    }
+
+    .viewer-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 1.5rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .viewer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .frame-viewport {
+      width: 100%;
+      height: 620px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 2px solid var(--border-card);
+      position: relative;
+      background: #1B0F08;
+    }
+
+    .frame-viewport iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .viewer-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding: 0 0.5rem;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .viewer-hint {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .control-buttons-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .action-btn-pill {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.4rem 0.95rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition);
+    }
+
+    .action-btn-pill:hover {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: transparent;
+    }
+
+    /* Right Dossier Card */
+    .dossier-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+      min-height: 680px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .dossier-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .dossier-crest {
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: var(--accent-brown);
+      text-transform: uppercase;
+    }
+
+    .dossier-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.55rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin: 0.3rem 0;
+      line-height: 1.3;
+    }
+
+    .meta-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .meta-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.22rem 0.65rem;
+      border-radius: 12px;
+      background: #FAF0DF;
+      border: 1px solid var(--border-card);
+      color: var(--accent-brown);
+    }
+
+    .dossier-preview-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-card);
+      margin-bottom: 0.8rem;
+      background: #1B0F08;
+    }
+
+    .dossier-desc {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+      flex: 1;
+    }
+
+    .highlight-box {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border-card);
+      border-left: 3.5px solid var(--accent-gold);
+      border-radius: 0 10px 10px 0;
+      padding: 0.6rem 0.85rem;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .dossier-footer {
+      display: flex;
+      gap: 0.6rem;
+      padding-top: 0.8rem;
+      border-top: 1.5px solid var(--border-card);
+    }
+
+    .btn-action {
+      flex: 1;
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      text-decoration: none;
+      padding: 0.7rem;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-align: center;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-action:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 1040px) {
+      .tour-layout { grid-template-columns: 1fr; }
+      .frame-viewport { height: 440px; }
+      .dossier-card { min-height: auto; }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home Archive</a></li>
+      <li><a href="living-heritage-map.html">Heritage Map</a></li>
+      <li><a href="games.html">Gaming Pavilion</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <!-- Tour Selector Bar -->
+  <div class="tour-selector-bar" id="tourSelector">
+    <button class="tour-chip active" data-id="kailasa">🛕 Kailasa Temple (Cave 16, Ellora)</button>
+    <button class="tour-chip" data-id="brihadisvara">🏛️ Brihadisvara Temple (Thanjavur)</button>
+    <button class="tour-chip" data-id="konark">☸️ Konark Sun Temple (Puri)</button>
+    <button class="tour-chip" data-id="hampi">🐎 Hampi Stone Chariot (Vitthala)</button>
+    <button class="tour-chip" data-id="ajanta">🎨 Ajanta Caves (Cave 1 Murals)</button>
+    <button class="tour-chip" data-id="ranikivav">💧 Rani ki Vav (Patan Stepwell)</button>
+  </div>
+
+  <main class="tour-layout">
+
+    <!-- Left 360° Interactive Viewport -->
+    <section class="viewer-card">
+      <div class="frame-viewport" id="viewportBox">
+        <iframe id="tourIframe" src="" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+
+      <div class="viewer-controls-bar">
+        <div class="viewer-hint">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          Interactive Street View: Drag inside the frame to rotate 360°, scroll to zoom in/out
+        </div>
+
+        <div class="control-buttons-group">
+          <button class="action-btn-pill" onclick="toggleFullscreen()">
+            <span>⛶ Fullscreen</span>
+          </button>
+          <button class="action-btn-pill" onclick="reloadFrame()">
+            <span>🔄 Reload Tour</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Archaeological Dossier -->
+    <aside class="dossier-card">
+      <div>
+        <div class="dossier-crest">Immersive Archaeological Dossier</div>
+        <h2 class="dossier-title" id="dossierTitle">Kailasa Rock-Cut Temple</h2>
+
+        <div class="meta-pills-row" id="dossierPills">
+          <span class="meta-pill" id="pillState">Ellora, Maharashtra</span>
+          <span class="meta-pill" id="pillEra">Rashtrakuta Dynasty • 8th C.</span>
+          <span class="meta-pill" id="pillType">Monolithic Basalt</span>
+        </div>
+
+        <img src="assets/games/kailash.jpg" alt="Heritage Site Preview" class="dossier-preview-img" id="dossierImg" />
+
+        <p class="dossier-desc" id="dossierDesc">
+          Carved top-down from a single volcanic basalt cliff, removing over 200,000 tonnes of rock without scaffolding or mortar seams. Commissioned under Rashtrakuta King Krishna I, the monument features a multi-tiered Dravidian vimana spire and monolithic life-sized elephants.
+        </p>
+
+        <div class="highlight-box" id="dossierHighlight">
+          <strong>Architectural Feat:</strong> Sculptors worked simultaneously from the summit downwards, following strict proportions recorded in ancient <em>Vastu Shastra</em> treaties.
+        </div>
+      </div>
+
+      <div class="dossier-footer">
+        <a href="living-heritage-map.html" class="btn-action">Inspect on Heritage Map</a>
+        <a href="games.html" class="btn-action" style="background:#FFF; color:var(--accent-brown); border:1.5px solid var(--border-card);">Play Site Puzzle</a>
+      </div>
+    </aside>
+
+  </main>
+
+  <script>
+    // Header Auth Sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Scholar';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // Exact Street View 360° Photospheres for Indian Monuments
+    const tourData = {
+      kailasa: {
+        title: "Kailasa Temple (Cave 16)",
+        state: "Ellora, Maharashtra",
+        era: "Rashtrakuta Dynasty • c. 760 CE",
+        type: "Monolithic Basalt Excavation",
+        img: "assets/games/kailash.jpg",
+        desc: "Cave 16 is the pinnacle of top-down rock-cut architecture. An entire multi-storeyed sanctum, nandi mandapa, assembly halls, and courtyards were carved from living mountain stone without structural joints.",
+        highlight: "Monolithic Continuity: Masons removed 200,000+ tonnes of solid rock, carving pillars, galleries, and life-size elephants directly out of the cliff.",
+        embedUrl: "https://www.google.com/maps/embed?pb=!4v1700000000000!6m8!1m7!1sCAoSLEFGMVFpcE5pNDJ1cUZtZkE3SXV6TDFuYmJjX3M0aFZzckw1eEZpXzZ3T01B!2m2!1d20.023812!2d75.179124!3f28.5!4f10.2!5f0.7820865974627469"
+      },
+      brihadisvara: {
+        title: "Brihadisvara Temple",
+        state: "Thanjavur, Tamil Nadu",
+        era: "Imperial Chola Dynasty • 1010 CE",
+        type: "Granite Interlocking Masonry",
+        img: "assets/slides/slide7.jpg",
+        desc: "Built by Emperor Rajaraja Chola I, featuring a 66-meter high granite vimana crowned with an 80-tonne monolithic stone dome raised via an inclined ramp.",
+        highlight: "UNESCO World Heritage: Epitomizes the highest structural achievement of Dravidian temple mathematics and acoustics.",
+        embedUrl: "https://www.google.com/maps/embed?pb=!4v1700000000001!6m8!1m7!1sCAoSLEFGMVFpcE1sOGxad0dldWZfN0RkZ2dUbFF1b3B6X2pYQ1BvcFRfQ19nSG1T!2m2!1d10.782802!2d79.131835!3f140.2!4f15.8!5f0.7820865974627469"
+      },
+      konark: {
+        title: "Konark Sun Chariot Temple",
+        state: "Puri Coast, Odisha",
+        era: "Eastern Ganga Dynasty • 1250 CE",
+        type: "Chlorite & Khondalite Stone",
+        img: "assets/games/chakra.jpg",
+        desc: "Conceived as a grand 24-wheeled chariot dedicated to Surya Dev. The 24 stone wheels function as astronomical sundials tracking solar time with precision.",
+        highlight: "Astronomical Engineering: Each wheel spoke corresponds to planetary hours, casting shadows accurate to minutes.",
+        embedUrl: "https://www.google.com/maps/embed?pb=!4v1700000000002!6m8!1m7!1sCAoSLEFGMVFpcFBocE8wN2d0SG5fZWc0ZlZxbW1fZVl3bTVsOGtBcjA1SGlfa25X!2m2!1d19.8876!2d86.0945!3f210.5!4f12.0!5f0.7820865974627469"
+      },
+      hampi: {
+        title: "Hampi Stone Chariot (Vitthala)",
+        state: "Vijayanagara, Karnataka",
+        era: "Vijayanagara Empire • 16th C.",
+        type: "Carved Granite Monoliths",
+        img: "assets/slides/slide1.jpg",
+        desc: "A shrine dedicated to Garuda situated inside the Vitthala Temple complex, with modular stone wheels that originally rotated on their granite axles.",
+        highlight: "Musical Pillars: Surrounding Ranga Mandapa pillars resonate with microtonal notes (Sa-Re-Ga-Ma) when struck.",
+        embedUrl: "https://www.google.com/maps/embed?pb=!4v1700000000003!6m8!1m7!1sCAoSLEFGMVFpcE1PZGNrOGkzaUVvTUtKOW1JcEx5aE5sS3NlUUp3aVJvX055OHZp!2m2!1d15.335012!2d76.460012!3f320.0!4f5.0!5f0.7820865974627469"
+      },
+      ajanta: {
+        title: "Ajanta Caves (Cave 1 Murals)",
+        state: "Aurangabad, Maharashtra",
+        era: "Vakataka Dynasty • 5th C. CE",
+        type: "Rock-Cut Tempera Frescoes",
+        img: "assets/games/riti.jpg",
+        desc: "A horseshoe gorge housing masterpieces of Buddhist religious art and tempera wall paintings, notably the Bodhisattva Padmapani holding a blue lotus.",
+        highlight: "Organic Pigment Longevity: Colored with ground lapis lazuli, yellow ochre, and green glauconite, preserving luster for 1,500 years.",
+        embedUrl: "https://www.google.com/maps/embed?pb=!4v1700000000004!6m8!1m7!1sCAoSLEFGMVFpcE11enVfX2tGOGN4OHc4eHpzMGxfVGR0Y090dG9vQnJ3Q0c5bVlC!2m2!1d20.5519!2d75.7033!3f45.0!4f0.0!5f0.7820865974627469"
+      },
+      ranikivav: {
+        title: "Rani ki Vav (Queen's Stepwell)",
+        state: "Patan, Gujarat",
+        era: "Solanki Dynasty • 1063 CE",
+        type: "Subterranean Inverted Temple",
+        img: "assets/slides/slide4.jpg",
+        desc: "Designed as an inverted temple honoring water sanctity across seven terraced subterranean storeys, containing over 500 principal sculptures.",
+        highlight: "Hydrological Sanctity: Subterranean pavilions engineered to honor groundwater, featuring Sheshashayi Vishnu sculptures.",
+        embedUrl: "https://www.google.com/maps/embed?pb=!4v1700000000005!6m8!1m7!1sCAoSLEFGMVFpcE1KTE9RMXpTck13UWZlNWV0MW1tZ2F6Smt5NV9XcnJ2Q0p3T3F5!2m2!1d23.8589!2d72.1018!3f180.0!4f-20.0!5f0.7820865974627469"
+      }
+    };
+
+    let activeTourId = 'kailasa';
+
+    function setTour(tourId) {
+      activeTourId = tourId;
+      const data = tourData[tourId];
+      if (!data) return;
+
+      document.getElementById('dossierTitle').textContent = data.title;
+      document.getElementById('pillState').textContent = data.state;
+      document.getElementById('pillEra').textContent = data.era;
+      document.getElementById('pillType').textContent = data.type;
+      document.getElementById('dossierDesc').textContent = data.desc;
+      document.getElementById('dossierHighlight').innerHTML = `<strong>Architectural Feat:</strong> ${data.highlight}`;
+      document.getElementById('dossierImg').src = data.img;
+
+      // Update iframe source
+      document.getElementById('tourIframe').src = data.embedUrl;
+    }
+
+    function toggleFullscreen() {
+      const box = document.getElementById('viewportBox');
+      if (!document.fullscreenElement) {
+        box.requestFullscreen().catch(err => alert("Fullscreen error: " + err.message));
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    function reloadFrame() {
+      const frame = document.getElementById('tourIframe');
+      frame.src = frame.src;
+    }
+
+    // Attach click events to chips
+    document.querySelectorAll('.tour-chip').forEach(chip => {
+      chip.addEventListener('click', function () {
+        document.querySelectorAll('.tour-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+        setTour(this.dataset.id);
+      });
+    });
+
+    // Initialize with Kailasa Temple
+    setTour('kailasa');
+  </script>
+</body>
+</html>

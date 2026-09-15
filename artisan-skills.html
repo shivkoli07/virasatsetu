@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traditional Artisan Skills | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/skills/hero-skills.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Material Domains Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .style-badge {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 02.03 • Hereditary Guild Craftsmanship</div>
+      <h1 class="hero-title">Traditional Artisan Skills</h1>
+      <p class="hero-tagline">"Where lost-wax bronze casting, silver damascening, wood carving, and terracotta shaping transmit tactile mastery."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Parampara of Hereditary Artisan Guilds</h2>
+        <p class="doctrine-subtitle">Traditional artisan skills in India represent tactile intelligence transmitted across generations through physical apprenticeship. Guided by treatises like the <em>Shilpa Shastra</em>, master craftspeople transform raw earth, bronze, wood, and silver into immortalized functional and spiritual objects.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What are Artisan Skills -->
+        <div class="concept-block">
+          <h3 class="concept-title">🔨 What are Traditional Artisan Skills?</h3>
+          <p class="concept-text">
+            Artisan skills are specialized manual and metallurgical technologies practiced by hereditary guilds (such as the Panchaloha bronzesmiths or Bidri inlay artisans). These techniques require profound empirical knowledge of fire temperatures, alloy ratios, organic binders, and carving geometry without modern industrial machinery.
+          </p>
+        </div>
+
+        <!-- Tacit Knowledge & Apprenticeship -->
+        <div class="concept-block">
+          <h3 class="concept-title">🤝 Tacit Knowledge & Apprenticeship</h3>
+          <p class="concept-text">
+            Unlike codified literary texts, artisan knowledge is overwhelmingly tacit—learned by observation, touch, and muscle memory in family workshops over decades. Protecting these endangered craft guilds is vital to safeguarding India's living material culture from extinction.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Material Domains Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Material Craft Classifications</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Metallurgy & Casting</h4>
+            <span class="style-badge">Bronze, Zinc & Brass</span>
+            <p class="style-text">Lost-wax cire-perdue casting, silver damascening into zinc-copper alloy, and hollow-box brass casting (e.g., Swamimalai Bronzes, Bidriware, Dhokra).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Wood & Toy Carving</h4>
+            <span class="style-badge">Timber & Softwood</span>
+            <p class="style-text">Intricate architectural relief carving and lathe-turned natural lacquer toy-making using Wrightia tinctoria wood (e.g., Saharanpur Carving, Channapatna Toys).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Terracotta & Ceramics</h4>
+            <span class="style-badge">Clay & Glazed Pottery</span>
+            <p class="style-text">Hand-modeled ritual plaques, unglazed votive horses, and turquoise-glazed Persian pottery fired in wood and gas kilns (e.g., Molela Plaques, Jaipur Blue Pottery).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Artisan Skills) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Traditional Artisan Skills of India</h2>
+      <p>Pan-Indian case studies documenting metallurgical alloys, carving techniques, guild traditions, and workshop epicenters.</p>
+    </div>
+
+    <!-- 01: Swamimalai Bronze Murties (Chola Legacy) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/swamimalai-bronze.jpg');">
+        <span class="monument-badge-top">Cauvery Delta • Chola Lost-Wax Bronze</span>
+        <div class="monument-bottom-title">
+          <h3>Swamimalai Bronze Casting</h3>
+          <span>Swamimalai, Thanjavur, Tamil Nadu • Cire-Perdue Heritage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Traditional Sthapatis (bronzesmith guilds) of Swamimalai, tracing lineage to Chola royal patronage</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Uses the exact 9th-century lost-wax (<em>cire-perdue</em>) method. A beeswax model coated with clay layers is melted out, and molten <em>Panchaloha</em> alloy (five sacred metals: gold, silver, copper, brass, and lead) is poured in</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">World-renowned for exquisite Nataraja and divine icons displaying flawless proportions governed by the <em>Shilpa Shastra</em> iconometry canons</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Panchaloha 5-Metal Alloy</span>
+              <span class="tag-pill">Cire-Perdue Lost-Wax</span>
+              <span class="tag-pill">Chola Shilpa Shastra</span>
+              <span class="tag-pill">Sthapati Guild</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Swamimalai (10.9572° N, 79.3308° E)</span>
+          <a href="https://maps.google.com/?q=Swamimalai+Bronze+Casting+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Bidri Silver Inlay (Bidar, Karnataka) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/bidriware.jpg');">
+        <span class="monument-badge-top">Deccan Plateau • Zinc & Pure Silver Inlay</span>
+        <div class="monument-bottom-title">
+          <h3>Bidri Silver Inlay Craft</h3>
+          <span>Bidar, Karnataka • Bahamani Sultanate Legacy</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Master metal artisans of Bidar fort town, Karnataka</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Crafted from a dark alloy of zinc and copper (16:1 ratio), hand-engraved with geometric or floral trenches, inlaid with pure silver wire or sheet, and oxidized using special soil from Bidar Fort to turn the alloy jet-black</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Striking high-contrast contrast of shimmering silver inlay against a permanent, velvety matte black metal surface</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Zinc-Copper Alloy</span>
+              <span class="tag-pill">Pure Silver Wire Inlay</span>
+              <span class="tag-pill">Bidar Fort Special Soil</span>
+              <span class="tag-pill">Matte Black Oxidation</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Bidar, Karnataka (17.9103° N, 77.5199° E)</span>
+          <a href="https://maps.google.com/?[Bidar+Karnataka+Crafts]" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Saharanpur Wood Carving (Uttar Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/saharanpur-wood.jpg');">
+        <span class="monument-badge-top">Western UP • Sheesham Intricate Carving</span>
+        <div class="monument-bottom-title">
+          <h3>Saharanpur Wood Carving</h3>
+          <span>Saharanpur, Uttar Pradesh • Mughal Timber Art</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Woodcarver master guilds of Saharanpur, Uttar Pradesh</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Skilled artisans carve seasoned Sheesham (rosewood), mango wood, and white cedar using specialized chisels (Sali) and mallets to create deep pierced (Jali) reliefs and brass-wire inlay</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Flawless symmetry, intricate leaf scrolls, jali lattice screens, and functional folding furniture</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Seasoned Sheesham Wood</span>
+              <span class="tag-pill">Pierced Jali Screens</span>
+              <span class="tag-pill">Chiseling Mallets</span>
+              <span class="tag-pill">Floral Reliefs</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Saharanpur (29.9640° N, 77.5460° E)</span>
+          <a href="https://maps.google.com/?q=Saharanpur+Wood+Carving+Craft" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Molela Terracotta Plaques (Rajsamand, Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/molela-terracotta.jpg');">
+        <span class="monument-badge-top">Aravalli Foothills • Votive Clay Reliefs</span>
+        <div class="monument-bottom-title">
+          <h3>Molela Terracotta Plaques</h3>
+          <span>Molela, Rajsamand, Rajasthan • Ritual Relief Art</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Kumhar (potter) community families of Molela village, Rajasthan</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Artisans hand-shape river silt clay mixed with donkey dung into detailed three-dimensional votive plaques depicting folk deities like Devnarayan, baked in open kilns and painted in vibrant natural mineral colors</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Entirely hand-pinched and modeled without casting molds, creating striking bas-relief divine panels</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Hand-Pinched Clay</span>
+              <span class="tag-pill">Open Kiln Firing</span>
+              <span class="tag-pill">Devnarayan Votive Panels</span>
+              <span class="tag-pill">River Silt Mixture</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Molela, Rajsamand (25.1764° N, 73.7423° E)</span>
+          <a href="https://maps.google.com/?q=Molela+Terracotta+Village" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Kondapalli Toys (Krishna District, Andhra Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/kondapalli-toys.jpg');">
+        <span class="monument-badge-top">Krishna River • Softwood Artisanal Toys</span>
+        <div class="monument-bottom-title">
+          <h3>Kondapalli Wooden Toys</h3>
+          <span>Kondapalli, NTR District, Andhra Pradesh • Tunkiki Wood</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Arya Kshatriya artisan families of Kondapalli, Andhra Pradesh</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Carved from lightweight <em>Tunkiki Chettu</em> (Wrightia tinctoria) softwood sourced from nearby hills. Individual parts are joined with tamarind seed paste adhesive and painted with vegetable and water-based colors</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Famous for depicting rural bullock carts, mythological figures, and dancers for Sankranti Bommala Kolu festival displays</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Tunkiki Softwood</span>
+              <span class="tag-pill">Tamarind Paste Adhesive</span>
+              <span class="tag-pill">Water-Based Dyes</span>
+              <span class="tag-pill">Bommala Kolu Statues</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Kondapalli (16.6190° N, 80.6010° E)</span>
+          <a href="https://maps.google.com/?q=Kondapalli+Toy+Makers" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Blue Pottery of Jaipur (Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/blue-pottery.jpg');">
+        <span class="monument-badge-top">Turquoise Glaze • Quartz Stone Powder</span>
+        <div class="monument-bottom-title">
+          <h3>Jaipur Blue Pottery</h3>
+          <span>Jaipur, Rajasthan • Turanian Glaze Craft</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Master potters of Jaipur, carrying forward Turko-Persian glazed pottery introduced by Kachwaha rulers</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Uniquely uses **no clay**. Instead, the body is formed from crushed quartz stone powder, powdered glass, multani mitti (fuller's earth), gum, and water, fired once in a kiln to produce a luminous turquoise glaze</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Vibrant cobalt blue and turquoise floral motifs painted over smooth quartz bodies without potter's wheel throwing</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Quartz & Glass Body</span>
+              <span class="tag-pill">Zero Clay Used</span>
+              <span class="tag-pill">Cobalt Turquoise Glaze</span>
+              <span class="tag-pill">Single-Fired Pottery</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Jaipur, Rajasthan (26.9124° N, 75.7873° E)</span>
+          <a href="https://maps.google.com/?q=Blue+Pottery+Jaipur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Dhokra Brass Casting (Bastar, Chhattisgarh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/dhokra.jpg');">
+        <span class="monument-badge-top">Chota Nagpur • Tribal Hollow Brass</span>
+        <div class="monument-bottom-title">
+          <h3>Dhokra Tribal Metal Casting</h3>
+          <span>Bastar, Chhattisgarh & Odisha • 4,000-Year Tradition</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Ghara and Malwa tribal metal smiths of Bastar, Chhattisgarh and Mayurbhanj, Odisha</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">A non-ferrous metal casting technique using lost-wax casting. Beeswax threads are wrapped intricately around a clay core to form distinct rustic tribal figurines before molten brass is poured</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Primitive, rustic texture featuring fine metallic wire threads and iconic tribal motifs including horses, elephants, and village deities</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Beeswax Thread Wrapping</span>
+              <span class="tag-pill">Non-Ferrous Brass</span>
+              <span class="tag-pill">Bastar Tribal Art</span>
+              <span class="tag-pill">Indus Valley Link</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Kondagaon, Bastar (19.5978° N, 81.6661° E)</span>
+          <a href="https://maps.google.com/?q=Kondagaon+Bastar+Dhokra+Craft" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Channapatna Lacware Toys (Karnataka) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/channapatna.jpg');">
+        <span class="monument-badge-top">Gombegala Ooru • Lac-Turned Woodcraft</span>
+        <div class="monument-bottom-title">
+          <h3>Channapatna Lacware Toys</h3>
+          <span>Channapatna, Ramanagara, Karnataka • Non-Toxic Woodwork</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Traditional lathe-turner artisan families of Channapatna town, Karnataka</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Turned on wooden lathes using Ivory wood (Aale mara). While the wood spins on the lathe, colored natural vegetable lac sticks are pressed against it, melting friction-lessly onto the wood surface</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Completely child-safe, non-toxic organic toys gleaming with vibrant, polished lac colors without chemical paints</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Ivory Wood Lathe-Turned</span>
+              <span class="tag-pill">Natural Vegetable Lac</span>
+              <span class="tag-pill">Friction Polishing</span>
+              <span class="tag-pill">GI Tagged Toy Cluster</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Channapatna (12.6517° N, 77.2031° E)</span>
+          <a href="https://maps.google.com/?q=Channapatna+Toy+Cluster" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Kutch Copper Bell Craft (Gujarat) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/kutch-bells.jpg');">
+        <span class="monument-badge-top">Banni Grasslands • Lohar Metal Tuning</span>
+        <div class="monument-bottom-title">
+          <h3>Kutch Copper Bell Craft</h3>
+          <span>Nirona, Kutch, Gujarat • Acoustic Metal Tuning</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Lohar (ironsmith) Muslim community of Nirona village, Kutch</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Crafted from recycled iron sheets coated in a copper-brass slurry, folded seamlessly without welding, and hand-tuned using specialized wooden hammers to achieve precise acoustic pitches for cattle</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Remarkable harmonized resonance; bells are tuned individually by ear to recognize specific livestock across the Banni desert</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Weldless Copper Coating</span>
+              <span class="tag-pill">Acoustic Ear Tuning</span>
+              <span class="tag-pill">Lohar Guild Tradition</span>
+              <span class="tag-pill">Banni Pastoral Craft</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Nirona, Kutch (23.4140° N, 69.5847° E)</span>
+          <a href="https://maps.google.com/?q=Nirona+Kutch+Copper+Bells" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Kasavu Metal & Wire Inlay Art (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/skills/kasavu-metal.jpg');">
+        <span class="monument-badge-top">Malabar Coast • Repoussé Metal Art</span>
+        <div class="monument-bottom-title">
+          <h3>Traditional Repoussé Metal Craft</h3>
+          <span>Thrissur & Aranmula, Kerala • Temple Metal Art</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Craft Guild</span>
+            <p class="dossier-text">Traditional temple metal craft workers of Thrissur and Aranmula, Kerala</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Technological Process</span>
+            <p class="dossier-text">Involves <em>repoussé</em> and chasing techniques where copper and brass sheets are hammered from the reverse side against a soft pitch bed to yield high-relief divine icons and temple chariot panels</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Exquisite mirror-polished brass bells, giant temple hanging lamps (Nilavilakku), and ritual metal percussion instruments</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artisanal Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Repoussé Hammering</span>
+              <span class="tag-pill">Nilavilakku Lamps</span>
+              <span class="tag-pill">Pitch Bed Embossing</span>
+              <span class="tag-pill">Kerala Temple Bronze</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Cluster Epicenter: Thrissur, Kerala (10.5276° N, 76.2144° E)</span>
+          <a href="https://maps.google.com/?q=Thrissur+Kerala+Metal+Craft" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Artisan Cluster
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

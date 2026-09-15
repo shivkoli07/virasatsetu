@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Varga-Karan: Cultural Taxonomy Sorter | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+    }
+
+    .game-layout {
+      max-width: 1100px;
+      margin: 3.5rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+    }
+
+    .game-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2.8rem 2.4rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .game-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+
+    .game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+      text-align: center;
+    }
+
+    .game-desc {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Unsorted Pool Area */
+    .pool-wrapper {
+      background: rgba(255, 255, 255, 0.6);
+      border: 1.5px dashed var(--border-card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+    }
+
+    .pool-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--accent-brown);
+      margin-bottom: 1rem;
+    }
+
+    .terms-pool {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+      min-height: 48px;
+    }
+
+    .term-chip {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.55rem 1.15rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 3px 8px rgba(42, 21, 11, 0.08);
+      user-select: none;
+    }
+
+    .term-chip:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-2px);
+      background: #FAF3E8;
+    }
+
+    .term-chip.selected {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: var(--accent-brown);
+      box-shadow: 0 4px 12px rgba(42, 21, 11, 0.25);
+    }
+
+    .term-chip.shake {
+      animation: shake 0.3s ease;
+      background: #FCE8E6;
+      border-color: #B83230;
+      color: #8C1F1D;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-6px); }
+      75% { transform: translateX(6px); }
+    }
+
+    /* Category Sorting Buckets */
+    .buckets-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.25rem;
+    }
+
+    .bucket {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 1.2rem 1rem;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .bucket:hover {
+      border-color: var(--accent-gold);
+      box-shadow: 0 6px 18px rgba(42, 21, 11, 0.08);
+    }
+
+    .bucket-header {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-brown);
+      text-align: center;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    .bucket-contents {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      flex: 1;
+    }
+
+    .sorted-chip {
+      background: rgba(36, 107, 62, 0.12);
+      border: 1px solid #246B3E;
+      color: #1A542F;
+      border-radius: 12px;
+      padding: 0.4rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .action-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.2rem;
+      border-top: 1px solid var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn-next {
+      background: #FAF0DF;
+      border: 1.5px solid var(--accent-gold);
+      color: var(--accent-brown);
+      border-radius: 25px;
+      padding: 0.65rem 1.3rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-next:hover {
+      background: #F1DDBE;
+      transform: translateY(-2px);
+    }
+
+    .win-box {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 1.8rem;
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+
+    .unlocked-badge-box {
+      margin-top: 0.9rem;
+      padding: 0.8rem 1.2rem;
+      background: rgba(238, 219, 190, 0.4);
+      border: 1.5px dashed var(--accent-gold);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .unlocked-badge-icon {
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .unlocked-badge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: left;
+    }
+
+    .unlocked-badge-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .btn-action {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 25px;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 1rem;
+    }
+
+    .btn-action:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 900px) {
+      .buckets-grid { grid-template-columns: repeat(2, 1fr); }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <main class="game-layout">
+    <div class="game-card">
+      <div class="game-tag" id="levelTag">Trial 04.01 • Civilizational Taxonomy</div>
+      <h1 class="game-title">Varga-Karan</h1>
+      <p class="game-desc">
+        Click a floating cultural expression from the pool, then click its corresponding domain bucket to categorize it. Earn <strong>+300 XP</strong> and unlock the <strong>Shastra Acharya</strong> honor.
+      </p>
+
+      <!-- Unsorted Terms Pool -->
+      <div class="pool-wrapper">
+        <div class="pool-label">Unclassified Cultural Concepts</div>
+        <div class="terms-pool" id="termsPool"></div>
+      </div>
+
+      <!-- 4 Classification Buckets -->
+      <div class="buckets-grid">
+        <div class="bucket" onclick="placeIntoBucket('cat1')">
+          <div class="bucket-header" id="headerCat1">Textiles & Weaving</div>
+          <div class="bucket-contents" id="bucket-cat1"></div>
+        </div>
+
+        <div class="bucket" onclick="placeIntoBucket('cat2')">
+          <div class="bucket-header" id="headerCat2">Temple Architecture</div>
+          <div class="bucket-contents" id="bucket-cat2"></div>
+        </div>
+
+        <div class="bucket" onclick="placeIntoBucket('cat3')">
+          <div class="bucket-header" id="headerCat3">Folk & Tribal Art</div>
+          <div class="bucket-contents" id="bucket-cat3"></div>
+        </div>
+
+        <div class="bucket" onclick="placeIntoBucket('cat4')">
+          <div class="bucket-header" id="headerCat4">Imperial Dynasties</div>
+          <div class="bucket-contents" id="bucket-cat4"></div>
+        </div>
+      </div>
+
+      <div class="action-panel">
+        <div style="font-weight: 600; color: var(--accent-brown);" id="progressStatus">Categorized: 0 / 8</div>
+        <button class="btn-next" onclick="tryNextLevel()">Try Next One &rarr;</button>
+        <div style="font-weight: 700; color: var(--accent-gold);">Reward: +300 XP</div>
+      </div>
+
+      <div class="win-box" id="winCard">
+        <h2 style="font-family: 'Cinzel', serif; color: var(--accent-brown);">Taxonomy Complete!</h2>
+        <p style="font-size: 0.92rem; color: var(--text-muted); margin-top: 0.4rem;" id="winDetails"></p>
+
+        <div class="unlocked-badge-box">
+          <span class="unlocked-badge-icon">🏛️</span>
+          <div>
+            <div class="unlocked-badge-name">Shastra Acharya</div>
+            <div class="unlocked-badge-sub">Honor permanently recorded to PostgreSQL</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1rem;">
+          <button class="btn-action" onclick="tryNextLevel()" style="margin-top:0;">Next Trial &rarr;</button>
+          <button class="btn-action" onclick="window.location.href='profile.html'" style="margin-top:0; background:#FFF; color:var(--accent-brown); border:1.5px solid var(--border-card);">View in Scholar Dossier</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_QUIZ = 'http://localhost:8080/api/quiz/submit';
+    const userEmail = localStorage.getItem('virasatSetu_user_email');
+
+    // Navbar sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true'; // fallback safe
+      const navBtn = document.getElementById('authNavBtn');
+      if (localStorage.getItem('virasatSetu_auth') === 'true' && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Profile';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // 6 Taxonomy Levels Dataset (Level 1 + 5 New Levels)
+    const levelsData = [
+      {
+        tag: "Trial 04.01 • Arts & Architecture Taxonomy",
+        categories: { cat1: "Textiles & Weaving", cat2: "Temple Architecture", cat3: "Folk & Tribal Art", cat4: "Imperial Dynasties" },
+        items: [
+          { id: 1, name: "Paithani Saree", category: "cat1" },
+          { id: 2, name: "Banarasi Brocade", category: "cat1" },
+          { id: 3, name: "Amalaka Finial", category: "cat2" },
+          { id: 4, name: "Dravidian Vimana", category: "cat2" },
+          { id: 5, name: "Warli Rice Murals", category: "cat3" },
+          { id: 6, name: "Madhubani Painting", category: "cat3" },
+          { id: 7, name: "Rashtrakuta Empire", category: "cat4" },
+          { id: 8, name: "Imperial Cholas", category: "cat4" }
+        ]
+      },
+      {
+        tag: "Trial 04.02 • Performing Arts & Instruments",
+        categories: { cat1: "Classical Dance", cat2: "Folk Drums", cat3: "String Instruments", cat4: "Martial Arts" },
+        items: [
+          { id: 1, name: "Bharatanatyam", category: "cat1" },
+          { id: 2, name: "Kathakali", category: "cat1" },
+          { id: 3, name: "Dhol-Tasha", category: "cat2" },
+          { id: 4, name: "Dhak Drum", category: "cat2" },
+          { id: 5, name: "Sitar", category: "cat3" },
+          { id: 6, name: "Veena", category: "cat3" },
+          { id: 7, name: "Gatka", category: "cat4" },
+          { id: 8, name: "Kalaripayattu", category: "cat4" }
+        ]
+      },
+      {
+        tag: "Trial 04.03 • Sacred Sites & Geographies",
+        categories: { cat1: "Jyotirlinga Shrines", cat2: "Himalayan Pilgrimages", cat3: "Shakti Peethas", cat4: "Vedic Rivers" },
+        items: [
+          { id: 1, name: "Kashi Vishwanath", category: "cat1" },
+          { id: 2, name: "Trimbakeshwar", category: "cat1" },
+          { id: 3, name: "Kedarnath", category: "cat2" },
+          { id: 4, name: "Badrinath", category: "cat2" },
+          { id: 5, name: "Kamakhya Temple", category: "cat3" },
+          { id: 6, name: "Kalighat", category: "cat3" },
+          { id: 7, name: "Ganga River", category: "cat4" },
+          { id: 8, name: "Yamuna River", category: "cat4" }
+        ]
+      },
+      {
+        tag: "Trial 04.04 • Festive Heritage & Harvest",
+        categories: { cat1: "Harvest Festivals", cat2: "Equinox & New Year", cat3: "Monsoon Festivities", cat4: "Light Celebrations" },
+        items: [
+          { id: 1, name: "Makar Sankranti", category: "cat1" },
+          { id: 2, name: "Onam Sadya", category: "cat1" },
+          { id: 3, name: "Gudi Padwa", category: "cat2" },
+          { id: 4, name: "Baisakhi", category: "cat2" },
+          { id: 5, name: "Ambubachi Mela", category: "cat3" },
+          { id: 6, name: "Sao Joao", category: "cat3" },
+          { id: 7, name: "Deepawali", category: "cat4" },
+          { id: 8, name: "Dev Deepawali", category: "cat4" }
+        ]
+      },
+      {
+        tag: "Trial 04.05 • Handloom & Craft Traditions",
+        categories: { cat1: "Silk Weaving", cat2: "Tie & Dye", cat3: "Metal Craft", cat4: "Cashmere Wool" },
+        items: [
+          { id: 1, name: "Kanjeevaram", category: "cat1" },
+          { id: 2, name: "Chanderi Silk", category: "cat1" },
+          { id: 3, name: "Bandhani", category: "cat2" },
+          { id: 4, name: "Leheriya", category: "cat2" },
+          { id: 5, name: "Dhokra Casting", category: "cat3" },
+          { id: 6, name: "Bidriware", category: "cat3" },
+          { id: 7, name: "Pashmina Shawl", category: "cat4" },
+          { id: 8, name: "Shahtoosh Weave", category: "cat4" }
+        ]
+      },
+      {
+        tag: "Trial 04.06 • Epics & Literary Heritage",
+        categories: { cat1: "Itihasa Epics", cat2: "Vedic Scriptures", cat3: "Classical Drama", cat4: "Tamil Sangam Lit" },
+        items: [
+          { id: 1, name: "Mahabharata", category: "cat1" },
+          { id: 2, name: "Ramayana", category: "cat1" },
+          { id: 3, name: "Rigveda", category: "cat2" },
+          { id: 4, name: "Upanishads", category: "cat2" },
+          { id: 5, name: "Abhijnanashakuntalam", category: "cat3" },
+          { id: 6, name: "Meghaduta", category: "cat3" },
+          { id: 7, name: "Silappatikaram", category: "cat4" },
+          { id: 8, name: "Tirukkural", category: "cat4" }
+        ]
+      }
+    ];
+
+    let currentLevelIdx = 0;
+    let selectedChip = null;
+    let categorizedCount = 0;
+
+    function initGame() {
+      const lvl = levelsData[currentLevelIdx];
+      document.getElementById('levelTag').textContent = lvl.tag;
+
+      // Update bucket headers
+      document.getElementById('headerCat1').textContent = lvl.categories.cat1;
+      document.getElementById('headerCat2').textContent = lvl.categories.cat2;
+      document.getElementById('headerCat3').textContent = lvl.categories.cat3;
+      document.getElementById('headerCat4').textContent = lvl.categories.cat4;
+
+      const pool = document.getElementById('termsPool');
+      pool.innerHTML = '';
+      categorizedCount = 0;
+      selectedChip = null;
+      document.getElementById('winCard').style.display = 'none';
+      document.getElementById('progressStatus').textContent = `Categorized: 0 / ${lvl.items.length}`;
+
+      // Clear all buckets
+      ['cat1', 'cat2', 'cat3', 'cat4'].forEach(cat => {
+        document.getElementById(`bucket-${cat}`).innerHTML = '';
+      });
+
+      // Shuffle and render items in pool
+      const shuffled = [...lvl.items].sort(() => Math.random() - 0.5);
+      shuffled.forEach(item => {
+        const chip = document.createElement('div');
+        chip.className = 'term-chip';
+        chip.textContent = item.name;
+        chip.dataset.id = item.id;
+        chip.dataset.category = item.category;
+
+        chip.onclick = (e) => {
+          e.stopPropagation();
+          selectChip(chip);
+        };
+        pool.appendChild(chip);
+      });
+    }
+
+    function tryNextLevel() {
+      currentLevelIdx = (currentLevelIdx + 1) % levelsData.length;
+      initGame();
+    }
+
+    function selectChip(chip) {
+      if (selectedChip) selectedChip.classList.remove('selected');
+      selectedChip = chip;
+      selectedChip.classList.add('selected');
+    }
+
+    function placeIntoBucket(bucketCategory) {
+      if (!selectedChip) return;
+
+      const targetCategory = selectedChip.dataset.category;
+      const lvl = levelsData[currentLevelIdx];
+
+      if (targetCategory === bucketCategory) {
+        // Correct bucket
+        const bucket = document.getElementById(`bucket-${bucketCategory}`);
+        const sortedItem = document.createElement('div');
+        sortedItem.className = 'sorted-chip';
+        sortedItem.textContent = selectedChip.textContent;
+
+        bucket.appendChild(sortedItem);
+        selectedChip.remove();
+        selectedChip = null;
+
+        categorizedCount++;
+        document.getElementById('progressStatus').textContent = `Categorized: ${categorizedCount} / ${lvl.items.length}`;
+
+        if (categorizedCount === lvl.items.length) {
+          handleWin();
+        }
+      } else {
+        // Wrong bucket
+        const chip = selectedChip;
+        chip.classList.add('shake');
+        setTimeout(() => {
+          chip.classList.remove('shake', 'selected');
+        }, 400);
+        selectedChip = null;
+      }
+    }
+
+    async function handleWin() {
+      const winCard = document.getElementById('winCard');
+      winCard.style.display = 'block';
+
+      if (!userEmail) {
+        document.getElementById('winDetails').textContent = "All domains categorized! Log in to register your +300 XP.";
+        return;
+      }
+
+      try {
+        const res = await fetch(API_QUIZ, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: userEmail,
+            title: `Varga-Karan: ${levelsData[currentLevelIdx].tag}`,
+            category: "Domain Classification",
+            scorePercent: 100,
+            xpEarned: 300,
+            badgeTitle: "Shastra Acharya",
+            badgeIcon: "🏛️"
+          })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          document.getElementById('winDetails').innerHTML = 
+            `Exceptional insight! All cultural domains accurately categorized. <strong>+300 XP</strong> written to PostgreSQL (Total: <strong>${data.totalXp} XP</strong>).`;
+        }
+      } catch (e) {
+        console.warn('XP sync failed');
+      }
+    }
+
+    initGame();
+  </script>
+</body>
+</html>

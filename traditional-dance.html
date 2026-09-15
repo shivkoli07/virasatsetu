@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traditional Dance | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/dance/hero-dance.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Dance Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Tripartite Performance Elements */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .style-badge {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 01.03 • Living Intangible Heritage</div>
+      <h1 class="hero-title">Traditional Dance</h1>
+      <p class="hero-tagline">"Where sacred gesture (Mudra), geometric cadence (Tala), and theatrical emotion (Rasa) unite."</p>
+    </div>
+  </section>
+
+  <!-- Foundational Dance Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Natya Shastra & The Philosophy of Indian Movement</h2>
+        <p class="doctrine-subtitle">In the Indian civilizational tradition, dance (<em>Nritya</em>) is the fifth Veda—codified by Sage Bharata Muni as a consecrated visual synthesis of spiritual storytelling, spatial geometry, and cosmic rhythmic cycles.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What is Traditional Dance -->
+        <div class="concept-block">
+          <h3 class="concept-title">💃 What is Traditional Dance?</h3>
+          <p class="concept-text">
+            Traditional Indian dance is an expressive kinetic medium passed down through hereditary lineages (<em>Gharanas</em> and <em>Paramparas</em>). Synthesizing strict geometric footwork with micro-facial muscle manipulation, dancers enact epic mythologies and human-divine devotion through codified hand gestures (<em>Hastas</em>/<em>Mudras</em>) and rhythmic ankle bells (<em>Ghungroos</em>).
+          </p>
+        </div>
+
+        <!-- The Doctrine of Rasa & Bhava -->
+        <div class="concept-block">
+          <h3 class="concept-title">🎭 The Navarasa & Abhinaya</h3>
+          <p class="concept-text">
+            At the heart of classical dance lies the communication of <em>Bhava</em> (emotional state) to evoke <em>Rasa</em> (aesthetic bliss) in the spectator. The Natya Shastra defines fourfold Abhinaya: <em>Angika</em> (physical body posture), <em>Vachika</em> (spoken/sung song), <em>Aharya</em> (ornamentation and temple attire), and <em>Sattvika</em> (genuine inner emotional tears, trembling, and ecstasy).
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Tripartite Performance Elements -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">The Tripartite Structure of Indian Classical Performance</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Nritta</h4>
+            <span class="style-badge">Pure Abstract Rhythm</span>
+            <p class="style-text">Focuses purely on aesthetic body movement, geometric limb extensions, and complex footwork synchronized to rhythmic meters (<em>Tala</em>) without narrative or emotional storytelling.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Nritya</h4>
+            <span class="style-badge">Expressive Storytelling</span>
+            <p class="style-text">Combines abstract movement with expressive storytelling through facial mimesis, eye movements, and hand mudras illustrating lyrics, devotional poems, and legendary episodes.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Natya</h4>
+            <span class="style-badge">Dramatic Theatre Ensemble</span>
+            <p class="style-text">The full theatrical synthesis featuring dialogue, multi-character ensembles, symbolic facial make-up, and staging that enacts philosophical epics before a consecrated audience.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Comprehensive Dance Traditions) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Dance Traditions of India</h2>
+      <p>Pan-Indian case studies spanning the 8 Sangeet Natak Akademi classical forms alongside revered martial and folk dances.</p>
+    </div>
+
+    <!-- 01: Bharatanatyam (Tamil Nadu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/bharatanatyam.jpg');">
+        <span class="monument-badge-top">Sadir Natyam • Chola Temple Heritage</span>
+        <div class="monument-bottom-title">
+          <h3>Bharatanatyam</h3>
+          <span>Thanjavur, Tamil Nadu • 2nd Century BCE Roots</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Evolved from ancient <em>Sadir Natyam</em> performed by Devadasis in Brihadisvara and Chidambaram temple corridors</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Characterized by the firm half-sitting knee posture (<em>Aramandi</em>), dynamic triangular body geometry, crisp percussive foot stamping, and sophisticated eye-hand alignments</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Carnatic vocalists, Mridangam, violin, and the Nattuvanar wielding bronze cymbals (Talam) chanting bols</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconic Repertoire</span>
+            <div class="tag-container">
+              <span class="tag-pill">Alarippu</span>
+              <span class="tag-pill">Jatiswaram</span>
+              <span class="tag-pill">Varnam</span>
+              <span class="tag-pill">Tillana</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Thanjavur (10.7870° N, 79.1378° E)</span>
+          <a href="https://maps.google.com/?q=Brihadisvara+Temple+Thanjavur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Kathakali (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/kathakali.jpg');">
+        <span class="monument-badge-top">All-Night Dance Drama • Aharya Apex</span>
+        <div class="monument-bottom-title">
+          <h3>Kathakali</h3>
+          <span>Valluvanad, Kerala • 17th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Developed under the patron kings of Kottarakkara and Vettathu, synthesizing martial arts (Kalaripayattu) with ancient Sanskrit Kudiyattam</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Elaborate facial color-coded makeup (<em>Chutti</em>), magnificent headgear (<em>Kiritam</em>), voluminous flared skirts, and micro-movements of eyebrows, eyelids, and chin under coconut-oil brass lamps</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Sopanam style singing accompanied by Chenda drums, Maddalam, Chengila gong, and Ilathalam cymbals</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Character Types</span>
+            <div class="tag-container">
+              <span class="tag-pill">Paccha (Noble Green)</span>
+              <span class="tag-pill">Kathi (Villainous Knife)</span>
+              <span class="tag-pill">Thadi (Bearded Demons)</span>
+              <span class="tag-pill">Minukku (Virtuous Women)</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Cheruthuruthy (10.7483° N, 76.2825° E)</span>
+          <a href="https://maps.google.com/?q=Kerala+Kalamandalam+Cheruthuruthy" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Kathak (Northern India) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/kathak.jpg');">
+        <span class="monument-badge-top">Katha Kahe So Kathak • Court & Temple</span>
+        <div class="monument-bottom-title">
+          <h3>Kathak</h3>
+          <span>Lucknow & Varanasi, UP • Ancient to Mughal Courts</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Traced to nomadic temple storytellers (<em>Kathakars</em>) reciting epics, later reaching imperial refinement in Awadh under Nawab Wajid Ali Shah</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Standing straight-legged posture, lightning pirouettes (<em>Chakkars</em>), subtle facial glances, and blistering microtonal footwork (<em>Tatkar</em>) tuned to 100+ ankle bells</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Hindustani classical music, rhythmic Pakhawaj and Tabla syllables (Padhant), Sarangi, and Harmonium</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Major Gharanas</span>
+            <div class="tag-container">
+              <span class="tag-pill">Lucknow Gharana (Bhav)</span>
+              <span class="tag-pill">Jaipur Gharana (Laykari)</span>
+              <span class="tag-pill">Banaras Gharana</span>
+              <span class="tag-pill">Tatkar</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Lucknow (26.8467° N, 80.9462° E)</span>
+          <a href="https://maps.google.com/?q=Kathak+Kendra+Lucknow" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Odissi (Odisha) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/odissi.jpg');">
+        <span class="monument-badge-top">Mahari & Gotipua • Sculptural Grace</span>
+        <div class="monument-bottom-title">
+          <h3>Odissi</h3>
+          <span>Bhubaneswar & Puri, Odisha • 2nd Century BCE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Immortalized on the stone walls of Konark and Udayagiri caves; nurtured by temple dancers (<em>Maharis</em>) and young acrobats (<em>Gotipuas</em>)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Defined by the iconic three-bend body posture (<em>Tribhanga</em>) and firm masculine square stamp (<em>Chowk</em>), mimicking living temple sculptures through soft torso deflections</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Odissi classical music, Mardala barrel drum, flute, Manjira cymbals, and Gitagovinda ashtapadis</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Repertoire Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Mangalacharan</span>
+              <span class="tag-pill">Tribhanga</span>
+              <span class="tag-pill">Pallavi</span>
+              <span class="tag-pill">Moksha</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Jagannath Puri (19.8049° N, 85.8179° E)</span>
+          <a href="https://maps.google.com/?q=Jagannath+Temple+Puri" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Manipuri (Manipur) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/manipuri.jpg');">
+        <span class="monument-badge-top">Jagoi & Cholom • Vaishnava Rasleela</span>
+        <div class="monument-bottom-title">
+          <h3>Manipuri Rasleela</h3>
+          <span>Imphal Valley, Manipur • 18th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Deeply intertwined with the ancient Meitei Lai Haraoba festival and medieval Vaishnavism institutionalized under King Bhagyachandra</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Gentle, serpentine torso movements forming figures-of-eight without ankle bells, juxtaposed with the striking cylinder skirt (<em>Potloi</em>) for Radha-Gopis, paired with vigorous drum dances (<em>Pung Cholom</em>)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Pung barrel drum, Kartal cymbals, Pena bowed fiddle, and devotional choral chants in Meiteilon and Brajabuli</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Dance Disciplines</span>
+            <div class="tag-container">
+              <span class="tag-pill">Rasleela (Lasya)</span>
+              <span class="tag-pill">Pung Cholom (Tandava)</span>
+              <span class="tag-pill">Kartal Cholom</span>
+              <span class="tag-pill">Potloi Attire</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Imphal (24.8170° N, 93.9368° E)</span>
+          <a href="https://maps.google.com/?q=Govindaji+Temple+Imphal" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Mohiniyattam (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/mohiniyattam.jpg');">
+        <span class="monument-badge-top">Dance of the Enchantress • Pure Lasya</span>
+        <div class="monument-bottom-title">
+          <h3>Mohiniyattam</h3>
+          <span>Travancore, Kerala • 16th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Inspired by the mythological enchantress Mohini; revived during the golden era of Maharaja Swathi Thirunal Rama Varma</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Slow, undulating sways of the torso mimicking palm fronds and ocean waves, executed in the distinctive white and gold Kasavu saree with side hair bun (<em>Kuduma</em>)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Sopanam classical music, Edakka pressure hourglass drum, Mridangam, violin, and Veena</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Performance Suite</span>
+            <div class="tag-container">
+              <span class="tag-pill">Cholkettu</span>
+              <span class="tag-pill">Jatiswaram</span>
+              <span class="tag-pill">Padam</span>
+              <span class="tag-pill">Kasavu Saree</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Thiruvananthapuram (8.5241° N, 76.9366° E)</span>
+          <a href="https://maps.google.com/?q=Padmanabhaswamy+Temple+Thiruvananthapuram" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Kuchipudi (Andhra Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/kuchipudi.jpg');">
+        <span class="monument-badge-top">Bhakti Village Heritage • Brass Plate Balance</span>
+        <div class="monument-bottom-title">
+          <h3>Kuchipudi</h3>
+          <span>Krishna District, Andhra Pradesh • 15th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Originated in Kuchelapuram village, created by ascetic Siddhendra Yogi as a sacred dance-drama tradition</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Fast, sparkling footwork combined with spoken dialogue (<em>Vachika</em>). Renowned for the thrilling <em>Tarangam</em>, where the dancer balances atop the raised edge of a brass plate while carrying a water pitcher</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Carnatic instruments, Mridangam, flute, and Talam cymbals played by the master Sutradhara</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Signature Acts</span>
+            <div class="tag-container">
+              <span class="tag-pill">Tarangam Plate Balance</span>
+              <span class="tag-pill">Bhama Kalapam</span>
+              <span class="tag-pill">Manduka Shabdam</span>
+              <span class="tag-pill">Vachika Dialogue</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kuchipudi Village (16.1950° N, 80.9575° E)</span>
+          <a href="https://maps.google.com/?q=Kuchipudi+Village+Andhra+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Sattriya (Assam) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/sattriya.jpg');">
+        <span class="monument-badge-top">Monastic Living Heritage • Neo-Vaishnavite</span>
+        <div class="monument-bottom-title">
+          <h3>Sattriya Nritya</h3>
+          <span>Majuli Island, Assam • 15th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Created by the polymath saint Srimanta Sankardeva inside island monasteries (<em>Sattras</em>) of the Brahmaputra as an offering of devotion</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Rigid geometric knee stances (<em>Ora</em>), soaring leaps, and crisp arm extensions, performed in raw wild Muga and Pat silk with traditional Assamese silver filigree ornaments</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">Borgeet devotional compositions, Khol two-headed clay drum, and Bartal large bronze cymbals</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Sacred Forms</span>
+            <div class="tag-container">
+              <span class="tag-pill">Mati Akhara Basics</span>
+              <span class="tag-pill">Chali Nach</span>
+              <span class="tag-pill">Gayan-Bayan</span>
+              <span class="tag-pill">Muga Silk</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Majuli Island (26.9536° N, 94.2037° E)</span>
+          <a href="https://maps.google.com/?q=Kamalabari+Satra+Majuli" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Lavani (Maharashtra) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/lavani.jpg');">
+        <span class="monument-badge-top">Shahiri Folk Tradition • Dholki Rhythm</span>
+        <div class="monument-bottom-title">
+          <h3>Lavani</h3>
+          <span>Western Maharashtra • 18th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Derived from <em>Lavanya</em> (beauty); celebrated in Maratha military encampments and Peshwa courts to boost warrior morale</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">High-energy rhythmic foot stamping, theatrical eye flirtations, expressive storytelling, and sharp hip shifts executed in the traditional 9-yard Nauvari saree and heavy brass ghungroos</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">The rapid acoustic pulse of the two-sided Dholki, Tuntune wire instrument, Manjira, and vocal Shahiri ballads</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Performance Styles</span>
+            <div class="tag-container">
+              <span class="tag-pill">Baithakichi Lavani</span>
+              <span class="tag-pill">Phadachi Lavani</span>
+              <span class="tag-pill">Nauvari Saree</span>
+              <span class="tag-pill">Dholki Taal</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Pune (18.5204° N, 73.8567° E)</span>
+          <a href="https://maps.google.com/?q=Shaniwar+Wada+Pune" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Mayurbhanj Chhau (Odisha) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/dance/chhau.jpg');">
+        <span class="monument-badge-top">UNESCO Intangible Cultural Heritage • Martial Dance</span>
+        <div class="monument-bottom-title">
+          <h3>Mayurbhanj Chhau</h3>
+          <span>Baripada, Mayurbhanj, Odisha • Ancient Martial Lineage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Evolved from indigenous military combat exercises (<em>Paika Akhada</em>) and royal palace patron competitions during Chaitra Parva</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Kinetic Architecture</span>
+            <p class="dossier-text">Unlike Purulia Chhau, Mayurbhanj Chhau is performed without masks—relying on high aerial jumps, sweeping leg extensions, sword-and-shield combat simulations, and animal gait mimesis</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Musical Accompaniment</span>
+            <p class="dossier-text">The thunderous Dhamsa kettle drum, Dhol barrel drum, and wailing aerophone Mohuri reed horn</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Martial Moves</span>
+            <div class="tag-container">
+              <span class="tag-pill">Hathiyar Dhara (Weapon)</span>
+              <span class="tag-pill">Ufli (Leg Swings)</span>
+              <span class="tag-pill">Chaitra Parva</span>
+              <span class="tag-pill">Maskless Chhau</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Baripada (21.9346° N, 86.7380° E)</span>
+          <a href="https://maps.google.com/?q=Mayurbhanj+Palace+Baripada" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

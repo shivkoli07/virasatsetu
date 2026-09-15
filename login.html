@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Account Portal | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --error-red: #A32A2A;
+      --success-green: #246B3E;
+      --card-shadow: 0 20px 50px rgba(53, 29, 14, 0.16);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.92) 0%, rgba(241, 225, 203, 0.92) 100%);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .back-home-link {
+      text-decoration: none;
+      color: var(--accent-brown);
+      font-weight: 600;
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+    }
+
+    .back-home-link:hover {
+      color: var(--primary-dark);
+      transform: translateX(-3px);
+    }
+
+    .auth-viewport {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+    }
+
+    .auth-card {
+      width: 100%;
+      max-width: 500px;
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2.6rem 2.4rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .auth-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    /* Tab Switcher */
+    .tab-nav {
+      display: flex;
+      background: rgba(219, 191, 156, 0.35);
+      border-radius: 14px;
+      padding: 4px;
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-card);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 0.75rem;
+      border: none;
+      background: transparent;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab-btn.active {
+      background: #FFFFFF;
+      color: var(--primary-dark);
+      box-shadow: 0 3px 10px rgba(42, 21, 11, 0.1);
+    }
+
+    .auth-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.35rem;
+    }
+
+    .auth-subtitle {
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+    }
+
+    .status-banner {
+      display: none;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.35rem;
+      text-align: center;
+    }
+
+    .status-banner.error {
+      display: block;
+      background: rgba(163, 42, 42, 0.12);
+      border: 1px solid var(--error-red);
+      color: var(--error-red);
+    }
+
+    .status-banner.success {
+      display: block;
+      background: rgba(36, 107, 62, 0.12);
+      border: 1px solid var(--success-green);
+      color: var(--success-green);
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--accent-brown);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-input {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 12px;
+      padding: 0.8rem 1rem;
+      font-size: 0.92rem;
+      color: var(--primary-dark);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(184, 130, 48, 0.18);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 30px;
+      padding: 0.88rem;
+      font-size: 0.92rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(42, 21, 11, 0.28);
+      transition: var(--transition);
+      margin-top: 0.75rem;
+    }
+
+    .submit-btn:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    .form-section {
+      display: none;
+    }
+
+    .form-section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <a href="index.html" class="back-home-link">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+      Return Home
+    </a>
+  </header>
+
+  <main class="auth-viewport">
+    <div class="auth-card">
+      <div class="tab-nav">
+        <button class="tab-btn active" id="tabLoginBtn" type="button">Sign In</button>
+        <button class="tab-btn" id="tabRegisterBtn" type="button">Create Account</button>
+      </div>
+
+      <div id="statusMessage" class="status-banner"></div>
+
+      <!-- 1. LOGIN FORM -->
+      <form id="loginForm" class="form-section active" novalidate>
+        <h1 class="auth-title">Welcome Back</h1>
+        <p class="auth-subtitle">Enter your credentials to access preserved archives.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="loginEmail">Email Address</label>
+          <input type="email" id="loginEmail" class="form-input" placeholder="user@virasatsetu.in" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required />
+        </div>
+
+        <button type="submit" class="submit-btn" id="loginBtn">Authenticate & Enter</button>
+      </form>
+
+      <!-- 2. REGISTER FORM -->
+      <form id="registerForm" class="form-section" novalidate>
+        <h1 class="auth-title">Join VirasatSetu</h1>
+        <p class="auth-subtitle">Create an account to safeguard and explore Indian heritage.</p>
+
+        <div class="form-group">
+          <label class="form-label" for="regFullName">Full Name</label>
+          <input type="text" id="regFullName" class="form-input" placeholder="e.g., Shiv Koli" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email Address</label>
+          <input type="email" id="regEmail" class="form-input" placeholder="user@domain.com" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Create Password</label>
+          <input type="password" id="regPassword" class="form-input" placeholder="At least 6 characters" required />
+        </div>
+
+        <button type="submit" class="submit-btn" id="registerBtn">Create Heritage Account</button>
+      </form>
+    </div>
+  </main>
+
+  <script>
+    // Tab switching logic
+    const tabLogin = document.getElementById('tabLoginBtn');
+    const tabRegister = document.getElementById('tabRegisterBtn');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const statusMsg = document.getElementById('statusMessage');
+
+    function switchTab(activeTab) {
+      statusMsg.className = 'status-banner';
+      if (activeTab === 'login') {
+        tabLogin.classList.add('active');
+        tabRegister.classList.remove('active');
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
+      } else {
+        tabRegister.classList.add('active');
+        tabLogin.classList.remove('active');
+        registerForm.classList.add('active');
+        loginForm.classList.remove('active');
+      }
+    }
+
+    tabLogin.addEventListener('click', () => switchTab('login'));
+    tabRegister.addEventListener('click', () => switchTab('register'));
+
+    function showStatus(text, type) {
+      statusMsg.className = `status-banner ${type}`;
+      statusMsg.textContent = text;
+    }
+
+    // Backend endpoint base URL
+    const API_BASE = 'http://localhost:8080/api/auth';
+
+    // Registration Form Handler
+    registerForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const fullName = document.getElementById('regFullName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value.trim();
+
+      if (!fullName || !email || !password) {
+        showStatus('Please complete all fields.', 'error');
+        return;
+      }
+      if (password.length < 6) {
+        showStatus('Password must contain at least 6 characters.', 'error');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/register`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fullName, email, password })
+        });
+
+        if (response.ok) {
+          showStatus('Account created in database! Switching to Sign In...', 'success');
+          setTimeout(() => switchTab('login'), 1200);
+        } else {
+          const errData = await response.json();
+          showStatus(errData.message || 'Registration failed.', 'error');
+        }
+      } catch (err) {
+        showStatus('Backend unreachable. Storing mock session locally.', 'error');
+      }
+    });
+
+    // Login Form Handler
+    loginForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value.trim();
+
+      if (!email || !password) {
+        showStatus('Please enter email and password.', 'error');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${API_BASE}/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem('virasatSetu_auth', 'true');
+          localStorage.setItem('virasatSetu_user_email', email);
+          localStorage.setItem('virasatSetu_user_name', data.fullName || email);
+
+          const redirectUrl = sessionStorage.getItem('redirect_after_login') || 'index.html';
+          sessionStorage.removeItem('redirect_after_login');
+          window.location.href = redirectUrl;
+        } else {
+          const errData = await response.json().catch(() => ({}));
+          showStatus(errData.message || 'Invalid email or password.', 'error');
+        }
+      } catch (err) {
+        showStatus('Backend unreachable. Make sure Spring Boot is running on port 8080.', 'error');
+      }
+    });
+  </script>
+</body>
+</html>

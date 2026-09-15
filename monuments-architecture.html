@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monuments & Architecture | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/monuments/hero-monuments.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.88) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Architectural Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Architectural Orders (Nagara, Dravida, Vesara) */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .style-badge {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Landmark Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.1) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.8);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 01.01 • Tangible Heritage</div>
+      <h1 class="hero-title">Monuments & Architecture</h1>
+      <p class="hero-tagline">"Where sacred geometry, stone monolithic precision, and civilizational memory converge."</p>
+    </div>
+  </section>
+
+  <!-- Foundational Architectural Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Philosophy of Indian Architecture</h2>
+        <p class="doctrine-subtitle">In the Indian civilizational tradition, monuments were physical manifestations of cosmic harmony (Vastu Purusha) and sovereign spiritual authority.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What are Monuments -->
+        <div class="concept-block">
+          <h3 class="concept-title">🏛️ What is a Monument?</h3>
+          <p class="concept-text">
+            A monument is an enduring structure erected to commemorate a sacred deity, dynastic epoch, or civilizational triumph. Derived from the Latin <em>monere</em> (to remind), Indian monuments preserve timeless historical identity—spanning volcanic basalt cave temples, impenetrable mountain bastions, and hydraulic stepwells designed to sanctify monsoon waters.
+          </p>
+        </div>
+
+        <!-- What is Architecture -->
+        <div class="concept-block">
+          <h3 class="concept-title">📐 What is Architecture?</h3>
+          <p class="concept-text">
+            Codified under the <em>Vastu Shastra</em> and <em>Shilpa Shastras</em>, Indian architecture is the exact mathematical science uniting spatial orientation, solar geometry, and material engineering. Its bedrock is the <em>Vastu Purusha Mandala</em>—a symmetrical square grid aligning the sanctum sanctorum (Garbhagriha) directly with the divine cosmological axis.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Architectural Styles Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Classical Indian Architectural Orders</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Nagara Style</h4>
+            <span class="style-badge">Northern Subcontinent</span>
+            <p class="style-text">Distinguished by curvilinear beehive towers (<em>Shikhara</em>), square sanctum plans, and crowning ribbed stone disks (<em>Amalaka</em>) with pot finials (<em>Kalasha</em>). Built over elevated stone plinths without tall perimeter walls.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Dravida Style</h4>
+            <span class="style-badge">Southern Peninsula</span>
+            <p class="style-text">Defined by multi-tiered pyramidal towers (<em>Vimana</em>), pillared corridor mandapas, ceremonial temple tanks, and monumental perimeter gate towers known as <em>Gopurams</em> that dominate the town skyline.</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Vesara Style</h4>
+            <span class="style-badge">Deccan & Central India</span>
+            <p class="style-text">A hybrid synthesis flourishing under the Chalukyas and Hoysalas. Famous for star-shaped (stellate) ground plans, finely polished chloritic schist (soapstone) carvings, and horizontal terrace bands.</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Comprehensive Monument Examples) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Masterworks of Indian Architecture</h2>
+      <p>Pan-Indian case studies documenting dynastic eras, architectural styles, engineering feats, and geospatial coordinates.</p>
+    </div>
+
+    <!-- 01: Kailasa Temple (Cave 16, Ellora) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/kailasa-temple.jpg');">
+        <span class="monument-badge-top">Cave 16 • Monolithic Wonder</span>
+        <div class="monument-bottom-title">
+          <h3>Kailasa Temple</h3>
+          <span>Ellora Caves, Maharashtra • 8th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Rashtrakuta Dynasty • Commissioned by King Krishna I (c. 756–773 CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Top-down monolithic rock excavation (Dravidian Vimana carved into basalt cliffs)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Over 200,000 tonnes of volcanic rock were chiseled entirely from top to bottom with zero structural joints or scaffolding, carving multi-level sanctums and life-sized guardian elephants.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Basalt Monolith</span>
+              <span class="tag-pill">Nandi Mandapa</span>
+              <span class="tag-pill">Ravana Shaking Kailash</span>
+              <span class="tag-pill">Dravidian Shikhara</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 20.0238° N, 75.1793° E</span>
+          <a href="https://maps.google.com/?q=Kailasa+Temple+Ellora" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Brihadisvara Temple (Thanjavur) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/brihadisvara-temple.jpg');">
+        <span class="monument-badge-top">Peruvudaiyar Kovil • Dravida Apex</span>
+        <div class="monument-bottom-title">
+          <h3>Brihadisvara Temple</h3>
+          <span>Thanjavur, Tamil Nadu • 1010 CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Imperial Chola Empire • Built by Emperor Rajaraja Chola I</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Pure Dravidian Granite Architecture with a 13-tiered pyramidal Vimana</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Constructed entirely of interlocking granite blocks without mortar. The crowning monolithic Kumbam weighs 80 tonnes, hauled atop the 66-meter Vimana using an earthen inclined ramp spanning over 4 kilometers.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Granite Masonry</span>
+              <span class="tag-pill">66m Vimana</span>
+              <span class="tag-pill">Monolithic Nandi</span>
+              <span class="tag-pill">Chola Frescoes</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 10.7828° N, 79.1318° E</span>
+          <a href="https://maps.google.com/?q=Brihadisvara+Temple+Thanjavur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Sun Temple (Konark) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/konark-sun-temple.jpg');">
+        <span class="monument-badge-top">Black Pagoda • Kalinga Order</span>
+        <div class="monument-bottom-title">
+          <h3>Sun Temple, Konark</h3>
+          <span>Puri Coast, Odisha • 13th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Eastern Ganga Dynasty • Conceived by King Narasimhadeva I (c. 1250 CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Kalinga Architecture (Deula style: Jagamohana porch and Rekha sanctum)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Engineered as a colossal celestial chariot with 24 carved stone wheels pulled by seven galloping horses. The spokes function as accurate sundials measuring solar time down to minutes.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Khondalite Stone</span>
+              <span class="tag-pill">Astronomical Sundials</span>
+              <span class="tag-pill">Iron Dowel Clamps</span>
+              <span class="tag-pill">Natya Mandapa</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 19.8876° N, 86.0945° E</span>
+          <a href="https://maps.google.com/?q=Konark+Sun+Temple" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Rani ki Vav (The Queen's Stepwell) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/rani-ki-vav.jpg');">
+        <span class="monument-badge-top">Subterranean Sanctum • Maru-Gurjara</span>
+        <div class="monument-bottom-title">
+          <h3>Rani ki Vav</h3>
+          <span>Patan, Gujarat • 11th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Solanki (Chaulukya) Dynasty • Commissioned by Queen Udayamati</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Maru-Gurjara Inverted Subterranean Stepwell Architecture</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">An inverted temple descending 7 tiers into the earth, integrating structural stone retaining walls holding over 500 major sculptures to sanctify groundwater as sacred amrita.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">7 Subterranean Tiers</span>
+              <span class="tag-pill">Sheshashayi Vishnu</span>
+              <span class="tag-pill">Pillared Pavilions</span>
+              <span class="tag-pill">Hydraulic Stepwell</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 23.8589° N, 72.1017° E</span>
+          <a href="https://maps.google.com/?q=Rani+ki+Vav+Patan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Vitthala Temple & Stone Chariot (Hampi) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/hampi-stone-chariot.jpg');">
+        <span class="monument-badge-top">Tungabhadra Basin • Vijayanagara Order</span>
+        <div class="monument-bottom-title">
+          <h3>Stone Chariot & Vitthala Complex</h3>
+          <span>Hampi, Karnataka • 15th–16th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Vijayanagara Empire • Patrons: King Devaraya II & Krishnadevaraya</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Mature Vijayanagara Style with monolithic granite pillars and open halls</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Famous for its Garuda shrine crafted as an ornamental stone chariot with rotatable stone wheels, and the Ranga Mandapa's 56 musical pillars that chime note frequencies upon acoustic tapping.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Granite Chariot</span>
+              <span class="tag-pill">Musical Pillars</span>
+              <span class="tag-pill">Yali Balustrades</span>
+              <span class="tag-pill">Kalyana Mandapa</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 15.3350° N, 76.4600° E</span>
+          <a href="https://maps.google.com/?q=Vijaya+Vitthala+Temple+Hampi" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Kandariya Mahadeva Temple (Khajuraho) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/kandariya-mahadeva.jpg');">
+        <span class="monument-badge-top">Bundelkhand • Nagara Zenith</span>
+        <div class="monument-bottom-title">
+          <h3>Kandariya Mahadeva Temple</h3>
+          <span>Khajuraho, Madhya Pradesh • c. 1030 CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Chandela Dynasty • Erected by King Vidyadhara</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Nagara Latinate Sandhara style (mountain-peak clustered Urushringas)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Features an organic mountain-range silhouette formed by 84 miniature subsidiary spires (Urushringas) clinging to the central 31-meter main Shikhara, creating an architectural replica of Mount Meru.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Sandstone Carvings</span>
+              <span class="tag-pill">Urushringa Clustered Spire</span>
+              <span class="tag-pill">Mithuna Reliefs</span>
+              <span class="tag-pill">Jagati Plinth</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 24.8532° N, 79.9197° E</span>
+          <a href="https://maps.google.com/?q=Kandariya+Mahadeva+Temple+Khajuraho" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Hoysaleswara Temple (Halebidu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/hoysaleswara-temple.jpg');">
+        <span class="monument-badge-top">Dwarasamudra • Stellate Vesara</span>
+        <div class="monument-bottom-title">
+          <h3>Hoysaleswara Temple</h3>
+          <span>Halebidu, Karnataka • 12th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Hoysala Empire • Built under King Vishnuvardhana (c. 1121 CE)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Dvikuta (twin-sanctum) Vesara architecture on a raised star-shaped platform</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Carved from fine-grained chloritic schist (soapstone) with deep undercut friezes depicting galloping horses, charging elephants, and floral scrolls running seamlessly along the building's exterior perimeter.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Soapstone Sculptures</span>
+              <span class="tag-pill">Stellate Ground Plan</span>
+              <span class="tag-pill">Lathe-Turned Pillars</span>
+              <span class="tag-pill">Dvikuta Sanctuaries</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 13.2131° N, 75.9942° E</span>
+          <a href="https://maps.google.com/?q=Hoysaleswara+Temple+Halebidu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Meenakshi Sundareswarar Temple (Madurai) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/meenakshi-temple.jpg');">
+        <span class="monument-badge-top">Vaigai Basin • Madurai Nayaka</span>
+        <div class="monument-bottom-title">
+          <h3>Meenakshi Temple</h3>
+          <span>Madurai, Tamil Nadu • 16th–17th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Pandya & Madurai Nayaka Dynasties • Expanded by Thirumalai Nayak</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Late Dravidian monumental city-temple complex with concentric enclosures</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Dominated by 14 soaring Gopurams (the tallest Southern tower rising to 52 meters) covered in thousands of stucco mythological figures, surrounding the famous Hall of a Thousand Pillars (Aayiram Kaal Mandapam).</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">14 Soaring Gopurams</span>
+              <span class="tag-pill">1000-Pillared Hall</span>
+              <span class="tag-pill">Golden Lotus Tank</span>
+              <span class="tag-pill">Concentric Enclosures</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 9.9195° N, 78.1194° E</span>
+          <a href="https://maps.google.com/?q=Meenakshi+Amman+Temple+Madurai" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Chittorgarh Fort (Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/chittorgarh-fort.jpg');">
+        <span class="monument-badge-top">Mewar Citadel • Rajput Bastion</span>
+        <div class="monument-bottom-title">
+          <h3>Chittorgarh Fort</h3>
+          <span>Chittorgarh, Rajasthan • 7th–15th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Mori Rajput Origin • Expanded by Sisodia Rulers of Mewar (Maharana Kumbha)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Rajput Hill-Fort & Fortified Palace Architecture</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Spanning across 700 acres atop an isolated 180-meter plateau, it incorporated 84 natural rainwater reservoirs with deep underground catchment systems capable of sustaining an army of 50,000 soldiers for four years.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Vijay Stambha (Victory Tower)</span>
+              <span class="tag-pill">Water Catchment Tanks</span>
+              <span class="tag-pill">7 Bastion Gates (Pol)</span>
+              <span class="tag-pill">Kirti Stambha</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 24.8879° N, 74.6453° E</span>
+          <a href="https://maps.google.com/?q=Chittorgarh+Fort" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Dilwara Temples (Mount Abu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/monuments/dilwara-temples.jpg');">
+        <span class="monument-badge-top">Aravalli Ranges • Maru-Gurjara Marble</span>
+        <div class="monument-bottom-title">
+          <h3>Dilwara Marble Temples</h3>
+          <span>Mount Abu, Rajasthan • 11th–13th Century CE</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Dynasty & Era</span>
+            <p class="dossier-text">Chaulukya Era • Built by Vimal Shah and Ministers Tejapala & Vastupala</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Type</span>
+            <p class="dossier-text">Maru-Gurjara Jain Marble Temple Architecture</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Engineering Feat</span>
+            <p class="dossier-text">Renowned for its sheer translucent white Makrana marble stone-cutting. The central Mandapa ceilings feature concentric rings of hanging pendant drops and multi-layered brackets carved thin enough to allow light diffusion.</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Architectural Keys</span>
+            <div class="tag-container">
+              <span class="tag-pill">Pure Makrana Marble</span>
+              <span class="tag-pill">Vimal Vasahi Ceiling</span>
+              <span class="tag-pill">Carved Torana Arches</span>
+              <span class="tag-pill">Translucent Filigree</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">GPS: 24.6033° N, 72.7233° E</span>
+          <a href="https://maps.google.com/?q=Dilwara+Temples+Mount+Abu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View on Google Maps
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

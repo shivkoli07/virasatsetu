@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Explore Heritage & Traditions of India | VirasatSetu</title>
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.88);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF2DF !important;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.3s ease;
+    }
+
+    .auth-btn:hover {
+      box-shadow: 0 4px 15px rgba(184, 130, 48, 0.4);
+      transform: translateY(-1px);
+    }
+
+    /* Page Header */
+    .explore-hero {
+      text-align: center;
+      padding: 4.5rem 1.5rem 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(184, 130, 48, 0.12);
+      padding: 0.35rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(184, 130, 48, 0.3);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.7rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      letter-spacing: 1px;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Module Grid / Flow */
+    .explore-container {
+      max-width: 1260px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .heritage-card {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      background: var(--card-bg);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .heritage-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Visual Box */
+    .card-visual {
+      position: relative;
+      min-height: 380px;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      overflow: hidden;
+    }
+
+    .card-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.35) 0%, rgba(42, 21, 11, 0.85) 100%);
+      z-index: 1;
+      transition: background 0.3s ease;
+    }
+
+    .heritage-card:hover .card-visual::before {
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.25) 0%, rgba(42, 21, 11, 0.8) 100%);
+    }
+
+    .visual-index {
+      position: absolute;
+      top: 1.2rem;
+      left: 1.2rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.65);
+      border: 1px solid rgba(205, 179, 147, 0.4);
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .visual-overlay-title {
+      position: relative;
+      z-index: 2;
+      font-family: 'Cinzel', serif;
+      color: #FAF0DF;
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-align: center;
+      line-height: 1.3;
+      letter-spacing: 1px;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.7);
+      padding: 0 1rem;
+    }
+
+    .visual-overlay-title::after {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 2px;
+      background: var(--gold-accent-gradient);
+      margin: 0.8rem auto 0;
+      border-radius: 2px;
+    }
+
+    /* Right Content Pane */
+    .card-content {
+      padding: 2.2rem 2.6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .domain-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--accent-gold);
+      font-size: 1.05rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .details-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+      color: var(--primary-dark);
+    }
+
+    .details-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .detail-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .detail-text {
+      color: #3e2617;
+      line-height: 1.55;
+    }
+
+    .detail-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .chip {
+      background: rgba(205, 179, 147, 0.28);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 1.8rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed var(--border-card);
+    }
+
+    .btn-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-explore:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateX(4px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 980px) {
+      .navbar {
+        padding: 1rem 1.5rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .heritage-card {
+        grid-template-columns: 1fr;
+      }
+      .card-visual {
+        min-height: 220px;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+      }
+      .card-content {
+        padding: 1.6rem;
+      }
+      .details-row {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Page Title & Subtitle -->
+  <section class="explore-hero">
+    <div class="hero-badge">Encyclopedic Living Taxonomy</div>
+    <h1 class="hero-title">Explore Heritage & Traditions in India</h1>
+    <p class="hero-subtitle">
+      A comprehensive chronicle of India's civilizational inheritance—from monolithic stone sanctums and lost-wax metallurgy to sacred oral cantos, indigenous knowledge systems, and timeless festival cycles.
+    </p>
+  </section>
+
+  <!-- 16 Heritage Modules Section -->
+  <main class="explore-container">
+
+    <!-- 01.01: Monuments & Architecture -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/monuments-architecture.jpg');">
+        <span class="visual-index">01.01</span>
+        <h2 class="visual-overlay-title">Monuments &<br>Architecture</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Vastu Shastra, sacred stone geometry, and monumental dynastic power.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Enduring physical structures erected to embody civilizational memory, cosmic alignments, spiritual sanctums, and sovereign administration.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Key Archetypes</span>
+              <div class="detail-chips">
+                <span class="chip">Nagara (North)</span>
+                <span class="chip">Dravida (South)</span>
+                <span class="chip">Vesara (Deccan)</span>
+                <span class="chip">Indo-Islamic Arch & Dome</span>
+                <span class="chip">Cave Rock-Cut</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Master Examples</span>
+              <p class="detail-text">Brihadisvara Temple (Thanjavur), Kailasa Temple (Cave 16, Ellora), Sun Temple (Konark), Chittorgarh Fort, Rani ki Vav stepwell.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="monuments-architecture.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.02: Archaeological Heritage -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/archaeological-heritage.jpg');">
+        <span class="visual-index">01.02</span>
+        <h2 class="visual-overlay-title">Archaeological<br>Heritage</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Buried strata, Harappan urbanism, epigraphic rock edicts, and numismatic records.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Material relics and stratified excavations that supply primary empirical evidence for ancient human settlements, trade routes, and script evolution.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Categories</span>
+              <div class="detail-chips">
+                <span class="chip">Proto-Historic Metropolises</span>
+                <span class="chip">Asokan Edicts</span>
+                <span class="chip">Megalithic Cairns</span>
+                <span class="chip">Punch-Marked Coins</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Prime Sites</span>
+              <p class="detail-text">Dholavira hydraulic network, Rakhigarhi urban grid, Keeladi Sangam-era settlement, Maski & Junagadh rock inscriptions.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="archaeological-heritage.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.03: Traditional Dance -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/traditional-dance.jpg');">
+        <span class="visual-index">01.03</span>
+        <h2 class="visual-overlay-title">Traditional<br>Dance</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Natya Shastra treatise, mudras, rhythmic footwork, and sacred rasa theory.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Codified theatrical movement synthesizing gesture (Abhinaya), rhythm (Tala), and melody (Bhava) into narrative storytelling and community celebration.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Dance Disciplines</span>
+              <div class="detail-chips">
+                <span class="chip">8 Classical Sangeet Natak Forms</span>
+                <span class="chip">Warrior Martial Dances</span>
+                <span class="chip">Harvest Folk Forms</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Celebrated Forms</span>
+              <p class="detail-text">Bharatanatyam, Kathakali, Odissi, Kathak, Manipuri, Mohiniyattam, Sattriya, plus folk Lavani, Bihu, and Mayurbhanj Chhau.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="traditional-dance.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 01.04: Traditional Music -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/traditional-music.jpg');">
+        <span class="visual-index">01.04</span>
+        <h2 class="visual-overlay-title">Traditional<br>Music</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Nada Brahma, microtonal shrutis, improvisational ragas, and complex rhythmic talas.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Acoustic traditions passed via Guru-Shishya parampara, spanning contemplative classical microtones to communal harvest percussion rhythms.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Musical Streams</span>
+              <div class="detail-chips">
+                <span class="chip">Hindustani (Gharana System)</span>
+                <span class="chip">Carnatic (Kriti & Gamaka)</span>
+                <span class="chip">Baul Mysticism</span>
+                <span class="chip">Haveli Sangeet</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Instrument Arsenal</span>
+              <p class="detail-text">Rudra Veena, Saraswati Veena, Sitar, Sarangi, Mridangam, Tabla, Pakhawaj, Shehnai, Bansuri, and tribal Ektara.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="traditional-music.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.01: Art & Crafts -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/art-crafts.jpg');">
+        <span class="visual-index">02.01</span>
+        <h2 class="visual-overlay-title">Art &<br>Crafts</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Earth-pigment murals, spiritual iconography, scrolls, and miniature painting schools.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Visual vernacular traditions executed on cloth, walls, and handmade papers depicting epic mythologies, cosmic geometries, and agrarian rhythms.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Mediums & Styles</span>
+              <div class="detail-chips">
+                <span class="chip">Kalam Pen-Work</span>
+                <span class="chip">Natural Mineral Pigments</span>
+                <span class="chip">Palm-Leaf Etching</span>
+                <span class="chip">Gold Foil Embossing</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Renowned Schools</span>
+              <p class="detail-text">Madhubani (Mithila), Warli (Maharashtra), Pattachitra (Odisha), Kalamkari (Andhra), Thangka (Ladakh), Tanjore Gold Leaf (Tamil Nadu).</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="art-crafts.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.02: Textiles & Weaving -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/textiles-weaving.jpg');">
+        <span class="visual-index">02.02</span>
+        <h2 class="visual-overlay-title">Textiles &<br>Weaving</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Intersecting warp and weft, resist-dyeing, jacquard brocades, and mulberry silks.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Indigenous handloom sciences leveraging pit-looms, frame-looms, and resist techniques to translate geographic identity into wearable masterworks.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Technique Types</span>
+              <div class="detail-chips">
+                <span class="chip">Double-Ikat Patola</span>
+                <span class="chip">Tapestry Weaving (Zari)</span>
+                <span class="chip">Block-Print Tie & Dye</span>
+                <span class="chip">Shadow Work (Chikan)</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Living Weaves</span>
+              <p class="detail-text">Paithani (Yeola), Banarasi Katan Silk, Kanjeevaram (Tamil Nadu), Chanderi (MP), Sambalpuri Bandha (Odisha), Jamdani (Bengal).</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="textiles-weaving.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.03: Traditional Artisan Skills -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/traditional-artisan-skills.jpg');">
+        <span class="visual-index">02.03</span>
+        <h2 class="visual-overlay-title">Traditional<br>Artisan Skills</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Lost-wax cire-perdue, Bidri silver inlay, terracotta firing, and soapstone carving.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Hereditary guilds and metallurgical, lapidary, and woodwork techniques transmitting tacit manufacturing knowledge through physical apprenticeship.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Material Domains</span>
+              <div class="detail-chips">
+                <span class="chip">Panchaloha Bronze Casting</span>
+                <span class="chip">Damascening & Bidriware</span>
+                <span class="chip">Tarkashi Wire Inlay</span>
+                <span class="chip">Blue Pottery</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Famed Traditions</span>
+              <p class="detail-text">Swamimalai Bronze Murties (Chola legacy), Bidar Silver Inlay, Saharanpur Wood Carving, Molela Terracotta plaques, Kondapalli Toys.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="artisan-skills.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02.04: Languages, Dialects & Oral Traditions -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/languages-oral-traditions.jpg');">
+        <span class="visual-index">02.04</span>
+        <h2 class="visual-overlay-title">Languages &<br>Oral Traditions</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Vedic chanting phonetics, epigraphic scripts, dying dialects, and bardic memory.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Linguistic repositories housing India's linguistic pluralism across Indo-Aryan, Dravidian, Austroasiatic, and Tibeto-Burman language families.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Linguistic Spheres</span>
+              <div class="detail-chips">
+                <span class="chip">Classical Tongues (Sanskrit, Tamil, etc.)</span>
+                <span class="chip">Endangered Dialects</span>
+                <span class="chip">Bhat & Charan Bards</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Oral Heritage</span>
+              <p class="detail-text">UNESCO-recognized Vedic chanting, Kudiyattam Sanskrit stage recitations, Burrakatha (Telugu ballads), Powada (Maratha heroic lore).</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="languages-oral-traditions.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03.01: Literature & Knowledge Traditions -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/literature-knowledge.jpg');">
+        <span class="visual-index">03.01</span>
+        <h2 class="visual-overlay-title">Literature &<br>Knowledge</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Upanishadic dialogues, Sangam poetry anthologies, astronomy, and botanical canons.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Intellectual corpuses encompassing theoretical philosophy, exact mathematics, linguistics (Paninian grammar), statecraft, and lyric poetry.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Core Fields</span>
+              <div class="detail-chips">
+                <span class="chip">Shad-Darshana (Six Philosophies)</span>
+                <span class="chip">Ganita (Sulba Sutras & Aryabhatiya)</span>
+                <span class="chip">Arthashastra & Kural</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Timeless Canons</span>
+              <p class="detail-text">Mahabharata, Ramayana, Silappadikaram, Kalidasa's Meghaduta, Charaka Samhita, Madhava's calculus series (Kerala School).</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="literature-knowledge.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03.02: Festivals & Celebrations -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/festivals-celebrations.jpg');">
+        <span class="visual-index">03.02</span>
+        <h2 class="visual-overlay-title">Festivals &<br>Celebrations</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Lunar tithis, solstices, harvest cycles, temple processions, and sacred congregations.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Cyclical calendar milestones synchronizing astronomical transitions, agricultural bounty, spiritual renewal, and shared civic unity.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Calendar Types</span>
+              <div class="detail-chips">
+                <span class="chip">Solar Sankranti Shifts</span>
+                <span class="chip">Lunar Navaratras</span>
+                <span class="chip">Spring & Autumn Equinoxes</span>
+                <span class="chip">Monastic Utsavas</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Pan-Indian Fairs</span>
+              <p class="detail-text">Maha Kumbh Mela, Thrissur Pooram, Durga Puja (Kolkata), Rath Yatra (Puri), Hornbill Festival (Nagaland), Hemis Tsechu (Ladakh).</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="festivals-celebrations.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03.03: Traditional Clothing & Adornment -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/clothing-adornment.jpg');">
+        <span class="visual-index">03.03</span>
+        <h2 class="visual-overlay-title">Clothing &<br>Adornment</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Unstitched draped garments, temple jewellery, gold filigree, and regional turbans.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Sartorial expressions structured by climatic conditions, sacred unstitched conventions, dynastic courts, and regional metalcraft.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Attire Styles</span>
+              <div class="detail-chips">
+                <span class="chip">Nauvari & Kache Drapes</span>
+                <span class="chip">Mekhela Sador</span>
+                <span class="chip">Pheta & Pagri Turbans</span>
+                <span class="chip">Kundan & Jadau Ornaments</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Living Examples</span>
+              <p class="detail-text">Kashmiri Pheran with Tilla needlework, Rajasthani Bandhani Odhnis, Kerala Kasavu Mundu, Cuttack Tarakasi silver filigree.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="clothing-adornment.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03.04: Culinary Heritage -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/culinary-heritage.jpg');">
+        <span class="visual-index">03.04</span>
+        <h2 class="visual-overlay-title">Culinary<br>Heritage</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Sad-rasa six tastes, Ayurvedic dietetics, spice thermodynamics, and temple bhoga.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Ancient food philosophies harmonizing seasonal ingredients (Ritucharya), fermentation techniques, heirloom grains, and religious offering protocols.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Tradition Streams</span>
+              <div class="detail-chips">
+                <span class="chip">Temple Mahaprasada</span>
+                <span class="chip">Fermented Millet Cuisines</span>
+                <span class="chip">Wazwan & Dum Cooking</span>
+                <span class="chip">Coastal Coconut-Kokum</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Heirloom Cuisines</span>
+              <p class="detail-text">Puri Jagannath Temple Chappan Bhog, Chettinad spice mixtures, Maharashtrian Puran Poli, Malabar spice blends, Kashmiri Wazwan.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="culinary-heritage.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04.01: Rituals, Customs & Social Traditions -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/rituals-customs.jpg');">
+        <span class="visual-index">04.01</span>
+        <h2 class="visual-overlay-title">Rituals &<br>Customs</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Shodasha Samskaras life stages, sacred hearth yajnas, and ancestral river rites.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Structured ceremonies demarcating birth, initiation, wedlock, harvest cycles, and ancestral reverence, preserving community continuity.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Ceremonial Spheres</span>
+              <div class="detail-chips">
+                <span class="chip">Samskaras (Rites of Passage)</span>
+                <span class="chip">Ganga Arati Traditions</span>
+                <span class="chip">Village Grama-Devata Puja</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Prominent Customs</span>
+              <p class="detail-text">Varanasi & Haridwar Sandhya Aratis, Theyyam living worship rituals (Kerala), Chhath Surya Arghya, Toda tribal funeral rites.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="rituals-customs.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04.02: Tribal & Indigenous Heritage -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/tribal-indigenous.jpg');">
+        <span class="visual-index">04.02</span>
+        <h2 class="visual-overlay-title">Tribal &<br>Indigenous</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Sacred groves, animistic worship, cane engineering, and unscripted folk memories.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">The ancient, sustainable life systems, customary laws, and artisanal techniques of India's 700+ Scheduled Tribes and indigenous groups.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Core Communities</span>
+              <div class="detail-chips">
+                <span class="chip">Gonds (Central India)</span>
+                <span class="chip">Santhals & Bhils</span>
+                <span class="chip">Khasis & Nagas</span>
+                <span class="chip">Todas (Nilgiris)</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Iconic Practices</span>
+              <p class="detail-text">Meghalaya Living Root Bridges (Jingkieng Jri), Bastar Dokra brass casting, Santhali flower festivals (Baha Parab), Toda conical huts.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="tribal-indigenous.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04.03: Traditional Knowledge & Practices -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/traditional-knowledge.jpg');">
+        <span class="visual-index">04.03</span>
+        <h2 class="visual-overlay-title">Traditional<br>Knowledge</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Ayurveda, Siddha pulse reading, rainwater stepwell baolis, and zinc distillation.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Empirical scientific methodologies developed over millennia spanning medicine, sustainable irrigation, metallurgy, and botanical ecology.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Scientific Branches</span>
+              <div class="detail-chips">
+                <span class="chip">Ayurveda & Siddha Medicine</span>
+                <span class="chip">Zawar Zinc Retort Smelting</span>
+                <span class="chip">Kuhl & Baoli Water Systems</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Historic Innovations</span>
+              <p class="detail-text">Wootz Crucible Damascus Steel, Zawar medieval industrial zinc furnaces, Ahar-Pyne irrigation (Bihar), Sushruta surgical instruments.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="traditional-knowledge.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04.04: Historical Personalities & Cultural Figures -->
+    <article class="heritage-card">
+      <div class="card-visual" style="background-image: url('assets/explore/historical-personalities.jpg');">
+        <span class="visual-index">04.04</span>
+        <h2 class="visual-overlay-title">Historical<br>Personalities</h2>
+      </div>
+      <div class="card-content">
+        <div>
+          <span class="domain-tagline">Philosophers, warrior queens, astronomer-mathematicians, and mystic poets.</span>
+          <div class="details-grid">
+            <div class="details-row">
+              <span class="detail-label">What It Is</span>
+              <p class="detail-text">Luminaries whose moral philosophies, strategic governance, scientific breakthroughs, and lyrical compositions shaped Indian civilization.</p>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Archetypes</span>
+              <div class="detail-chips">
+                <span class="chip">Rulers & Sovereign Strategists</span>
+                <span class="chip">Bhakti & Sufi Saint-Poets</span>
+                <span class="chip">Scientists & Grammarians</span>
+              </div>
+            </div>
+            <div class="details-row">
+              <span class="detail-label">Icons of History</span>
+              <p class="detail-text">Chhatrapati Shivaji Maharaj, Rajaraja Chola I, Rani Ahilyabai Holkar, Aryabhata, Panini, Sant Tukaram, Kabir, Mirabai, Swami Vivekananda.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="historical-personalities.html" class="btn-explore">Enter Archive &rarr;</a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+</body>
+</html>

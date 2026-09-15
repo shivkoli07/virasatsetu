@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chakra-Virasat: The Konark Sun Wheel | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+    }
+
+    .game-layout {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 500px 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .wheel-card, .challenge-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2.4rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .wheel-card::before, .challenge-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .game-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+      text-align: center;
+    }
+
+    .game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    /* Moving Wheel Container */
+    .wheel-wrapper {
+      position: relative;
+      width: 380px;
+      height: 380px;
+      margin: 0 auto;
+    }
+
+    /* Fixed Top Indicator Needle */
+    .wheel-pointer {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 14px solid transparent;
+      border-right: 14px solid transparent;
+      border-top: 28px solid #804724;
+      z-index: 10;
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3));
+    }
+
+    #wheelCanvas {
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      box-shadow: 0 10px 30px rgba(42, 21, 11, 0.25), inset 0 0 15px rgba(0,0,0,0.3);
+      border: 4px solid var(--border-card);
+      transition: transform 4.5s cubic-bezier(0.15, 0.95, 0.25, 1);
+    }
+
+    /* Center Bronze Hub Button */
+    .spin-center-btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: var(--royal-gradient);
+      border: 3px solid #EEDBBE;
+      color: #FFF9F0;
+      font-family: 'Cinzel', serif;
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(42, 21, 11, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 5;
+    }
+
+    .spin-center-btn:hover:not(:disabled) {
+      transform: translate(-50%, -50%) scale(1.08);
+      background: var(--royal-gradient-hover);
+    }
+
+    .spin-center-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Right Challenge Panel */
+    .challenge-panel-content {
+      min-height: 340px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .sector-badge {
+      display: inline-block;
+      background: rgba(219, 191, 156, 0.35);
+      border: 1px solid var(--border-card);
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      margin-bottom: 0.8rem;
+    }
+
+    .prompt-text {
+      font-size: 1.05rem;
+      font-weight: 600;
+      line-height: 1.55;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .choices-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .choice-btn {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 12px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      cursor: pointer;
+      text-align: left;
+      transition: var(--transition);
+    }
+
+    .choice-btn:hover:not(:disabled) {
+      border-color: var(--accent-gold);
+      background: #FAF3E8;
+    }
+
+    .choice-btn.correct {
+      background: rgba(36, 107, 62, 0.15) !important;
+      border-color: #246B3E !important;
+      color: #1A542F !important;
+    }
+
+    .choice-btn.wrong {
+      background: rgba(184, 50, 48, 0.15) !important;
+      border-color: #B83230 !important;
+      color: #8C1F1D !important;
+    }
+
+    .win-box {
+      display: none;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid var(--accent-gold);
+      border-radius: 16px;
+      padding: 1.2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .unlocked-badge-box {
+      margin-top: 0.8rem;
+      padding: 0.7rem 1rem;
+      background: rgba(238, 219, 190, 0.4);
+      border: 1.5px dashed var(--accent-gold);
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .unlocked-badge-icon {
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+
+    .unlocked-badge-name {
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-align: left;
+    }
+
+    .unlocked-badge-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    .btn-action {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 25px;
+      padding: 0.65rem 1.6rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      cursor: pointer;
+      transition: var(--transition);
+      margin-top: 0.8rem;
+    }
+
+    .btn-action:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 992px) {
+      .game-layout { grid-template-columns: 1fr; }
+      .wheel-wrapper { width: 320px; height: 320px; }
+      #wheelCanvas { width: 320px; height: 320px; }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <main class="game-layout">
+
+    <!-- Konark Sun Wheel -->
+    <section class="wheel-card">
+      <div class="game-tag">24-Spoke Sacred Geometry</div>
+      <h1 class="game-title">Chakra-Virasat</h1>
+
+      <div class="wheel-wrapper">
+        <div class="wheel-pointer"></div>
+        <canvas id="wheelCanvas" width="500" height="500"></canvas>
+        <button class="spin-center-btn" id="spinBtn" onclick="spinWheel()">SPIN</button>
+      </div>
+
+      <p style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-top: 1.5rem;">
+        Inspired by the 13th-century Sun Temple Chariot Wheel of Konark.
+      </p>
+    </section>
+
+    <!-- Challenge Reveal Side Panel -->
+    <aside class="challenge-card">
+      <div class="challenge-panel-content" id="challengeContent">
+        <div>
+          <span class="sector-badge" id="sectorDisplay">Wheel Awaiting Spin</span>
+          <h2 style="font-family: 'Cinzel', serif; font-size: 1.3rem; margin-bottom: 0.8rem;" id="promptHeading">
+            Invoke the Wheel of Time
+          </h2>
+          <p class="prompt-text" id="promptText">
+            Click the central bronze hub to rotate the wheel across India’s tangible and intangible domains. Earn up to <strong>+300 XP</strong> and unlock the <strong>Kala Chakra Master</strong> honor.
+          </p>
+        </div>
+
+        <div class="choices-stack" id="choicesBox"></div>
+
+        <div class="win-box" id="winCard">
+          <strong style="font-family: 'Cinzel', serif; color: var(--accent-brown);" id="winTitle">Sector Mastered!</strong>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;" id="winDesc"></p>
+
+          <div class="unlocked-badge-box">
+            <span class="unlocked-badge-icon">☸️</span>
+            <div>
+              <div class="unlocked-badge-name">Kala Chakra Master</div>
+              <div class="unlocked-badge-sub">Honor permanently recorded to PostgreSQL</div>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn-action" onclick="window.location.href='profile.html'">View in Scholar Dossier</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <script>
+    const API_QUIZ = 'http://localhost:8080/api/quiz/submit';
+    const userEmail = localStorage.getItem('virasatSetu_user_email');
+
+    // Navbar sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Profile';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // 8 Sectors with Expanded Question Banks (No repetitions per category)
+    const sectors = [
+      {
+        label: "Architecture", color: "#66381B", xp: 250,
+        questions: [
+          { q: "Which crowning architectural element caps the spires of North Indian Nagara temples?", options: ["Amalaka", "Gopuram", "Mandapa", "Torana"], answer: 0 },
+          { q: "What is the term for the pillared outdoor hall meant for public rituals in Indian temple complexes?", options: ["Mandapa", "Garbhagriha", "Shikhara", "Pradakshina"], answer: 0 },
+          { q: "In Dravidian architecture, what is the monumental ornamented entrance gateway called?", options: ["Gopuram", "Amalaka", "Vimana", "Kalasha"], answer: 0 }
+        ]
+      },
+      {
+        label: "Textiles", color: "#804724", xp: 200,
+        questions: [
+          { q: "Paithani silk sarees from Maharashtra are traditionally recognized by which motif on the pallu?", options: ["Peacock (Mor)", "Elephant", "Lotus Rosette", "Tiger Stripe"], answer: 0 },
+          { q: "Which traditional tie-and-dye textile craft originates from the desert regions of Gujarat and Rajasthan?", options: ["Bandhani", "Chanderi", "Kantha", "Phulkari"], answer: 0 },
+          { q: "Kanjeevaram silk sarees, celebrated for their vibrant contrast borders, are crafted in which state?", options: ["Tamil Nadu", "West Bengal", "Uttar Pradesh", "Assam"], answer: 0 }
+        ]
+      },
+      {
+        label: "Tribal Art", color: "#9E642A", xp: 200,
+        questions: [
+          { q: "What pigment is traditionally utilized to render white figures in sacred Warli murals?", options: ["Rice Paste & Gum", "Crushed Pearl", "Chalk Powder", "White Lime"], answer: 0 },
+          { q: "Madhubani painting, characterized by intricate geometric patterns, originated in which cultural region?", options: ["Mithila", "Bastar", "Wayanad", "Kutch"], answer: 0 },
+          { q: "Pattachitra scroll paintings, famous for mythological narratives, traditionally hail from which state?", options: ["Odisha", "Punjab", "Kerala", "Rajasthan"], answer: 0 }
+        ]
+      },
+      {
+        label: "Metallurgy", color: "#5E3219", xp: 300,
+        questions: [
+          { q: "Which royal dynasty perfected lost-wax (cire-perdue) casting of the iconic cosmic Nataraja?", options: ["Imperial Cholas", "Kushans", "Guptas", "Mauryas"], answer: 0 },
+          { q: "Bidriware metal handicraft, known for its striking silver inlay on blackened alloy, originates from where?", options: ["Bidar, Karnataka", "Jaipur, Rajasthan", "Moradabad, UP", "Kutch, Gujarat"], answer: 0 },
+          { q: "Dhokra casting is an ancient 4,000-year-old brass craft practiced predominantly by tribal artisans of which region?", options: ["Bastar, Chhattisgarh", "Nilgiris, Tamil Nadu", "Ladakh Valley", "Sikkim Hills"], answer: 0 }
+        ]
+      },
+      {
+        label: "Oral Epics", color: "#B88230", xp: 200,
+        questions: [
+          { q: "Which ancient collection of oral beast fables and political stratagems was authored by Pandit Vishnu Sharma?", options: ["Panchantantra", "Hitopadesha", "Jataka Tales", "Kathasaritsagara"], answer: 0 },
+          { q: "Which great epic composed by Sage Valmiki chronicles the journey and righteous reign of Lord Rama?", options: ["Ramayana", "Mahabharata", "Silappatikaram", "Raghuvamsha"], answer: 0 },
+          { q: "The epic Sanskrit dialogue between Prince Arjuna and Lord Krishna on the battlefield of Kurukshetra is known as:", options: ["Bhagavad Gita", "Upanishads", "Vedanta Sutra", "Yoga Sutras"], answer: 0 }
+        ]
+      },
+      {
+        label: "Dynasties", color: "#3A1E11", xp: 300,
+        questions: [
+          { q: "King Krishna I, who commissioned the monolithic rock-cut Kailasa Temple, belonged to which dynasty?", options: ["Rashtrakutas", "Pallavas", "Chalukyas", "Cheras"], answer: 0 },
+          { q: "Which imperial dynasty established their magnificent capital at Hampi on the banks of the Tungabhadra River?", options: ["Vijayanagara Empire", "Hoysala Empire", "Kakatiya Dynasty", "Yadava Dynasty"], answer: 0 },
+          { q: "Ashoka the Great, renowned for his rock edicts and spread of Dhamma, belonged to which ancient empire?", options: ["Mauryan Empire", "Gupta Empire", "Nanda Empire", "Shunga Empire"], answer: 0 }
+        ]
+      },
+      {
+        label: "Dance Forms", color: "#754021", xp: 200,
+        questions: [
+          { q: "Which classical Indian dance form is distinguished by vibrant facial makeup, billowing skirts, and epic Kathakali masks?", options: ["Kathakali (Kerala)", "Kathak (UP)", "Sattriya (Assam)", "Odissi (Odisha)"], answer: 0 },
+          { q: "Bharatanatyam, one of India's oldest classical dance traditions, originated in the temples of which state?", options: ["Tamil Nadu", "Andhra Pradesh", "Kerala", "Karnataka"], answer: 0 },
+          { q: "Which classical dance style of Northern India is renowned for intricate footwork and rapid spins (Chakkars)?", options: ["Kathak", "Manipuri", "Kuchipudi", "Mohiniyattam"], answer: 0 }
+        ]
+      },
+      {
+        label: "Acoustics", color: "#A25C31", xp: 250,
+        questions: [
+          { q: "Which ancient microtonal drone instrument forms the acoustic meditative foundation of Indian classical music?", options: ["Tanpura", "Shehnai", "Pakhawaj", "Sarangi"], answer: 0 },
+          { q: "What is the melodic framework consisting of specific notes and emotional motifs in Indian classical music called?", options: ["Raga", "Tala", "Shruti", "Alap"], answer: 0 },
+          { q: "Which classical percussion instrument consists of a pair of hand drums—the dayan and the bayan?", options: ["Tabla", "Mridangam", "Ghatam", "Kanjira"], answer: 0 }
+        ]
+      }
+    ];
+
+    const canvas = document.getElementById('wheelCanvas');
+    const ctx = canvas.getContext('2d');
+    const numSectors = sectors.length;
+    const arc = (2 * Math.PI) / numSectors;
+    let currentRotation = 0;
+    let isSpinning = false;
+
+    // Track asked questions per sector to prevent repetition
+    const askedQuestionsTracker = {};
+    sectors.forEach((sec, idx) => {
+      askedQuestionsTracker[idx] = [];
+    });
+
+    function drawWheel() {
+      const radius = canvas.width / 2;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      sectors.forEach((sec, i) => {
+        const angle = i * arc;
+        ctx.beginPath();
+        ctx.fillStyle = sec.color;
+        ctx.moveTo(radius, radius);
+        ctx.arc(radius, radius, radius - 15, angle, angle + arc);
+        ctx.lineTo(radius, radius);
+        ctx.fill();
+        ctx.strokeStyle = "#FAF0DF";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        ctx.save();
+        ctx.translate(radius, radius);
+        ctx.rotate(angle + arc / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#FFF9F0";
+        ctx.font = "bold 17px 'Cinzel', serif";
+        ctx.fillText(sec.label, radius - 35, 6);
+        ctx.restore();
+      });
+
+      ctx.beginPath();
+      ctx.arc(radius, radius, radius - 8, 0, 2 * Math.PI);
+      ctx.strokeStyle = "#C98F3B";
+      ctx.lineWidth = 10;
+      ctx.stroke();
+    }
+
+    drawWheel();
+
+    function spinWheel() {
+      if (isSpinning) return;
+      isSpinning = true;
+      document.getElementById('spinBtn').disabled = true;
+      document.getElementById('winCard').style.display = 'none';
+
+      const extraDegrees = Math.floor(Math.random() * 360);
+      const totalDegrees = 1800 + extraDegrees;
+      currentRotation += totalDegrees;
+
+      canvas.style.transform = `rotate(${currentRotation}deg)`;
+
+      setTimeout(() => {
+        isSpinning = false;
+        document.getElementById('spinBtn').disabled = false;
+
+        const actualDeg = currentRotation % 360;
+        const normalizedDeg = (360 - (actualDeg % 360) + 270) % 360;
+        const selectedIndex = Math.floor(normalizedDeg / (360 / numSectors)) % numSectors;
+
+        presentSectorChallenge(selectedIndex);
+      }, 4600);
+    }
+
+    function presentSectorChallenge(sectorIdx) {
+      const sector = sectors[sectorIdx];
+      const tracker = askedQuestionsTracker[sectorIdx];
+
+      // Find available unasked questions for this sector
+      let availableIndices = sector.questions
+        .map((_, i) => i)
+        .filter(i => !tracker.includes(i));
+
+      // Reset tracker if all questions have been exhausted
+      if (availableIndices.length === 0) {
+        askedQuestionsTracker[sectorIdx] = [];
+        availableIndices = sector.questions.map((_, i) => i);
+      }
+
+      // Pick a random unasked question
+      const randomQIdx = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+      askedQuestionsTracker[sectorIdx].push(randomQIdx);
+
+      const qObj = sector.questions[randomQIdx];
+
+      document.getElementById('sectorDisplay').textContent = `Spoke Selected: ${sector.label}`;
+      document.getElementById('promptHeading').textContent = `The Riddle of ${sector.label}`;
+      document.getElementById('promptText').textContent = qObj.q;
+
+      const choicesBox = document.getElementById('choicesBox');
+      choicesBox.innerHTML = '';
+
+      const optionsWithIndices = qObj.options.map((opt, i) => ({ text: opt, isCorrect: i === qObj.answer }));
+      optionsWithIndices.sort(() => Math.random() - 0.5);
+
+      optionsWithIndices.forEach(item => {
+        const btn = document.createElement('button');
+        btn.className = 'choice-btn';
+        btn.textContent = item.text;
+        btn.onclick = () => handleChoice(btn, item.isCorrect, sector, qObj);
+        choicesBox.appendChild(btn);
+      });
+    }
+
+    async function handleChoice(btn, isCorrect, sector, qObj) {
+      const allBtns = document.querySelectorAll('.choice-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (isCorrect) {
+        btn.classList.add('correct');
+        const winCard = document.getElementById('winCard');
+        winCard.style.display = 'block';
+
+        if (userEmail) {
+          try {
+            const res = await fetch(API_QUIZ, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                email: userEmail,
+                title: `Chakra-Virasat: ${sector.label} Spoke`,
+                category: "Wheel of Heritage",
+                scorePercent: 100,
+                xpEarned: sector.xp,
+                badgeTitle: "Kala Chakra Master",
+                badgeIcon: "☸️"
+              })
+            });
+
+            if (res.ok) {
+              const data = await res.json();
+              document.getElementById('winDesc').innerHTML = 
+                `Accurate civilizational knowledge! <strong>+${sector.xp} XP</strong> saved to your dossier (Total: <strong>${data.totalXp} XP</strong>).`;
+            }
+          } catch (e) {
+            console.warn('Sync failed');
+          }
+        }
+      } else {
+        btn.classList.add('wrong');
+        allBtns.forEach(b => {
+          if (b.textContent === qObj.options[qObj.answer]) b.classList.add('correct');
+        });
+      }
+    }
+  </script>
+</body>
+</html>

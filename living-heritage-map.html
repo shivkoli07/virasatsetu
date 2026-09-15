@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Living Heritage Map | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Leaflet GIS Map Library -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--accent-brown); }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    /* Filters Bar */
+    .filter-bar-container {
+      max-width: 1400px;
+      margin: 1.2rem auto 0 auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .filters-group {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-chip {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .filter-chip:hover, .filter-chip.active {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: var(--accent-brown);
+    }
+
+    .sites-counter {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    /* Main Grid Layout */
+    .map-container-layout {
+      max-width: 1400px;
+      margin: 1rem auto 3rem auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 1.8rem;
+      flex: 1;
+    }
+
+    #map {
+      width: 100%;
+      height: 720px;
+      border-radius: 24px;
+      border: 2px solid var(--border-card);
+      box-shadow: var(--card-shadow);
+      z-index: 1;
+    }
+
+    .site-dossier-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      height: 720px;
+      position: relative;
+    }
+
+    .site-dossier-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .dossier-img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1.5px solid var(--border-card);
+      margin: 1rem 0;
+      background: #1B0F08;
+    }
+
+    .site-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.45rem;
+      color: var(--primary-dark);
+      margin-top: 0.3rem;
+      line-height: 1.3;
+    }
+
+    .meta-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
+
+    .meta-pill {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.22rem 0.65rem;
+      border-radius: 12px;
+      background: #FAF0DF;
+      border: 1px solid var(--border-card);
+      color: var(--accent-brown);
+    }
+
+    .site-desc {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      overflow-y: auto;
+      flex: 1;
+      padding-right: 0.5rem;
+      margin-top: 0.8rem;
+    }
+
+    .site-desc::-webkit-scrollbar {
+      width: 5px;
+    }
+    .site-desc::-webkit-scrollbar-thumb {
+      background: var(--border-card);
+      border-radius: 4px;
+    }
+
+    .coords-badge {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent-brown);
+      margin-top: 0.8rem;
+    }
+
+    .action-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-card);
+    }
+
+    .btn-action {
+      flex: 1;
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      text-decoration: none;
+      padding: 0.65rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-align: center;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-action:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: #FFFFFF;
+      color: var(--accent-brown);
+      border: 1px solid var(--border-card);
+    }
+    .btn-secondary:hover {
+      background: #FAF0DF;
+    }
+
+    @media (max-width: 1040px) {
+      .map-container-layout { grid-template-columns: 1fr; }
+      #map { height: 480px; }
+      .site-dossier-card { height: auto; }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home Archive</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <!-- Domain Filter Bar -->
+  <div class="filter-bar-container">
+    <div class="filters-group" id="filterContainer">
+      <button class="filter-chip active" data-filter="all">All Civilizational Sites</button>
+      <button class="filter-chip" data-filter="monument">Temples & Monoliths</button>
+      <button class="filter-chip" data-filter="textile">Textiles & Looms</button>
+      <button class="filter-chip" data-filter="tribal">Tribal & Indigenous Art</button>
+      <button class="filter-chip" data-filter="metallurgy">Lost-Wax Metallurgy</button>
+      <button class="filter-chip" data-filter="astronomy">Vedic Astronomy</button>
+    </div>
+    <div class="sites-counter" id="siteCountDisplay">20 Heritage Coordinates Loaded</div>
+  </div>
+
+  <main class="map-container-layout">
+    <div id="map"></div>
+
+    <!-- Right Detailed Geo-Dossier -->
+    <aside class="site-dossier-card">
+      <div style="font-family: 'Cinzel', serif; font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; color: var(--accent-brown); text-transform: uppercase;">
+        Civilizational Geo-Dossier
+      </div>
+      <h2 class="site-name" id="siteName">Kailasa Rock-Cut Temple</h2>
+      
+      <div class="meta-pills-row" id="metaRow">
+        <span class="meta-pill" id="stateTag">Maharashtra</span>
+        <span class="meta-pill" id="eraTag">Rashtrakuta Dynasty • 8th C.</span>
+        <span class="meta-pill" id="domainTag">Monolith Architecture</span>
+      </div>
+
+      <img id="siteImg" src="assets/games/kailash.jpg" alt="Heritage Landmark" class="dossier-img" />
+
+      <p class="site-desc" id="siteDesc">
+        Cave 16 at Ellora represents the undisputed zenith of rock-cut monolithic craftsmanship. Commissioned under Rashtrakuta King Krishna I in the 8th century, master masons removed over 200,000 tonnes of volcanic basalt rock top-down from a single escarpment without a single joint seam or structural mortar.
+      </p>
+
+      <div class="coords-badge">
+        <span>GPS: <strong id="coordsText">20.0238° N, 75.1791° E</strong></span>
+        <span style="color: var(--accent-gold);">UNESCO World Heritage</span>
+      </div>
+
+      <div class="action-row">
+        <button class="btn-action" onclick="zoomToCurrentSite()">Center View</button>
+        <a href="games.html" class="btn-action btn-secondary">Play Trial</a>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const API_SITES = 'http://localhost:8080/api/heritage/sites';
+
+    // Navbar Auth Sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Scholar';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    // 20 Exact GPS Coordinates Across Pan-India
+    const fallbackSites = [
+      {
+        id: 1,
+        name: "Kailasa Rock-Cut Temple (Cave 16)",
+        category: "monument",
+        state: "Maharashtra (Ellora)",
+        lat: 20.0238,
+        lng: 75.1791,
+        eraOrPeriod: "Rashtrakuta Dynasty • c. 760 CE",
+        imageUrl: "assets/games/kailash.jpg",
+        description: "Monolithic excavation carved top-down from living basalt cliff. Dedicated to Lord Shiva, the multi-storeyed sanctum, gateway, nandi mandapa, and monumental monolithic elephants stand as one single stone continuum."
+      },
+      {
+        id: 2,
+        name: "Brihadisvara Temple (Peruvudaiyar Kovil)",
+        category: "monument",
+        state: "Tamil Nadu (Thanjavur)",
+        lat: 10.7828,
+        lng: 79.1318,
+        eraOrPeriod: "Imperial Chola Dynasty • 1010 CE",
+        imageUrl: "assets/slides/slide7.jpg",
+        description: "Engineered under Emperor Rajaraja Chola I entirely from interlocking granite blocks. Crowned with an 80-tonne monolithic Kumbam apex dome raised via a 6 km earthen ramp."
+      },
+      {
+        id: 3,
+        name: "Konark Sun Chariot Temple",
+        category: "astronomy",
+        state: "Odisha (Puri Coast)",
+        lat: 19.8921,
+        lng: 86.0912,
+        eraOrPeriod: "Eastern Ganga Dynasty • 1250 CE",
+        imageUrl: "assets/games/chakra.jpg",
+        description: "Conceived as a colossal celestial chariot with 24 carved stone wheels pulled by seven horses. The intricate spokes function as precision sundials tracking solar time."
+      },
+      {
+        id: 4,
+        name: "Virupaksha & Vitthala Temples (Hampi)",
+        category: "monument",
+        state: "Karnataka (Vijayanagara)",
+        lat: 15.3350,
+        lng: 76.4600,
+        eraOrPeriod: "Vijayanagara Empire • 14th–16th C.",
+        imageUrl: "assets/slides/slide1.jpg",
+        description: "The imperial capital situated on the boulder-strewn banks of the Tungabhadra River. Celebrated for musical stone pillars and the iconic stone chariot dedicated to Garuda."
+      },
+      {
+        id: 5,
+        name: "Paithani Handloom Silk Weaving Guilds",
+        category: "textile",
+        state: "Maharashtra (Paithan)",
+        lat: 19.4795,
+        lng: 75.3855,
+        eraOrPeriod: "Satavahana Dynasty to Marathas",
+        imageUrl: "assets/games/akshar.jpg",
+        description: "Traditional tapestry weave technique intertwining pure mulberry silk and silver-gold electroplated zari. Characteristic peacocks (Mor) and parrot motifs adorning royal pallus."
+      },
+      {
+        id: 6,
+        name: "Warli Tribal Ochre Art Heartland",
+        category: "tribal",
+        state: "Maharashtra (Dahanu/Palghar)",
+        lat: 19.9703,
+        lng: 72.7329,
+        eraOrPeriod: "Prehistoric Oral Tradition (Neolithic Roots)",
+        imageUrl: "assets/games/yugma.jpg",
+        description: "Sacred indigenous mud-wall compositions rendered using white rice paste mixed with water and binding gum. Circles symbolize the sun and moon, while triangles represent mountains and trees."
+      },
+      {
+        id: 7,
+        name: "Bastar Dhokra Lost-Wax Metallurgy",
+        category: "metallurgy",
+        state: "Chhattisgarh (Kondagaon/Bastar)",
+        lat: 19.5986,
+        lng: 81.6703,
+        eraOrPeriod: "Indus Valley Continuum (c. 2500 BCE)",
+        imageUrl: "assets/games/drishti.jpg",
+        description: "Ancient non-ferrous hollow brass casting using beeswax coils wrapped around clay cores. Handcrafted bells, lamps, and tribal deities created by the Ghadwa community."
+      },
+      {
+        id: 8,
+        name: "Swamimalai Chola Bronze Casting Centers",
+        category: "metallurgy",
+        state: "Tamil Nadu (Thanjavur District)",
+        lat: 10.9577,
+        lng: 79.3242,
+        eraOrPeriod: "Imperial Chola Golden Age (10th C.)",
+        imageUrl: "assets/slides/slide8.jpg",
+        description: "Generational Sthapathis adhering strictly to the ancient proportions of the *Shilpa Shastra*. Famous for casting the cosmic Nataraja in five-metal Panchaloha alloy."
+      },
+      {
+        id: 9,
+        name: "Khajuraho Western Group of Temples",
+        category: "monument",
+        state: "Madhya Pradesh (Chhatarpur)",
+        lat: 24.8318,
+        lng: 79.9199,
+        eraOrPeriod: "Chandela Dynasty • 950–1050 CE",
+        imageUrl: "assets/slides/slide3.jpg",
+        description: "The zenith of North Indian Nagara temple architecture, culminating in the Kandariya Mahadeva temple with sweeping curvilinear spires symbolizing Mount Meru."
+      },
+      {
+        id: 10,
+        name: "Sanchi Great Stupa & Toranas",
+        category: "monument",
+        state: "Madhya Pradesh (Raisen)",
+        lat: 23.4795,
+        lng: 77.7397,
+        eraOrPeriod: "Mauryan to Shunga Era • 3rd C. BCE",
+        imageUrl: "assets/slides/slide4.jpg",
+        description: "Commissioned by Emperor Ashoka, housing the sacred relics of the Buddha. The four carved Torana gateways illustrate Jataka tales with unmatched narrative fluidity."
+      },
+      {
+        id: 11,
+        name: "Banarasi Zari Handloom Weaving Guilds",
+        category: "textile",
+        state: "Uttar Pradesh (Varanasi)",
+        lat: 25.3176,
+        lng: 82.9739,
+        eraOrPeriod: "Mughal & Vedic Silk Lineages",
+        imageUrl: "assets/slides/slide2.jpg",
+        description: "Intricate brocades crafted on pit looms using pure gold and silver threads (Kalabattun), famous for Mughal-inspired floral jals and bel motifs."
+      },
+      {
+        id: 12,
+        name: "Madhubani (Mithila) Folk Painting",
+        category: "tribal",
+        state: "Bihar (Madhubani District)",
+        lat: 26.3540,
+        lng: 86.0716,
+        eraOrPeriod: "Ramayana Era Oral Lineage",
+        imageUrl: "assets/slides/slide5.jpg",
+        description: "Folk paintings characterized by eye-catching geometrical patterns executed with twigs, nib-pens, and matchsticks using natural dyes derived from soot and leaves."
+      },
+      {
+        id: 13,
+        name: "Jantar Mantar Royal Astronomical Observatory",
+        category: "astronomy",
+        state: "Rajasthan (Jaipur)",
+        lat: 26.9248,
+        lng: 75.8246,
+        eraOrPeriod: "Maharaja Sawai Jai Singh II • 1734 CE",
+        imageUrl: "assets/slides/slide6.jpg",
+        description: "Collection of 19 monumental stone architectural astronomical instruments, including the world's largest stone sundial (Vrihat Samrat Yantra) accurate to 2 seconds."
+      },
+      {
+        id: 14,
+        name: "Pochampally Ikat Handloom Cluster",
+        category: "textile",
+        state: "Telangana (Bhoodan Pochampally)",
+        lat: 17.3486,
+        lng: 78.8152,
+        eraOrPeriod: "Historic Silk Weaving Clusters",
+        imageUrl: "assets/games/varga.jpg",
+        description: "Renowned for traditional tie-and-dye 'Pagdu Bandhu' weaving where warp and weft yarns are dyed with geometric precision before weaving."
+      },
+      {
+        id: 15,
+        name: "Ajanta Cave Buddhist Frescoes",
+        category: "monument",
+        state: "Maharashtra (Aurangabad)",
+        lat: 20.5519,
+        lng: 75.7033,
+        eraOrPeriod: "Satavahana & Vakataka • 2nd C. BCE–5th C. CE",
+        imageUrl: "assets/games/riti.jpg",
+        description: "Thirty rock-cut cave monuments carved into a horseshoe gorge, housing masterpieces of Buddhist religious art and natural-pigment tempera murals."
+      },
+      {
+        id: 16,
+        name: "Kalamkari Natural Pigment Painting",
+        category: "tribal",
+        state: "Andhra Pradesh (Srikalahasti)",
+        lat: 13.7498,
+        lng: 79.6984,
+        eraOrPeriod: "Chola to Golconda Patronage",
+        imageUrl: "assets/slides/slide5.jpg",
+        description: "Traditional hand-painted textiles utilizing tamarind pens (Kalam), fermented jaggery, and alum mordants to illustrate scenes from the Mahabharata and Ramayana."
+      },
+      {
+        id: 17,
+        name: "Meenakshi Amman Dravidian Gopurams",
+        category: "monument",
+        state: "Tamil Nadu (Madurai)",
+        lat: 9.9195,
+        lng: 78.1193,
+        eraOrPeriod: "Pandya & Nayaka Dynasties • 14th–17th C.",
+        imageUrl: "assets/slides/slide7.jpg",
+        description: "Historic heart of the Tamil Sangam era. The complex features 14 monumental gopuram gateway towers adorned with thousands of painted mythological figures."
+      },
+      {
+        id: 18,
+        name: "Rani ki Vav (The Queen's Stepwell)",
+        category: "monument",
+        state: "Gujarat (Patan)",
+        lat: 23.8589,
+        lng: 72.1018,
+        eraOrPeriod: "Chaulukya / Solanki Dynasty • 1063 CE",
+        imageUrl: "assets/slides/slide4.jpg",
+        description: "Subterranean stepwell designed as an inverted temple honoring the sanctity of water, displaying over 500 principal sculptures across seven terraced subterranean levels."
+      },
+      {
+        id: 19,
+        name: "Majuli Island Sattras & Mask Making",
+        category: "tribal",
+        state: "Assam (Brahmaputra Valley)",
+        lat: 26.9535,
+        lng: 94.2037,
+        eraOrPeriod: "Neo-Vaishnavite Srimanta Sankardev (15th C.)",
+        imageUrl: "assets/slides/slide3.jpg",
+        description: "The world's largest river island and cradle of Bhaona traditional theater mask making crafted from bamboo, cane, and organic riverbed clay."
+      },
+      {
+        id: 20,
+        name: "Chittorgarh Hill Fortification",
+        category: "monument",
+        state: "Rajasthan (Mewar)",
+        lat: 24.8879,
+        lng: 74.6451,
+        eraOrPeriod: "Mewar Kingdom • 7th C. onwards",
+        imageUrl: "assets/slides/slide1.jpg",
+        description: "Sprawling over 700 acres atop a 180-meter hill, featuring the 9-story Vijay Stambha (Tower of Victory) and monumental Rajput stone architecture."
+      }
+    ];
+
+    let currentLat = fallbackSites[0].lat;
+    let currentLng = fallbackSites[0].lng;
+    let activeMarkers = [];
+
+    // Initialize Map with Pan-India Extent
+    const map = L.map('map', {
+      center: [21.5000, 80.0000],
+      zoom: 5,
+      zoomControl: true,
+      minZoom: 4,
+      maxZoom: 16
+    });
+
+    // High-performance ESRI Antique Canvas Layer
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      maxZoom: 18,
+      attribution: 'Tiles &copy; Esri &mdash; National Geographic, DeLorme, NAVTEQ'
+    }).addTo(map);
+
+    function getDomainColor(category) {
+      switch(category) {
+        case 'monument': return '#804724';
+        case 'textile': return '#B88230';
+        case 'tribal': return '#2A6F4E';
+        case 'metallurgy': return '#9E642A';
+        case 'astronomy': return '#3A1E11';
+        default: return '#66381B';
+      }
+    }
+
+    function renderMarkers(sitesList) {
+      // Clear existing markers
+      activeMarkers.forEach(m => map.removeLayer(m));
+      activeMarkers = [];
+
+      sitesList.forEach(site => {
+        const markerColor = getDomainColor(site.category);
+
+        const marker = L.circleMarker([site.lat, site.lng], {
+          radius: 9,
+          fillColor: markerColor,
+          color: '#FAF0DF',
+          weight: 2.5,
+          opacity: 1,
+          fillOpacity: 0.95
+        }).addTo(map);
+
+        marker.bindTooltip(`
+          <div style="font-family:'Plus Jakarta Sans',sans-serif; padding:2px;">
+            <strong style="color:#2A150B;">${site.name}</strong><br>
+            <span style="color:#66381B; font-size:0.75rem;">${site.state}</span>
+          </div>
+        `, { direction: 'top', offset: [0, -8] });
+
+        marker.on('click', () => updateDossier(site));
+        activeMarkers.push(marker);
+      });
+
+      document.getElementById('siteCountDisplay').textContent = `${sitesList.length} Heritage Coordinates Loaded`;
+    }
+
+    function updateDossier(site) {
+      currentLat = site.lat;
+      currentLng = site.lng;
+
+      document.getElementById('siteName').textContent = site.name;
+      document.getElementById('stateTag').textContent = site.state;
+      document.getElementById('eraTag').textContent = site.eraOrPeriod;
+      document.getElementById('domainTag').textContent = site.category.toUpperCase();
+      document.getElementById('siteDesc').textContent = site.description;
+      document.getElementById('coordsText').textContent = `${site.lat.toFixed(4)}° N, ${site.lng.toFixed(4)}° E`;
+
+      if (site.imageUrl) {
+        document.getElementById('siteImg').src = site.imageUrl;
+      }
+
+      map.flyTo([site.lat, site.lng], 9, { duration: 1.5 });
+    }
+
+    function zoomToCurrentSite() {
+      map.flyTo([currentLat, currentLng], 12, { duration: 1.2 });
+    }
+
+    // Filter Chips Event Binding
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', function () {
+        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+        this.classList.add('active');
+
+        const filter = this.dataset.filter;
+        if (filter === 'all') {
+          renderMarkers(fallbackSites);
+        } else {
+          const filtered = fallbackSites.filter(s => s.category === filter);
+          renderMarkers(filtered);
+        }
+      });
+    });
+
+    // Try live fetch from Spring Boot backend, fallback to local coordinates if server is offline
+    async function loadHeritageSites() {
+      try {
+        const res = await fetch(API_SITES);
+        if (res.ok) {
+          const sites = await res.json();
+          if (sites && sites.length > 0) {
+            // Map backend schema to leaflet points
+            const backendMapped = sites.map(s => ({
+              id: s.id,
+              name: s.name,
+              category: s.category || 'monument',
+              state: s.state,
+              lat: s.latitude,
+              lng: s.longitude,
+              eraOrPeriod: s.eraOrPeriod,
+              imageUrl: s.imageUrl || 'assets/games/kailash.jpg',
+              description: s.description
+            }));
+            renderMarkers(backendMapped);
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Backend unavailable, activating local pan-Indian coordinate engine.');
+      }
+
+      // Default to complete 20 pan-Indian sites
+      renderMarkers(fallbackSites);
+    }
+
+    loadHeritageSites();
+  </script>
+</body>
+</html>

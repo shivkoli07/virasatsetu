@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Heritage Storyteller | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --parchment-bg: #FCF7EE;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      width: 100%;
+      height: 76px;
+      padding: 0 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-weight: 600;
+      font-size: 0.88rem;
+    }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0 !important;
+      padding: 0.55rem 1.4rem;
+      border-radius: 25px;
+      font-size: 0.82rem;
+    }
+
+    .story-layout {
+      max-width: 1280px;
+      margin: 3rem auto 5rem auto;
+      padding: 0 2rem;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 390px 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .generator-card, .output-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 24px;
+      padding: 2.2rem;
+      box-shadow: var(--card-shadow);
+      position: relative;
+    }
+
+    .generator-card::before, .output-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+    }
+
+    .title-crest {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.35rem;
+    }
+
+    .page-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-group {
+      margin-top: 1.25rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-brown);
+      margin-bottom: 0.4rem;
+    }
+
+    .form-select {
+      width: 100%;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .form-select:focus {
+      border-color: var(--accent-gold);
+      box-shadow: 0 0 0 3px rgba(184, 130, 48, 0.15);
+    }
+
+    .generate-btn {
+      width: 100%;
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      border-radius: 30px;
+      padding: 0.9rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 1.6rem;
+      transition: var(--transition);
+      box-shadow: 0 6px 16px rgba(42, 21, 11, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .generate-btn:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+    }
+
+    /* Manuscript Display Styling */
+    .manuscript-wrapper {
+      background: var(--parchment-bg);
+      border: 2px solid var(--border-card);
+      border-radius: 18px;
+      padding: 2.2rem 2.5rem;
+      margin-top: 1.2rem;
+      box-shadow: inset 0 0 20px rgba(184, 130, 48, 0.08), 0 8px 24px rgba(42, 21, 11, 0.06);
+      position: relative;
+    }
+
+    .manuscript-wrapper::after {
+      content: '❧ ❧ ❧';
+      display: block;
+      text-align: center;
+      color: var(--accent-gold);
+      font-size: 1.2rem;
+      margin-top: 1.8rem;
+    }
+
+    .manuscript-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      padding-bottom: 1rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .dynasty-badge {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      text-transform: uppercase;
+    }
+
+    .audio-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .audio-btn {
+      background: #FFFFFF;
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: var(--transition);
+    }
+
+    .audio-btn:hover {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border-color: transparent;
+    }
+
+    .story-reading-pane {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      line-height: 1.95;
+      color: #24140B;
+      min-height: 220px;
+    }
+
+    .story-reading-pane p {
+      margin-bottom: 1.2rem;
+    }
+
+    .story-reading-pane p::first-letter {
+      font-family: 'Cinzel', serif;
+      font-size: 2.8rem;
+      float: left;
+      line-height: 0.8;
+      padding-right: 0.6rem;
+      color: var(--accent-brown);
+      font-weight: 700;
+    }
+
+    .action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-card);
+    }
+
+    .action-pill-btn {
+      background: transparent;
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 0.4rem 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .action-pill-btn:hover {
+      background: #FFFFFF;
+      border-color: var(--accent-gold);
+    }
+
+    /* Library Section */
+    .library-section {
+      margin-top: 2.4rem;
+    }
+
+    .library-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .library-item {
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 14px;
+      padding: 1.1rem;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .library-item:hover {
+      border-color: var(--accent-gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(42, 21, 11, 0.08);
+    }
+
+    @media (max-width: 992px) {
+      .story-layout { grid-template-columns: 1fr; }
+      .library-grid { grid-template-columns: 1fr; }
+      header { padding: 0 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASATSETU</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="games.html">Games Pavilion</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <main class="story-layout">
+
+    <!-- Left Controls Panel -->
+    <section class="generator-card">
+      <div class="title-crest">Computational Oral Bard</div>
+      <h1 class="page-title">Synthesize Epics</h1>
+      <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.55;">
+        Generate and preserve authentic oral narratives derived from royal epigraphy, temple inscriptions, and artisan traditions.
+      </p>
+
+      <form id="storyForm">
+        <div class="form-group">
+          <label class="form-label" for="selectEra">Civilizational Era & Dynasty</label>
+          <select class="form-select" id="selectEra">
+            <option value="Imperial Chola Dynasty">Imperial Chola Dynasty (10th–12th C. • Maritime & Lost-Wax Bronzes)</option>
+            <option value="Mauryan Empire">Mauryan Empire (3rd C. BCE • Edicts & Polished Sandstone)</option>
+            <option value="Rashtrakuta Dynasty">Rashtrakuta Dynasty (8th C. • Monolithic Ellora Kailasa)</option>
+            <option value="Gupta Golden Age">Gupta Golden Age (4th–6th C. • Classical Sanskrit & Metalwork)</option>
+            <option value="Vijayanagara Empire">Vijayanagara Empire (14th–16th C. • Hampi Stone Monoliths)</option>
+            <option value="Maratha Empire">Maratha Empire (17th–18th C. • Sahyadri Fortresses & Paithani Weaves)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="selectTheme">Living Heritage Domain</label>
+          <select class="form-select" id="selectTheme">
+            <option value="Lost-Wax Bronze Metallurgy">Lost-Wax Bronze Metallurgy (Cire-Perdue & Nataraja Casts)</option>
+            <option value="Monolithic Rock Excavation">Monolithic Rock Excavation (Chiseling Cave Sanctums)</option>
+            <option value="Royal Paithani Loom Guilds">Royal Paithani Loom Guilds (Mulberry Silk & Pure Gold Zari)</option>
+            <option value="Sacred Warli Murals">Sacred Warli Murals (Ochre Walls & Natural Rice Paste)</option>
+            <option value="Temple Acoustics & Dhrupad">Temple Acoustics & Dhrupad (Microtonal Vocal Traditions)</option>
+            <option value="Stone Chariots & Sun Wheels">Stone Chariots & Sun Wheels (Konark Solar Astronomy)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="selectTone">Narrative Cadence</label>
+          <select class="form-select" id="selectTone">
+            <option value="Devotional & Meditative">Devotional & Meditative (Sacred Temple Inscription)</option>
+            <option value="Heroic & Valiant Chronicle">Heroic & Valiant Chronicle (Royal Edict & Dynasty Lore)</option>
+            <option value="Poetic & Philosophic">Poetic & Philosophic (Artisan Guild Legend)</option>
+          </select>
+        </div>
+
+        <button type="submit" class="generate-btn" id="generateBtn">
+          <span>Invoke Oral Bard</span>
+          <span>&rarr;</span>
+        </button>
+      </form>
+    </section>
+
+    <!-- Right Output Panel: Royal Manuscript -->
+    <section class="output-card">
+      <div class="title-crest">Living Oral Manuscript</div>
+      <h2 class="page-title" id="storyTitleDisplay">Sacred Inscription of the Artisans</h2>
+
+      <div class="manuscript-wrapper">
+        <div class="manuscript-header">
+          <span class="dynasty-badge" id="manuscriptTag">Imperial Chronicle • Active Voice</span>
+
+          <div class="audio-controls">
+            <button class="audio-btn" id="playAudioBtn" onclick="toggleAudioNarration()">
+              <span id="audioIcon">▶</span> <span id="audioLabel">Recite Aloud</span>
+            </button>
+            <button class="audio-btn" onclick="stopAudioNarration()">⏹ Stop</button>
+          </div>
+        </div>
+
+        <div class="story-reading-pane" id="storyOutputText">
+          Select civilizational parameters on the left and invoke the oral engine to craft an epic. The narrative will record directly to your permanent PostgreSQL archive.
+        </div>
+
+        <div class="action-bar">
+          <button class="action-pill-btn" onclick="copyStoryText()">📋 Copy Manuscript</button>
+          <button class="action-pill-btn" onclick="downloadStoryText()">📜 Download Scroll</button>
+          <a href="profile.html" class="action-pill-btn" style="text-decoration: none;">View Scholar Dossier &rarr;</a>
+        </div>
+      </div>
+
+      <!-- Chronicled Library Grid -->
+      <div class="library-section">
+        <h3 style="font-family: 'Cinzel', serif; font-size: 1.15rem; color: var(--accent-brown);">
+          My Chronicled Library (PostgreSQL)
+        </h3>
+        <div class="library-grid" id="libraryList">
+          <p style="font-size: 0.85rem; color: var(--text-muted);">Loading library records...</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const API_BASE = 'http://localhost:8080/api/stories';
+    const userEmail = localStorage.getItem('virasatSetu_user_email');
+
+    // SpeechSynthesis Speech Engine
+    let synth = window.speechSynthesis;
+    let isSpeaking = false;
+
+    // Navbar Auth Sync
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Scholar';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+
+    async function loadLibrary() {
+      if (!userEmail) {
+        document.getElementById('libraryList').innerHTML = 
+          '<p style="font-size: 0.85rem; color: var(--text-muted); grid-column: 1 / -1;">Log in to view your permanent database library.</p>';
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_BASE}/my-library?email=${encodeURIComponent(userEmail)}`);
+        if (res.ok) {
+          const stories = await res.json();
+          const listContainer = document.getElementById('libraryList');
+
+          if (!stories || stories.length === 0) {
+            listContainer.innerHTML = 
+              '<p style="font-size: 0.85rem; color: var(--text-muted); grid-column: 1 / -1;">No chronicles recorded yet. Synthesize your first epic above.</p>';
+            return;
+          }
+
+          listContainer.innerHTML = '';
+          stories.forEach(s => {
+            const item = document.createElement('div');
+            item.className = 'library-item';
+            item.innerHTML = `
+              <div>
+                <strong style="font-family: 'Cinzel', serif; font-size: 0.95rem; color: var(--primary-dark); display: block; margin-bottom: 0.3rem;">${s.title}</strong>
+                <span style="font-size: 0.76rem; color: var(--accent-brown); font-weight: 600; text-transform: uppercase;">
+                  ${s.dynastyEra}
+                </span>
+                <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.2rem;">
+                  ${s.craftTheme}
+                </div>
+              </div>
+              <div style="font-size: 0.72rem; color: var(--accent-gold); margin-top: 0.8rem; font-weight: 700;">
+                Click to Inspect Scroll &rarr;
+              </div>
+            `;
+            item.onclick = () => {
+              stopAudioNarration();
+              document.getElementById('storyTitleDisplay').textContent = s.title;
+              document.getElementById('storyOutputText').innerHTML = `<p>${s.storyContent.replace(/\n+/g, '</p><p>')}</p>`;
+              document.getElementById('manuscriptTag').textContent = `${s.dynastyEra} • ${s.narrativeTone}`;
+              window.scrollTo({ top: 120, behavior: 'smooth' });
+            };
+            listContainer.appendChild(item);
+          });
+        }
+      } catch (err) {
+        console.warn('Could not load story library:', err);
+      }
+    }
+
+    document.getElementById('storyForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      if (!userEmail) {
+        alert('Please sign in to chronicle epics into your scholar dossier.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      stopAudioNarration();
+
+      const era = document.getElementById('selectEra').value;
+      const theme = document.getElementById('selectTheme').value;
+      const tone = document.getElementById('selectTone').value;
+      const genBtn = document.getElementById('generateBtn');
+
+      genBtn.disabled = true;
+      genBtn.innerHTML = '<span>Chronicling to Archive...</span>';
+
+      try {
+        const res = await fetch(`${API_BASE}/generate`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: userEmail, era, theme, tone })
+        });
+
+        if (res.ok) {
+          const data = await res.json();
+          const story = data.story;
+
+          document.getElementById('storyTitleDisplay').textContent = story.title;
+          document.getElementById('storyOutputText').innerHTML = `<p>${story.storyContent.replace(/\n+/g, '</p><p>')}</p>`;
+          document.getElementById('manuscriptTag').textContent = `${story.dynastyEra} • ${story.narrativeTone}`;
+
+          loadLibrary();
+        } else {
+          alert('Failed to chronicle story.');
+        }
+      } catch (err) {
+        alert('Backend service unreachable.');
+      } finally {
+        genBtn.disabled = false;
+        genBtn.innerHTML = '<span>Invoke Oral Bard</span><span>&rarr;</span>';
+      }
+    });
+
+    // Audio Narration
+    function toggleAudioNarration() {
+      if (!synth) {
+        alert('Speech recitation is not supported on this browser.');
+        return;
+      }
+
+      if (synth.speaking && !synth.paused) {
+        synth.pause();
+        document.getElementById('audioLabel').textContent = 'Resume';
+        document.getElementById('audioIcon').textContent = '▶';
+        return;
+      }
+
+      if (synth.paused) {
+        synth.resume();
+        document.getElementById('audioLabel').textContent = 'Pause';
+        document.getElementById('audioIcon').textContent = '⏸';
+        return;
+      }
+
+      const text = document.getElementById('storyOutputText').innerText;
+      if (!text || text.includes('Select civilizational parameters')) return;
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.rate = 0.92;
+      utter.pitch = 0.95;
+
+      // Select natural English voice if available
+      const voices = synth.getVoices();
+      const inVoice = voices.find(v => v.lang.includes('en-IN')) || voices.find(v => v.lang.includes('en-GB')) || voices[0];
+      if (inVoice) utter.voice = inVoice;
+
+      utter.onend = () => {
+        document.getElementById('audioLabel').textContent = 'Recite Aloud';
+        document.getElementById('audioIcon').textContent = '▶';
+      };
+
+      synth.speak(utter);
+      document.getElementById('audioLabel').textContent = 'Pause';
+      document.getElementById('audioIcon').textContent = '⏸';
+    }
+
+    function stopAudioNarration() {
+      if (synth) {
+        synth.cancel();
+        document.getElementById('audioLabel').textContent = 'Recite Aloud';
+        document.getElementById('audioIcon').textContent = '▶';
+      }
+    }
+
+    function copyStoryText() {
+      const text = document.getElementById('storyOutputText').innerText;
+      navigator.clipboard.writeText(text).then(() => alert('Manuscript copied to clipboard!'));
+    }
+
+    function downloadStoryText() {
+      const title = document.getElementById('storyTitleDisplay').textContent;
+      const text = document.getElementById('storyOutputText').innerText;
+      const blob = new Blob([`${title}\n\n${text}`], { type: 'text/plain' });
+      const anchor = document.createElement('a');
+      anchor.href = URL.createObjectURL(blob);
+      anchor.download = `${title.replace(/\s+/g, '_')}_Manuscript.txt`;
+      anchor.click();
+    }
+
+    loadLibrary();
+  </script>
+</body>
+</html>
