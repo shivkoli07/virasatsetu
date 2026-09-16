@@ -1,7 +1,7 @@
 # Stage 1: Build the application using Maven
 FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /app
-COPY . .
+COPY backend/ .
 RUN ./mvnw clean package -DskipTests
 
 # Stage 2: Run the application
