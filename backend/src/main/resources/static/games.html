@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sacred Gaming Pavilion | VirasatSetu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 45%, #EBDBC4 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --border-card: #CDB393;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 10px 26px rgba(53, 29, 14, 0.12);
+      --card-shadow-hover: 0 16px 36px rgba(53, 29, 14, 0.2);
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Updated Navbar to match full-size branding and spacing */
+    header {
+      width: 100%;
+      padding: 1.1rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1.5px solid var(--border-card);
+      background: rgba(250, 240, 223, 0.94);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+
+    .brand-logo span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--accent-gold); }
+
+    .auth-btn {
+      background: var(--royal-gradient);
+      color: #FFF2DF !important;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+    }
+
+    .auth-btn:hover {
+      box-shadow: 0 4px 15px rgba(184, 130, 48, 0.4);
+      transform: translateY(-1px);
+    }
+
+    .hub-container {
+      max-width: 1220px;
+      margin: 3rem auto 5rem auto;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .hub-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .hub-badge {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .hub-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .hub-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 740px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    .games-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .game-hub-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      display: grid;
+      grid-template-columns: 340px 1fr;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .game-hub-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3.5px;
+      background: var(--gold-accent-gradient);
+      opacity: 0;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .game-hub-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    .game-hub-card:hover::before { opacity: 1; }
+
+    /* Left Frame: Clean, borderless image presentation */
+    .game-visual-side {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem 1rem 1.2rem 1.5rem;
+      background: transparent;
+    }
+
+    .game-visual-img {
+      width: 100%;
+      height: auto;
+      max-height: 310px;
+      object-fit: contain;
+      border: none;
+      outline: none;
+      box-shadow: none;
+      background: transparent;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .game-hub-card:hover .game-visual-img {
+      transform: scale(1.02);
+    }
+
+    .visual-game-title-bar {
+      margin-top: 0.8rem;
+      text-align: center;
+      width: 100%;
+    }
+
+    .visual-game-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 0.8px;
+    }
+
+    .visual-game-type {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      display: block;
+      margin-top: 0.15rem;
+    }
+
+    /* Right Details Side: Linear Stack */
+    .game-details-side {
+      padding: 1.8rem 2.2rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .meta-pills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .meta-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--border-card);
+      color: var(--accent-brown);
+    }
+
+    .meta-tag.highlight {
+      background: #F4E8D6;
+      border-color: var(--accent-gold);
+      color: var(--primary-dark);
+    }
+
+    /* Linear Details Sections */
+    .detail-section {
+      margin-bottom: 0.85rem;
+    }
+
+    .detail-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--accent-brown);
+      margin-bottom: 0.25rem;
+    }
+
+    .detail-text {
+      font-size: 0.88rem;
+      color: var(--primary-dark);
+      line-height: 1.55;
+    }
+
+    .lore-box {
+      background: rgba(255, 255, 255, 0.65);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 0 10px 10px 0;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 0.9rem;
+    }
+
+    .detail-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 1rem;
+      border-top: 1.5px solid var(--border-card);
+      margin-top: 0.3rem;
+    }
+
+    .rewards-cluster {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .xp-pill {
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: var(--accent-brown);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1.5px solid var(--border-card);
+      padding: 0.35rem 0.9rem;
+      border-radius: 18px;
+    }
+
+    .badge-unlock-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .play-btn {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      text-decoration: none;
+      padding: 0.65rem 1.8rem;
+      border-radius: 25px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      transition: var(--transition);
+      box-shadow: 0 3px 10px rgba(42, 21, 11, 0.2);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .play-btn:hover {
+      background: var(--royal-gradient-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 16px rgba(42, 21, 11, 0.3);
+    }
+
+    @media (max-width: 900px) {
+      .game-hub-card { grid-template-columns: 1fr; }
+      .game-visual-side { padding: 1.5rem; }
+      .game-details-side { padding: 1.5rem; }
+      header { padding: 1rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="index.html" class="brand-logo">VIRASAT<span>SETU</span></a>
+    <ul class="nav-links">
+      <li><a href="explore.html">Explore</a></li>
+      <li><a href="experience.html">Experience</a></li>
+      <li><a href="analytics.html">Analytics</a></li>
+      <li><a href="games.html">Games</a></li>
+      <li><a href="profile.html" class="auth-btn" id="authNavBtn">Scholar Dossier</a></li>
+    </ul>
+  </header>
+
+  <main class="hub-container">
+
+    <div class="hub-header">
+      <div class="hub-badge">Interactive Heritage Pavilion</div>
+      <h1 class="hub-title">Sacred Cultural Games</h1>
+      <p class="hub-subtitle">
+        Eight interactive trials engineered to test spatial observation, lexical fluency, chronological mastery, and indigenous knowledge systems.
+      </p>
+    </div>
+
+    <div class="games-stack">
+
+      <!-- 1. Chitra-Sandhi -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/chitra.jpg" alt="Chitra-Sandhi Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Chitra-Sandhi</h2>
+            <span class="visual-game-type">Sacred Visual Jigsaw</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">Temple Architecture</span>
+              <span class="meta-tag">Spatial Logic</span>
+              <span class="meta-tag">Medium Difficulty</span>
+              <span class="meta-tag">~3 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                From Sanskrit <em>Chitra</em> (visual image) and <em>Sandhi</em> (harmonious union). Reconstructs fractured stone reliefs, sanctums, and monolithic rock-cut shrines that have weathered centuries.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Slide adjacent stone tiles on a 3x3 geometric grid into the open matrix slot until the sacred monument is restored to structural perfection. Completing under 40 moves awards the maximum bonus.
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Encodes the monolithic top-down basalt excavation of Ellora Cave 16 (Kailasa Temple), chiseled under Rashtrakuta King Krishna I without joints or mortar.
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+350 XP Award</span>
+              <span class="badge-unlock-label">Honor: Shreshthi Architect</span>
+            </div>
+            <a href="chitra-sandhi.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Akshar-Manthan -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/akshar.jpg" alt="Akshar-Manthan Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Akshar-Manthan</h2>
+            <span class="visual-game-type">Heritage Anagrams</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">Linguistics & Handlooms</span>
+              <span class="meta-tag">Etymological Recall</span>
+              <span class="meta-tag">Brisk Pace</span>
+              <span class="meta-tag">~2 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                Meaning <em>"The Churning of Letters"</em>. Revives endangered Sanskrit, Prakrit, and vernacular terminology across ancient guilds, handlooms, and metallurgy.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Read the civilizational clue and click the scrambled letter tiles in the correct sequence to build the authentic term before time expires.
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Deciphers motifs from Satavahana gold zari weaving, temple shikharas, and lost-wax bronze casting guilds.
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+150 XP Award</span>
+              <span class="badge-unlock-label">Honor: Vidvan Grammarian</span>
+            </div>
+            <a href="akshar-manthan.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Yugma-Milan -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/yugma.jpg" alt="Yugma-Milan Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Yugma-Milan</h2>
+            <span class="visual-game-type">Dual-Column Matcher</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">Regional Geography</span>
+              <span class="meta-tag">Associative Memory</span>
+              <span class="meta-tag">Balanced Trial</span>
+              <span class="meta-tag">~2.5 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                Translates to <em>"The Union of Complementary Pairs"</em>. Connects tangible material art forms to their specific geographic, geological, and dynastic birthplaces.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Select an art expression or architectural style in Column A, then link it to its matching counterpart in Column B.
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Traces Warli ochre to the North Sahyadris, Bastar Dhokra to tribal metallurgists, and Chola granite vimanas to Thanjavur.
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+250 XP Award</span>
+              <span class="badge-unlock-label">Honor: Sutradhar Custodian</span>
+            </div>
+            <a href="yugma-milan.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Varga-Karan -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/varga.jpg" alt="Varga-Karan Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Varga-Karan</h2>
+            <span class="visual-game-type">Civilizational Taxonomy</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">Taxonomy & Systems</span>
+              <span class="meta-tag">Domain Sorting</span>
+              <span class="meta-tag">Advanced Focus</span>
+              <span class="meta-tag">~3 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                Derived from the Vedic classification principle (<em>Varga</em>). Tests structured knowledge across both tangible material domains and living traditions.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Pick floating cultural concept chips from the unsorted pool and assign each to its proper domain bucket: Textiles, Architecture, Art, or Dynasties.
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Differentiates architectural finials recorded in the *Manasara* from tribal pigments documented in indigenous oral traditions.
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+300 XP Award</span>
+              <span class="badge-unlock-label">Honor: Shastra Acharya</span>
+            </div>
+            <a href="varga-karan.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Drishti-Pariksha -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/drishti.jpg" alt="Drishti-Pariksha Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Drishti-Pariksha</h2>
+            <span class="visual-game-type">Visual Artifact Lens</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">Iconography & Relics</span>
+              <span class="meta-tag">Visual Discernment</span>
+              <span class="meta-tag">Precision Trial</span>
+              <span class="meta-tag">~2 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                Meaning <em>"The Examination of Vision"</em>. Trains the player to identify bronze patinas, stone chisel patterns, and sacred geometry from close inspection.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Examine a magnified macro view of an authentic Indian artifact, read the structural clue, and select the correct option from 4 possibilities.
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Focuses on fine details like natural rice paste strokes in Warli walls, bronze patinas in Nataraja casts, and pure zari threads.
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+200 XP Award</span>
+              <span class="badge-unlock-label">Honor: Shilpi Connoisseur</span>
+            </div>
+            <a href="drishti-pariksha.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. Kala-Kram -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/kala.jpg" alt="Kala-Kram Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Kala-Kram</h2>
+            <span class="visual-game-type">Timeline Chronology</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">Dynastic History</span>
+              <span class="meta-tag">Temporal Sequencing</span>
+              <span class="meta-tag">Challenging</span>
+              <span class="meta-tag">~3 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                Meaning <em>"The Sequence of Time"</em>. Traces over 1,500 years of structural engineering evolution across royal dynasties and imperial patrons.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Shift scrambled monument cards up or down using the arrows to order them chronologically from oldest (top) to most recent (bottom).
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Reconstructs the arc from Mauryan polished sandstone edicts (c. 250 BCE) to the grand chariot wheels of Konark (1250 CE).
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+250 XP Award</span>
+              <span class="badge-unlock-label">Honor: Itihasa Chronicler</span>
+            </div>
+            <a href="kala-kram.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 7. Chakra-Virasat -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/chakra.jpg" alt="Chakra-Virasat Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Chakra-Virasat</h2>
+            <span class="visual-game-type">Konark Wheel of Time</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">All 16 Heritage Domains</span>
+              <span class="meta-tag">Rapid Response</span>
+              <span class="meta-tag">Dynamic Risk</span>
+              <span class="meta-tag">~1.5 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                Inspired by the 24-spoke stone sundial wheels of Konark's Sun Chariot Temple, symbolizing cosmic cycles and civilizational memory.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Spin the radial wheel to land on an unpredictable cultural domain spoke, then solve its timed question to secure bonus XP and multipliers.
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Integrates prompts covering classical theater, temple acoustics, metallurgical secrets, and ancient astronomical treatises.
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+300 XP Award</span>
+              <span class="badge-unlock-label">Honor: Kala Chakra Master</span>
+            </div>
+            <a href="chakra-virasat.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8. Riti-Vandana -->
+      <article class="game-hub-card">
+        <div class="game-visual-side">
+          <img src="assets/games/riti.jpg" alt="Riti-Vandana Visual" class="game-visual-img" />
+          <div class="visual-game-title-bar">
+            <h2 class="visual-game-title">Riti-Vandana</h2>
+            <span class="visual-game-type">Sacred Memory Matrix</span>
+          </div>
+        </div>
+        <div class="game-details-side">
+          <div>
+            <div class="meta-pills-row">
+              <span class="meta-tag highlight">Artisan Lineages</span>
+              <span class="meta-tag">Spatial Concentration</span>
+              <span class="meta-tag">Memory Challenge</span>
+              <span class="meta-tag">~3 Min</span>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Meaning & Significance</h3>
+              <p class="detail-text">
+                Meaning <em>"Reverence of Living Traditions"</em>. Connects sacred artisan tools and raw materials directly to their final masterpieces.
+              </p>
+            </div>
+
+            <div class="detail-section">
+              <h3 class="detail-heading">Gameplay Rules</h3>
+              <p class="detail-text">
+                Flip stone relief tablets across a 4x4 grid to match complementary pairs (such as chisel with temple, or zari thread with Paithani silk).
+              </p>
+            </div>
+
+            <div class="lore-box">
+              <strong>Archaeological Context:</strong> Highlights the tools of classical Indian guilds: lost-wax molds for bronzes, bamboo brushes for murals, and pit-looms for silks.
+            </div>
+          </div>
+
+          <div class="detail-footer">
+            <div class="rewards-cluster">
+              <span class="xp-pill">+300 XP Award</span>
+              <span class="badge-unlock-label">Honor: Smriti Custodian</span>
+            </div>
+            <a href="riti-vandana.html" class="play-btn">Play Now &rarr;</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <script>
+    (function () {
+      const isAuth = localStorage.getItem('virasatSetu_auth') === 'true';
+      const navBtn = document.getElementById('authNavBtn');
+      if (isAuth && navBtn) {
+        const name = localStorage.getItem('virasatSetu_user_name') || 'Scholar';
+        navBtn.textContent = name.split(' ')[0];
+      }
+    })();
+  </script>
+</body>
+</html>

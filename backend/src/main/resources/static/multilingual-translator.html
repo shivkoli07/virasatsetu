@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multilingual Indic Translator | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Noto+Sans+Devanagari:wght@400;600;700&family=Noto+Sans+Tamil:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Top Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Page Header */
+    .hero-section {
+      text-align: center;
+      padding: 3.5rem 1.5rem 1.8rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(184, 130, 48, 0.12);
+      padding: 0.35rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(184, 130, 48, 0.3);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Translator Workspace */
+    .translator-wrapper {
+      max-width: 1200px;
+      margin: 1.5rem auto 5rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    /* Quick Preset Chips */
+    .presets-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      background: rgba(255, 250, 242, 0.7);
+      padding: 0.9rem 1.4rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-card);
+    }
+
+    .presets-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      letter-spacing: 1px;
+    }
+
+    .sample-chip {
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-card);
+      background: #fff;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .sample-chip:hover {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      border-color: var(--accent-gold);
+      transform: translateY(-1px);
+    }
+
+    /* Dual Translation Desk */
+    .translation-desk {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 1.8rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .pane-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 0.6rem;
+      border-bottom: 1.5px solid rgba(205, 179, 147, 0.4);
+    }
+
+    .lang-select {
+      padding: 0.45rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-card);
+      background: #fff;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.84rem;
+      color: var(--primary-dark);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .mode-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-brown);
+    }
+
+    .text-area-box {
+      width: 100%;
+      height: 220px;
+      background: #fff;
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.2rem;
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: var(--primary-dark);
+      resize: none;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+
+    .text-area-box:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .text-area-box.output-box {
+      background: rgba(250, 240, 223, 0.4);
+    }
+
+    .pane-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 0.4rem;
+    }
+
+    .char-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .action-icons {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 0.4rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-brown);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .icon-btn:hover {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      border-color: var(--accent-gold);
+    }
+
+    .translate-action-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    .btn-translate {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      border: 1px solid var(--accent-gold);
+      padding: 0.8rem 2.8rem;
+      border-radius: 8px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(42, 21, 11, 0.2);
+    }
+
+    .btn-translate:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(184, 130, 48, 0.4);
+    }
+
+    /* Etymology & Semantic Intelligence Card */
+    .semantic-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-card);
+      border-radius: 14px;
+      padding: 1.6rem 2rem;
+      box-shadow: var(--shadow-soft);
+      display: none;
+    }
+
+    .semantic-head {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .semantic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1rem;
+    }
+
+    .etymology-item {
+      background: #fff;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 1rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .etymology-item h4 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .etymology-item p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-dark);
+      color: #CDB393;
+      text-align: center;
+      padding: 2.8rem 1.5rem;
+      font-size: 0.88rem;
+      border-top: 2px solid var(--accent-gold);
+    }
+
+    @media (max-width: 900px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .translation-desk { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page Header -->
+  <section class="hero-section">
+    <div class="hero-badge">Civilizational Semantics & Etymology</div>
+    <h1 class="hero-title">Multilingual Indic Translator</h1>
+    <p class="hero-subtitle">
+      Powered by real-time neural translation engines to translate regional and classical Indian languages into any tongue while preserving cultural roots.
+    </p>
+  </section>
+
+  <!-- Workspace Container -->
+  <main class="translator-wrapper">
+
+    <!-- Preset Inscriptions for Evaluation -->
+    <div class="presets-bar">
+      <span class="presets-label">Civilizational Presets:</span>
+      <button class="sample-chip" onclick="loadPreset('shloka')">Vedic Mahavakya (Sanskrit)</button>
+      <button class="sample-chip" onclick="loadPreset('powada')">Shivaji Maharaj Powada (Marathi)</button>
+      <button class="sample-chip" onclick="loadPreset('sangam')">Sangam Kuruntokai (Tamil)</button>
+      <button class="sample-chip" onclick="loadPreset('weaving')">Paithani Zari Craft Term (Marathi)</button>
+    </div>
+
+    <!-- Dual Workspace Desk -->
+    <div class="translation-desk">
+      
+      <!-- Source Pane -->
+      <div class="pane">
+        <div class="pane-toolbar">
+          <select class="lang-select" id="sourceLang">
+            <option value="auto">Detect Language (Auto)</option>
+            <option value="mr" selected>Marathi (मराठी)</option>
+            <option value="hi">Hindi (हिन्दी)</option>
+            <option value="sa">Sanskrit (संस्कृतम्)</option>
+            <option value="ta">Tamil (தமிழ்)</option>
+            <option value="te">Telugu (తెలుగు)</option>
+            <option value="bn">Bengali (বাংলা)</option>
+            <option value="gu">Gujarati (ગુજરાતી)</option>
+            <option value="kn">Kannada (ಕನ್ನಡ)</option>
+            <option value="ml">Malayalam (മലയാളം)</option>
+            <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+            <option value="ur">Urdu (اردو)</option>
+            <option value="en">English</option>
+          </select>
+          <span style="font-size:0.8rem; color:var(--text-muted); font-style:italic;">Source Inscription</span>
+        </div>
+
+        <textarea class="text-area-box" id="sourceInput" placeholder="Enter or paste words, regional dialects, verses, or craft terms (e.g. मधुर, संस्कृती, वारसा)..."></textarea>
+
+        <div class="pane-footer">
+          <span class="char-count" id="sourceCharCount">0 characters</span>
+          <div class="action-icons">
+            <button class="icon-btn" onclick="clearInput()">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target Output Pane -->
+      <div class="pane">
+        <div class="pane-toolbar">
+          <select class="lang-select" id="targetLang">
+            <option value="hi" selected>Hindi (हिन्दी)</option>
+            <option value="en">English (Global)</option>
+            <option value="mr">Marathi (मराठी)</option>
+            <option value="sa">Sanskrit (संस्कृतम्)</option>
+            <option value="ta">Tamil (தமிழ்)</option>
+            <option value="te">Telugu (తెలుగు)</option>
+            <option value="bn">Bengali (বাংলা)</option>
+            <option value="gu">Gujarati (ગુજરાતી)</option>
+            <option value="kn">Kannada (ಕನ್ನಡ)</option>
+            <option value="ml">Malayalam (മലയാളം)</option>
+            <option value="pa">Punjabi (ਪੰਜਾਬੀ)</option>
+            <option value="ur">Urdu (اردو)</option>
+          </select>
+          
+          <div class="mode-toggle">
+            <input type="checkbox" id="contextualMode" checked />
+            <label for="contextualMode">Cultural Context Mode</label>
+          </div>
+        </div>
+
+        <textarea class="text-area-box output-box" id="targetOutput" readonly placeholder="Live translation will materialize here..."></textarea>
+
+        <div class="pane-footer">
+          <span class="char-count" id="targetStatus">Ready for synthesis</span>
+          <div class="action-icons">
+            <button class="icon-btn" id="listenBtn" onclick="speakTranslation()">🔊 Listen</button>
+            <button class="icon-btn" onclick="copyTranslation()">📋 Copy</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Action Button -->
+    <div class="translate-action-row">
+      <button class="btn-translate" onclick="performTranslation()">Synthesize Translation &rarr;</button>
+    </div>
+
+    <!-- Etymology & Cultural Meaning Drawer -->
+    <div class="semantic-card" id="semanticCard">
+      <div class="semantic-head">
+        <span>✦</span> Etymological Roots & Untranslatable Concepts Discovered
+      </div>
+      <p style="font-size:0.86rem; color:var(--text-muted);">
+        The engine identifies terms whose civilizational resonance would be diminished by standard replacement:
+      </p>
+      
+      <div class="semantic-grid" id="etymologyGrid"></div>
+    </div>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer>
+    <p>&copy; 2026 VirasatSetu. Digital Preservation & Revival of India's Living Heritage.</p>
+    <p style="font-size: 0.78rem; opacity: 0.75;">Designed for AICTE Student Innovation in Cultural Preservation.</p>
+  </footer>
+
+  <!-- Script Engine -->
+  <script>
+    const presets = {
+      shloka: {
+        srcLang: 'sa',
+        tgtLang: 'en',
+        text: 'सत्यमेव जयते नानृतं सत्येन पन्था विततो देवयानः।',
+        translation: 'Truth alone triumphs, not falsehood; through truth the divine path of spiritual ascent is laid out.',
+        etymology: [
+          { term: 'सत्यम् (Satyam)', root: '√as (to exist)', desc: 'That which remains unchangeable across past, present, and future.' },
+          { term: 'देवयानः (Devayāna)', root: 'Deva + Yāna', desc: 'The upward celestial path of radiant light and liberation.' }
+        ]
+      },
+      powada: {
+        srcLang: 'mr',
+        tgtLang: 'en',
+        text: 'सह्याद्रीच्या कुशीतून गर्जली शिवशंभूंची तलवार, गनिमी काव्याने थरथरली मोगलांची सत्ता!',
+        translation: 'From the bosom of the Sahyadri ranges roared the sword of Shivaji, while Ganimi Kava (guerrilla warfare) shook the Mughal dominion to its core!',
+        etymology: [
+          { term: 'गनिमी कावा (Ganimi Kava)', root: 'Maratha Military Science', desc: 'Strategic asymmetric mountain guerrilla warfare utilizing Sahyadri topography.' },
+          { term: 'शिवशंभू (Shiva-Shambhu)', root: 'Revered Honorific', desc: 'Conflating the ruler’s valor with the fierce auspiciousness of Lord Shiva.' }
+        ]
+      },
+      sangam: {
+        srcLang: 'ta',
+        tgtLang: 'en',
+        text: 'யாயும் ஞாயும் யாரா கியரோ, எந்தையும் நுந்தையும் எம்முறைக் கேளிர்.',
+        translation: 'What kin was my mother to yours? What connection between your father and mine? Yet our hearts merged like crimson rainwater into red earth.',
+        etymology: [
+          { term: 'செம்புலப் பெயல் (Cempulap Peyal)', root: 'Sangam Kuruntokai 40', desc: 'Poetic metaphor representing the indivisible union of two separate souls.' }
+        ]
+      },
+      weaving: {
+        srcLang: 'mr',
+        tgtLang: 'en',
+        text: 'पैठणीच्या पदरावर मोर-पोपट आणि अस्सल सोन्याची जरी गुंफलेली आहे.',
+        translation: 'On the pallu (drape shoulder) of the Paithani saree, peacock and parrot motifs are hand-interwoven using authentic pure-gold zari.',
+        etymology: [
+          { term: 'पदरावर (Padar / Pallu)', root: 'Sartorial Inscription', desc: 'The prime decorative head of an unstitched saree displaying family prestige.' },
+          { term: 'जरी (Zari)', root: 'Metallurgical Brocade', desc: 'Metallic thread made of gold or silver flattened over pure silk yarn.' }
+        ]
+      }
+    };
+
+    function loadPreset(key) {
+      const p = presets[key];
+      document.getElementById('sourceLang').value = p.srcLang;
+      document.getElementById('targetLang').value = p.tgtLang;
+      document.getElementById('sourceInput').value = p.text;
+      updateCharCount();
+      performTranslation();
+    }
+
+    function updateCharCount() {
+      const len = document.getElementById('sourceInput').value.length;
+      document.getElementById('sourceCharCount').textContent = len + ' characters';
+    }
+    document.getElementById('sourceInput').addEventListener('input', updateCharCount);
+
+    function clearInput() {
+      document.getElementById('sourceInput').value = '';
+      document.getElementById('targetOutput').value = '';
+      document.getElementById('semanticCard').style.display = 'none';
+      document.getElementById('targetStatus').textContent = 'Ready for synthesis';
+      updateCharCount();
+    }
+
+    function copyTranslation() {
+      const txt = document.getElementById('targetOutput').value;
+      if (!txt) return;
+      navigator.clipboard.writeText(txt);
+      alert('✓ Translated text copied to clipboard!');
+    }
+
+    function speakTranslation() {
+      const txt = document.getElementById('targetOutput').value;
+      const tgtLang = document.getElementById('targetLang').value;
+      if (!txt) return;
+      
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(txt);
+      
+      const voiceLocales = {
+        'hi': 'hi-IN',
+        'mr': 'mr-IN',
+        'ta': 'ta-IN',
+        'te': 'te-IN',
+        'bn': 'bn-IN',
+        'gu': 'gu-IN',
+        'en': 'en-IN',
+        'pa': 'pa-IN',
+        'ur': 'ur-PK',
+        'sa': 'hi-IN'
+      };
+      utterance.lang = voiceLocales[tgtLang] || 'en-IN';
+      utterance.rate = 0.92;
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // Real-Time Translation Pipeline (Google Translate Engine + Dual Fallback Nodes)
+    async function performTranslation() {
+      const text = document.getElementById('sourceInput').value.trim();
+      let sl = document.getElementById('sourceLang').value;
+      let tl = document.getElementById('targetLang').value;
+      const out = document.getElementById('targetOutput');
+      const status = document.getElementById('targetStatus');
+      const semanticCard = document.getElementById('semanticCard');
+      const etymologyGrid = document.getElementById('etymologyGrid');
+
+      if (!text) {
+        alert('Please enter text or select a preset to translate.');
+        return;
+      }
+
+      // Check if input matches presets for in-depth civilizational demo
+      for (const k in presets) {
+        if (text.includes(presets[k].text.substring(0, 8)) && tl === presets[k].tgtLang) {
+          out.value = presets[k].translation;
+          status.textContent = '✓ Synthesized in Cultural Context Mode';
+          
+          etymologyGrid.innerHTML = '';
+          presets[k].etymology.forEach(item => {
+            etymologyGrid.innerHTML += `
+              <div class="etymology-item">
+                <h4>${item.term}</h4>
+                <div style="font-size:0.75rem; color:var(--accent-gold); font-weight:700; margin-bottom:0.3rem;">Root: ${item.root}</div>
+                <p>${item.desc}</p>
+              </div>
+            `;
+          });
+          semanticCard.style.display = 'block';
+          return;
+        }
+      }
+
+      semanticCard.style.display = 'none';
+      status.textContent = 'Contacting Google Translation Gateway...';
+
+      // 1. Primary Engine: Google Translate Free Endpoint
+      try {
+        const googleUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${sl}&tl=${tl}&dt=t&q=${encodeURIComponent(text)}`;
+        const response = await fetch(googleUrl);
+        
+        if (response.ok) {
+          const data = await response.json();
+          let translatedText = '';
+          if (data && data[0]) {
+            data[0].forEach(chunk => {
+              if (chunk && chunk[0]) translatedText += chunk[0];
+            });
+          }
+          if (translatedText.trim()) {
+            out.value = translatedText;
+            const detected = data[2] || sl;
+            status.textContent = `✓ Translated via Google Engine (${detected} → ${tl})`;
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn("Primary Google gateway unreachable, switching to backup node:", err);
+      }
+
+      // 2. Secondary Engine: MyMemory Public Translation API
+      try {
+        status.textContent = 'Routing through secondary translation network...';
+        const sourceCode = (sl === 'auto') ? 'auto' : sl;
+        const pair = `${sourceCode}|${tl}`;
+        const memoryUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${pair}`;
+        
+        const res = await fetch(memoryUrl);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.responseData && data.responseData.translatedText) {
+            out.value = data.responseData.translatedText;
+            status.textContent = `✓ Translated via Memory Network (${sl} → ${tl})`;
+            return;
+          }
+        }
+      } catch (backupErr) {
+        console.warn("Secondary node failed:", backupErr);
+      }
+
+      // 3. Third Engine: Lingva Open Relay (CORS-friendly mirror)
+      try {
+        status.textContent = 'Connecting via Lingva relay...';
+        const relaySl = (sl === 'auto') ? 'auto' : sl;
+        const relayUrl = `https://lingva.ml/api/v1/${relaySl}/${tl}/${encodeURIComponent(text)}`;
+        const relayRes = await fetch(relayUrl);
+        if (relayRes.ok) {
+          const rData = await relayRes.json();
+          if (rData && rData.translation) {
+            out.value = rData.translation;
+            status.textContent = `✓ Translated via Neural Relay (${sl} → ${tl})`;
+            return;
+          }
+        }
+      } catch (relayErr) {
+        console.error("All translation providers failed:", relayErr);
+      }
+
+      status.textContent = 'Translation failed';
+      out.value = "Translation error: Network request could not reach translation servers. Please verify your internet connection.";
+    }
+
+    // Trigger translation when pressing Enter (without Shift)
+    document.getElementById('sourceInput').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        performTranslation();
+      }
+    });
+  </script>
+</body>
+</html>

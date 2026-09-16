@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Culinary Heritage | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/culinary/hero-culinary.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Sad-Rasa Taste Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.1rem;
+      text-align: center;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.92rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .style-badge {
+      font-size: 0.65rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      dir: ltr;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 1024px) {
+      .styles-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: repeat(2, 1fr); }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 03.04 • Ayurvedic Dietetics & Spice Thermodynamics</div>
+      <h1 class="hero-title">Culinary Heritage</h1>
+      <p class="hero-tagline">"Where Sad-Rasa six tastes, heirloom grains, seasonal thermodynamics, and sacred temple bhoga converge."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Philosophy of Indian Food & Ayurvedic Dietetics</h2>
+        <p class="doctrine-subtitle">In the Indian civilizational ethos, food (<em>Annam</em>) is revered as divine energy (Brahman). Culinary traditions are rooted in Ayurvedic science, balancing seasonal ingredients, digestive fire (Agni), and the harmonious interplay of the six essential tastes.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What is Culinary Heritage -->
+        <div class="concept-block">
+          <h3 class="concept-title">🍲 What is Culinary Heritage?</h3>
+          <p class="concept-text">
+            Indian culinary heritage represents a sophisticated historical synthesis of indigenous spice blending, fermentation sciences, indigenous grain preservation, and imperial royal kitchens. Recipes are passed down through matriarchal lineage and sacred temple institutional kitchens, capturing the bio-climatic identity of India's diverse regions.
+          </p>
+        </div>
+
+        <!-- Spice Thermodynamics -->
+        <div class="concept-block">
+          <h3 class="concept-title">🔥 Spice Thermodynamics & Fermentation</h3>
+          <p class="concept-text">
+            Spices in Indian cooking are never used merely for heat; they operate as precision functional medicines. Blends like Garam Masala, Chettinad peppercorn mixes, and Malabar spice pastes regulate internal body thermodynamics, boost immunity, and aid digestion across tropical and temperate climates.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Sad-Rasa Taste Grid -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">The Sad-Rasa (Six Tastes) Principle in Indian Dietetics</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Madhura</h4>
+            <span class="style-badge">Sweet</span>
+            <p class="style-text">Grains, milk, ghee, jaggery (nourishing & grounding).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Amla</h4>
+            <span class="style-badge">Sour</span>
+            <p class="style-text">Citrus, tamarind, raw mango (stimulates digestion).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Lavana</h4>
+            <span class="style-badge">Salty</span>
+            <p class="style-text">Rock and sea salts (electrolytes & taste enhancer).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Katu</h4>
+            <span class="style-badge">Pungent</span>
+            <p class="style-text">Chilies, ginger, black pepper (clears sinuses & boosts Agni).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Tikta</h4>
+            <span class="style-badge">Bitter</span>
+            <p class="style-text">Fenugreek, turmeric, bitter gourd (blood purifier).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Kashaya</h4>
+            <span class="style-badge">Astringent</span>
+            <p class="style-text">Lentils, raw banana, pomegranate (cooling & toning).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Culinary Traditions) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Culinary Traditions of India</h2>
+      <p>Pan-Indian case studies documenting temple offerings, royal dumbs, spice formulations, and regional kitchens.</p>
+    </div>
+
+    <!-- 01: Puri Jagannath Temple Chappan Bhog (Odisha) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/chappan-bhog.jpg');">
+        <span class="monument-badge-top">Mahaprasad • Sacred 56 Temple Offerings</span>
+        <div class="monument-bottom-title">
+          <h3>Jagannath Temple Chappan Bhog</h3>
+          <span>Puri, Odisha • Divine Mahaprasad Tradition</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">The monumental temple kitchen of Sri Jagannath Temple, Puri, Odisha (world's largest functioning institutional kitchen)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">Prepares 56 sacred vegetarian dishes (Mahaprasad) daily using unglazed earthenware pots stacked sequentially over firewood hearths, ensuring natural slow-heat conduction without chemical processing</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Cooked entirely without onion or garlic, relying purely on ghee, jaggery, fresh coconut, and native vegetables offered first to Lord Jagannath</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Earthenware Pot Cooking</span>
+              <span class="tag-pill">No Onion/Garlic Canon</span>
+              <span class="tag-pill">Mahaprasad Sanctification</span>
+              <span class="tag-pill">Puri Temple Kitchen</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Jagannath Temple, Puri (19.8049° N, 85.8179° E)</span>
+          <a href="https://maps.google.com/?q=Jagannath+Temple+Puri" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Chettinad Spice Mixtures (Tamil Nadu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/chettinad.jpg');">
+        <span class="monument-badge-top">Cheiyand Nadu • Sun-Dried Peppercorn Blends</span>
+        <div class="monument-bottom-title">
+          <h3>Chettinad Spice Cuisine</h3>
+          <span>Karaikudi & Sivaganga, Tamil Nadu • Aromatic Heat</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Nattukottai Chettiar mansions of the arid Chettinad region, Tamil Nadu</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">Renowned for complex, sun-dried spice formulations featuring star anise, kalpasi (stone flower), dried flower pods, fennel seeds, black peppercorns, and roasted cumin ground on stone slabs</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Deeply aromatic, pungent, and warming flavor profile crafted for maritime trade merchants who imported exotic spices across Southeast Asia</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Kalpasi Stone Flower</span>
+              <span class="tag-pill">Sun-Dried Spice Blends</span>
+              <span class="tag-pill">Chettiar Mansions</span>
+              <span class="tag-pill">Pungent Pepper Base</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Karaikudi, Tamil Nadu (10.0781° N, 78.7803° E)</span>
+          <a href="https://maps.google.com/?q=Karaikudi+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Maharashtrian Puran Poli -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/puran-poli.jpg');">
+        <span class="monument-badge-top">Deccan Plateau • Festive Sweet Flatbread</span>
+        <div class="monument-bottom-title">
+          <h3>Maharashtrian Puran Poli</h3>
+          <span>Pune & Konkan, Maharashtra • Ghee & Jaggery Flatbread</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Maharashtrian household kitchens, prepared during Gudi Padwa and Holi festivals</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">A sweet, nutrient-dense flatbread stuffed with a boiled chana dal and jaggery filling (Puran) seasoned with aromatic nutmeg, cardamom, and saffron, encased in a wheat flour dough shell (Poli) and roasted in pure cow ghee</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Melt-in-the-mouth texture balanced with warm spices; traditionally served steaming hot smothered in golden ghee and accompanied by warm milk or spicy Kat (lentil broth)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Chana Dal & Jaggery Puran</span>
+              <span class="tag-pill">Pure Cow Ghee</span>
+              <span class="tag-pill">Nutmeg & Cardamom</span>
+              <span class="tag-pill">Gudi Padwa Tradition</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Pune, Maharashtra (18.5204° N, 73.8567° E)</span>
+          <a href="https://maps.google.com/?q=Pune+Maharashtrian+Cuisine" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Malabar Spice Blends (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/malabar.jpg');">
+        <span class="monument-badge-top">Spice Coast • Coconut & Curry Leaf Mastery</span>
+        <div class="monument-bottom-title">
+          <h3>Malabar Coastal Spice Cuisine</h3>
+          <span>Kozhikode & Kochi, Kerala • Coconut & Seafood Heritage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Malabar coastline and Moplah heritage kitchens, Kerala</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">Leverages raw coconut milk, roasted shallots, fresh curry leaves, tamarind, and green peppercorns to create harmonious, cooling yet spiced coastal delicacies (e.g., Meen Curry)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Reflects centuries of Arab, Portuguese, and indigenous spice trade exchanges concentrated along the ancient pepper coast</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Raw Coconut Milk Base</span>
+              <span class="tag-pill">Fresh Curry Leaves</span>
+              <span class="tag-pill">Malabar Black Pepper</span>
+              <span class="tag-pill">Moplah Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kozhikode, Kerala (11.2588° N, 75.7804° E)</span>
+          <a href="https://maps.google.com/?q=Kozhikode+Kerala+Cuisine" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Kashmiri Wazwan (Jammu & Kashmir) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/wazwan.jpg');">
+        <span class="monument-badge-top">Jhelum Valley • 36-Course Royal Banquet</span>
+        <div class="monument-bottom-title">
+          <h3>Kashmiri Wazwan Feast</h3>
+          <span>Srinagar, Jammu & Kashmir • Master Waza Banquet</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Traditional master chef guilds (Wazas) of Srinagar, Kashmir</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">A multi-course ceremonial banquet consisting of up to 36 meat-heavy dishes slow-cooked overnight over wood fires. Features iconic dishes like Rogan Josh, Rista, and Tabak Maaz seasoned with saffron and dried cockscomb flower extract (Maval)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Eaten communally from a single large copper platter (Trami) shared by four guests, symbolizing egalitarian brotherhood</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">36-Course Royal Banquet</span>
+              <span class="tag-pill">Waza Master Chefs</span>
+              <span class="tag-pill">Saffron & Maval Flower</span>
+              <span class="tag-pill">Communal Trami Platter</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Srinagar, J&K (34.0837° N, 74.7973° E)</span>
+          <a href="https://maps.google.com/?q=Srinagar+Kashmir+Wazwan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Hyderabadi Dum Biryani (Telangana) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/hyderabadi-biryani.jpg');">
+        <span class="monument-badge-top">Deccan Nizam Legacy • Sealed Dum Cooking</span>
+        <div class="monument-bottom-title">
+          <h3>Hyderabadi Dum Biryani</h3>
+          <span>Hyderabad, Telangana • Nizam Royal Heritage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Royal kitchens of the Nizams of Hyderabad, blending Persian and Telugu flavours</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">Prepared via the <em>Dum Pukht</em> (slow-oven baking) method. Raw marinated mutton or chicken is layered with half-cooked basmati rice, saffron, mint, and fried onions inside a heavy copper vessel sealed shut with dough (Atta) over glowing charcoal</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Trapped aromatic steam infuses the tender meat and rice with intense whole spice notes and pure ghee</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Dum Pukht Sealed Baking</span>
+              <span class="tag-pill">Raw Marinated Meat</span>
+              <span class="tag-pill">Saffron Infused Basmati</span>
+              <span class="tag-pill">Nizami Court Heritage</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Hyderabad, Telangana (17.3850° N, 78.4867° E)</span>
+          <a href="https://maps.google.com/?q=Charminar+Hyderabad+Cuisine" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Awadhi Galouti Kebab (Lucknow, UP) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/galouti-kebab.jpg');">
+        <span class="monument-badge-top">Nawabi Court • Melt-in-the-Mouth Spice Meats</span>
+        <div class="monument-bottom-title">
+          <h3>Awadhi Galouti Kebab</h3>
+          <span>Lucknow, Uttar Pradesh • Royal Nawabi Delicacy</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Nawabi court kitchens of Awadh (Lucknow), Uttar Pradesh</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">Invented for an aging Nawab who had lost his teeth. Finely minced lamb meat is tenderized using raw papaya paste and blended with over 16 secret ground spices before being gently pan-seared in ghee on a flat Mahidhar griddle</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Famed for dissolving instantaneously on the tongue with rich, aromatic floral and warm spice undertones</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Melt-in-Mouth Texture</span>
+              <span class="tag-pill">Raw Papaya Tenderizer</span>
+              <span class="tag-pill">16 Awadhi Spices</span>
+              <span class="tag-pill">Nawabi Court Origin</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Lucknow, UP (26.8467° N, 80.9462° E)</span>
+          <a href="https://maps.google.com/?q=Lucknow+Awadhi+Cuisine" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Goan Vindaloo & Saraswat Fish Curry -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/goan-fish-curry.jpg');">
+        <span class="monument-badge-top">Konkan Coast • Toddy Vinegar & Kokum Acid</span>
+        <div class="monument-bottom-title">
+          <h3>Goan Saraswat Fish Curry & Vindaloo</h3>
+          <span>Goa • Indo-Portuguese Coastal Fusion</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Konkan coastal kitchens and Indo-Portuguese Goan homes</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">Balances fiery Kashmiri chilies, fresh ground coconut, and pungent Goan coconut toddy vinegar (Vinha d'alhos) or sun-dried wild mangosteen (Kokum) to create vibrant, tangy coastal curries</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">A harmonious culinary bridge uniting native Saraswat Hindu coconut-garlic bases with Portuguese vinegar preservation techniques</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Toddy Vinegar Base</span>
+              <span class="tag-pill">Kokum Acidity</span>
+              <span class="tag-pill">Fresh Coconut Gravy</span>
+              <span class="tag-pill">Indo-Portuguese Fusion</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Panaji, Goa (15.4909° N, 73.8278° E)</span>
+          <a href="https://maps.google.com/?q=Panaji+Goa+Cuisine" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Gujarati Thali & Farsan -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/gujarati-thali.jpg');">
+        <span class="monument-badge-top">Gujarat • Sweet, Salty & Sour Balance</span>
+        <div class="monument-bottom-title">
+          <h3>Gujarati Thali & Farsan</h3>
+          <span>Ahmedabad & Surat, Gujarat • Vegetarian Harmony</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Merchant mercantile kitchens of Gujarat, refined over centuries of vegetarian tradition</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">A masterclass in balancing sweet, salty, and sour flavors simultaneously within a single meal. Incorporates jaggery and lemon juice into savory lentil broths (Dal) and vegetable curries (Shaak)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Accompanied by steamed snacks (Farsan) like Dhokla and Patra, unleavened breads, and cooling buttermilk (Chhaas)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Sweet-Sour-Salty Balance</span>
+              <span class="tag-pill">Farsan Steamed Snacks</span>
+              <span class="tag-pill">Pure Vegetarian Thali</span>
+              <span class="tag-pill">Jaggery & Lemon Fusion</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Ahmedabad, Gujarat (23.0225° N, 72.5714° E)</span>
+          <a href="https://maps.google.com/?q=Ahmedabad+Gujarati+Thali" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Himachali Dham -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/culinary/himachali-dham.jpg');">
+        <span class="monument-badge-top">Himalayan Valleys • Communal Brass Platter Feast</span>
+        <div class="monument-bottom-title">
+          <h3>Himachali Dham Feast</h3>
+          <span>Mandi & Chamba, Himachal Pradesh • Brahmin Botis</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Regional Kitchen</span>
+            <p class="dossier-text">Hereditary Brahmin master chefs known as Botis across Mandi and Chamba valleys, HP</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Culinary Science</span>
+            <p class="dossier-text">A traditional vegetarian feast prepared strictly for weddings and religious festivals. Slow-cooked overnight in heavy bronze vessels without onions or garlic, relying on curd, mustard oil, and digestive spices</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Served sitting on the floor on leaf plates (Pattal); features sweet-and-sour lentil and legume dishes like Madra and Khatta</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Gastronomic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Boti Master Chefs</span>
+              <span class="tag-pill">Curd & Yogurt Gravies</span>
+              <span class="tag-pill">Madra & Khatta Dishes</span>
+              <span class="tag-pill">Pattal Leaf Platter</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Mandi, Himachal Pradesh (31.7087° N, 76.9317° E)</span>
+          <a href="https://maps.google.com/?q=Mandi+Himachal+Pradesh+Cuisine" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Culinary Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

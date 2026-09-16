@@ -17,12 +17,37 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
             .csrf(csrf -> csrf.disable())
+
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**", "/api/quiz/**", "/api/stories/**", "/api/heritage/**", "/api/ai/**").permitAll()
+
+                // Allow all frontend pages and static resources
+                .requestMatchers(
+                    "/",
+                    "/*.html",
+                    "/css/**",
+                    "/js/**",
+                    "/images/**",
+                    "/assets/**",
+                    "/static/**",
+                    "/favicon.ico"
+                ).permitAll()
+
+                // Allow public APIs
+                .requestMatchers(
+                    "/api/auth/**",
+                    "/api/quiz/**",
+                    "/api/stories/**",
+                    "/api/heritage/**",
+                    "/api/ai/**"
+                ).permitAll()
+
+                // Everything else requires authentication
                 .anyRequest().authenticated()
             );
+
         return http.build();
     }
 }

@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speech-to-Text Oral Pipeline | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Top Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Page Header */
+    .hero-section {
+      text-align: center;
+      padding: 3.5rem 1.5rem 1.8rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(184, 130, 48, 0.12);
+      padding: 0.35rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(184, 130, 48, 0.3);
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.02rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* Main Grid */
+    .stt-container {
+      max-width: 1260px;
+      margin: 1.5rem auto 5rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    /* Control Desk */
+    .stt-desk {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 1.8rem;
+      background: var(--card-bg);
+      border: 1px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    /* Left Console */
+    .audio-console {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      border-right: 1.5px dashed var(--border-card);
+      padding-right: 1.8rem;
+    }
+
+    .console-card {
+      background: #241309;
+      border-radius: 12px;
+      padding: 1.4rem;
+      color: #FAF0DF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(184, 130, 48, 0.4);
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.6);
+    }
+
+    .engine-tag {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 1.5px;
+      color: var(--accent-gold-light);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      text-transform: uppercase;
+    }
+
+    .live-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #555;
+    }
+
+    .live-indicator.listening {
+      background: #E53935;
+      animation: pulse 1s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.3; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    #visualizerCanvas {
+      width: 100%;
+      height: 80px;
+      background: #190C05;
+      border-radius: 6px;
+      border: 1px solid #472614;
+    }
+
+    .timer-display {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      letter-spacing: 2px;
+    }
+
+    .btn-mic-action {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: none;
+      font-family: 'Cinzel', serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      transition: all 0.25s ease;
+    }
+
+    .btn-mic-start {
+      background: #9C1B1B;
+      color: #fff;
+      border: 1px solid #E53935;
+    }
+    .btn-mic-start:hover { background: #b92424; }
+
+    .btn-mic-stop {
+      background: #4A3022;
+      color: #FAF0DF;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Configuration form fields */
+    .config-box {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .field-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .lang-dropdown {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-card);
+      background: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--primary-dark);
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .lang-dropdown:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .file-player-card {
+      background: rgba(205, 179, 147, 0.2);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 0.8rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .file-player-card audio {
+      width: 100%;
+      height: 34px;
+      outline: none;
+    }
+
+    /* Right Output Pane */
+    .transcript-console {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      justify-content: space-between;
+    }
+
+    .pane-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid rgba(205, 179, 147, 0.4);
+      padding-bottom: 0.6rem;
+    }
+
+    .status-text {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .output-text-area {
+      width: 100%;
+      height: 230px;
+      background: #fff;
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 1.2rem;
+      font-family: 'Noto Sans Devanagari', 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--primary-dark);
+      resize: none;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+
+    .output-text-area:focus {
+      border-color: var(--accent-gold);
+    }
+
+    .interim-strip {
+      font-size: 0.85rem;
+      color: #8b5b29;
+      font-style: italic;
+      min-height: 1.4rem;
+      padding: 0.2rem 0.4rem;
+    }
+
+    .translation-drawer {
+      background: rgba(205, 179, 147, 0.25);
+      border: 1px solid var(--border-card);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      display: none;
+    }
+
+    .translation-drawer-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      margin-bottom: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .translation-content {
+      font-size: 0.95rem;
+      color: #3E2617;
+      line-height: 1.6;
+    }
+
+    .actions-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed var(--border-card);
+    }
+
+    .btn-group-left, .btn-group-right {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .btn-tool {
+      background: transparent;
+      border: 1px solid var(--border-card);
+      border-radius: 6px;
+      padding: 0.45rem 0.85rem;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-brown);
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-tool:hover {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      border-color: var(--accent-gold);
+    }
+
+    .btn-primary-action {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      border: 1px solid var(--accent-gold);
+      padding: 0.55rem 1.4rem;
+      border-radius: 6px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    footer {
+      background: var(--primary-dark);
+      color: #CDB393;
+      text-align: center;
+      padding: 2.8rem 1.5rem;
+      font-size: 0.88rem;
+      border-top: 2px solid var(--accent-gold);
+    }
+
+    @media (max-width: 900px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .stt-desk { grid-template-columns: 1fr; }
+      .audio-console { border-right: none; border-bottom: 1.5px dashed var(--border-card); padding-right: 0; padding-bottom: 1.8rem; }
+      .hero-title { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page Header -->
+  <section class="hero-section">
+    <div class="hero-badge">Voice Preservation Pipeline</div>
+    <h1 class="hero-title">Speech-to-Text Oral Pipeline</h1>
+    <p class="hero-subtitle">
+      Powered by Google Speech Recognition to capture and transcribe village elder recollections, regional ballads, and sacred oral chants directly into searchable text.
+    </p>
+  </section>
+
+  <!-- Workspace Container -->
+  <main class="stt-container">
+
+    <div class="stt-desk">
+
+      <!-- Left Console: Controls & Audio Visualizer -->
+      <aside class="audio-console">
+        
+        <div class="console-card">
+          <div class="engine-tag">
+            <span class="live-indicator" id="liveDot"></span>
+            <span id="engineLabel">Google Speech Engine Standby</span>
+          </div>
+
+          <canvas id="visualizerCanvas"></canvas>
+
+          <div class="timer-display" id="recTimer">00:00</div>
+
+          <button type="button" class="btn-mic-action btn-mic-start" id="toggleMicBtn">
+            <span>●</span> Start Recording & Transcribing
+          </button>
+        </div>
+
+        <div class="config-box">
+          <label class="field-label" for="speechLang">Spoken Dialect / Language</label>
+          <select class="lang-dropdown" id="speechLang">
+            <option value="mr-IN" selected>Marathi (मराठी - भारत)</option>
+            <option value="hi-IN">Hindi (हिन्दी - भारत)</option>
+            <option value="sa-IN">Sanskrit (संस्कृतम्)</option>
+            <option value="ta-IN">Tamil (தமிழ் - இந்தியா)</option>
+            <option value="te-IN">Telugu (తెలుగు - భారతదేశం)</option>
+            <option value="bn-IN">Bengali (বাংলা - ভারত)</option>
+            <option value="gu-IN">Gujarati (ગુજરાતી - ભારત)</option>
+            <option value="kn-IN">Kannada (ಕನ್ನಡ - ಭಾರತ)</option>
+            <option value="ml-IN">Malayalam (മലയാളം - ഇന്ത്യ)</option>
+            <option value="pa-IN">Punjabi (ਪੰਜਾਬੀ - ਭਾਰਤ)</option>
+            <option value="ur-IN">Urdu (اردو - بھارت)</option>
+            <option value="en-IN">Indian English (en-IN)</option>
+          </select>
+        </div>
+
+        <div class="config-box">
+          <label class="field-label">Field Audio Reference</label>
+          <div class="file-player-card">
+            <input type="file" id="audioUpload" accept="audio/*" style="font-size: 0.8rem;" />
+            <audio id="localAudioPlayer" controls style="display:none;"></audio>
+            <span id="audioFileInfo" style="font-size:0.75rem; color:var(--text-muted);">Upload a local recording to review playback alongside live microphone transcription.</span>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Right Console: Live Transcript & Translation Pipeline -->
+      <section class="transcript-console">
+        
+        <div>
+          <div class="pane-header-row">
+            <span class="field-label">Digitized Speech Transcription</span>
+            <span class="status-text" id="statusNotice">Ready to capture voice</span>
+          </div>
+
+          <textarea class="output-text-area" id="transcriptOutput" placeholder="Click 'Start Recording & Transcribing' and speak into your microphone in Marathi, Hindi, or English. Your actual spoken words will transcribe here in real time..."></textarea>
+          
+          <div class="interim-strip" id="interimOutput"></div>
+        </div>
+
+        <!-- Automatic Translation Box -->
+        <div class="translation-drawer" id="translationBox">
+          <div class="translation-drawer-title">
+            <span>✦ English Translation (Google Engine)</span>
+            <span style="font-size:0.75rem; cursor:pointer;" onclick="copyTranslation()">📋 Copy Translation</span>
+          </div>
+          <div class="translation-content" id="translationOutput"></div>
+        </div>
+
+        <!-- Actions Toolbar -->
+        <div class="actions-strip">
+          <div class="btn-group-left">
+            <button class="btn-tool" onclick="clearTranscript()">Clear</button>
+            <button class="btn-tool" onclick="copyTranscript()">📋 Copy Text</button>
+            <button class="btn-tool" onclick="downloadTranscript()">💾 Save Scroll (.txt)</button>
+          </div>
+
+          <div class="btn-group-right">
+            <button class="btn-tool" onclick="translateTranscript()">🌐 Translate to English</button>
+            <button class="btn-primary-action" onclick="sendToArchive()">Commit to Oral Archive &rarr;</button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Speech-to-Text & Audio Logic -->
+  <script>
+    let isRecording = false;
+    let recognition = null;
+    let timerInterval = null;
+    let secondsElapsed = 0;
+
+    // Web Audio Canvas Visualizer elements
+    let audioCtx = null;
+    let analyser = null;
+    let micStream = null;
+    let animId = null;
+    const canvas = document.getElementById('visualizerCanvas');
+    const canvasCtx = canvas.getContext('2d');
+
+    const toggleBtn = document.getElementById('toggleMicBtn');
+    const liveDot = document.getElementById('liveDot');
+    const engineLabel = document.getElementById('engineLabel');
+    const recTimer = document.getElementById('recTimer');
+    const transcriptOutput = document.getElementById('transcriptOutput');
+    const interimOutput = document.getElementById('interimOutput');
+    const statusNotice = document.getElementById('statusNotice');
+    const speechLang = document.getElementById('speechLang');
+
+    // Canvas size initialization
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    // Baseline static wave line
+    function drawIdleWave() {
+      canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+      canvasCtx.lineWidth = 2;
+      canvasCtx.strokeStyle = '#472614';
+      canvasCtx.beginPath();
+      canvasCtx.moveTo(0, canvas.height / 2);
+      canvasCtx.lineTo(canvas.width, canvas.height / 2);
+      canvasCtx.stroke();
+    }
+    drawIdleWave();
+
+    // Initialize Web Speech Recognition API (Chrome/Chromium native Google speech backend)
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (SpeechRecognition) {
+      recognition = new SpeechRecognition();
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onstart = () => {
+        isRecording = true;
+        liveDot.classList.add('listening');
+        engineLabel.textContent = "Google Engine Active";
+        statusNotice.textContent = "Listening to live microphone audio...";
+        toggleBtn.classList.remove('btn-mic-start');
+        toggleBtn.classList.add('btn-mic-stop');
+        toggleBtn.innerHTML = "<span>■</span> Stop Capturing Voice";
+        startTimer();
+        startAudioVisualizer();
+      };
+
+      recognition.onresult = (event) => {
+        let interimText = '';
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            transcriptOutput.value += (transcriptOutput.value.length ? ' ' : '') + transcript;
+          } else {
+            interimText += transcript;
+          }
+        }
+        interimOutput.textContent = interimText ? `Live hearing: "${interimText}"` : '';
+      };
+
+      recognition.onerror = (event) => {
+        console.warn("Speech recognition notice:", event.error);
+        if (event.error === 'not-allowed') {
+          alert("Microphone access was denied. Please allow microphone permissions in Chrome to transcribe live speech.");
+          stopRecording();
+        }
+      };
+
+      recognition.onend = () => {
+        if (isRecording) {
+          try {
+            recognition.start();
+          } catch(e) {
+            stopRecording();
+          }
+        } else {
+          stopRecording();
+        }
+      };
+    } else {
+      statusNotice.textContent = "Speech recognition unavailable in this browser. Please run in Google Chrome.";
+      toggleBtn.disabled = true;
+      toggleBtn.style.opacity = "0.5";
+    }
+
+    // Toggle speech capture
+    toggleBtn.addEventListener('click', () => {
+      if (!recognition) return;
+      if (!isRecording) {
+        recognition.lang = speechLang.value;
+        try {
+          recognition.start();
+        } catch(e) {
+          console.error(e);
+        }
+      } else {
+        isRecording = false;
+        recognition.stop();
+        stopRecording();
+      }
+    });
+
+    // Update recognition language dynamically
+    speechLang.addEventListener('change', () => {
+      if (isRecording && recognition) {
+        recognition.stop();
+        setTimeout(() => {
+          recognition.lang = speechLang.value;
+          recognition.start();
+        }, 200);
+      }
+    });
+
+    function startTimer() {
+      secondsElapsed = 0;
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, '0');
+        const secs = String(secondsElapsed % 60).padStart(2, '0');
+        recTimer.textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function stopRecording() {
+      isRecording = false;
+      clearInterval(timerInterval);
+      liveDot.classList.remove('listening');
+      engineLabel.textContent = "Google Speech Engine Standby";
+      statusNotice.textContent = "Transcription paused";
+      toggleBtn.classList.remove('btn-mic-stop');
+      toggleBtn.classList.add('btn-mic-start');
+      toggleBtn.innerHTML = "<span>●</span> Start Recording & Transcribing";
+      interimOutput.textContent = '';
+      stopAudioVisualizer();
+    }
+
+    // Canvas Frequency Visualizer Loop
+    async function startAudioVisualizer() {
+      try {
+        micStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        analyser = audioCtx.createAnalyser();
+        analyser.fftSize = 256;
+        const source = audioCtx.createMediaStreamSource(micStream);
+        source.connect(analyser);
+
+        const bufferLength = analyser.frequencyBinCount;
+        const dataArray = new Uint8Array(bufferLength);
+
+        function drawWave() {
+          animId = requestAnimationFrame(drawWave);
+          analyser.getByteTimeDomainData(dataArray);
+
+          canvasCtx.fillStyle = '#190C05';
+          canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+          canvasCtx.lineWidth = 2;
+          canvasCtx.strokeStyle = '#B88230';
+          canvasCtx.beginPath();
+
+          const sliceWidth = canvas.width * 1.0 / bufferLength;
+          let x = 0;
+
+          for (let i = 0; i < bufferLength; i++) {
+            const v = dataArray[i] / 128.0;
+            const y = v * (canvas.height / 2);
+
+            if (i === 0) canvasCtx.moveTo(x, y);
+            else canvasCtx.lineTo(x, y);
+
+            x += sliceWidth;
+          }
+
+          canvasCtx.lineTo(canvas.width, canvas.height / 2);
+          canvasCtx.stroke();
+        }
+        drawWave();
+      } catch (err) {
+        console.warn("Visualizer stream permission optional:", err);
+      }
+    }
+
+    function stopAudioVisualizer() {
+      if (animId) cancelAnimationFrame(animId);
+      if (micStream) micStream.getTracks().forEach(track => track.stop());
+      if (audioCtx) audioCtx.close();
+      drawIdleWave();
+    }
+
+    // Real-Time Translation via Google Translate Engine
+    async function translateTranscript() {
+      const text = transcriptOutput.value.trim();
+      const translationBox = document.getElementById('translationBox');
+      const translationOutput = document.getElementById('translationOutput');
+
+      if (!text) {
+        alert("Please speak or record voice in the transcription box first.");
+        return;
+      }
+
+      translationBox.style.display = 'block';
+      translationOutput.textContent = "Translating via Google Neural Engine...";
+
+      const srcLangCode = speechLang.value.split('-')[0];
+
+      try {
+        const googleUrl = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=${srcLangCode}&tl=en&dt=t&q=${encodeURIComponent(text)}`;
+        const response = await fetch(googleUrl);
+        
+        if (response.ok) {
+          const data = await response.json();
+          let translatedText = '';
+          if (data && data[0]) {
+            data[0].forEach(chunk => {
+              if (chunk && chunk[0]) translatedText += chunk[0];
+            });
+          }
+          translationOutput.textContent = translatedText || "Translation synthesis completed.";
+          return;
+        }
+      } catch (err) {
+        console.warn("Google endpoint notice:", err);
+      }
+
+      try {
+        const memoryUrl = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=${srcLangCode}|en`;
+        const res = await fetch(memoryUrl);
+        const data = await res.json();
+        if (data.responseData && data.responseData.translatedText) {
+          translationOutput.textContent = data.responseData.translatedText;
+          return;
+        }
+      } catch(e) {}
+
+      translationOutput.textContent = "Translation unavailable. Please verify network access.";
+    }
+
+    // Audio File Handling: Genuine Audio Player (No fake Powada text)
+    const audioUpload = document.getElementById('audioUpload');
+    const localAudioPlayer = document.getElementById('localAudioPlayer');
+    const audioFileInfo = document.getElementById('audioFileInfo');
+
+    audioUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const fileUrl = URL.createObjectURL(file);
+        localAudioPlayer.src = fileUrl;
+        localAudioPlayer.style.display = 'block';
+        audioFileInfo.innerHTML = `Loaded: <strong>${file.name}</strong> (${(file.size / 1024).toFixed(1)} KB).<br>Click 'Start Recording' and play your audio to transcribe it live.`;
+        statusNotice.textContent = `Audio file ready: ${file.name}`;
+      }
+    });
+
+    // Helper functions
+    function clearTranscript() {
+      transcriptOutput.value = '';
+      interimOutput.textContent = '';
+      document.getElementById('translationBox').style.display = 'none';
+      statusNotice.textContent = 'Transcripts cleared';
+    }
+
+    function copyTranscript() {
+      if (!transcriptOutput.value) return;
+      navigator.clipboard.writeText(transcriptOutput.value);
+      alert('✓ Transcription copied to clipboard!');
+    }
+
+    function copyTranslation() {
+      const text = document.getElementById('translationOutput').textContent;
+      if (!text) return;
+      navigator.clipboard.writeText(text);
+      alert('✓ English translation copied to clipboard!');
+    }
+
+    function downloadTranscript() {
+      const content = transcriptOutput.value;
+      if (!content) {
+        alert("Nothing to export yet.");
+        return;
+      }
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `virasatsetu_transcript_${Date.now()}.txt`;
+      a.click();
+    }
+
+    function sendToArchive() {
+      const content = transcriptOutput.value;
+      if (!content) {
+        alert("Please record or transcribe speech before submitting to the archive.");
+        return;
+      }
+      sessionStorage.setItem('virasatSetu_pending_transcript', content);
+      sessionStorage.setItem('virasatSetu_pending_lang', speechLang.value);
+      alert('✓ Transcription synchronized! Redirecting to the Living Oral Archive in Analytics...');
+      window.location.href = 'analytics.html#oralArchive';
+    }
+  </script>
+</body>
+</html>

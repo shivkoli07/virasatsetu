@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Festivals & Celebrations | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/festivals/hero-festivals.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Calendar Systems Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .style-badge {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 03.02 • Cyclic Time & Utsava</div>
+      <h1 class="hero-title">Festivals & Celebrations</h1>
+      <p class="hero-tagline">"Where lunar tithis, solar equinoxes, harvest gratitude, and grand temple processions synchronize human communities."</p>
+    </div>
+  </section>
+
+  <!-- Core Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Philosophy of Indian Time & Utsava</h2>
+        <p class="doctrine-subtitle">In the Indian civilizational calendar, festivals (<em>Utsava</em>, meaning "that which removes worldly sorrow and elevates the mind") are not mere holiday breaks. They are profound cosmic milestones aligning agricultural seasons, planetary solstices, and spiritual rejuvenation.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What are Festivals -->
+        <div class="concept-block">
+          <h3 class="concept-title">🎉 What is a Festival (Utsava)?</h3>
+          <p class="concept-text">
+            Festivals serve as civilizational glue, binding multigenerational families and diverse communities through shared culinary traditions, festive attire, sacred music, and ritual processions. They mark the victory of light over ignorance, seasonal transitions, and gratitude toward nature's bounty.
+          </p>
+        </div>
+
+        <!-- Panchangam & Lunar Tithis -->
+        <div class="concept-block">
+          <h3 class="concept-title">🌙 The Panchangam & Lunar Tithis</h3>
+          <p class="concept-text">
+            Unlike Gregorian calendar dates fixed to the solar year, traditional Indian festivals are calculated via the <em>Panchangam</em> (Hindu lunisolar calendar). They are anchored to lunar phases (<em>Tithis</em>), solar transitions (<em>Sankrantis</em>), and equinoxes, ensuring festivities harmonize seamlessly with ecological cycles.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Calendar & Festival Systems Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Festival Motivations & Types</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Harvest & Agrarian</h4>
+            <span class="style-badge">Nature & Bounty</span>
+            <p class="style-text">Celebrations expressing profound gratitude to the Sun, soil, and livestock for agricultural abundance (e.g., Makar Sankranti, Pongal, Baisakhi, Onam).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Temple & Processional</h4>
+            <span class="style-badge">Deity & Ratha</span>
+            <p class="style-text">Colossal public spectacles where wooden chariots carrying divine icons traverse city streets amidst devotional music and thousands of pilgrims (e.g., Rath Yatra, Thrissur Pooram).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Monastic & Tribal</h4>
+            <span class="style-badge">Ancestral & Solstice</span>
+            <p class="style-text">Himalayan monastic masked dances celebrating esoteric Buddhist triumphs and indigenous tribal fairs honoring forest spirits (e.g., Hornbill, Hemis Tsechu).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Festivals) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Festivals & Celebrations of India</h2>
+      <p>Pan-Indian case studies documenting lunar alignments, ritual processions, harvest thanksgiving, and cultural epicenters.</p>
+    </div>
+
+    <!-- 01: Maha Kumbh Mela (Prayagraj, Uttar Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/kumbh-mela.jpg');">
+        <span class="monument-badge-top">UNESCO Intangible Heritage • World's Largest Congregation</span>
+        <div class="monument-bottom-title">
+          <h3>Maha Kumbh Mela</h3>
+          <span>Prayagraj, Uttar Pradesh • 12-Year Cyclic Pilgrimage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Calculated via planetary positions of Jupiter, Sun, and Moon at the holy Sangam (confluence of Ganga, Yamuna, and Saraswati)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">Millions of pilgrims and ascetic sadhus (Naga Akharas) converge for holy ritual immersion (Shahi Snan) to cleanse karma and attain spiritual liberation</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Recognized by UNESCO as the largest peaceful gathering of humanity on earth, temporarily erecting a fully functioning tent city with infrastructure rivalling major metropolises</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">UNESCO Intangible</span>
+              <span class="tag-pill">Triveni Sangam Bath</span>
+              <span class="tag-pill">Naga Akhara Procession</span>
+              <span class="tag-pill">12-Year Astrological Cycle</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Triveni Sangam, Prayagraj (25.4358° N, 81.8848° E)</span>
+          <a href="https://maps.google.com/?q=Triveni+Sangam+Prayagraj" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Thrissur Pooram (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/thrissur-pooram.jpg');">
+        <span class="monument-badge-top">Vadakkunnathan Temple • Festival of Elephants</span>
+        <div class="monument-bottom-title">
+          <h3>Thrissur Pooram</h3>
+          <span>Thrissur, Kerala • Mayooram & Percussion Spectacle</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Celebrated annually on the Malayalam month of Medam (April–May) on the day of Pooram star</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">A grand spectacle featuring 50+ caparisoned elephants lined up in two rival temple groups exchanging ornate silk parasols (Kuda mattom) amidst thunderous traditional Panchavadyam percussion orchestras</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">The dazzling midnight fireworks display (Vedikettu) lighting up the entire Thekkinkadu Maग्राउंड</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Elephant Caparisons</span>
+              <span class="tag-pill">Kuda Mattom Parasols</span>
+              <span class="tag-pill">Panchavadyam Orchestra</span>
+              <span class="tag-pill">Vadakkunnathan Grounds</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Thekkinkadu Ground, Thrissur (10.5276° N, 76.2144° E)</span>
+          <a href="https://maps.google.com/?q=Vadakkunnathan+Temple+Thrissur" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Durga Puja (Kolkata, West Bengal) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/durga-puja.jpg');">
+        <span class="monument-badge-top">UNESCO Intangible Heritage • Pandal Art</span>
+        <div class="monument-bottom-title">
+          <h3>Kolkata Durga Puja</h3>
+          <span>Kolkata, West Bengal • Autumn Equinox Celebration</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Held over 10 days in autumn (September–October) during Ashwina Shukla Paksha</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">Neighbourhood committees construct elaborate, avant-garde temporary architectural installations (Pandals) housing clay idols of Goddess Durga slaying Mahishasura, accompanied by Dhunuchi Naach incense dancing</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Inscribed on the UNESCO Representative List of the Intangible Cultural Heritage of Humanity for its exceptional community art and public design</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">UNESCO Intangible</span>
+              <span class="tag-pill">Immersive Pandal Art</span>
+              <span class="tag-pill">Dhunuchi Naach Dance</span>
+              <span class="tag-pill">Dashami Immersion</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kolkata, West Bengal (22.5726° N, 88.3639° E)</span>
+          <a href="https://maps.google.com/?q=Kolkata+Durga+Puja+Pandals" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Rath Yatra (Puri, Odisha) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/rath-yatra.jpg');">
+        <span class="monument-badge-top">Jagannath Temple • Grand Chariot Procession</span>
+        <div class="monument-bottom-title">
+          <h3>Puri Rath Yatra</h3>
+          <span>Puri, Odisha • Asadha Shukla Dwitiya</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Conducted annually on the second day of the bright fortnight of Ashadha month (June–July)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">Deities Jagannath, Balabhadra, and Subhadra emerge from the 12th-century sanctum and board three gigantic newly built wooden chariots to travel to Gundicha Temple amidst roaring devotional chants</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">The chariots are pulled manually by hundreds of thousands of ecstatic devotees using thick ropes without mechanical assistance</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Gigantic Wooden Chariots</span>
+              <span class="tag-pill">Jagannath Temple Puri</span>
+              <span class="tag-pill">Rope Pulling Pilgrimage</span>
+              <span class="tag-pill">Gundicha Yatra</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Jagannath Temple, Puri (19.8049° N, 85.8179° E)</span>
+          <a href="https://maps.google.com/?q=Jagannath+Temple+Puri" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Hornbill Festival (Nagaland) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/hornbill-festival.jpg');">
+        <span class="monument-badge-top">Kisama Heritage Village • Festival of Festivals</span>
+        <div class="monument-bottom-title">
+          <h3>Hornbill Festival</h3>
+          <span>Kisama, Kohima, Nagaland • December Tribal Gathering</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Celebrated annually from December 1st to 10th across Nagaland state</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">All major Naga tribes gather at Kisama Heritage Village showcasing traditional war dances, indigenous sports, folk music, bamboo craft displays, and ceremonial attire adorned with hornbill feathers</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Created by the Government of Nagaland to encourage inter-tribal interaction and promote cultural preservation of Northeast indigenous heritage</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Kisama Heritage Village</span>
+              <span class="tag-pill">Naga Tribal War Dances</span>
+              <span class="tag-pill">Hornbill Feathers</span>
+              <span class="tag-pill">Northeast Cultural Unity</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Kisama Heritage Village, Kohima (25.6033° N, 94.1000° E)</span>
+          <a href="https://maps.google.com/?q=Kisama+Heritage+Village+Nagaland" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Hemis Tsechu (Ladakh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/hemis-festival.jpg');">
+        <span class="monument-badge-top">Hemis Monastery • Himalayan Masked Dance</span>
+        <div class="monument-bottom-title">
+          <h3>Hemis Tsechu Festival</h3>
+          <span>Hemis Monastery, Ladakh • Tibetan Buddhist Solstice</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Held on the 10th day (Tsechu) of the Tibetan lunar month (June–July)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">Commemorates the birth anniversary of Guru Padmasambhava. Lamas clad in vibrant silk brocades and fearsome papier-mâché masks perform sacred Cham dances accompanied by long cymbals and dungchen horns</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Unfurling of a colossal sacred thangka scroll down the monastery courtyard once every 12 years</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Cham Masked Dances</span>
+              <span class="tag-pill">Hemis Monastery Ladakh</span>
+              <span class="tag-pill">Padmasambhava Birthday</span>
+              <span class="tag-pill">Giant Thangka Unfurling</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Hemis Monastery, Ladakh (33.9115° N, 77.6974° E)</span>
+          <a href="https://maps.google.com/?q=Hemis+Monastery+Ladakh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Makar Sankranti & Pongal (Pan-India & Tamil Nadu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/makar-sankranti.jpg');">
+        <span class="monument-badge-top">Solar Solstice • Harvest Thanksgiving</span>
+        <div class="monument-bottom-title">
+          <h3>Makar Sankranti & Pongal</h3>
+          <span>Pan-India & Tamil Nadu • Sun Transition Festival</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Fixed solar calendar date: January 14–15, marking the sun's entry into Makara (Capricorn)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">Farmers give thanks to the Sun god for agricultural abundance. In Tamil Nadu, <em>Pongal</em> involves boiling fresh rice, milk, and jaggery in clay pots outdoors while chanting "Pongalo Pongal!"</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Celebrated with vibrant kite-flying festivals across Gujarat, Maharashtra sesame sweet exchanges (Tilgul), and cattle worship (Mattu Pongal)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Uttarayan Sun Transit</span>
+              <span class="tag-pill">Sweet Pongal Pot Boiling</span>
+              <span class="tag-pill">Kite Flying Skies</span>
+              <span class="tag-pill">Tilgul Sesame Exchange</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Madurai, Tamil Nadu (9.9195° N, 78.1194° E)</span>
+          <a href="https://maps.google.com/?q=Madurai+Tamil+Nadu" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Onam (Kerala) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/onam.jpg');">
+        <span class="monument-badge-top">Malayalam Calendar (Chingam) • Legendary Homecoming</span>
+        <div class="monument-bottom-title">
+          <h3>Onam Harvest Festival</h3>
+          <span>Kerala • Vallam Kali & Pookalam</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Celebrated during the Malayalam month of Chingam (August–September)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">Commemorates the legendary golden reign of benevolent demon king Mahabali. Homes are decorated with intricate floral carpets (Pookalam), followed by the grand Onasadya vegetarian feast served on banana leaves</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">Stunning snake boat races (Vallam Kali) held on backwaters, alongside Pulikali tiger dance processions</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Pookalam Floral Carpets</span>
+              <span class="tag-pill">Vallam Kali Snake Boats</span>
+              <span class="tag-pill">Onasadya 26-Dish Feast</span>
+              <span class="tag-pill">Pulikali Tiger Dance</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Aranmula, Kerala (9.3308° N, 76.6800° E)</span>
+          <a href="https://maps.google.com/?q=Aranmula+Kerala+Snake+Boat+Race" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Diwali & Bandi Chhor Divas (Pan-India & Punjab) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/diwali.jpg');">
+        <span class="monument-badge-top">Kartik Amavasya • Festival of Lights</span>
+        <div class="monument-bottom-title">
+          <h3>Diwali & Bandi Chhor Divas</h3>
+          <span>Pan-India & Amritsar, Punjab • Triumph of Light</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Observed on the darkest new moon night of the Hindu month of Kartika (October–November)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">Commemorates Lord Rama’s return to Ayodhya after 14 years in exile and Guru Hargobind Ji’s release from Gwalior Fort (Bandi Chhor Divas). Homes glow with earthen oil lamps (diyas) and intricate rangoli floor patterns</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">The Golden Temple in Amritsar illuminated with thousands of lamps and fireworks reflecting across the holy nectar tank</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Earthen Diyas Illumination</span>
+              <span class="tag-pill">Bandi Chhor Divas</span>
+              <span class="tag-pill">Golden Temple Fireworks</span>
+              <span class="tag-pill">Rangoli Floor Art</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Golden Temple, Amritsar (31.6200° N, 74.8765° E)</span>
+          <a href="https://maps.google.com/?q=Golden+Temple+Amritsar" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Pushkar Camel Fair (Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/festivals/pushkar-fair.jpg');">
+        <span class="monument-badge-top">Thar Desert Edge • Kartik Purnima Fair</span>
+        <div class="monument-bottom-title">
+          <h3>Pushkar Camel Fair</h3>
+          <span>Pushkar, Rajasthan • Desert Livestock & Cultural Mela</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Calendar & Timing</span>
+            <p class="dossier-text">Held annually during the full moon of Kartik Purnima (November)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Rituals</span>
+            <p class="dossier-text">One of the world's largest camel and livestock fairs. Rabari herdsmen and desert traders gather at the holy Pushkar lake for ritual holy dips alongside folk music, turban-tying competitions, and camel races</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Distinguishing Mark</span>
+            <p class="dossier-text">A mesmerizing cultural explosion of colorful Rajasthani attire, desert folk musicians, and bustling tent encampments under desert skies</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Festival Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Kartik Purnima Holy Bath</span>
+              <span class="tag-pill">Camel & Livestock Trading</span>
+              <span class="tag-pill">Rajasthani Folk Music</span>
+              <span class="tag-pill">Thar Desert Encampment</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Pushkar Lake, Rajasthan (26.4885° N, 74.5511° E)</span>
+          <a href="https://maps.google.com/?q=Pushkar+Lake+Rajasthan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Celebration Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

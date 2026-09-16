@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audio Heritage Acoustic Archive | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Header */
+    .hero-section {
+      text-align: center;
+      padding: 4rem 1.5rem 2rem;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold);
+      background: rgba(184, 130, 48, 0.12);
+      padding: 0.35rem 1.2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(184, 130, 48, 0.3);
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.7rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.25;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* Main Container */
+    .archive-container {
+      max-width: 1280px;
+      margin: 1.5rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    /* MASTER AUDIO PLAYER CONSOLE */
+    .master-player {
+      background: #221208;
+      color: #FAF0DF;
+      border: 1.5px solid rgba(184, 130, 48, 0.45);
+      border-radius: 18px;
+      padding: 2.2rem 2.6rem;
+      box-shadow: 0 18px 45px rgba(42, 21, 11, 0.35);
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .master-player::after {
+      content: '';
+      position: absolute;
+      right: -80px;
+      bottom: -80px;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(184, 130, 48, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .player-visual-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      border-right: 1px dashed rgba(205, 179, 147, 0.25);
+      padding-right: 2.2rem;
+    }
+
+    .album-art {
+      width: 200px;
+      height: 200px;
+      border-radius: 14px;
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      border: 1.5px solid rgba(205, 179, 147, 0.4);
+      position: relative;
+    }
+
+    #acousticVisualizer {
+      width: 100%;
+      height: 60px;
+      background: #140A04;
+      border-radius: 8px;
+      border: 1px solid rgba(184, 130, 48, 0.3);
+    }
+
+    .player-details-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.2rem;
+    }
+
+    .now-playing-tag {
+      font-family: 'Cinzel', serif;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+    }
+
+    .track-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: #FAF0DF;
+      line-height: 1.25;
+      margin: 0.2rem 0;
+    }
+
+    .track-meta {
+      font-size: 0.88rem;
+      color: #CDB393;
+    }
+
+    .verse-box {
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(184, 130, 48, 0.25);
+      border-radius: 10px;
+      padding: 1rem 1.4rem;
+      margin: 0.5rem 0;
+      max-height: 110px;
+      overflow-y: auto;
+    }
+
+    .verse-text {
+      font-family: 'Noto Sans Devanagari', 'Playfair Display', serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #F8E6C8;
+    }
+
+    .verse-meaning {
+      font-size: 0.82rem;
+      font-style: italic;
+      color: #D3BA9E;
+      margin-top: 0.4rem;
+    }
+
+    /* Progress and Scrub */
+    .scrub-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .time-stamps {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: #CDB393;
+      font-family: monospace;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 4px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: var(--gold-accent-gradient);
+      border-radius: 4px;
+      transition: width 0.1s linear;
+    }
+
+    /* Player Controls */
+    .ctrl-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .playback-buttons {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .btn-ctrl {
+      background: transparent;
+      border: none;
+      color: #FAF0DF;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-ctrl:hover {
+      color: var(--accent-gold-light);
+      transform: scale(1.1);
+    }
+
+    .btn-play-pause {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      border: none;
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.4);
+    }
+
+    .btn-play-pause:hover {
+      transform: scale(1.08);
+      background: #FFF;
+    }
+
+    .volume-box {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: #CDB393;
+    }
+
+    .volume-slider {
+      width: 90px;
+      accent-color: var(--accent-gold);
+      cursor: pointer;
+    }
+
+    /* CATALOG CONTROLS */
+    .filter-search-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      background: var(--card-bg);
+      padding: 1.1rem 1.6rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-card);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .category-pills {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .pill-btn {
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      border: 1px solid var(--border-card);
+      background: rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .pill-btn.active,
+    .pill-btn:hover {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      border-color: var(--accent-gold);
+    }
+
+    .search-input {
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border-card);
+      font-size: 0.85rem;
+      width: 250px;
+      outline: none;
+      background: #FFF;
+    }
+
+    /* TRACK CARDS GRID */
+    .tracks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .track-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.4rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      gap: 1.2rem;
+      align-items: center;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .track-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    .track-card.active-card {
+      border: 2px solid var(--accent-gold);
+      background: #FFF9EE;
+    }
+
+    .card-thumb {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+      border: 1px solid var(--border-card);
+    }
+
+    .card-body {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .card-category {
+      font-family: 'Cinzel', serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent-gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin: 0.15rem 0;
+    }
+
+    .card-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-duration {
+      font-size: 0.75rem;
+      color: var(--accent-brown);
+      font-weight: 600;
+      margin-top: 0.3rem;
+    }
+
+    .card-action-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--border-card);
+      background: #FFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--accent-brown);
+      transition: all 0.2s;
+    }
+
+    .track-card:hover .card-action-btn {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      border-color: var(--accent-gold);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--primary-dark);
+      color: #CDB393;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      font-size: 0.88rem;
+      border-top: 2px solid var(--accent-gold);
+    }
+
+    footer p {
+      margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 960px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .master-player { grid-template-columns: 1fr; padding: 1.6rem; }
+      .player-visual-panel { border-right: none; border-bottom: 1px dashed rgba(205, 179, 147, 0.25); padding-right: 0; padding-bottom: 1.5rem; }
+      .tracks-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Native HTML5 audio for stream management -->
+  <audio id="globalAudioPlayer" preload="auto"></audio>
+
+  <!-- Top Navbar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html">Explore</a></li>
+        <li><a href="experience.html" class="active">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Page Header -->
+  <section class="hero-section">
+    <div class="hero-badge">Acoustic Heritage Preservation</div>
+    <h1 class="hero-title">Audio Heritage Archive</h1>
+    <p class="hero-subtitle">
+      A curated civilizational acoustic repository preserving sacred Vedic mantras, heroic Maratha powadas, Sanskrit stotrams, and timeless regional folk chants.
+    </p>
+  </section>
+
+  <!-- Main Archive Flow -->
+  <main class="archive-container">
+
+    <!-- MASTER ACTIVE PLAYER -->
+    <section class="master-player">
+      
+      <!-- Left: Cover & Visualizer -->
+      <div class="player-visual-panel">
+        <div class="album-art" id="currentCover" style="background-image: url('assets/experience/audio-heritage.jpg');"></div>
+        <canvas id="acousticVisualizer"></canvas>
+      </div>
+
+      <!-- Right: Controls & Verse Dossier -->
+      <div class="player-details-panel">
+        <div>
+          <span class="now-playing-tag" id="currentCategory">Vedic Mantra • Rigveda</span>
+          <h2 class="track-name" id="currentTitle">Gayatri Mantra (गायत्री मन्त्र)</h2>
+          <div class="track-meta" id="currentMeta">Scale: Vedic Chanting • Language: Vedic Sanskrit • Meter: Gayatri</div>
+        </div>
+
+        <div class="verse-box">
+          <div class="verse-text" id="currentVerse">ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥</div>
+          <div class="verse-meaning" id="currentMeaning">"We meditate on the supreme radiant splendor of the divine Sun; may that light illuminate and inspire our intellect."</div>
+        </div>
+
+        <!-- Progress Scrubber -->
+        <div class="scrub-container">
+          <div class="progress-bar-wrap" id="progressBar">
+            <div class="progress-bar-fill" id="progressFill"></div>
+          </div>
+          <div class="time-stamps">
+            <span id="currentTime">0:00</span>
+            <span id="totalDuration">0:00</span>
+          </div>
+        </div>
+
+        <!-- Controls Toolbar -->
+        <div class="ctrl-strip">
+          <div class="playback-buttons">
+            <button class="btn-ctrl" id="prevBtn" title="Previous Track">⏮</button>
+            <button class="btn-play-pause" id="masterPlayBtn" title="Play / Pause">▶</button>
+            <button class="btn-ctrl" id="nextBtn" title="Next Track">⏭</button>
+            <button class="btn-ctrl" id="loopBtn" title="Loop Track" style="font-size:1.1rem; opacity:0.7;">🔁</button>
+          </div>
+
+          <div class="volume-box">
+            <span>🔊</span>
+            <input type="range" class="volume-slider" id="volSlider" min="0" max="1" step="0.05" value="0.85" />
+            <button class="btn-ctrl" id="downloadBtn" title="Download Audio File" style="font-size:1.05rem;">💾</button>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- FILTER & SEARCH BAR -->
+    <section class="filter-search-strip">
+      <div class="category-pills">
+        <button class="pill-btn active" data-filter="all">All Tracks</button>
+        <button class="pill-btn" data-filter="Mantra">Vedic Mantras</button>
+        <button class="pill-btn" data-filter="Powada">Historical Powadas</button>
+        <button class="pill-btn" data-filter="Shloka">Sacred Shlokas</button>
+        <button class="pill-btn" data-filter="Stotram">Stotrams & Chants</button>
+        <button class="pill-btn" data-filter="Folk">Folk Lore & Baul</button>
+      </div>
+
+      <input type="text" id="trackSearch" class="search-input" placeholder="Search track, raga, or deity..." />
+    </section>
+
+    <!-- TRACKS CATALOGUE GRID -->
+    <section class="tracks-grid" id="tracksGrid">
+      <!-- Injected Dynamically via JS -->
+    </section>
+
+  </main>
+
+  <!-- Script Engine -->
+  <script>
+    // ------------------------------------------------------------------------
+    // TRACKS ARCHIVE DATA STORE (10 Pan-Indian Audios)
+    // ------------------------------------------------------------------------
+    const audioCatalog = [
+      {
+        id: 1,
+        title: "Gayatri Mantra (गायत्री मन्त्र)",
+        category: "Mantra",
+        tradition: "Rigveda Mandala 3.62.10",
+        lang: "Vedic Sanskrit",
+        verse: "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥",
+        meaning: "We meditate upon the auspicious splendor of the solar deity Savitr; may that divine illumination awaken our intellect.",
+        localFallback: "assets/audio/gayatri-mantra.mp3",
+        cover: "assets/audio/gayatri-cover.jpg",
+        duration: "03:14"
+      },
+      {
+        id: 2,
+        title: "Chhatrapati Shivaji Maharaj Powada (शिवराज पोवाडा)",
+        category: "Powada",
+        tradition: "Shahiri Bardic Lore (Afzal Khan Vadh)",
+        lang: "Classical Marathi",
+        verse: "गर्जती सह्याद्रीचे कडे, शिवबाचे तेज चहुकडे! प्रतापगडावर दाविला गनिमी कावा, मराठा वीर जागा झाला नवा!",
+        meaning: "The cliffs of the Sahyadri roar with Shivaji's radiance! At Pratapgad, guerilla strategy triumphed and ignited sovereign Maratha valor.",
+        localFallback: "assets/audio/shivaji-powada.mp3",
+        cover: "assets/audio/shivaji-cover.jpg",
+        duration: "04:45"
+      },
+      {
+        id: 3,
+        title: "Maha Mrityunjaya Mantra (महामृत्युंजय मन्त्र)",
+        category: "Mantra",
+        tradition: "Yajurveda / Rigveda 7.59.12",
+        lang: "Vedic Sanskrit",
+        verse: "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्। उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय मामृतात्॥",
+        meaning: "We revere the three-eyed one who nourishes all beings. Like a melon freed from its stalk, may we be liberated from death, not from immortality.",
+        localFallback: "assets/audio/mrityunjaya.mp3",
+        cover: "assets/audio/mrityunjaya-cover.jpg",
+        duration: "04:12"
+      },
+      {
+        id: 4,
+        title: "Nirvana Shatakam (निर्वाणषट्कम्)",
+        category: "Shloka",
+        tradition: "Adi Shankaracharya • Advaita Vedanta",
+        lang: "Classical Sanskrit",
+        verse: "मनोबुद्ध्यहङ्कार चित्तानि नाहं न च श्रोत्रजिह्वे न च घ्राणनेत्रे। चिदानन्दरूपः शिवोऽहम् शिवोऽहम्॥",
+        meaning: "I am not the mind, intellect, ego or subconscious; I am eternal consciousness and auspicious bliss: Shiva am I, Shiva am I.",
+        localFallback: "assets/audio/nirvana-shatakam.mp3",
+        cover: "assets/audio/nirvana-shatakam-cover.jpg",
+        duration: "05:18"
+      },
+      {
+        id: 5,
+        title: "Tanaji Malusare Sinhagad Powada (तानाजी पोवाडा)",
+        category: "Powada",
+        tradition: "Shahiri Ballad of Kondhana",
+        lang: "Classical Marathi",
+        verse: "आधी लग्न कोंढाण्याचं मग माझ्या रायबाचं! घोरपडीच्या साहाय्याने तानाजी चढले कडा!",
+        meaning: "First the wedding of Kondhana fort, then my son Rayba's wedding! Ascending sheer rock walls under cover of night.",
+        localFallback: "assets/audio/tanaji-powada.mp3",
+        cover: "assets/audio/tanaji-powada-cover.jpg",
+        duration: "06:05"
+      },
+      {
+        id: 6,
+        title: "Shiva Tandava Stotram (शिवताण्डवस्तोत्रम्)",
+        category: "Stotram",
+        tradition: "Lankesh Ravana • Panchachamara Meter",
+        lang: "Sanskrit",
+        verse: "जटाटवीगलज्जलप्रवाहपावितस्थले गलेऽवलम्ब्य लम्बितां भुजङ्गतुङ्गमालिकाम्। डमड्डमड्डमड्डमन्निनादवड्डमर्वयं चकार चण्डताण्डवं तनोतु नः शिवः शिवम्॥",
+        meaning: "With his neck consecrated by the holy river trickling from his forest of matted locks, Shiva dances the cosmic Tandava to the sound of damaru.",
+        localFallback: "assets/audio/shiva-tandava.mp3",
+        cover: "assets/audio/shiva-tandava-cover.jpg",
+        duration: "07:30"
+      },
+      {
+        id: 7,
+        title: "Gita Dhyana Shlokas (भगवद्गीता ध्यानम्)",
+        category: "Shloka",
+        tradition: "Mahabharata Bhishma Parva",
+        lang: "Sanskrit",
+        verse: "पार्थाय प्रतिबोधितां भगवता नारायणेन स्वयं व्यासेन ग्रथितां पुराणमुनिना मध्येमहाभारतम्।",
+        meaning: "Revealed by Lord Narayana Himself to Partha (Arjuna), woven by the ancient sage Vyasa into the epic Mahabharata.",
+        localFallback: "assets/audio/gita-dhyanam.mp3",
+        cover: "assets/audio/gita-dhyanam-cover.jpg",
+        duration: "03:55"
+      },
+      {
+        id: 8,
+        title: "Baul Mystic Folk Song (बाउल गान)",
+        category: "Folk",
+        tradition: "Bengal UNESCO Intangible Lore • Ektara",
+        lang: "Bengali",
+        verse: "খাঁচার ভিতর অচিন পাখি কেমনে আসে যায়। তারে ধরতে পারলে মনবেড়ি দিতাম পাখির পায়॥",
+        meaning: "How does the unknown bird flutter in and out of the cage of the body? Could I catch it, I would fasten it with the chain of love.",
+        localFallback: "assets/audio/baul-song.mp3",
+        cover: "assets/audio/baul-song-cover.jpg",
+        duration: "04:40"
+      },
+      {
+        id: 9,
+        title: "Vishnu Sahasranama Stotram (विष्णुसहस्रनाम)",
+        category: "Stotram",
+        tradition: "Anushasana Parva • Bhishma Pitamaha",
+        lang: "Sanskrit",
+        verse: "शुक्लाम्बरधरं विष्णुं शशिवर्णं चतुर्भुजम्। प्रसन्नवदनं ध्यायेत् सर्वविघ्नोपशान्तये॥",
+        meaning: "We meditate on Vishnu, robed in luminous white, moon-colored, four-armed and serene-faced, for the removal of all impediments.",
+        localFallback: "assets/audio/vishnu-sahasranama.mp3",
+        cover: "assets/audio/vishnu-sahasranama-cover.jpg",
+        duration: "08:15"
+      },
+      {
+        id: 10,
+        title: "Varli Tribal Harvest Chant (वारली तर्पा गीत)",
+        category: "Folk",
+        tradition: "Palghar Sahyadri Wind Tarpa",
+        lang: "Varli Dialect",
+        verse: "कणसरी मातेचा जयघोष! भात शेतातील नव्या धानाचा सुवास तरपा वादनाने घुमतो डोंगरदऱ्यात!",
+        meaning: "Revering Kansari Devi (Goddess of Corn)! As autumn rice matures, the resonant breath of the tarpa horn echoes across the valleys.",
+        localFallback: "assets/audio/varli-tarpa.mp3",
+        cover: "assets/audio/varli-tarpa-cover.jpg",
+        duration: "03:30"
+      }
+    ];
+
+    // ------------------------------------------------------------------------
+    // PLAYER STATE & ELEMENTS
+    // ------------------------------------------------------------------------
+    let currentIndex = 0;
+    let isPlaying = false;
+    let isLooping = false;
+
+    const audio = document.getElementById('globalAudioPlayer');
+    const playBtn = document.getElementById('masterPlayBtn');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const loopBtn = document.getElementById('loopBtn');
+    const volSlider = document.getElementById('volSlider');
+    const downloadBtn = document.getElementById('downloadBtn');
+
+    const coverElem = document.getElementById('currentCover');
+    const titleElem = document.getElementById('currentTitle');
+    const categoryElem = document.getElementById('currentCategory');
+    const metaElem = document.getElementById('currentMeta');
+    const verseElem = document.getElementById('currentVerse');
+    const meaningElem = document.getElementById('currentMeaning');
+
+    const progressBar = document.getElementById('progressBar');
+    const progressFill = document.getElementById('progressFill');
+    const currentTimeElem = document.getElementById('currentTime');
+    const totalDurationElem = document.getElementById('totalDuration');
+    const tracksGrid = document.getElementById('tracksGrid');
+    const searchInput = document.getElementById('trackSearch');
+    const filterPills = document.querySelectorAll('.pill-btn');
+
+    // ------------------------------------------------------------------------
+    // RENDER TRACKS
+    // ------------------------------------------------------------------------
+    function renderCatalog(items) {
+      tracksGrid.innerHTML = '';
+      if (items.length === 0) {
+        tracksGrid.innerHTML = `<div style="grid-column: 1/-1; text-align:center; padding:3rem; color:var(--text-muted); font-style:italic;">No recordings found matching your search.</div>`;
+        return;
+      }
+
+      items.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = `track-card ${audioCatalog[currentIndex].id === item.id ? 'active-card' : ''}`;
+        card.onclick = () => selectTrackById(item.id);
+
+        card.innerHTML = `
+          <div class="card-thumb" style="background-image: url('${item.cover}');"></div>
+          <div class="card-body">
+            <div class="card-category">${item.category} • ${item.lang}</div>
+            <div class="card-title">${item.title}</div>
+            <div class="card-subtitle">${item.tradition}</div>
+            <div class="card-duration">Duration: ${item.duration}</div>
+          </div>
+          <button class="card-action-btn" title="Play Track">${audioCatalog[currentIndex].id === item.id && isPlaying ? '⏸' : '▶'}</button>
+        `;
+        tracksGrid.appendChild(card);
+      });
+    }
+
+    // ------------------------------------------------------------------------
+    // TRACK CONTROLLER LOGIC
+    // ------------------------------------------------------------------------
+    function loadTrack(index, autoPlay = true) {
+      currentIndex = index;
+      const track = audioCatalog[currentIndex];
+
+      titleElem.textContent = track.title;
+      categoryElem.textContent = `${track.category} • ${track.tradition}`;
+      metaElem.textContent = `Language: ${track.lang} • Archive ID: VS-AUD-${String(track.id).padStart(3, '0')}`;
+      verseElem.textContent = track.verse;
+      meaningElem.textContent = `"${track.meaning}"`;
+      coverElem.style.backgroundImage = `url('${track.cover}')`;
+
+      // Assign local file path securely
+      audio.src = track.localFallback;
+      audio.load();
+
+      progressFill.style.width = '0%';
+      currentTimeElem.textContent = '0:00';
+      totalDurationElem.textContent = track.duration;
+
+      applyFilterAndSearch();
+
+      if (autoPlay) {
+        playAudio();
+      }
+    }
+
+    function selectTrackById(id) {
+      const idx = audioCatalog.findIndex(t => t.id === id);
+      if (idx !== -1) {
+        if (currentIndex === idx && isPlaying) {
+          pauseAudio();
+        } else {
+          loadTrack(idx, true);
+        }
+      }
+    }
+
+    function playAudio() {
+      audio.play().then(() => {
+        isPlaying = true;
+        playBtn.textContent = '⏸';
+        applyFilterAndSearch();
+      }).catch(err => {
+        console.warn("Audio play blocked or file not found:", err);
+        isPlaying = false;
+        playBtn.textContent = '▶';
+      });
+    }
+
+    function pauseAudio() {
+      audio.pause();
+      isPlaying = false;
+      playBtn.textContent = '▶';
+      applyFilterAndSearch();
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (isPlaying) pauseAudio();
+      else playAudio();
+    });
+
+    prevBtn.addEventListener('click', () => {
+      const newIdx = (currentIndex - 1 + audioCatalog.length) % audioCatalog.length;
+      loadTrack(newIdx, true);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const newIdx = (currentIndex + 1) % audioCatalog.length;
+      loadTrack(newIdx, true);
+    });
+
+    loopBtn.addEventListener('click', () => {
+      isLooping = !isLooping;
+      audio.loop = isLooping;
+      loopBtn.style.opacity = isLooping ? '1' : '0.5';
+      loopBtn.style.color = isLooping ? 'var(--accent-gold-light)' : '#FAF0DF';
+    });
+
+    volSlider.addEventListener('input', (e) => {
+      audio.volume = e.target.value;
+    });
+
+    downloadBtn.addEventListener('click', () => {
+      const track = audioCatalog[currentIndex];
+      const a = document.createElement('a');
+      a.href = audio.src;
+      a.download = `${track.title}.mp3`;
+      a.target = '_blank';
+      a.click();
+    });
+
+    // Scrubbing and progress
+    audio.addEventListener('timeupdate', () => {
+      if (!isNaN(audio.duration) && audio.duration > 0) {
+        const percent = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = `${percent}%`;
+
+        const curMin = Math.floor(audio.currentTime / 60);
+        const curSec = String(Math.floor(audio.currentTime % 60)).padStart(2, '0');
+        currentTimeElem.textContent = `${curMin}:${curSec}`;
+
+        const durMin = Math.floor(audio.duration / 60);
+        const durSec = String(Math.floor(audio.duration % 60)).padStart(2, '0');
+        totalDurationElem.textContent = `${durMin}:${durSec}`;
+      }
+    });
+
+    progressBar.addEventListener('click', (e) => {
+      const rect = progressBar.getBoundingClientRect();
+      const clickPos = (e.clientX - rect.left) / rect.width;
+      if (!isNaN(audio.duration)) {
+        audio.currentTime = clickPos * audio.duration;
+      }
+    });
+
+    audio.addEventListener('ended', () => {
+      if (!isLooping) {
+        nextBtn.click();
+      }
+    });
+
+    // ------------------------------------------------------------------------
+    // FILTER & SEARCH HANDLERS
+    // ------------------------------------------------------------------------
+    let currentFilter = 'all';
+
+    function applyFilterAndSearch() {
+      const query = searchInput.value.toLowerCase().trim();
+      const filtered = audioCatalog.filter(item => {
+        const matchCategory = (currentFilter === 'all') || (item.category === currentFilter);
+        const matchQuery = item.title.toLowerCase().includes(query) ||
+                           item.tradition.toLowerCase().includes(query) ||
+                           item.lang.toLowerCase().includes(query) ||
+                           item.verse.toLowerCase().includes(query);
+        return matchCategory && matchQuery;
+      });
+      renderCatalog(filtered);
+    }
+
+    filterPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        filterPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFilter = pill.dataset.filter;
+        applyFilterAndSearch();
+      });
+    });
+
+    searchInput.addEventListener('input', applyFilterAndSearch);
+
+    // ------------------------------------------------------------------------
+    // CANVAS VISUALIZER (Safe Dynamic Simulation Mode)
+    // ------------------------------------------------------------------------
+    const canvas = document.getElementById('acousticVisualizer');
+    const ctx = canvas.getContext('2d');
+
+    function resizeCanvas() {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function drawVisualizerBars() {
+      requestAnimationFrame(drawVisualizerBars);
+
+      ctx.fillStyle = '#140A04';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const barCount = 32;
+      const barWidth = (canvas.width / barCount) - 3;
+      let x = 0;
+
+      for (let i = 0; i < barCount; i++) {
+        let barHeight = 4;
+        if (isPlaying) {
+          const randomFactor = Math.sin(Date.now() / 150 + i * 0.5) * 0.5 + 0.5;
+          barHeight = Math.max(8, randomFactor * (canvas.height * 0.85));
+        }
+
+        ctx.fillStyle = isPlaying ? 'var(--accent-gold)' : '#472614';
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+        x += barWidth + 3;
+      }
+    }
+    drawVisualizerBars();
+
+    // Initial page load without autoplaying sound
+    loadTrack(0, false);
+  </script>
+</body>
+</html>

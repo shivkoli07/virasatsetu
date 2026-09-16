@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Art & Crafts | VirasatSetu</title>
+
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --accent-gold-light: #E3B465;
+      --text-muted: #573E2C;
+      --border-card: #CDB393;
+      --card-bg: rgba(255, 250, 242, 0.92);
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+      --shadow-soft: 0 10px 30px rgba(42, 21, 11, 0.08);
+      --shadow-hover: 0 16px 40px rgba(42, 21, 11, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--page-gradient);
+      color: var(--primary-dark);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-attachment: fixed;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 4rem;
+      background: rgba(250, 240, 223, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--border-card);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .nav-brand span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--primary-dark);
+      transition: all 0.25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-gold);
+    }
+
+    .user-pill {
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.55rem 1.6rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.84rem;
+      letter-spacing: 1.2px;
+      text-decoration: none;
+      border: 1px solid var(--accent-gold);
+    }
+
+    /* Panoramic Hero Banner */
+    .hero-banner {
+      position: relative;
+      height: 480px;
+      background: url('assets/art/hero-art.jpg') center/cover no-repeat;
+      background-color: #241309;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 1.5rem;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.45) 0%, rgba(42, 21, 11, 0.9) 100%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 920px;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent-gold-light);
+      background: rgba(42, 21, 11, 0.6);
+      border: 1px solid rgba(227, 180, 101, 0.4);
+      padding: 0.35rem 1.4rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: 3.4rem;
+      font-weight: 900;
+      color: #FAF0DF;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      text-shadow: 0 4px 18px rgba(0, 0, 0, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #E3B465;
+    }
+
+    /* Core Art Doctrine Section */
+    .doctrine-container {
+      max-width: 1240px;
+      margin: 3.5rem auto 2.5rem;
+      padding: 0 1.5rem;
+    }
+
+    .doctrine-card {
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      padding: 2.8rem;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .doctrine-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .doctrine-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.6rem;
+    }
+
+    .doctrine-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .doctrine-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .concept-block {
+      background: rgba(255, 255, 255, 0.65);
+      border: 1px solid var(--border-card);
+      border-radius: 12px;
+      padding: 1.8rem;
+      border-left: 4px solid var(--accent-gold);
+    }
+
+    .concept-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--accent-brown);
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .concept-text {
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: #3e2617;
+    }
+
+    /* Mediums Grid */
+    .styles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .style-box {
+      background: rgba(205, 179, 147, 0.18);
+      border: 1px solid var(--border-card);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+
+    .style-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .style-badge {
+      font-size: 0.72rem;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .style-text {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+    }
+
+    /* Showcase Section */
+    .showcase-container {
+      max-width: 1240px;
+      margin: 2rem auto 6rem;
+      padding: 0 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-separator {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-separator h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: 1px;
+    }
+
+    .section-separator p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      font-style: italic;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .monument-card {
+      display: grid;
+      grid-template-columns: 460px 1fr;
+      background: var(--card-bg);
+      border: 1.5px solid var(--border-card);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .monument-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    /* Left Image with Title on Bottom */
+    .monument-visual {
+      position: relative;
+      min-height: 420px;
+      background-size: cover;
+      background-position: center;
+      background-color: #241309;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    .monument-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(42, 21, 11, 0.15) 0%, rgba(42, 21, 11, 0.92) 100%);
+      z-index: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .monument-badge-top {
+      position: absolute;
+      top: 1.4rem;
+      left: 1.4rem;
+      font-family: 'Cinzel', serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #FFF2DF;
+      background: rgba(42, 21, 11, 0.75);
+      border: 1px solid rgba(205, 179, 147, 0.5);
+      padding: 0.3rem 0.85rem;
+      border-radius: 4px;
+      z-index: 2;
+      letter-spacing: 1px;
+    }
+
+    .monument-bottom-title {
+      position: relative;
+      z-index: 2;
+      color: #FAF0DF;
+    }
+
+    .monument-bottom-title h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.25;
+      text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
+      margin-bottom: 0.3rem;
+    }
+
+    .monument-bottom-title span {
+      font-size: 0.85rem;
+      color: var(--accent-gold-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    /* Right Description Pane */
+    .monument-details {
+      padding: 2.4rem 2.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 1.4rem;
+    }
+
+    .monument-dossier-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      font-size: 0.93rem;
+    }
+
+    .dossier-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      align-items: baseline;
+      gap: 0.8rem;
+    }
+
+    .dossier-label {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: var(--accent-brown);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .dossier-text {
+      color: #3e2617;
+      line-height: 1.6;
+    }
+
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag-pill {
+      background: rgba(205, 179, 147, 0.3);
+      border: 1px solid rgba(184, 130, 48, 0.35);
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .monument-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 1.4rem;
+      border-top: 1px dashed var(--border-card);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .coords-text {
+      font-family: monospace;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    .btn-maps-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: var(--royal-gradient);
+      color: #FFF2DF;
+      padding: 0.65rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      border: 1px solid var(--accent-gold);
+      transition: all 0.25s ease;
+    }
+
+    .btn-maps-action:hover {
+      background: var(--gold-accent-gradient);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(184, 130, 48, 0.35);
+    }
+
+    @media (max-width: 980px) {
+      .navbar { padding: 1rem 1.5rem; }
+      .hero-title { font-size: 2.4rem; }
+      .doctrine-split { grid-template-columns: 1fr; }
+      .styles-grid { grid-template-columns: 1fr; }
+      .monument-card { grid-template-columns: 1fr; }
+      .monument-visual { min-height: 280px; }
+      .monument-details { padding: 1.8rem; }
+      .dossier-row { grid-template-columns: 1fr; gap: 0.3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        VIRASAT<span>SETU</span>
+      </a>
+      
+      <ul class="nav-links">
+        <li><a href="explore.html" class="active">Explore</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="games.html">Games</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="profile.html" class="user-pill">Scholar Dossier</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Large Panoramic Hero Banner with Title Overlay -->
+  <section class="hero-banner">
+    <div class="hero-content">
+      <div class="hero-badge">Domain 02.01 • Visual & Folk Artistry</div>
+      <h1 class="hero-title">Art & Crafts</h1>
+      <p class="hero-tagline">"Where earth pigments, sacred geometry, natural pen-work, and spiritual iconography come alive."</p>
+    </div>
+  </section>
+
+  <!-- Core Art Doctrine Section -->
+  <section class="doctrine-container">
+    <div class="doctrine-card">
+      
+      <div class="doctrine-header">
+        <h2 class="doctrine-title">The Philosophy of Indian Visual Arts</h2>
+        <p class="doctrine-subtitle">In the Indian tradition, painting and craft were never divorced from spiritual devotion or agrarian rhythms. Artisans used natural minerals, crushed stones, and botanical dyes to render cosmic narratives on walls, cloth, and paper.</p>
+      </div>
+
+      <div class="doctrine-split">
+        
+        <!-- What is Traditional Art -->
+        <div class="concept-block">
+          <h3 class="concept-title">🎨 What is Traditional Art?</h3>
+          <p class="concept-text">
+            Traditional Indian art is a collective vernacular heritage transmitted through family guilds and tribal communities. Eschewing Western perspective in favor of symbolic hierarchy and flat, vibrant color planes, these traditions encapsulate epics, seasonal fertility rites, and ancestral legends onto mud walls, handmade paper, and temple textiles.
+          </p>
+        </div>
+
+        <!-- Natural Pigments & Techniques -->
+        <div class="concept-block">
+          <h3 class="concept-title">🌿 Natural Pigments & Bindings</h3>
+          <p class="concept-text">
+            Master artisans formulate their own colors from organic elements: lampblack for deep blacks, turmeric and geru for yellows and ochres, indigo for blues, and crushed malachite for greens, bound together with natural gums, cow dung, or tamarind seed paste to endure across centuries.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Artistic Categories Breakdown -->
+      <div>
+        <h3 style="font-family:'Cinzel', serif; font-size:1.2rem; color:var(--accent-brown); margin-bottom:0.8rem;">Core Artistic Mediums & Traditions</h3>
+        <div class="styles-grid">
+          
+          <div class="style-box">
+            <h4 class="style-title">Tribal & Earth Art</h4>
+            <span class="style-badge">Aniconic & Ritualistic</span>
+            <p class="style-text">Rooted in animistic worship and agricultural cycles, utilizing simple geometric shapes (circles, triangles, squares) painted directly on mud walls (e.g., Warli, Gond).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Court & Temple Scrolls</h4>
+            <span class="style-badge">Epics & Devotion</span>
+            <p class="style-text">Detailed narrative scrolls and cloth paintings executed by hereditary bardic guilds to accompany oral storytelling performances (e.g., Pattachitra, Kalamkari, Pichwai).</p>
+          </div>
+
+          <div class="style-box">
+            <h4 class="style-title">Monastic & Gem Inlay</h4>
+            <span class="style-badge">Tantric & Royal Gold</span>
+            <p class="style-text">Highly specialized spiritual schools incorporating mineral gold leaf, precious stones, and sacred geometry under strict canonical treatises (e.g., Tanjore, Thangka).</p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Landmark Showcase (10 Master Art & Craft Traditions) -->
+  <main class="showcase-container">
+    
+    <div class="section-separator">
+      <h2>10 Benchmark Art & Craft Traditions of India</h2>
+      <p>Pan-Indian case studies documenting regional pigmenry, iconographic styles, master techniques, and geospatial origins.</p>
+    </div>
+
+    <!-- 01: Madhubani (Mithila) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/madhubani.jpg');">
+        <span class="monument-badge-top">Mithila Region • Natural Pigment Wall Art</span>
+        <div class="monument-bottom-title">
+          <h3>Madhubani (Mithila) Painting</h3>
+          <span>Madhubani, Bihar • Ancient Ritual Tradition</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Originating in the Mithila region of Bihar and Nepal; traditionally painted by women on freshly plastered mud walls (Kohbar ghar) during weddings and festivals</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Characterized by vibrant double-line borders, dense cross-hatching, and zero empty space, filled with bright natural vegetable dyes applied using twigs, nibs, and cotton fingers</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Depictions of Rama-Sita wedding, fertility motifs (lotus, fish, bamboo groves), celestial sun, and lunar deities</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Vegetable Dyes</span>
+              <span class="tag-pill">Kohbar Motifs</span>
+              <span class="tag-pill">Double-Line Outlines</span>
+              <span class="tag-pill">Mithila Folklore</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Madhubani, Bihar (26.3518° N, 86.0777° E)</span>
+          <a href="https://maps.google.com/?q=Madhubani+Bihar" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02: Warli (Maharashtra) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/warli.jpg');">
+        <span class="monument-badge-top">Sahyadri Foothills • Tribal Rice Paste Art</span>
+        <div class="monument-bottom-title">
+          <h3>Warli Painting</h3>
+          <span>Palghar & Thane, Maharashtra • Tribal Heritage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Practiced by the Warli tribal indigenous community inhabiting the mountainous border of Maharashtra and Gujarat</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Utilizes a stark, minimalist geometry based on three elemental shapes: the circle (representing sun and moon), the triangle (mountains and conical trees), and the square (sacred enclosure/chawk)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">The Tarpa harvest dance spiral, hunting expeditions, community sowing, and Palaghata (fertility goddess)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Rice Paste White</span>
+              <span class="tag-pill">Tarpa Dance Spiral</span>
+              <span class="tag-pill">Circle, Triangle, Square</span>
+              <span class="tag-pill">Red Mud Background</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Dahanu, Palghar (19.9754° N, 72.7381° E)</span>
+          <a href="https://maps.google.com/?q=Dahanu+Palghar+Maharashtra" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03: Pattachitra (Odisha) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/pattachitra.jpg');">
+        <span class="monument-badge-top">Raghurajpur • Cloth Scroll Painting</span>
+        <div class="monument-bottom-title">
+          <h3>Pattachitra</h3>
+          <span>Raghurajpur, Odisha • Temple Scroll Heritage</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Traditional cloth-based scroll painting tied to the worship of Lord Jagannath in Puri and crafted in artisan artisan villages like Raghurajpur</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Canvases are prepared by coating cotton cloth with a mixture of tamarind seed gum and chalk, polished smooth with stones, and painted with brilliant mineral and shell colors before being finished with lacquer</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Jagannath Triad, Krishnalila, Ramayana episodes, and the celestial ten avatars (Dasavatara)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Tamarind Gum Canvas</span>
+              <span class="tag-pill">Natural Mineral Pigments</span>
+              <span class="tag-pill">Intricate Floral Borders</span>
+              <span class="tag-pill">Jagannath Motifs</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Raghurajpur, Odisha (19.8522° N, 85.8145° E)</span>
+          <a href="https://maps.google.com/?q=Raghurajpur+Odisha" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04: Kalamkari (Andhra Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/kalamkari.jpg');">
+        <span class="monument-badge-top">Srikalahasti & Machilipatnam • Pen-Work Art</span>
+        <div class="monument-bottom-title">
+          <h3>Kalamkari</h3>
+          <span>Andhra Pradesh • Hand-Painted Textile Art</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">An ancient textile art using a bamboo or date-palm pen (kalam) to apply organic dyes onto cotton fabric across Srikalahasti and Machilipatnam clusters</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Involves 23 painstaking steps of mordanting, resin treatment, iron-acetate outlining, and multiple river-water washings to bind permanent organic hues derived from roots, barks, and leaves</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Epics of Mahabharata and Ramayana (Srikalahasti temple style) alongside Persian-influenced floral trellis motifs (Machilipatnam block-print style)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Bamboo Kalam Pen</span>
+              <span class="tag-pill">Organic Roots & Dyes</span>
+              <span class="tag-pill">Mordant Fixing</span>
+              <span class="tag-pill">Epic Scroll Panels</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Srikalahasti (13.7479° N, 79.7008° E)</span>
+          <a href="https://maps.google.com/?q=Srikalahasti+Andhra+Pradesh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05: Thangka (Ladakh & Sikkim) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/thangka.jpg');">
+        <span class="monument-badge-top">Himalayan Monasteries • Vajrayana Scroll Art</span>
+        <div class="monument-bottom-title">
+          <h3>Thangka Painting</h3>
+          <span>Leh & Sikkim • Tibetan Buddhist Art</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Sacred Buddhist scroll paintings executed on cotton or silk canvas framed in multi-colored Chinese brocade, used in Ladakh, Sikkim, and Himachal monasteries</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Strictly adheres to Vajrayana iconography and proportional grids. Paints are blended from pure mineral pigments (malachite, cinnabar, lapis lazuli) combined with gold dust highlights</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Mandalas, Wheel of Life (Bhavachakra), Buddha Shakyamuni, and fierce protective deities (Dharmapalas)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Gold Dust Highlights</span>
+              <span class="tag-pill">Vajrayana Mandalas</span>
+              <span class="tag-pill">Silk Brocade Frame</span>
+              <span class="tag-pill">Mineral Pigments</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Hemis Monastery, Ladakh (33.9115° N, 77.6974° E)</span>
+          <a href="https://maps.google.com/?q=Hemis+Monastery+Ladakh" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06: Tanjore Gold Leaf (Tamil Nadu) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/tanjore.jpg');">
+        <span class="monument-badge-top">Chola Royal Art • 22-Karat Gold Foil</span>
+        <div class="monument-bottom-title">
+          <h3>Tanjore Gold Leaf Painting</h3>
+          <span>Thanjavur, Tamil Nadu • Maratha Court Tradition</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Flourished under the Maratha rulers of Thanjavur during the late 16th century, blending Deccani, Vijayanagara, and European artistic influences</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Distinguished by rich relief work sculpted from chalk and gum paste on jackfruit wood boards, encrusted with genuine 22-karat gold foil and embedded semi-precious glass beads</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Plump, radiant depictions of Lord Balaji, Goddess Lakshmi, Rama Durbar, and other Hindu deities framed in ornate arches</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">22-Karat Gold Foil</span>
+              <span class="tag-pill">Plaster Relief Work</span>
+              <span class="tag-pill">Semi-Precious Stones</span>
+              <span class="tag-pill">Jackfruit Wood Panel</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Thanjavur, TN (10.7870° N, 79.1378° E)</span>
+          <a href="https://maps.google.com/?q=Thanjavur+Palace+Art" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07: Gond Art (Madhya Pradesh) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/gond.jpg');">
+        <span class="monument-badge-top">Satpura Forests • Tribal Dot & Dash Art</span>
+        <div class="monument-bottom-title">
+          <h3>Gond Tribal Painting</h3>
+          <span>Dindori & Bhopal, MP • Animistic Lore</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Practiced by the Gond tribal community of central India, transforming traditional mud-wall partition motifs into vibrant contemporary canvas artworks</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Renowned for intricate patterns of fine dots, dashes, fish scales, and curved lines superimposed over bold, colorful silhouettes of nature and fauna</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Sacred trees (Mahua tree of life), forest animals, serpents, tribal deities, and interconnected cosmological realms</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Signature Dot & Dash</span>
+              <span class="tag-pill">Mahua Tree of Life</span>
+              <span class="tag-pill">Natural Earth Pigments</span>
+              <span class="tag-pill">Gond Mythology</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Bhopal, MP (23.2599° N, 77.4126° E)</span>
+          <a href="https://maps.google.com/?q=Bharat+Bhavan+Bhopal" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 08: Phad Painting (Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/phad.jpg');">
+        <span class="monument-badge-top">Bhilwara • Portable Temple Scroll Art</span>
+        <div class="monument-bottom-title">
+          <h3>Phad Painting</h3>
+          <span>Bhilwara, Rajasthan • Epic Bardic Scrolls</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">A 700-year-old scroll painting tradition created by the Joshi family of Bhilwara to serve as portable temples for folk deities Pabuji and Devji</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Painted on hand-woven cotton cloth treated with starch and soapstone, using mineral colors exclusively. Traditionally unrolled only at night by wandering bards (Bhopas) accompanied by fiddle music</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Heroic exploits and martial campaigns of Rajasthani folk deities Pabuji and Devnarayan</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Portable Cloth Scroll</span>
+              <span class="tag-pill">Bhopa Bardic Tradition</span>
+              <span class="tag-pill">Mineral Stone Colors</span>
+              <span class="tag-pill">Pabuji Epics</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Shahpura, Bhilwara (25.6268° N, 74.9338° E)</span>
+          <a href="https://maps.google.com/?q=Shahpura+Bhilwara+Rajasthan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 09: Pichwai (Nathdwara, Rajasthan) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/pichwai.jpg');">
+        <span class="monument-badge-top">Shrinathji Shrine • Devotional Cloth Art</span>
+        <div class="monument-bottom-title">
+          <h3>Pichwai Painting</h3>
+          <span>Nathdwara, Rajasthan • Pushtimarg Devotion</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">Intricate cloth hangings created behind the deity Shrinathji (Lord Krishna) at the sanctum sanctorum in Nathdwara, commissioned by the Pushtimarg sect</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Features rich natural colors, heavy gold foil stamping, and intricate depictions of lotus ponds, cows, gopis, and seasonal festival adornments (Annakoot)</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Shrinathji lifting Govardhan mountain, Sharad Purnima moonlit rasleela, and blooming lotus gardens</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Shrinathji Sanctum Art</span>
+              <span class="tag-pill">Gold Foil Accents</span>
+              <span class="tag-pill">Lotus & Cow Motifs</span>
+              <span class="tag-pill">Pushtimarg Tradition</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Nathdwara, Rajasthan (24.9288° N, 73.8203° E)</span>
+          <a href="https://maps.google.com/?q=Nathdwara+Rajasthan" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- 10: Cheriyal Scroll Painting (Telangana) -->
+    <article class="monument-card">
+      <div class="monument-visual" style="background-image: url('assets/art/cheriyal.jpg');">
+        <span class="monument-badge-top">Telangana Folklore • Narrative Story Scrolls</span>
+        <div class="monument-bottom-title">
+          <h3>Cheriyal Scroll Painting</h3>
+          <span>Siddipet, Telangana • Village Storyteller Art</span>
+        </div>
+      </div>
+      <div class="monument-details">
+        <div class="monument-dossier-grid">
+          <div class="dossier-row">
+            <span class="dossier-label">Origin & Heritage</span>
+            <p class="dossier-text">A distinct variation of Nakashi art practiced in Cheriyal village (Telangana), historically used by the Kakarallawar bard community as visual aids for village ballad recitals</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Aesthetic & Technique</span>
+            <p class="dossier-text">Painted on vertical khadi cotton scrolls treated with rice starch, tamarind paste, and white mud. Dominated by bright crimson and vermilion hues, depicting sequential comic-strip style story frames</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Iconographic Themes</span>
+            <p class="dossier-text">Markandeya Purana, local heroic ballads (Katamaraju Katha), and rural occupational castes</p>
+          </div>
+          <div class="dossier-row">
+            <span class="dossier-label">Artistic Markers</span>
+            <div class="tag-container">
+              <span class="tag-pill">Vertical Story Scroll</span>
+              <span class="tag-pill">Vermilion Red Palette</span>
+              <span class="tag-pill">Nakashi Guild</span>
+              <span class="tag-pill">Sequential Frames</span>
+            </div>
+          </div>
+        </div>
+        <div class="monument-footer">
+          <span class="coords-text">Epicenter: Cheriyal, Telangana (17.6784° N, 79.0142° E)</span>
+          <a href="https://maps.google.com/?q=Cheriyal+Telangana" target="_blank" rel="noopener noreferrer" class="btn-maps-action">
+            📍 View Cultural Epicenter
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VirasatSetu - Digital Preservation & Revival of India's Living Heritage</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      /* Dynamic Layered Beige & Amber-Brown Gradient Palette */
+      --page-gradient: radial-gradient(circle at 15% 20%, #FAF0DF 0%, #EEDBBE 35%, #DCBF9C 70%, #CFA982 100%);
+      --card-gradient: linear-gradient(145deg, #FFFDF8 0%, #F8EFE0 40%, #EBDBC4 100%);
+      --card-gradient-hover: linear-gradient(145deg, #FFFFFF 0%, #FAF1E2 35%, #E3CCA8 100%);
+      --badge-gradient: linear-gradient(135deg, #EAD7BE 0%, #D8BE9E 100%);
+      --royal-gradient: linear-gradient(135deg, #3A1E11 0%, #5E3219 50%, #804724 100%);
+      --royal-gradient-hover: linear-gradient(135deg, #4A2817 0%, #754021 50%, #A25C31 100%);
+      --gold-accent-gradient: linear-gradient(90deg, #9E642A 0%, #C98F3B 50%, #E3B465 100%);
+
+      /* Accents & Outlines */
+      --border-card: #CDB393;
+      --border-card-hover: #A77342;
+      --border-badge: #BA9973;
+      --primary-dark: #2A150B;
+      --accent-brown: #66381B;
+      --accent-gold: #B88230;
+      --text-muted: #573E2C;
+      --card-shadow: 0 12px 30px rgba(53, 29, 14, 0.12);
+      --card-shadow-hover: 0 20px 42px rgba(53, 29, 14, 0.22);
+      --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--page-gradient);
+      background-attachment: fixed;
+      color: var(--primary-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.5;
+    }
+
+    /* Royal Header & Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      height: 76px;
+      background: linear-gradient(90deg, rgba(248, 238, 222, 0.95) 0%, rgba(241, 225, 203, 0.95) 50%, rgba(235, 214, 187, 0.95) 100%);
+      backdrop-filter: blur(14px);
+      border-bottom: 1.5px solid var(--border-card);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(42, 21, 11, 0.08);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary-dark);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.1rem;
+    }
+
+    .brand-logo span {
+      background: var(--gold-accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .nav-links a:not(.login-btn):hover {
+      color: var(--accent-brown);
+    }
+
+    .nav-links a:not(.login-btn)::after {
+      content: '';
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background: var(--gold-accent-gradient);
+      transition: var(--transition);
+    }
+
+    .nav-links a:not(.login-btn):hover::after {
+      width: 100%;
+    }
+
+    .lang-dropdown {
+      background: linear-gradient(145deg, #F9F1E2, #E6D3B8);
+      border: 1.5px solid var(--border-card);
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      outline: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 2px 8px rgba(42, 21, 11, 0.06);
+    }
+
+    .lang-dropdown:hover {
+      border-color: var(--accent-brown);
+      background: linear-gradient(145deg, #FFFFFF, #EAD7BE);
+    }
+
+    .login-btn {
+      background: var(--royal-gradient) !important;
+      color: #FFF9F0 !important;
+      padding: 0.6rem 1.7rem;
+      border-radius: 30px;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      transition: var(--transition) !important;
+      box-shadow: 0 6px 16px rgba(42, 21, 11, 0.28);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .login-btn:hover {
+      background: var(--royal-gradient-hover) !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(42, 21, 11, 0.38);
+    }
+
+    /* Screen-filling Video Containers */
+    .hero-video-wrapper {
+      position: relative;
+      width: 100vw;
+      height: calc(100vh - 76px);
+      overflow: hidden;
+      background: #000;
+    }
+
+    .screen-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Floating Chatbot Launch Trigger */
+    .chatbot-floating-trigger {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      z-index: 50;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: linear-gradient(135deg, rgba(255, 250, 240, 0.95), rgba(237, 222, 200, 0.95));
+      backdrop-filter: blur(10px);
+      padding: 0.6rem 1.35rem 0.6rem 0.6rem;
+      border-radius: 50px;
+      border: 1.5px solid var(--border-card);
+      box-shadow: 0 10px 28px rgba(42, 21, 11, 0.25);
+    }
+
+    .chatbot-floating-trigger:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 14px 34px rgba(42, 21, 11, 0.35);
+      border-color: var(--accent-gold);
+    }
+
+    .chat-icon-container {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--royal-gradient);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(42, 21, 11, 0.25);
+    }
+
+    .chat-icon-container svg {
+      width: 24px;
+      height: 24px;
+      fill: #FFF9F0;
+    }
+
+    .chat-label {
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+    }
+
+    /* Common Sections Scaffolding */
+    .heritage-modules-section,
+    .functions-modules-section {
+      padding: 6.5rem 4rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .section-header-block {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      letter-spacing: 1.5px;
+      margin-bottom: 0.85rem;
+      text-shadow: 0 2px 4px rgba(255, 255, 255, 0.4);
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 720px;
+      margin: 0 auto;
+      font-weight: 500;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    /* Gradient-Infused Heritage & Function Cards */
+    .module-card {
+      background: var(--card-gradient);
+      border: 1.5px solid var(--border-card);
+      border-radius: 20px;
+      padding: 2.25rem 1.8rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 230px;
+      text-decoration: none;
+      color: var(--primary-dark);
+      box-shadow: var(--card-shadow);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .module-card::after {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(201, 143, 59, 0.25) 0%, rgba(201, 143, 59, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .module-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gold-accent-gradient);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .module-card:hover {
+      transform: translateY(-7px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--border-card-hover);
+      background: var(--card-gradient-hover);
+    }
+
+    .module-card:hover::before {
+      opacity: 1;
+    }
+
+    .module-card:hover::after {
+      transform: scale(1.4);
+      opacity: 0.8;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-index {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-brown);
+      background: var(--badge-gradient);
+      padding: 0.3rem 0.7rem;
+      border-radius: 9px;
+      border: 1px solid var(--border-badge);
+      box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6), 0 2px 5px rgba(53, 29, 14, 0.08);
+    }
+
+    .card-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .card-description {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 1.25rem;
+    }
+
+    .module-card:hover .card-title {
+      color: var(--accent-brown);
+    }
+
+    .card-action {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--accent-brown);
+      margin-top: auto;
+    }
+
+    .card-action svg {
+      width: 14px;
+      height: 14px;
+      transition: var(--transition);
+      fill: currentColor;
+    }
+
+    .module-card:hover .card-action svg {
+      transform: translateX(5px);
+      fill: var(--accent-gold);
+    }
+
+    /* 3 Videos in a Row Section */
+    .tri-video-section {
+      padding: 2rem 4rem 4rem 4rem;
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .tri-video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.8rem;
+    }
+
+    .tri-video-card {
+      height: 480px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid var(--border-card);
+      box-shadow: var(--card-shadow);
+      background: #000;
+      transition: var(--transition);
+    }
+
+    .tri-video-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--card-shadow-hover);
+      border-color: var(--accent-gold);
+    }
+
+    .tri-video-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Fullscreen 5-Second Carousel Slider Frame */
+    .fullscreen-slideshow-section {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      background: #110804;
+    }
+
+    .slide-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), visibility 1.2s;
+    }
+
+    .slide-item.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .slide-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transform: scale(1.02);
+      transition: transform 6s ease-out;
+    }
+
+    .slide-item.active img {
+      transform: scale(1.08);
+    }
+
+    .slide-caption-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 3.5rem 4rem 3rem 4rem;
+      background: linear-gradient(180deg, rgba(30, 15, 8, 0) 0%, rgba(30, 15, 8, 0.85) 45%, rgba(20, 9, 4, 0.98) 100%);
+      color: #FFF9F0;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .slide-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      color: #EEDBBE;
+    }
+
+    .slide-desc {
+      font-size: 1.05rem;
+      color: #F8EFE0;
+      max-width: 850px;
+      line-height: 1.55;
+    }
+
+    .slideshow-dots-nav {
+      position: absolute;
+      bottom: 1.5rem;
+      right: 4rem;
+      z-index: 20;
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .slide-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(255, 249, 240, 0.4);
+      border: 1px solid rgba(42, 21, 11, 0.5);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .slide-dot.active {
+      background: #C98F3B;
+      transform: scale(1.3);
+      border-color: #FFF9F0;
+    }
+
+    /* Chatbot Modal Window */
+    .chatbot-panel-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(30, 15, 8, 0.55);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .chatbot-panel-overlay.active {
+      display: block;
+      opacity: 1;
+    }
+
+    .chatbot-modal-window {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 410px;
+      height: 590px;
+      border-radius: 22px;
+      box-shadow: 0 22px 55px rgba(30, 15, 8, 0.5);
+      z-index: 2001;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 2px solid var(--border-card);
+      transform: translateY(30px) scale(0.95);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+      
+      background-color: #EBDBC4;
+      background-image: url('assets/home/chatbot_background.jpg');
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .chatbot-modal-window.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chatbot-backdrop-scrim {
+      position: absolute;
+      inset: 0;
+      background: rgba(245, 235, 220, 0.45);
+      backdrop-filter: blur(1.5px);
+      z-index: 1;
+    }
+
+    .chatbot-content-layer {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .chatbot-header {
+      padding: 1rem 1.25rem;
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1.5px solid var(--border-card);
+    }
+
+    .chatbot-brand-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .chatbot-close-btn {
+      background: none;
+      border: none;
+      color: #FFF9F0;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: var(--transition);
+    }
+
+    .chatbot-close-btn:hover {
+      color: #E3B465;
+    }
+
+    .chatbot-messages-viewport {
+      flex: 1;
+      padding: 1.25rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: transparent;
+    }
+
+    .chat-bubble {
+      max-width: 85%;
+      padding: 0.85rem 1.15rem;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .chat-bubble.bot {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(6px);
+      color: var(--primary-dark);
+      align-self: flex-start;
+      border: 1px solid var(--border-card);
+      box-shadow: 0 4px 12px rgba(42, 21, 11, 0.12);
+      border-bottom-left-radius: 2px;
+      font-weight: 500;
+    }
+
+    .chatbot-input-bar {
+      padding: 0.9rem 1rem;
+      background: rgba(248, 239, 224, 0.92);
+      backdrop-filter: blur(8px);
+      border-top: 1px solid var(--border-card);
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .chatbot-input-bar input {
+      flex: 1;
+      background: #FFFFFF;
+      border: 1.5px solid var(--border-card);
+      border-radius: 25px;
+      padding: 0.55rem 1rem;
+      outline: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      color: var(--primary-dark);
+    }
+
+    .chatbot-input-bar input:focus {
+      border-color: var(--accent-brown);
+    }
+
+    .chatbot-input-bar button {
+      background: var(--royal-gradient);
+      color: #FFF9F0;
+      border: none;
+      padding: 0.55rem 1.25rem;
+      border-radius: 25px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 3px 8px rgba(42, 21, 11, 0.2);
+    }
+
+    .chatbot-input-bar button:hover {
+      background: var(--royal-gradient-hover);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 1200px) {
+      .modules-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tri-video-grid {
+        grid-template-columns: 1fr;
+      }
+      .tri-video-card {
+        height: 380px;
+      }
+      header {
+        padding: 0 2rem;
+      }
+      .heritage-modules-section,
+      .functions-modules-section,
+      .tri-video-section {
+        padding: 4.5rem 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .modules-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .chatbot-modal-window {
+        width: 90vw;
+        right: 5vw;
+        bottom: 1rem;
+        height: 80vh;
+      }
+      .slide-caption-bar {
+        padding: 2rem 1.5rem 3.5rem 1.5rem;
+      }
+      .slideshow-dots-nav {
+        right: 1.5rem;
+        bottom: 1rem;
+      }
+    }
+  </style>
+
+  <!-- Google Translate Element Initialization Script -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        includedLanguages: 'hi,mr,ta,te,bn,en',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+
+  <!-- Hidden Google Translate Element to Drive Page-Wide Translation -->
+  <div id="google_translate_element" style="display:none;"></div>
+
+  <!-- Royal Navigation Bar -->
+  <header>
+    <a href="index.html" class="brand-logo">
+       VIRASAT<span>SETU</span>
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="explore.html" class="protected-link">Explore</a></li>
+      <li><a href="experience.html" class="protected-link">Experience</a></li>
+      <li><a href="analytics.html" class="protected-link">Analytics</a></li>
+      <li><a href="games.html" class="protected-link">Games</a></li>
+     
+      <li><a href="login.html" class="login-btn" id="authNavBtn">Login</a></li>
+    </ul>
+  </header>
+
+  <!-- Main Hero Full-Screen Video -->
+  <section class="hero-video-wrapper">
+    <video 
+      id="mainHeroVideo" 
+      class="screen-video" 
+      autoplay 
+      muted 
+      playsinline
+      preload="auto">
+      <source src="assets/home/large_video.mp4" type="video/mp4">
+      Your browser does not support HTML5 full-screen video streaming.
+    </video>
+
+    <!-- Floating Chatbot Trigger -->
+    <div class="chatbot-floating-trigger" id="openChatbotBtn" title="Launch AI Heritage Assistant">
+      <div class="chat-icon-container">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+        </svg>
+      </div>
+      <span class="chat-label">Virasat AI</span>
+    </div>
+  </section>
+
+  <!-- 16 Heritage Categories Grid (4x4) -->
+  <main class="heritage-modules-section">
+    <div class="section-header-block">
+      <h2 class="section-title">Features of VirasatSetu</h2>
+      <p class="section-subtitle">Preserving, cataloging, and celebrating the tangible and intangible richness of Indian civilizational heritage.</p>
+    </div>
+
+    <div class="modules-grid">
+      <!-- ROW 1 -->
+      <a href="monuments-architecture.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">01.01</span>
+        </div>
+        <h3 class="card-title">Monuments & Architecture</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="archaeological-heritage.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">01.02</span>
+        </div>
+        <h3 class="card-title">Archaeological Heritage</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="traditional-dance.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">01.03</span>
+        </div>
+        <h3 class="card-title">Traditional Dance</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="traditional-music.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">01.04</span>
+        </div>
+        <h3 class="card-title">Traditional Music</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- ROW 2 -->
+      <a href="art-crafts.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">02.01</span>
+        </div>
+        <h3 class="card-title">Art & Crafts</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="textiles-weaving.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">02.02</span>
+        </div>
+        <h3 class="card-title">Textiles & Weaving</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="artisan-skills.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">02.03</span>
+        </div>
+        <h3 class="card-title">Traditional Artisan Skills</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="languages-oral-traditions.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">02.04</span>
+        </div>
+        <h3 class="card-title">Languages, Dialects & Oral Traditions</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- ROW 3 -->
+      <a href="literature-knowledge.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">03.01</span>
+        </div>
+        <h3 class="card-title">Literature & Knowledge Traditions</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="festivals-celebrations.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">03.02</span>
+        </div>
+        <h3 class="card-title">Festivals & Celebrations</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="textiles-weaving.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">03.03</span>
+        </div>
+        <h3 class="card-title">Traditional Clothing & Adornment</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="culinary-heritage.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">03.04</span>
+        </div>
+        <h3 class="card-title">Culinary Heritage</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- ROW 4 -->
+      <a href="rituals-customs.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">04.01</span>
+        </div>
+        <h3 class="card-title">Rituals, Customs & Social Traditions</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="tribal-indigenous.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">04.02</span>
+        </div>
+        <h3 class="card-title">Tribal & Indigenous Heritage</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="traditional-knowledge.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">04.03</span>
+        </div>
+        <h3 class="card-title">Traditional Knowledge & Practices</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <a href="historical-personalities.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">04.04</span>
+        </div>
+        <h3 class="card-title">Historical Personalities & Cultural Figures</h3>
+        <div class="card-action">Explore Archive <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+    </div>
+  </main>
+
+  <!-- 3 Videos in a Row Section -->
+  <section class="tri-video-section">
+    <div class="tri-video-grid">
+      <div class="tri-video-card">
+        <video autoplay muted playsinline loop>
+          <source src="assets/home/video_row1.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div class="tri-video-card">
+        <video autoplay muted playsinline loop>
+          <source src="assets/home/video_row2.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+      <div class="tri-video-card">
+        <video autoplay muted playsinline loop>
+          <source src="assets/home/video_row3.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- Functions of VirasatSetu Section -->
+  <section class="functions-modules-section">
+    <div class="section-header-block">
+      <h2 class="section-title">Functions of VirasatSetu</h2>
+      <p class="section-subtitle">Intelligent computational modules and experiential engines designed to preserve, interact with, and celebrate living heritage.</p>
+    </div>
+
+    <div class="modules-grid">
+      <!-- FUNCTION 1 -->
+      <a href="living-heritage-map.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.01</span>
+        </div>
+        <h3 class="card-title">Living Heritage Map</h3>
+        <p class="card-description">Interactive GIS-based geographical exploration of regional arts, crafts, monuments, and indigenous traditions across all Indian states.</p>
+        <div class="card-action">Launch Map <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- FUNCTION 2 -->
+      <a href="ai-heritage-storyteller.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.02</span>
+        </div>
+        <h3 class="card-title">AI Heritage Storyteller</h3>
+        <p class="card-description">Generative narrative engine transforming complex archaeological and historical archives into compelling, personalized oral epics.</p>
+        <div class="card-action">Hear Stories <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- FUNCTION 3 -->
+      <a href="festival-calendar.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.03</span>
+        </div>
+        <h3 class="card-title">Festival Calendar</h3>
+        <p class="card-description">Dynamic cultural timeline tracking pan-Indian celebrations, auspicious dates, associated rituals, seasonal cuisines, and attire.</p>
+        <div class="card-action">View Calendar <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- FUNCTION 4 -->
+      <a href="virtual-tours.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.04</span>
+        </div>
+        <h3 class="card-title">Virtual Heritage Tours</h3>
+        <p class="card-description">Immersive 360-degree virtual reality walkthroughs of ancient temples, heritage forts, cave complexes, and artisan workshops.</p>
+        <div class="card-action">Start Tour <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- FUNCTION 5 -->
+      <a href="analytics.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.05</span>
+        </div>
+        <h3 class="card-title">Audio Heritage</h3>
+        <p class="card-description">Acoustic repository housing rare folk melodies, classical ragas, Vedic chants, tribal rhythms, and endangered indigenous instruments.</p>
+        <div class="card-action">Listen Now <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- FUNCTION 6 -->
+      <a href="multilingual-translator.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.06</span>
+        </div>
+        <h3 class="card-title">Multilingual Translator</h3>
+        <p class="card-description">Context-aware NLP translation preserving regional idioms and cultural semantics across classical and scheduled Indian languages.</p>
+        <div class="card-action">Translate <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- FUNCTION 7 -->
+      <a href="speech-to-text.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.07</span>
+        </div>
+        <h3 class="card-title">Speech-to-Text</h3>
+        <p class="card-description">Voice preservation pipeline transcribing elder interviews, folk ballads, and local oral narratives directly into searchable digital text.</p>
+        <div class="card-action">Transcribe <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+
+      <!-- FUNCTION 8 -->
+      <a href="games.html" class="module-card protected-link">
+        <div class="card-top">
+          <span class="card-index">FN.08</span>
+        </div>
+        <h3 class="card-title">Interactive Challenges</h3>
+        <p class="card-description">Gamified heritage quizzes, timeline sequencing puzzles, craft identification trials, and leaderboard exploration badges.</p>
+        <div class="card-action">Play Challenges <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Fullscreen 5-Second Carousel Slider (10 Photos) -->
+  <section class="fullscreen-slideshow-section" id="heritageSlideshow">
+    <!-- Slide 1 -->
+     <div class="slide-item active">
+      <img src="assets/slides/slide1.jpg" alt="Royal Forts and Bastions" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">01. Invincible Fortresses & Royal Bastions</h3>
+        <p class="slide-desc">Mountain bastions of the Sahyadris and Rajasthan standing as formidable guardians of sovereign regional heritage and valor.</p>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide2.jpg" alt="Living Handloom Traditions" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">02. Master Pit-Loom Weaving & Silks</h3>
+        <p class="slide-desc">Heritage weavers intertwining pure mulberry silks and zari threads to preserve age-old Paithani and Banarasi techniques.</p>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide3.jpg" alt="Classical Dance Mudras" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">03. The Rhythmic Language of Classical Dance</h3>
+        <p class="slide-desc">Dynamic Bharatanatyam, Kathak, and Kathakali recitals conveying ancient scriptures through delicate hand mudras and expressions.</p>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide4.jpg" alt="Terracotta Artisan Pottery" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">04. Terracotta & Indigenous Earth Pottery</h3>
+        <p class="slide-desc">Rural masters molding sacred river clays into ceremonial lamps, terracotta horses, and utilitarian earthen crafts.</p>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide5.jpg" alt="Folk & Tribal Wall Art" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">05. Tribal Canvas: Warli & Madhubani Murals</h3>
+        <p class="slide-desc">Sacred geometric figures and ritual paintings composed from natural pigments, rice paste, and mineral dyes on clay walls.</p>
+      </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide6.jpg" alt="Classical Instrumental Ragas" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">06. Classical Resonances: Veena, Sitar & Tabla</h3>
+        <p class="slide-desc">Acoustic heritages honed across centuries, resonating through intricate tala cycles and devotional meditative ragas.</p>
+      </div>
+    </div>
+
+    <!-- Slide 7 -->
+     <div class="slide-item">
+      <img src="assets/slides/slide7.jpg" alt="Ancient Temple Architecture" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">07. Architectural Grandeur of Ancient Temples</h3>
+        <p class="slide-desc">Intricate Dravidian and Nagara stone carvings capturing timeless civilizational devotion, sacred geometry, and structural brilliance.</p>
+      </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide8.jpg" alt="Lost-Wax Bronze Craft" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">08. Dhokra Metal Casting & Lost-Wax Heritage</h3>
+        <p class="slide-desc">Four-thousand-year-old non-ferrous metal casting techniques passed down through generations of tribal metallurgists.</p>
+      </div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide9.jpg" alt="Culinary Spice Traditions" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">09. Ayurvedic Alchemy: Heritage Flavors & Spices</h3>
+        <p class="slide-desc">Ancient regional recipes celebrating medicinal gastronomy, slow-stone grinding, and festival cooking traditions.</p>
+      </div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="slide-item">
+      <img src="assets/slides/slide10.jpg" alt="Oral Histories & Manuscripts" />
+      <div class="slide-caption-bar">
+        <h3 class="slide-title">10. Preserving Oral Dialects & Ancient Inscriptions</h3>
+        <p class="slide-desc">Digitally immortalizing community folk tales, palm-leaf manuscripts, and spoken traditions before they vanish forever.</p>
+      </div>
+    </div>
+
+    <!-- Navigation Dots for Slideshow -->
+    <div class="slideshow-dots-nav" id="slideshowDots">
+      <span class="slide-dot active" data-slide="0"></span>
+      <span class="slide-dot" data-slide="1"></span>
+      <span class="slide-dot" data-slide="2"></span>
+      <span class="slide-dot" data-slide="3"></span>
+      <span class="slide-dot" data-slide="4"></span>
+      <span class="slide-dot" data-slide="5"></span>
+      <span class="slide-dot" data-slide="6"></span>
+      <span class="slide-dot" data-slide="7"></span>
+      <span class="slide-dot" data-slide="8"></span>
+      <span class="slide-dot" data-slide="9"></span>
+    </div>
+  </section>
+
+  <!-- AI Heritage Chatbot Modal Window -->
+  <div class="chatbot-panel-overlay" id="chatOverlay"></div>
+  <div class="chatbot-modal-window" id="chatbotDrawer">
+    <div class="chatbot-backdrop-scrim"></div>
+    <div class="chatbot-content-layer">
+      <div class="chatbot-header">
+        <span class="chatbot-brand-title">VirasatSetu AI Assistant</span>
+        <button class="chatbot-close-btn" id="closeChatbotBtn">&times;</button>
+      </div>
+      <div class="chatbot-messages-viewport" id="chatMessages">
+        <div class="chat-bubble bot">
+          Namaste! I am your VirasatSetu Cultural Companion. Ask me anything about Indian monuments, living crafts, oral histories, or endangered heritage.
+        </div>
+      </div>
+      <form class="chatbot-input-bar" id="chatInputForm">
+        <input type="text" id="chatQueryInput" placeholder="Ask about Indian heritage..." required autocomplete="off" />
+        <button type="submit">Ask</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Client-Side Scripts -->
+  <script>
+    /* ---- LIVE GROQ CHATBOT ENGINE FOR INDEX.HTML ---- */
+    const GROQ_API_KEY = "";//replace the api key 
+    const GROQ_URL = "https://api.groq.com/openai/v1/chat/completions";
+    const ACTIVE_MODELS = ["openai/gpt-oss-120b", "openai/gpt-oss-20b", "qwen/qwen3.6-27b"];
+    const SYSTEM_INSTRUCTION = `You are 'Virasat AI', the official interactive guide for the VirasatSetu website. 
+Your primary goal is to guide users smoothly across the website modules and provide rich cultural and civilizational information about India's heritage.
+
+Website Navigation Guide:
+- **Explore:** Click 'Explore' in the navbar to browse through 16 cataloged heritage domains spanning architecture, textiles, music, dance, and traditional knowledge.
+- **Experience:** Click 'Experience' in the navbar to launch interactive systems including GIS maps, AI storytellers, audio archives, and virtual tours.
+- **Analytics:** Click 'Analytics' in the navbar to view the preservation risk matrix and record oral histories via our voice pipeline.
+- **Games:** Click 'Games' in the navbar to test your knowledge across 8 sacred cultural trials and puzzles.
+- **Scholar Dossier / Profile:** Click your profile name or login button in the top right to access your personal scholar dossier, XP badges, and saved transcripts.
+
+Rules:
+1. Whenever a user asks about a feature, page, or topic (e.g., "Where are monuments?", "Show me textile weaves"), tell them clearly which navbar button or link to click, and then provide helpful information or a summary right inside the chat!
+2. Format comparisons, itineraries, and lists as clean Markdown tables when appropriate.`;
+
+    // Helper to query Groq with automatic model fallback
+    async function fetchGroqChatCompletion(messages) {
+      let lastError = null;
+      for (const model of ACTIVE_MODELS) {
+        try {
+          const response = await fetch(GROQ_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${GROQ_API_KEY}`
+            },
+            body: JSON.stringify({
+              model: model,
+              messages: messages,
+              temperature: 0.6,
+              max_tokens: 1024
+            })
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            if (data.choices && data.choices.length > 0) {
+              return data.choices[0].message.content;
+            }
+          } else {
+            const errData = await response.json().catch(() => ({}));
+            lastError = errData.error?.message || `HTTP error ${response.status}`;
+          }
+        } catch (err) {
+          lastError = err.message;
+        }
+      }
+      throw new Error(lastError || "All Groq model fallbacks failed.");
+    }
+
+    // 1. Full-Screen Video Controller (Stops on completion, does not loop)
+    const mainVideo = document.getElementById('mainHeroVideo');
+    if (mainVideo) {
+      mainVideo.addEventListener('ended', function() {
+        this.pause();
+      });
+    }
+
+    // 2. Auth Access Routing Guard & Dynamic User Display
+    const isUserAuthenticated = localStorage.getItem('virasatSetu_auth') === 'true';
+    const authNavBtn = document.getElementById('authNavBtn');
+
+    if (isUserAuthenticated && authNavBtn) {
+      const savedName = localStorage.getItem('virasatSetu_user_name') || 'Scholar';
+      const firstName = savedName.split(' ')[0];
+
+      authNavBtn.textContent = firstName;
+      authNavBtn.title = `Signed in as ${savedName}`;
+      authNavBtn.href = 'profile.html';
+    }
+    const protectedElements = document.querySelectorAll('.protected-link');
+    protectedElements.forEach(element => {
+      element.addEventListener('click', function(e) {
+        if (!isUserAuthenticated) {
+          e.preventDefault();
+          const targetUrl = this.getAttribute('href');
+          sessionStorage.setItem('redirect_after_login', targetUrl);
+          alert('Authenticating with VirasatSetu: Please login to unlock all interactive heritage archives.');
+          window.location.href = 'login.html';
+        }
+      });
+    });
+
+    // 3. 5-Second Automated Fullscreen Slideshow
+    const slides = document.querySelectorAll('.slide-item');
+    const dots = document.querySelectorAll('.slide-dot');
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    let slideTimer;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      currentSlide = index;
+    }
+
+    function nextSlide() {
+      const nextIndex = (currentSlide + 1) % totalSlides;
+      showSlide(nextIndex);
+    }
+
+    function startSlideshow() {
+      slideTimer = setInterval(nextSlide, 5000);
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+        clearInterval(slideTimer);
+        const slideIdx = parseInt(this.getAttribute('data-slide'), 10);
+        showSlide(slideIdx);
+        startSlideshow();
+      });
+    });
+
+    startSlideshow();
+
+    // 4. Chatbot Modal Interactions & Groq API Integration Logic
+    const openChatBtn = document.getElementById('openChatbotBtn');
+    const closeChatBtn = document.getElementById('closeChatbotBtn');
+    const chatDrawer = document.getElementById('chatbotDrawer');
+    const chatOverlay = document.getElementById('chatOverlay');
+    const chatForm = document.getElementById('chatInputForm');
+    const chatInput = document.getElementById('chatQueryInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function toggleChat(isOpen) {
+      if (isOpen) {
+        chatOverlay.classList.add('active');
+        chatDrawer.classList.add('open');
+      } else {
+        chatOverlay.classList.remove('active');
+        chatDrawer.classList.remove('open');
+      }
+    }
+
+    openChatBtn.addEventListener('click', () => toggleChat(true));
+    closeChatBtn.addEventListener('click', () => toggleChat(false));
+    chatOverlay.addEventListener('click', () => toggleChat(false));
+
+    // Keep conversation history in memory for multi-turn chat context
+    let chatConversationHistory = [
+      { role: "system", content: SYSTEM_INSTRUCTION }
+    ];
+
+    chatForm.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const userText = chatInput.value.trim();
+      if (!userText) return;
+
+      // 1. Render User Message Bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = 'chat-bubble';
+      userBubble.style.cssText = 'background: var(--royal-gradient); color: #FFF9F0; align-self: flex-end; border-bottom-right-radius: 2px; box-shadow: 0 4px 12px rgba(42, 21, 11, 0.2); font-weight: 500;';
+      userBubble.textContent = userText;
+      chatMessages.appendChild(userBubble);
+
+      chatInput.value = '';
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // Append user prompt to history
+      chatConversationHistory.push({ role: "user", content: userText });
+
+      // 2. Render Temporary Thinking Bubble
+      const botBubble = document.createElement('div');
+      botBubble.className = 'chat-bubble bot';
+      botBubble.textContent = 'Consulting preserved archives...';
+      chatMessages.appendChild(botBubble);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+
+      // 3. Send Query to Groq API Engine
+      try {
+        const botReplyText = await fetchGroqChatCompletion(chatConversationHistory);
+        botBubble.textContent = botReplyText;
+        
+        // Append assistant response to history
+        chatConversationHistory.push({ role: "assistant", content: botReplyText });
+      } catch (err) {
+        botBubble.textContent = `Namaste! Virasat AI is temporarily unable to reach the neural gateway (${err.message}). Please verify your connection or API token.`;
+      }
+
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    });
+
+    // 5. Page-Wide Google Translate Language Selector Controller
+    const languageSelector = document.getElementById('languageSelector');
+    
+    // Restore preferred language if saved in localStorage
+    window.addEventListener('load', function() {
+      const savedLang = localStorage.getItem('virasatSetu_language');
+      if (savedLang && languageSelector) {
+        languageSelector.value = savedLang;
+      }
+    });
+
+    languageSelector.addEventListener('change', function(e) {
+      const targetLang = e.target.value;
+      localStorage.setItem('virasatSetu_language', targetLang);
+      
+      // Trigger Google Translate Widget Cookie & ComboBox update
+      const translateCookie = `googtrans=/en/${targetLang}`;
+      document.cookie = translateCookie + ';path=/;domain=' + document.domain;
+      document.cookie = translateCookie + ';path=/;';
+      
+      // Attempt triggering google translate combo box change if loaded
+      const gtCombo = document.querySelector('.goog-te-combo');
+      if (gtCombo) {
+        gtCombo.value = targetLang;
+        gtCombo.dispatchEvent(new Event('change'));
+      } else {
+        // Fallback reload to apply cookie translation
+        window.location.reload();
+      }
+    });
+  </script>
+</body>
+</html>
